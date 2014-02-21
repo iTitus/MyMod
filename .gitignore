@@ -1,5 +1,13 @@
 *.class
 
+build/
+.classpath
+.project
+.gradle/
+eclipse/
+bin/
+repo/
+
 # Package Files #
 *.jar
 *.war
