@@ -4,6 +4,7 @@ build/
 .gradle/
 eclipse/
 bin/
+misc/
 
 # Package Files #
 *.jar
