@@ -1,0 +1,16 @@
+[
+{
+  "modid": "mymod",
+  "name": "iTitus' MyMOd",
+  "description": "It's just iTitus' MyMod ;)",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authors": ["iTitus"],
+  "credits": "The Forge and FML team, for making Forge :D",
+  "logoFile": "assets/mymod/textures/logo.png",
+  "screenshots": [],
+  "dependencies": []
+}
+]

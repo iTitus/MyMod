@@ -1,0 +1,27 @@
+﻿### BLOCKS ###
+tile.zero.name=Zero
+tile.timeshifter.name=Timeshifter
+tile.wheel.name=§1W§2h§3e§4e§5l §6o§7f §8F§9o§ar§bt§cu§dn§ee§r
+
+### ITEMS ###
+item.debug.name=Debug Item
+
+### GUI ###
+
+
+### MISC ###
+itemGroup.mymod=§4iTitus' MyMod§r
+message.timeshifter.daymode=Timeshifter set to §6day §rmode.
+message.timeshifter.nightmode=Timeshifter set to §8night §rmode.
+lore.debug=Creative-only debug item
+message.debug.nothing=Nothing in sight
+message.debug.entity.0=Right clicked on entity %s ( %d ) -> { %s }
+message.debug.block.0=Right clicked on block '%s' -> { 
+message.debug.block.1=Unlocalized name -> '%s' 
+message.debug.block.2=Block-ID -> '%d' 
+message.debug.block.3=Metadata - > '%d' 
+message.debug.block.4=Hardness - > '%d' 
+message.debug.block.5=Resistance - > '%d' 
+message.debug.block.6=Slipperiness - > '%d' 
+message.debug.block.7=NBT -> { %s } }
+message.debug.block.8=X -> '%d' Y -> '%d' Z -> '%d' }
