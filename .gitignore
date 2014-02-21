@@ -1,11 +1,11 @@
-build/
-.settings
-.classpath
-.project
+.settings/
 .gradle/
 eclipse/
 bin/
+build/
 misc/
+.classpath
+.project
 
 # Package Files #
 *.jar
