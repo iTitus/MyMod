@@ -1,8 +1,29 @@
 package com.iTitus.MyMod.tileentiy;
 
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.ByteBufAllocator;
+import io.netty.buffer.ByteBufProcessor;
+
+import java.io.IOException;
+import java.io.InputStream;
+import java.io.OutputStream;
+import java.nio.ByteBuffer;
+import java.nio.ByteOrder;
+import java.nio.channels.GatheringByteChannel;
+import java.nio.channels.ScatteringByteChannel;
+import java.nio.charset.Charset;
+
+import com.google.common.collect.BiMap;
+
+import cpw.mods.fml.common.network.FMLNetworkEvent;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.EnumConnectionState;
+import net.minecraft.network.INetHandler;
+import net.minecraft.network.Packet;
+import net.minecraft.network.PacketBuffer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.IChatComponent;
 
 public class TileEntityWheel extends TileEntity {
 
@@ -23,8 +44,11 @@ public class TileEntityWheel extends TileEntity {
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (worldObj.isRemote)
+		if (worldObj.isRemote) {
+			System.out.println("CLIENT: " + deg);
 			return;
+		}
+		System.out.println("SERVER: " + deg);
 
 		acc += friction;
 		if (acc < friction)
@@ -41,6 +65,11 @@ public class TileEntityWheel extends TileEntity {
 			} while (deg >= 360);
 		}
 
+	}
+
+	@Override
+	public Packet getDescriptionPacket() {
+		return super.getDescriptionPacket();
 	}
 
 	@Override
