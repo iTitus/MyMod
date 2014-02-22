@@ -3,9 +3,12 @@ package com.iTitus.MyMod.item;
 import java.util.List;
 
 import net.minecraft.block.Block;
+import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -16,6 +19,7 @@ import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
 
 import com.google.common.collect.Multimap;
 import com.iTitus.MyMod.helper.LangHelper;
@@ -27,10 +31,12 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemDebug extends MyItem {
 
+	private static final String AREA_MODE_ACTIVATED = "area_mode";
 	private static IIcon icon;
 
 	public ItemDebug() {
 		super(EnumItemType.debug);
+		setMaxStackSize(1);
 	}
 
 	@Override
@@ -73,12 +79,30 @@ public class ItemDebug extends MyItem {
 	public ItemStack onItemRightClick(ItemStack stack, World world,
 			EntityPlayer player) {
 
-		player.swingItem();
-
 		if (world.isRemote)
 			return stack;
 
-		if (Minecraft.getMinecraft().objectMouseOver != null) {
+		player.swingItem();
+
+		if (player.isSneaking()) {
+
+			if (stack.stackTagCompound == null
+					|| !stack.stackTagCompound.getBoolean(AREA_MODE_ACTIVATED)) {
+				if (stack.stackTagCompound == null)
+					stack.stackTagCompound = new NBTTagCompound();
+				stack.stackTagCompound.setBoolean(AREA_MODE_ACTIVATED, true);
+				player.addChatMessage(new ChatComponentText(String.format(
+						LangHelper.localize("message.debug.switch"),
+						LangHelper.localize("message.debug.mode.area"))));
+
+			} else {
+				stack.stackTagCompound.setBoolean(AREA_MODE_ACTIVATED, false);
+				player.addChatMessage(new ChatComponentText(String.format(
+						LangHelper.localize("message.debug.switch"),
+						LangHelper.localize("message.debug.mode.normal"))));
+			}
+
+		} else {
 			MovingObjectPosition mop = Minecraft.getMinecraft().objectMouseOver;
 
 			switch (mop.typeOfHit) {
@@ -164,10 +188,10 @@ public class ItemDebug extends MyItem {
 
 				player.addChatMessage(new ChatComponentText(LangHelper
 						.localize("message.debug.nothing")));
-
 			}
 			default:
 				break;
+
 			}
 		}
 
@@ -193,7 +217,8 @@ public class ItemDebug extends MyItem {
 		return (block.getBlockHardness(Minecraft.getMinecraft().theWorld,
 				Minecraft.getMinecraft().thePlayer.serverPosX,
 				Minecraft.getMinecraft().thePlayer.serverPosY,
-				Minecraft.getMinecraft().thePlayer.serverPosZ) + 1) * 3;
+				Minecraft.getMinecraft().thePlayer.serverPosZ) + 1)
+				* 6 * (Minecraft.getMinecraft().thePlayer.isInWater() ? 5 : 1);
 	}
 
 }

@@ -9,6 +9,8 @@ import com.iTitus.MyMod.lib.LibNames;
 import com.iTitus.MyMod.lib.LibTextures;
 
 import cpw.mods.fml.common.registry.LanguageRegistry;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
@@ -24,6 +26,7 @@ import net.minecraftforge.client.event.RenderGameOverlayEvent.Chat;
 
 public class BlockTimeshifter extends MyBlock {
 
+	@SideOnly(Side.CLIENT)
 	private static IIcon icon;
 
 	public BlockTimeshifter() {

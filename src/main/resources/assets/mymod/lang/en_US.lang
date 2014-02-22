@@ -25,3 +25,6 @@ message.debug.block.5=Resistance - > '%d'
 message.debug.block.6=Slipperiness - > '%d' 
 message.debug.block.7=NBT -> { %s } }
 message.debug.block.8=X -> '%d' Y -> '%d' Z -> '%d' }
+message.debug.switch=Switched to %s mode
+message.debug.mode.normal=NORMAL
+message.debug.mode.area=AREA

@@ -1,8 +1,11 @@
 package com.iTitus.MyMod.block;
 
 import com.iTitus.MyMod.lib.LibRender;
+import com.iTitus.MyMod.lib.LibTextures;
 import com.iTitus.MyMod.tileentiy.TileEntityWheel;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.*;
 import net.minecraft.client.renderer.texture.*;
 import net.minecraft.tileentity.*;
@@ -10,6 +13,9 @@ import net.minecraft.util.*;
 import net.minecraft.world.*;
 
 public class BlockWheel extends MyBlock implements ITileEntityProvider {
+
+	@SideOnly(Side.CLIENT)
+	private static IIcon icon;
 
 	public BlockWheel() {
 		super(EnumBlockType.WHEEL);
@@ -38,12 +44,13 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 
 	@Override
 	public void registerBlockIcons(IIconRegister register) {
-
+		icon = register.registerIcon(LibTextures
+				.getTextureLoc(EnumBlockType.WHEEL));
 	}
 
 	@Override
 	public IIcon getIcon(int side, int meta) {
-		return null;
+		return icon;
 	}
 
 	@Override

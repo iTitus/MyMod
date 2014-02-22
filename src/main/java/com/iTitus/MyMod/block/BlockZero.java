@@ -17,6 +17,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockZero extends MyBlock {
 
+	@SideOnly(Side.CLIENT)
 	private static IIcon icon;
 
 	protected BlockZero() {

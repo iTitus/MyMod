@@ -14,6 +14,10 @@ public class LibTextures {
 		return TEXTURE_LOCATION + ":" + type.name;
 	}
 
+	public static String getModelTextureLoc(EnumBlockType type) {
+		return "textures/models/" + type.name + ".png";
+	}
+
 	public static String getTextureLoc(EnumItemType type) {
 		return TEXTURE_LOCATION + ":" + type.name;
 	}
