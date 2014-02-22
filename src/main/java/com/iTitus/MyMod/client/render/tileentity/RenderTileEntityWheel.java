@@ -23,8 +23,10 @@ public class RenderTileEntityWheel extends TileEntitySpecialRenderer {
 
 	public static final TileEntitySpecialRenderer INSTANCE = new RenderTileEntityWheel();
 
-	public final ModelWheel model;
-	public final ResourceLocation texture;
+	@SideOnly(Side.CLIENT)
+	private final ModelWheel model;
+	@SideOnly(Side.CLIENT)
+	private final ResourceLocation texture;
 
 	public RenderTileEntityWheel() {
 		model = new ModelWheel();
@@ -35,7 +37,7 @@ public class RenderTileEntityWheel extends TileEntitySpecialRenderer {
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y,
 			double z, float tick) {
-
+		
 		TileEntityWheel wheel = (TileEntityWheel) tile;
 
 		GL11.glPushMatrix();
@@ -43,10 +45,9 @@ public class RenderTileEntityWheel extends TileEntitySpecialRenderer {
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		GL11.glTranslated(x, y, z);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-
 		GL11.glTranslatef(0.5F, 1.5F, 0.5F);
 		GL11.glScalef(1F, -1F, -1F);
-		model.render(wheel.getRotation());
+		model.render(wheel.getRotationAngleRad());
 		GL11.glScalef(1F, -1F, -1F);
 		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glPopMatrix();

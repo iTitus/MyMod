@@ -8,6 +8,7 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.*;
 import net.minecraft.client.renderer.texture.*;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -19,6 +20,20 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 
 	public BlockWheel() {
 		super(EnumBlockType.WHEEL);
+	}
+
+	@Override
+	public boolean onBlockActivated(World world, int x, int y, int z,
+			EntityPlayer p, int side, float hitX, float hitY, float hitZ) {
+		if (world.isRemote)
+			return false;
+
+		if (world.getTileEntity(x, y, z) instanceof TileEntityWheel) {
+			return ((TileEntityWheel) world.getTileEntity(x, y, z))
+					.onBlockActivated(p, side, hitX, hitY, hitZ);
+		}
+
+		return false;
 	}
 
 	@Override

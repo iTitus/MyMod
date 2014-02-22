@@ -31,7 +31,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemDebug extends MyItem {
 
-	private static final String AREA_MODE_ACTIVATED = "area_mode";
 	private static IIcon icon;
 
 	public ItemDebug() {
@@ -84,115 +83,93 @@ public class ItemDebug extends MyItem {
 
 		player.swingItem();
 
-		if (player.isSneaking()) {
+		MovingObjectPosition mop = Minecraft.getMinecraft().objectMouseOver;
 
-			if (stack.stackTagCompound == null
-					|| !stack.stackTagCompound.getBoolean(AREA_MODE_ACTIVATED)) {
-				if (stack.stackTagCompound == null)
-					stack.stackTagCompound = new NBTTagCompound();
-				stack.stackTagCompound.setBoolean(AREA_MODE_ACTIVATED, true);
-				player.addChatMessage(new ChatComponentText(String.format(
-						LangHelper.localize("message.debug.switch"),
-						LangHelper.localize("message.debug.mode.area"))));
+		switch (mop.typeOfHit) {
+		case ENTITY: {
 
+			if (mop.entityHit == null)
+				return stack;
+
+			Entity e = mop.entityHit;
+
+			NBTTagCompound nbt = new NBTTagCompound();
+			e.writeToNBT(nbt);
+
+			player.addChatMessage(new ChatComponentText(String.format(
+					LangHelper.localize("message.debug.entity.0"),
+					e.getCommandSenderName(), e.getEntityId(),
+					NBTHelper.readNBT(nbt))));
+
+			break;
+		}
+
+		case BLOCK: {
+
+			if (world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == null) {
+				return stack;
+			}
+
+			Block b = world.getBlock(mop.blockX, mop.blockY, mop.blockZ);
+
+			NBTTagCompound nbt = new NBTTagCompound();
+			TileEntity tile = null;
+			if (b.hasTileEntity(world.getBlockMetadata(mop.blockX, mop.blockY,
+					mop.blockZ))) {
+				tile = world.getTileEntity(mop.blockX, mop.blockY, mop.blockZ);
+				if (tile != null)
+					tile.writeToNBT(nbt);
+			}
+
+			StringBuilder sb = new StringBuilder();
+
+			sb.append(String.format(
+					LangHelper.localize("message.debug.block.0"),
+					b.getLocalizedName()));
+			sb.append(String.format(
+					LangHelper.localize("message.debug.block.1"),
+					b.getUnlocalizedName()));
+			sb.append(String.format(
+					LangHelper.localize("message.debug.block.2"),
+					b.getIdFromBlock(b)));
+			if (world.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ) != 0)
+				sb.append(String.format(LangHelper
+						.localize("message.debug.block.3"), world
+						.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ)));
+			sb.append(String.format(LangHelper
+					.localize("message.debug.block.4"), b.getBlockHardness(
+					world, mop.blockX, mop.blockY, mop.blockZ)));
+			sb.append(String.format(LangHelper
+					.localize("message.debug.block.5"), b
+					.getExplosionResistance(player, world, mop.blockX,
+							mop.blockY, mop.blockZ, mop.blockX, mop.blockY,
+							mop.blockZ)));
+			if (b.slipperiness != 0.6F)
+				sb.append(String.format(
+						LangHelper.localize("message.debug.block.6"),
+						b.slipperiness));
+			if (b.hasTileEntity(world.getBlockMetadata(mop.blockX, mop.blockY,
+					mop.blockZ))) {
+				sb.append(String.format(
+						LangHelper.localize("message.debug.block.7"),
+						NBTHelper.readNBT(nbt)));
 			} else {
-				stack.stackTagCompound.setBoolean(AREA_MODE_ACTIVATED, false);
-				player.addChatMessage(new ChatComponentText(String.format(
-						LangHelper.localize("message.debug.switch"),
-						LangHelper.localize("message.debug.mode.normal"))));
-			}
-
-		} else {
-			MovingObjectPosition mop = Minecraft.getMinecraft().objectMouseOver;
-
-			switch (mop.typeOfHit) {
-			case ENTITY: {
-
-				if (mop.entityHit == null)
-					return stack;
-
-				Entity e = mop.entityHit;
-
-				NBTTagCompound nbt = new NBTTagCompound();
-				e.writeToNBT(nbt);
-
-				player.addChatMessage(new ChatComponentText(String.format(
-						LangHelper.localize("message.debug.entity.0"),
-						e.getCommandSenderName(), e.getEntityId(),
-						NBTHelper.readNBT(nbt))));
-
-				break;
-			}
-
-			case BLOCK: {
-
-				if (world.getBlock(mop.blockX, mop.blockY, mop.blockZ) == null) {
-					return stack;
-				}
-
-				Block b = world.getBlock(mop.blockX, mop.blockY, mop.blockZ);
-
-				NBTTagCompound nbt = new NBTTagCompound();
-				TileEntity tile = null;
-				if (b.hasTileEntity(world.getBlockMetadata(mop.blockX,
-						mop.blockY, mop.blockZ))) {
-					tile = world.getTileEntity(mop.blockX, mop.blockY,
-							mop.blockZ);
-					if (tile != null)
-						tile.writeToNBT(nbt);
-				}
-
-				StringBuilder sb = new StringBuilder();
-
 				sb.append(String.format(
-						LangHelper.localize("message.debug.block.0"),
-						b.getLocalizedName()));
-				sb.append(String.format(
-						LangHelper.localize("message.debug.block.1"),
-						b.getUnlocalizedName()));
-				sb.append(String.format(
-						LangHelper.localize("message.debug.block.2"),
-						b.getIdFromBlock(b)));
-				if (world.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ) != 0)
-					sb.append(String.format(LangHelper
-							.localize("message.debug.block.3"), world
-							.getBlockMetadata(mop.blockX, mop.blockY,
-									mop.blockZ)));
-				sb.append(String.format(LangHelper
-						.localize("message.debug.block.4"), b.getBlockHardness(
-						world, mop.blockX, mop.blockY, mop.blockZ)));
-				sb.append(String.format(LangHelper
-						.localize("message.debug.block.5"), b
-						.getExplosionResistance(player, world, mop.blockX,
-								mop.blockY, mop.blockZ, mop.blockX, mop.blockY,
-								mop.blockZ)));
-				if (b.slipperiness != 0.6F)
-					sb.append(String.format(
-							LangHelper.localize("message.debug.block.6"),
-							b.slipperiness));
-				if (b.hasTileEntity(world.getBlockMetadata(mop.blockX,
-						mop.blockY, mop.blockZ))) {
-					sb.append(String.format(
-							LangHelper.localize("message.debug.block.7"),
-							NBTHelper.readNBT(nbt)));
-				} else {
-					sb.append(String.format(
-							LangHelper.localize("message.debug.block.8"),
-							mop.blockX, mop.blockY, mop.blockZ));
-				}
-
-				player.addChatMessage(new ChatComponentText(sb.toString()));
-				break;
+						LangHelper.localize("message.debug.block.8"),
+						mop.blockX, mop.blockY, mop.blockZ));
 			}
-			case MISS: {
 
-				player.addChatMessage(new ChatComponentText(LangHelper
-						.localize("message.debug.nothing")));
-			}
-			default:
-				break;
+			player.addChatMessage(new ChatComponentText(sb.toString()));
+			break;
+		}
+		case MISS: {
 
-			}
+			player.addChatMessage(new ChatComponentText(LangHelper
+					.localize("message.debug.nothing")));
+		}
+		default:
+			break;
+
 		}
 
 		return stack;

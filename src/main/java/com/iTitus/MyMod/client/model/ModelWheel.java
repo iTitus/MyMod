@@ -33,13 +33,12 @@ public class ModelWheel extends ModelBase {
 
 	}
 
-	public void render(int rotation) {
+	public void render(float rotationAngle) {
 		float f = 1F / 16F;
 		Base.render(f);
 		Holder.render(f);
 
-		// GL11.glTranslated((6D / 16D), (6D / 16D), 0);
-		GL11.glRotated(rotation, 0, 0, 1);
+		Wheel.rotateAngleZ = rotationAngle;
 		Wheel.render(f);
 	}
 

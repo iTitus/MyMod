@@ -47,4 +47,9 @@ public abstract class MyBlock extends Block {
 		return getIcon(side, world.getBlockMetadata(x, y, z));
 	}
 
+	@Override
+	public int damageDropped(int dmg) {
+		return super.damageDropped(0);
+	}
+
 }
