@@ -1,5 +1,6 @@
 package com.iTitus.MyMod.block;
 
+import com.iTitus.MyMod.lib.LibTextures;
 import com.iTitus.MyMod.lib.MyCreativeTab;
 
 import scala.collection.SetLike;
@@ -17,6 +18,7 @@ public abstract class MyBlock extends Block {
 
 	protected MyBlock(EnumBlockType type) {
 		super(type.material);
+		setBlockTextureName(LibTextures.getTextureLoc(type));
 		setBlockName(type.name);
 		setHardness(type.hardness);
 		setResistance(type.resistance);
@@ -28,24 +30,6 @@ public abstract class MyBlock extends Block {
 	}
 
 	public abstract boolean putInTab();
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerBlockIcons(IIconRegister register) {
-		super.registerBlockIcons(register);
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		return super.getIcon(side, meta);
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getIcon(IBlockAccess world, int x, int y, int z, int side) {
-		return getIcon(side, world.getBlockMetadata(x, y, z));
-	}
 
 	@Override
 	public int damageDropped(int dmg) {

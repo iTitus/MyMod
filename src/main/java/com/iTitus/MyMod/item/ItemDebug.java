@@ -31,8 +31,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class ItemDebug extends MyItem {
 
-	private static IIcon icon;
-
 	public ItemDebug() {
 		super(EnumItemType.debug);
 		setMaxStackSize(1);
@@ -43,19 +41,6 @@ public class ItemDebug extends MyItem {
 		return true;
 	}
 
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerIcons(IIconRegister register) {
-		super.registerIcons(register);
-		icon = register.registerIcon(LibTextures
-				.getTextureLoc(EnumItemType.debug));
-	}
-
-	@Override
-	public IIcon getIconFromDamage(int dmg) {
-		return icon;
-	}
-
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list,
 			boolean b) {
@@ -64,6 +49,7 @@ public class ItemDebug extends MyItem {
 	}
 
 	@SideOnly(Side.CLIENT)
+	@Override
 	public boolean isFull3D() {
 		return true;
 	}

@@ -1,6 +1,10 @@
 package com.iTitus.MyMod;
 
+import com.iTitus.MyMod.block.ModBlocks;
+import com.iTitus.MyMod.handler.ConfigHandler;
+import com.iTitus.MyMod.item.ModItems;
 import com.iTitus.MyMod.lib.LibMod;
+import com.iTitus.MyMod.network.PacketPipeline;
 import com.iTitus.MyMod.proxy.CommonProxy;
 
 import cpw.mods.fml.common.*;
@@ -13,56 +17,60 @@ public class MyMod {
 	@Instance(LibMod.MODID)
 	public static MyMod instance;
 
-	@SidedProxy(clientSide = "com.iTitus.MyMod.proxy.ClientProxy", serverSide = "iTitus.MyMod.proxy.CommonProxy")
+	@SidedProxy(clientSide = "com.iTitus.MyMod.proxy.ClientProxy", serverSide = "com.iTitus.MyMod.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		proxy.preInit(event);
+		ConfigHandler.init(event.getSuggestedConfigurationFile());
+
+		ModBlocks.init();
+		ModItems.init();
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		proxy.init(event);
+		proxy.registerRenderers();
+		PacketPipeline.INSTANCE.init();
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		proxy.postInit(event);
+		PacketPipeline.INSTANCE.postInit();
 	}
 
 	@EventHandler
 	public void serverAboutToStart(FMLServerAboutToStartEvent event) {
-		proxy.serverAboutToStart(event);
+
 	}
 
 	@EventHandler
 	public void serverStarting(FMLServerStartingEvent event) {
-		proxy.serverStarting(event);
+
 	}
 
 	@EventHandler
 	public void serverStarted(FMLServerStartedEvent event) {
-		proxy.serverStarted(event);
+
 	}
 
 	@EventHandler
 	public void serverStopping(FMLServerStoppingEvent event) {
-		proxy.serverStopping(event);
+
 	}
 
 	@EventHandler
 	public void serverStopped(FMLServerStoppedEvent event) {
-		proxy.serverStopped(event);
+
 	}
 
 	@EventHandler
 	public void fingerprintViolation(FMLFingerprintViolationEvent event) {
-		proxy.fingerprintViolation(event);
+
 	}
 
 	@EventHandler
 	public void interModComms(FMLInterModComms.IMCEvent event) {
-		proxy.interModComms(event);
+
 	}
 }

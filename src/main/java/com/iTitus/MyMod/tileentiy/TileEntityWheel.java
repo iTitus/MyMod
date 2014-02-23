@@ -14,6 +14,8 @@ import java.nio.channels.ScatteringByteChannel;
 import java.nio.charset.Charset;
 
 import com.google.common.collect.BiMap;
+import com.iTitus.MyMod.network.PacketPipeline;
+import com.iTitus.MyMod.network.PacketWheel;
 
 import cpw.mods.fml.common.network.FMLNetworkEvent;
 import net.minecraft.entity.player.EntityPlayer;
@@ -29,7 +31,7 @@ public class TileEntityWheel extends TileEntity {
 
 	private double deg, velo, acc;
 
-	private static final double friction = -0.1;
+	private static final double FRICTION = -0.1;
 
 	private static final String TAG_DEG = "degrees", TAG_VELO = "velocity",
 			TAG_ACC = "acceleration";
@@ -45,14 +47,12 @@ public class TileEntityWheel extends TileEntity {
 	public void updateEntity() {
 		super.updateEntity();
 		if (worldObj.isRemote) {
-			System.out.println("CLIENT: " + deg);
 			return;
 		}
-		System.out.println("SERVER: " + deg);
 
-		acc += friction;
-		if (acc < friction)
-			acc = friction;
+		acc += FRICTION;
+		if (acc < FRICTION)
+			acc = FRICTION;
 
 		velo += acc;
 		if (velo < 0)
@@ -64,6 +64,9 @@ public class TileEntityWheel extends TileEntity {
 				deg -= 360;
 			} while (deg >= 360);
 		}
+
+		PacketPipeline.INSTANCE.sendToDimension(new PacketWheel(xCoord, yCoord,
+				zCoord, acc, velo, deg), worldObj.provider.dimensionId);
 
 	}
 
@@ -86,13 +89,10 @@ public class TileEntityWheel extends TileEntity {
 		deg = nbt.getDouble(TAG_DEG);
 		velo = nbt.getDouble(TAG_VELO);
 		acc = nbt.getDouble(TAG_ACC);
-		worldObj.markBlockForUpdate(xCoord, yCoord, zCoord);
 	}
 
 	public float getRotationAngleRad() {
-		float f = (float) ((deg / 360D) * (2D * Math.PI));
-		System.out.println(deg + " -> " + f);
-		return f;
+		return (float) ((deg / 360D) * (2D * Math.PI));
 	}
 
 	public boolean onBlockActivated(EntityPlayer p, int side, float hitX,
@@ -100,11 +100,23 @@ public class TileEntityWheel extends TileEntity {
 
 		if (p.getHeldItem() == null && velo == 0
 				&& worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {
-			acc = (Math.random() * 1D) + 1D;
+			acc = (Math.random() * 2.5D) + 1D;
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
 		}
 
 		return true;
 
+	}
+
+	public void setAcc(double acc) {
+		this.acc = acc;
+	}
+
+	public void setVelo(double velo) {
+		this.velo = velo;
+	}
+
+	public void setDeg(double deg) {
+		this.deg = deg;
 	}
 }

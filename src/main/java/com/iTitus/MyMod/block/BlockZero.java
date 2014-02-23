@@ -17,9 +17,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 
 public class BlockZero extends MyBlock {
 
-	@SideOnly(Side.CLIENT)
-	private static IIcon icon;
-
 	protected BlockZero() {
 		super(EnumBlockType.ZERO);
 	}
@@ -44,19 +41,6 @@ public class BlockZero extends MyBlock {
 	@Override
 	public boolean renderAsNormalBlock() {
 		return false;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		return icon;
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void registerBlockIcons(IIconRegister register) {
-		icon = register.registerIcon(LibTextures
-				.getTextureLoc(EnumBlockType.ZERO));
 	}
 
 	@Override

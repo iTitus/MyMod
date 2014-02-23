@@ -15,9 +15,6 @@ import net.minecraft.world.*;
 
 public class BlockWheel extends MyBlock implements ITileEntityProvider {
 
-	@SideOnly(Side.CLIENT)
-	private static IIcon icon;
-
 	public BlockWheel() {
 		super(EnumBlockType.WHEEL);
 	}
@@ -55,17 +52,6 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y,
 			int z, int side) {
 		return false;
-	}
-
-	@Override
-	public void registerBlockIcons(IIconRegister register) {
-		icon = register.registerIcon(LibTextures
-				.getTextureLoc(EnumBlockType.WHEEL));
-	}
-
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		return icon;
 	}
 
 	@Override

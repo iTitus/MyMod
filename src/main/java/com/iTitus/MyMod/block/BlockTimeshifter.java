@@ -78,22 +78,6 @@ public class BlockTimeshifter extends MyBlock {
 	}
 
 	@Override
-	public void registerBlockIcons(IIconRegister register) {
-		icon = register.registerIcon(LibTextures
-				.getTextureLoc(EnumBlockType.TIMESHIFTER));
-	}
-
-	@Override
-	public IIcon getIcon(int side, int meta) {
-		return icon;
-	}
-
-	@Override
-	public int damageDropped(int dmg) {
-		return 0;
-	}
-
-	@Override
 	public boolean putInTab() {
 		return true;
 	}
