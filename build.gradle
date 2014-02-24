@@ -40,3 +40,11 @@ processResources
         exclude 'mcmod.info'
     }
 }
+
+// this sets our output jar to have a 'tag' of 'universal' on it
+// It also adds the minecraft version in a custom version name
+// The result is files named <projectname>-<mcversion>-<version>-universal.jar
+jar {
+    version = "${project.minecraft.version}-${project.version}"
+
+}
