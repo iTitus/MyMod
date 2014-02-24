@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.texture.IIconRegister;
+import net.minecraft.enchantment.EnchantmentDamage;
 import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
@@ -63,11 +64,10 @@ public class ItemDebug extends MyItem {
 	@Override
 	public ItemStack onItemRightClick(ItemStack stack, World world,
 			EntityPlayer player) {
-
-		if (world.isRemote)
-			return stack;
-
 		player.swingItem();
+
+		if (!world.isRemote)
+			return stack;
 
 		MovingObjectPosition mop = Minecraft.getMinecraft().objectMouseOver;
 
@@ -177,11 +177,7 @@ public class ItemDebug extends MyItem {
 
 	@Override
 	public float func_150893_a(ItemStack stack, Block block) {
-		return (block.getBlockHardness(Minecraft.getMinecraft().theWorld,
-				Minecraft.getMinecraft().thePlayer.serverPosX,
-				Minecraft.getMinecraft().thePlayer.serverPosY,
-				Minecraft.getMinecraft().thePlayer.serverPosZ) + 1)
-				* 6 * (Minecraft.getMinecraft().thePlayer.isInWater() ? 5 : 1);
+		return 10F;
 	}
 
 }

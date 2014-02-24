@@ -1,7 +1,7 @@
 [
 {
   "modid": "mymod",
-  "name": "iTitus' MyMOd",
+  "name": "iTitus' MyMod",
   "description": "It's just iTitus' MyMod ;)",
   "version": "${version}",
   "mcversion": "${mcversion}",

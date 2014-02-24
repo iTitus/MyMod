@@ -22,21 +22,17 @@ public class MyMod {
 
 	@EventHandler
 	public void preInit(FMLPreInitializationEvent event) {
-		ConfigHandler.init(event.getSuggestedConfigurationFile());
-
-		ModBlocks.init();
-		ModItems.init();
+		proxy.preInit(event);
 	}
 
 	@EventHandler
 	public void init(FMLInitializationEvent event) {
-		proxy.registerRenderers();
-		PacketPipeline.INSTANCE.init();
+		proxy.init(event);
 	}
 
 	@EventHandler
 	public void postInit(FMLPostInitializationEvent event) {
-		PacketPipeline.INSTANCE.postInit();
+		proxy.postInit(event);
 	}
 
 	@EventHandler
