@@ -65,7 +65,7 @@ public class TileEntityWheel extends TileEntity {
 			} while (deg >= 360);
 		}
 
-		if (worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 1) {
+		if (getBlockMetadata() == 1) {
 			PacketPipeline.INSTANCE.sendToDimension(new PacketWheel(xCoord,
 					yCoord, zCoord, acc, velo, deg),
 					worldObj.provider.dimensionId);

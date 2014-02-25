@@ -4,6 +4,7 @@ eclipse/
 bin/
 build/
 misc/
+mcp/
 .classpath
 .project
 
