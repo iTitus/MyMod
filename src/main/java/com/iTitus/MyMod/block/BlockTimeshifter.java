@@ -77,9 +77,4 @@ public class BlockTimeshifter extends MyBlock {
 				hitZ);
 	}
 
-	@Override
-	public boolean putInTab() {
-		return true;
-	}
-
 }

@@ -43,9 +43,4 @@ public class BlockZero extends MyBlock {
 		return false;
 	}
 
-	@Override
-	public boolean putInTab() {
-		return true;
-	}
-
 }

@@ -4,6 +4,7 @@ import com.iTitus.MyMod.block.ModBlocks;
 import com.iTitus.MyMod.handler.ConfigHandler;
 import com.iTitus.MyMod.item.ModItems;
 import com.iTitus.MyMod.network.PacketPipeline;
+import com.iTitus.MyMod.recipe.VanillaRecipes;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;
@@ -22,6 +23,7 @@ public class CommonProxy {
 
 		ModBlocks.init();
 		ModItems.init();
+		VanillaRecipes.init();
 	}
 
 	public void init(FMLInitializationEvent event) {

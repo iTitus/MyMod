@@ -1,5 +1,6 @@
 package com.iTitus.MyMod.block;
 
+import com.iTitus.MyMod.helper.ItemHelper;
 import com.iTitus.MyMod.lib.LibRender;
 import com.iTitus.MyMod.lib.LibTextures;
 import com.iTitus.MyMod.tileentiy.TileEntityWheel;
@@ -17,6 +18,7 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 
 	public BlockWheel() {
 		super(EnumBlockType.WHEEL);
+		// TODO: Maybe subtypes?
 	}
 
 	@Override
@@ -60,8 +62,32 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	}
 
 	@Override
-	public boolean putInTab() {
-		return true;
+	public void breakBlock(World world, int x, int y, int z, Block block,
+			int meta) {
+
+		if (meta == 9) {
+			// TODO: Fancy win thingie!
+			ItemHelper.dropInventory(world, x, y, z);
+		}
+
+		super.breakBlock(world, x, y, z, block, meta);
+	}
+
+	@Override
+	public boolean dropAllItems() {
+		return false;
+	}
+
+	@Override
+	public int damageDropped(int dmg) {
+		switch (dmg) {
+		case 8:
+		case 9:
+		case 15:
+			return 1;
+		default:
+			return dmg;
+		}
 	}
 
 }

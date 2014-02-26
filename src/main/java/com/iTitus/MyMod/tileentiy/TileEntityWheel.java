@@ -1,35 +1,22 @@
 package com.iTitus.MyMod.tileentiy;
 
-import io.netty.buffer.ByteBuf;
-import io.netty.buffer.ByteBufAllocator;
-import io.netty.buffer.ByteBufProcessor;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.inventory.IInventory;
+import net.minecraft.item.ItemStack;
+import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.nbt.NBTTagList;
+import net.minecraft.util.WeightedRandomChestContent;
+import net.minecraftforge.common.ChestGenHooks;
+import net.minecraftforge.common.util.Constants.NBT;
 
-import java.io.IOException;
-import java.io.InputStream;
-import java.io.OutputStream;
-import java.nio.ByteBuffer;
-import java.nio.ByteOrder;
-import java.nio.channels.GatheringByteChannel;
-import java.nio.channels.ScatteringByteChannel;
-import java.nio.charset.Charset;
-
-import com.google.common.collect.BiMap;
 import com.iTitus.MyMod.network.PacketPipeline;
 import com.iTitus.MyMod.network.PacketWheel;
 
-import cpw.mods.fml.common.network.FMLNetworkEvent;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.EnumConnectionState;
-import net.minecraft.network.INetHandler;
-import net.minecraft.network.Packet;
-import net.minecraft.network.PacketBuffer;
-import net.minecraft.tileentity.TileEntity;
-import net.minecraft.util.IChatComponent;
-
-public class TileEntityWheel extends TileEntity {
+public class TileEntityWheel extends MyTileEntity implements IInventory {
 
 	private double deg, velo, acc;
+
+	private ItemStack[] inv;
 
 	private static final double FRICTION = -0.1;
 
@@ -41,14 +28,12 @@ public class TileEntityWheel extends TileEntity {
 		deg = 0;
 		velo = 0;
 		acc = 0;
+		inv = new ItemStack[3];
 	}
 
 	@Override
 	public void updateEntity() {
 		super.updateEntity();
-		if (worldObj.isRemote) {
-			return;
-		}
 
 		acc += FRICTION;
 		if (acc < FRICTION)
@@ -65,17 +50,24 @@ public class TileEntityWheel extends TileEntity {
 			} while (deg >= 360);
 		}
 
-		if (getBlockMetadata() == 1) {
+		if (getBlockMetadata() == 15) {
 			PacketPipeline.INSTANCE.sendToDimension(new PacketWheel(xCoord,
 					yCoord, zCoord, acc, velo, deg),
 					worldObj.provider.dimensionId);
 		}
 
-	}
+		if (velo == 0 && getBlockMetadata() == 15)
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 8, 3);
 
-	@Override
-	public Packet getDescriptionPacket() {
-		return super.getDescriptionPacket();
+		if (getBlockMetadata() == 8) {
+			WeightedRandomChestContent.generateChestContents(worldObj.rand,
+					ChestGenHooks.getItems(ChestGenHooks.DUNGEON_CHEST,
+							worldObj.rand), this, ChestGenHooks.getCount(
+							ChestGenHooks.DUNGEON_CHEST, worldObj.rand));
+			// TODO: Choose item based on degrees
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 9, 3);
+		}
+
 	}
 
 	@Override
@@ -84,6 +76,18 @@ public class TileEntityWheel extends TileEntity {
 		nbt.setDouble(TAG_DEG, deg);
 		nbt.setDouble(TAG_VELO, velo);
 		nbt.setDouble(TAG_ACC, acc);
+
+		NBTTagList tagList = new NBTTagList();
+		for (int i = 0; i < inv.length; i++) {
+			ItemStack stack = getStackInSlot(i);
+			if (stack != null) {
+				NBTTagCompound tag = new NBTTagCompound();
+				tag.setByte("Slot", (byte) i);
+				stack.writeToNBT(tag);
+				tagList.appendTag(tag);
+			}
+		}
+		nbt.setTag("Items", tagList);
 	}
 
 	@Override
@@ -92,6 +96,17 @@ public class TileEntityWheel extends TileEntity {
 		deg = nbt.getDouble(TAG_DEG);
 		velo = nbt.getDouble(TAG_VELO);
 		acc = nbt.getDouble(TAG_ACC);
+
+		NBTTagList tagList = nbt.getTagList("Items", NBT.TAG_COMPOUND);
+		inv = new ItemStack[this.getSizeInventory()];
+		for (int i = 0; i < tagList.tagCount(); i++) {
+			NBTTagCompound tag = tagList.getCompoundTagAt(i);
+			byte slot = tag.getByte("Slot");
+			if (slot < getSizeInventory() && slot >= 0) {
+				setInventorySlotContents(slot,
+						ItemStack.loadItemStackFromNBT(tag));
+			}
+		}
 	}
 
 	public float getRotationAngleRad() {
@@ -103,8 +118,8 @@ public class TileEntityWheel extends TileEntity {
 
 		if (p.getHeldItem() == null && velo == 0
 				&& worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {
-			acc = (Math.random() * 2.5D) + 1D;
-			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
+			acc = (Math.random() * 3D) + 1D;
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 15, 3);
 		}
 
 		return true;
@@ -122,4 +137,81 @@ public class TileEntityWheel extends TileEntity {
 	public void setDeg(double deg) {
 		this.deg = deg;
 	}
+
+	@Override
+	public int getSizeInventory() {
+		return inv.length;
+	}
+
+	@Override
+	public ItemStack getStackInSlot(int slot) {
+		return (slot < getSizeInventory() && slot >= 0) ? inv[slot] : null;
+	}
+
+	@Override
+	public ItemStack decrStackSize(int slot, int amount) {
+		ItemStack stack = getStackInSlot(slot);
+		if (stack != null) {
+			if (stack.stackSize <= amount) {
+				setInventorySlotContents(slot, null);
+			} else {
+				stack = stack.splitStack(amount);
+				if (stack.stackSize == 0) {
+					setInventorySlotContents(slot, null);
+				}
+			}
+		}
+
+		return stack;
+	}
+
+	@Override
+	public ItemStack getStackInSlotOnClosing(int slot) {
+		ItemStack stack = getStackInSlot(slot);
+		if (stack != null) {
+			setInventorySlotContents(slot, null);
+			return stack;
+		}
+		return null;
+	}
+
+	@Override
+	public boolean isItemValidForSlot(int var1, ItemStack var2) {
+		return true;
+	}
+
+	@Override
+	public void setInventorySlotContents(int slot, ItemStack stack) {
+		if (slot < getSizeInventory() && slot >= 0)
+			inv[slot] = stack;
+	}
+
+	@Override
+	public String getInventoryName() {
+		return hasCustomInventoryName() ? getCustomName() : "";
+	}
+
+	@Override
+	public boolean hasCustomInventoryName() {
+		return hasCustomName();
+	}
+
+	@Override
+	public int getInventoryStackLimit() {
+		return 64;
+	}
+
+	@Override
+	public void openInventory() {
+	}
+
+	@Override
+	public void closeInventory() {
+	}
+
+	@Override
+	public boolean isUseableByPlayer(EntityPlayer player) {
+		return true;
+	}
+
 }
