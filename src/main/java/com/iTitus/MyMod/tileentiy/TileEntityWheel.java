@@ -9,31 +9,34 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.util.Constants.NBT;
 
+import com.iTitus.MyMod.helper.ItemHelper;
 import com.iTitus.MyMod.network.PacketPipeline;
 import com.iTitus.MyMod.network.PacketWheel;
 
 public class TileEntityWheel extends MyTileEntity implements IInventory {
 
 	private double deg, velo, acc;
+	private boolean running;
 
 	private ItemStack[] inv;
 
 	private static final double FRICTION = -0.1;
 
 	private static final String TAG_DEG = "degrees", TAG_VELO = "velocity",
-			TAG_ACC = "acceleration";
+			TAG_ACC = "acceleration", TAG_RUNNING = "running";
 
 	public TileEntityWheel() {
 		super();
 		deg = 0;
 		velo = 0;
 		acc = 0;
+		running = false;
 		inv = new ItemStack[3];
 	}
 
 	@Override
 	public void updateEntity() {
-		super.updateEntity();
+		System.out.println(getBlockMetadata());
 
 		acc += FRICTION;
 		if (acc < FRICTION)
@@ -56,16 +59,27 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 					worldObj.provider.dimensionId);
 		}
 
-		if (velo == 0 && getBlockMetadata() == 15)
+		if (acc == FRICTION && velo == 0 && getBlockMetadata() == 15 && running) {
+			System.out.println("Stopped! - " + acc + " - " + velo + " - " + deg
+					+ " - " + getBlockMetadata());
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 8, 3);
+		}
 
 		if (getBlockMetadata() == 8) {
+			running = false;
 			WeightedRandomChestContent.generateChestContents(worldObj.rand,
 					ChestGenHooks.getItems(ChestGenHooks.DUNGEON_CHEST,
 							worldObj.rand), this, ChestGenHooks.getCount(
 							ChestGenHooks.DUNGEON_CHEST, worldObj.rand));
 			// TODO: Choose item based on degrees
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 9, 3);
+		}
+
+		if (getBlockMetadata() == 9) {
+			// TODO: Fancy win thingie!
+			ItemHelper.dropInventory(worldObj, xCoord, yCoord, zCoord);
+			worldObj.createExplosion(null, xCoord, yCoord, zCoord, 0, true);
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
 		}
 
 	}
@@ -76,6 +90,7 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 		nbt.setDouble(TAG_DEG, deg);
 		nbt.setDouble(TAG_VELO, velo);
 		nbt.setDouble(TAG_ACC, acc);
+		nbt.setBoolean(TAG_RUNNING, running);
 
 		NBTTagList tagList = new NBTTagList();
 		for (int i = 0; i < inv.length; i++) {
@@ -96,6 +111,7 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 		deg = nbt.getDouble(TAG_DEG);
 		velo = nbt.getDouble(TAG_VELO);
 		acc = nbt.getDouble(TAG_ACC);
+		running = nbt.getBoolean(TAG_RUNNING);
 
 		NBTTagList tagList = nbt.getTagList("Items", NBT.TAG_COMPOUND);
 		inv = new ItemStack[this.getSizeInventory()];
@@ -120,6 +136,7 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 				&& worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {
 			acc = (Math.random() * 3D) + 1D;
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 15, 3);
+			running = true;
 		}
 
 		return true;

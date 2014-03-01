@@ -1,5 +1,7 @@
 package com.iTitus.MyMod.block;
 
+import java.util.List;
+
 import com.iTitus.MyMod.helper.ItemHelper;
 import com.iTitus.MyMod.lib.LibRender;
 import com.iTitus.MyMod.lib.LibTextures;
@@ -9,7 +11,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 import net.minecraft.block.*;
 import net.minecraft.client.renderer.texture.*;
+import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.*;
 import net.minecraft.util.*;
 import net.minecraft.world.*;
@@ -18,7 +22,6 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 
 	public BlockWheel() {
 		super(EnumBlockType.WHEEL);
-		// TODO: Maybe subtypes?
 	}
 
 	@Override
@@ -65,11 +68,6 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	public void breakBlock(World world, int x, int y, int z, Block block,
 			int meta) {
 
-		if (meta == 9) {
-			// TODO: Fancy win thingie!
-			ItemHelper.dropInventory(world, x, y, z);
-		}
-
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 
@@ -87,6 +85,13 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 			return 1;
 		default:
 			return dmg;
+		}
+	}
+
+	@SideOnly(Side.CLIENT)
+	public void getSubBlocks(int par1, CreativeTabs tab, List subItems) {
+		for (int ix = 0; ix < 2; ix++) {
+			subItems.add(new ItemStack(this, 1, ix));
 		}
 	}
 

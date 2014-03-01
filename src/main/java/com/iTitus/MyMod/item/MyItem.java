@@ -21,6 +21,8 @@ public abstract class MyItem extends Item {
 			setCreativeTab(MyCreativeTab.INSTANCE);
 	}
 
-	public abstract boolean putInTab();
+	public boolean putInTab() {
+		return true;
+	}
 
 }
