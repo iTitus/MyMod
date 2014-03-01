@@ -9,7 +9,9 @@ import net.minecraft.util.WeightedRandomChestContent;
 import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.util.Constants.NBT;
 
+import com.iTitus.MyMod.MyMod;
 import com.iTitus.MyMod.helper.ItemHelper;
+import com.iTitus.MyMod.lib.LibGUI;
 import com.iTitus.MyMod.network.PacketPipeline;
 import com.iTitus.MyMod.network.PacketWheel;
 
@@ -36,7 +38,6 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 
 	@Override
 	public void updateEntity() {
-		System.out.println(getBlockMetadata());
 
 		acc += FRICTION;
 		if (acc < FRICTION)
@@ -60,8 +61,6 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 		}
 
 		if (acc == FRICTION && velo == 0 && getBlockMetadata() == 15 && running) {
-			System.out.println("Stopped! - " + acc + " - " + velo + " - " + deg
-					+ " - " + getBlockMetadata());
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 8, 3);
 		}
 
@@ -132,11 +131,13 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 	public boolean onBlockActivated(EntityPlayer p, int side, float hitX,
 			float hitY, float hitZ) {
 
-		if (p.getHeldItem() == null && velo == 0
-				&& worldObj.getBlockMetadata(xCoord, yCoord, zCoord) == 0) {
+		if (p.getHeldItem() == null && velo == 0 && getBlockMetadata() == 0) {
 			acc = (Math.random() * 3D) + 1D;
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 15, 3);
 			running = true;
+		} else if (!p.isSneaking() && !running && getBlockMetadata() == 1) {
+			p.openGui(MyMod.instance, LibGUI.WHEEL_GUI_ID, worldObj, xCoord,
+					yCoord, zCoord);
 		}
 
 		return true;
@@ -228,7 +229,7 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
-		return true;
+		return player.getDistanceSq(xCoord, yCoord, zCoord) <= 64;
 	}
 
 }

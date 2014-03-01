@@ -7,7 +7,7 @@ tile.wheel.name=§1W§2h§3e§4e§5l §6o§7f §8F§9o§ar§bt§cu§dn§ee§r
 item.debug.name=Debug Item
 
 ### GUI ###
-
+gui.wheel.name=Wheel of Fortune
 
 ### MISC ###
 itemGroup.mymod=§4iTitus' MyMod§r
