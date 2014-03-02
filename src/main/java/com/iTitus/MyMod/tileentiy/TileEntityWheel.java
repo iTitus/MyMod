@@ -54,7 +54,7 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 			} while (deg >= 360);
 		}
 
-		if (getBlockMetadata() == 15) {
+		if (getBlockMetadata() >= 14) {
 			PacketPipeline.INSTANCE.sendToDimension(new PacketWheel(xCoord,
 					yCoord, zCoord, acc, velo, deg),
 					worldObj.provider.dimensionId);
