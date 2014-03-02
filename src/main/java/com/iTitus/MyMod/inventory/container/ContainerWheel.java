@@ -15,6 +15,7 @@ public class ContainerWheel extends MyContainer {
 	public ContainerWheel(InventoryPlayer inventory, TileEntityWheel wheel) {
 		super(inventory, true);
 		this.wheel = wheel;
+		this.wheel.openInventory();
 
 		addSlots();
 	}
@@ -34,6 +35,12 @@ public class ContainerWheel extends MyContainer {
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 		return wheel.isUseableByPlayer(player);
+	}
+
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		wheel.closeInventory();
 	}
 
 }
