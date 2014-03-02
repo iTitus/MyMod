@@ -12,6 +12,7 @@ public abstract class MyContainer extends Container {
 
 		if (shouldBindPlayerInventory)
 			bindPlayerInventory(inventoryPlayer);
+
 	}
 
 	private void bindPlayerInventory(InventoryPlayer inventoryPlayer) {

@@ -5,6 +5,8 @@ import com.iTitus.MyMod.tileentiy.TileEntityWheel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
 import net.minecraft.inventory.Container;
+import net.minecraft.inventory.Slot;
+import net.minecraft.item.ItemStack;
 
 public class ContainerWheel extends MyContainer {
 
@@ -13,6 +15,20 @@ public class ContainerWheel extends MyContainer {
 	public ContainerWheel(InventoryPlayer inventory, TileEntityWheel wheel) {
 		super(inventory, true);
 		this.wheel = wheel;
+
+		addSlots();
+	}
+
+	protected void addSlots() {
+		addSlotToContainer(new Slot(wheel, 0, 31, 35));
+		addSlotToContainer(new Slot(wheel, 1, 80, 35));
+		addSlotToContainer(new Slot(wheel, 2, 129, 35));
+	}
+
+	@Override
+	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
+		// TODO: Shift-Clicking
+		return null;
 	}
 
 	@Override

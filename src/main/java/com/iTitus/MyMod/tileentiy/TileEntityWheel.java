@@ -135,10 +135,14 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 			acc = (Math.random() * 3D) + 1D;
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 15, 3);
 			running = true;
-		} else if (!p.isSneaking() && !running && getBlockMetadata() == 1) {
-			p.openGui(MyMod.instance, LibGUI.WHEEL_GUI_ID, worldObj, xCoord,
-					yCoord, zCoord);
 		}
+		// else if (!p.isSneaking() && !running && getBlockMetadata() == 1) {
+		// p.openGui(MyMod.instance, LibGUI.WHEEL_GUI_ID, worldObj, xCoord,
+		// yCoord, zCoord);
+		// }
+
+		p.openGui(MyMod.instance, LibGUI.WHEEL_GUI_ID, worldObj, xCoord,
+				yCoord, zCoord);
 
 		return true;
 
