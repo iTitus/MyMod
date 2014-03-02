@@ -64,6 +64,12 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 8, 3);
 		}
 
+		if (getBlockMetadata() == 7) {
+			running = false;
+			// TODO: Choose item based on degrees
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 9, 3);
+		}
+
 		if (getBlockMetadata() == 8) {
 			running = false;
 			WeightedRandomChestContent.generateChestContents(worldObj.rand,
@@ -131,10 +137,18 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 	public boolean onBlockActivated(EntityPlayer p, int side, float hitX,
 			float hitY, float hitZ) {
 
-		if (p.getHeldItem() == null && velo == 0 && getBlockMetadata() == 0) {
-			acc = (Math.random() * 3D) + 1D;
-			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 15, 3);
-			running = true;
+		if (p.getHeldItem() == null && velo == 0) {
+			if (getBlockMetadata() == 0) {
+				acc = (Math.random() * 3D) + 1D;
+				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 15,
+						3);
+				running = true;
+			} else if (getBlockMetadata() == 13) {
+				acc = (Math.random() * 3D) + 1D;
+				worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 14,
+						3);
+				running = true;
+			}
 		}
 
 		else if (!p.isSneaking() && !running && getBlockMetadata() == 1) {
@@ -223,10 +237,13 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 
 	@Override
 	public void openInventory() {
+		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 12, 3);
 	}
 
 	@Override
 	public void closeInventory() {
+		if (getBlockMetadata() == 12)
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 13, 3);
 	}
 
 	@Override

@@ -46,6 +46,9 @@ public class ItemHelper {
 				world.spawnEntityInWorld(entityItem);
 				itemStack.stackSize = 0;
 			}
+
+			inventory.setInventorySlotContents(i, null);
+
 		}
 	}
 

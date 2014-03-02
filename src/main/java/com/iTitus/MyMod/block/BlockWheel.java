@@ -79,12 +79,10 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	@Override
 	public int damageDropped(int dmg) {
 		switch (dmg) {
-		case 8:
-		case 9:
-		case 15:
-			return 1;
+		case 0:
+			return 0;
 		default:
-			return dmg;
+			return 1;
 		}
 	}
 
