@@ -27,9 +27,41 @@ public class ContainerWheel extends MyContainer {
 	}
 
 	@Override
-	public ItemStack transferStackInSlot(EntityPlayer par1EntityPlayer, int par2) {
-		// TODO: Shift-Clicking
-		return null;
+	public ItemStack transferStackInSlot(EntityPlayer player, int slotID) {
+		System.out.println("Slot -> " + slotID);
+		ItemStack retStack = null;
+		Slot slot = (Slot) inventorySlots.get(slotID);
+
+		if (slot != null && slot.getHasStack()) {
+			ItemStack stack = slot.getStack();
+			retStack = stack.copy();
+
+			System.out.println(slotID + " - "
+					+ (inventorySlots.size() - wheel.getSizeInventory()));
+			if (slotID >= (inventorySlots.size() - wheel.getSizeInventory())) {
+				System.out.println("Im Wheel!");
+				if (!mergeItemStack(stack,
+						(inventorySlots.size() - wheel.getSizeInventory() - 9),
+						(inventorySlots.size() - wheel.getSizeInventory()),
+						false)
+						&& !mergeItemStack(stack, 0, (inventorySlots.size()
+								- wheel.getSizeInventory() - 9), false)) {
+					return null;
+				}
+			} else if (!mergeItemStack(stack,
+					(inventorySlots.size() - wheel.getSizeInventory()),
+					inventorySlots.size(), false)) {
+				return null;
+			}
+
+			if (stack.stackSize == 0) {
+				slot.putStack((ItemStack) null);
+			} else {
+				slot.onSlotChanged();
+			}
+		}
+
+		return retStack;
 	}
 
 	@Override

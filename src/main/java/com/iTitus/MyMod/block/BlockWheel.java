@@ -2,7 +2,7 @@ package com.iTitus.MyMod.block;
 
 import java.util.List;
 
-import com.iTitus.MyMod.helper.ItemHelper;
+import com.iTitus.MyMod.helper.InventoryHelper;
 import com.iTitus.MyMod.lib.LibRender;
 import com.iTitus.MyMod.lib.LibTextures;
 import com.iTitus.MyMod.tileentiy.TileEntityWheel;

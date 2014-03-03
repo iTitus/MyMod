@@ -9,7 +9,7 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class ItemHelper {
+public class InventoryHelper {
 
 	public static void dropInventory(World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);
@@ -50,6 +50,16 @@ public class ItemHelper {
 			inventory.setInventorySlotContents(i, null);
 
 		}
+	}
+
+	public static boolean isInventoryEmpty(IInventory inv) {
+		for (int i = 0; i < inv.getSizeInventory(); i++) {
+			if (inv.getStackInSlot(i) != null
+					&& inv.getStackInSlot(i).stackSize != 0)
+				return false;
+		}
+
+		return true;
 	}
 
 }

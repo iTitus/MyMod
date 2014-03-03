@@ -1,7 +1,7 @@
 package com.iTitus.MyMod.tileentiy;
 
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.inventory.IInventory;
+import net.minecraft.inventory.ISidedInventory;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -10,12 +10,12 @@ import net.minecraftforge.common.ChestGenHooks;
 import net.minecraftforge.common.util.Constants.NBT;
 
 import com.iTitus.MyMod.MyMod;
-import com.iTitus.MyMod.helper.ItemHelper;
+import com.iTitus.MyMod.helper.InventoryHelper;
 import com.iTitus.MyMod.lib.LibGUI;
 import com.iTitus.MyMod.network.PacketPipeline;
 import com.iTitus.MyMod.network.PacketWheel;
 
-public class TileEntityWheel extends MyTileEntity implements IInventory {
+public class TileEntityWheel extends MyTileEntity implements ISidedInventory {
 
 	private double deg, velo, acc;
 	private boolean running;
@@ -60,7 +60,11 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 					worldObj.provider.dimensionId);
 		}
 
-		if (acc == FRICTION && velo == 0 && getBlockMetadata() == 15 && running) {
+		if (acc == FRICTION && velo == 0 && running && getBlockMetadata() == 14) {
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 7, 3);
+		}
+
+		if (acc == FRICTION && velo == 0 && running && getBlockMetadata() == 15) {
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 8, 3);
 		}
 
@@ -82,7 +86,7 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 
 		if (getBlockMetadata() == 9) {
 			// TODO: Fancy win thingie!
-			ItemHelper.dropInventory(worldObj, xCoord, yCoord, zCoord);
+			InventoryHelper.dropInventory(worldObj, xCoord, yCoord, zCoord);
 			worldObj.createExplosion(null, xCoord, yCoord, zCoord, 0, true);
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
 		}
@@ -242,13 +246,31 @@ public class TileEntityWheel extends MyTileEntity implements IInventory {
 
 	@Override
 	public void closeInventory() {
-		if (getBlockMetadata() == 12)
+		if (InventoryHelper.isInventoryEmpty(this)) {
 			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 13, 3);
+		} else {
+			worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, 1, 3);
+		}
 	}
 
 	@Override
 	public boolean isUseableByPlayer(EntityPlayer player) {
 		return player.getDistanceSq(xCoord, yCoord, zCoord) <= 64;
+	}
+
+	@Override
+	public int[] getAccessibleSlotsFromSide(int var1) {
+		return new int[] {};
+	}
+
+	@Override
+	public boolean canInsertItem(int var1, ItemStack var2, int var3) {
+		return false;
+	}
+
+	@Override
+	public boolean canExtractItem(int var1, ItemStack var2, int var3) {
+		return false;
 	}
 
 }

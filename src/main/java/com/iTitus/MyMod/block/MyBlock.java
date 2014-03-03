@@ -1,6 +1,6 @@
 package com.iTitus.MyMod.block;
 
-import com.iTitus.MyMod.helper.ItemHelper;
+import com.iTitus.MyMod.helper.InventoryHelper;
 import com.iTitus.MyMod.lib.LibTextures;
 import com.iTitus.MyMod.lib.MyCreativeTab;
 import com.iTitus.MyMod.tileentiy.MyTileEntity;
@@ -77,7 +77,7 @@ public abstract class MyBlock extends Block {
 	public void breakBlock(World world, int x, int y, int z, Block block,
 			int meta) {
 		if (dropAllItems())
-			ItemHelper.dropInventory(world, x, y, z);
+			InventoryHelper.dropInventory(world, x, y, z);
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 
