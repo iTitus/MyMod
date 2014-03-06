@@ -3,6 +3,6 @@ MyMod
 
 
 It's just iTitus' MyMod.
-Have fun!
+Have fun :D
 
  - iTitus
