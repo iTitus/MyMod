@@ -1,7 +1,5 @@
 package com.iTitus.MyMod.tileentiy;
 
-import org.omg.IOP.TAG_CODE_SETS;
-
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
@@ -40,7 +38,6 @@ public class MyTileEntity extends TileEntity {
 	}
 
 	public void setCustomName(String customName) {
-
 		this.customName = customName;
 	}
 
@@ -56,9 +53,7 @@ public class MyTileEntity extends TileEntity {
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
-
 		nbtTagCompound.setByte(TAG_ORIENTATION, (byte) orientation.ordinal());
-
 		if (this.hasCustomName()) {
 			nbtTagCompound.setString(TAG_NAME, customName);
 		}
