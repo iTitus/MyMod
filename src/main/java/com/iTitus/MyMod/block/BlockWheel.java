@@ -29,7 +29,7 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer p, int side, float hitX, float hitY, float hitZ) {
 
-		if (world.isRemote
+		if (!world.isRemote
 				&& world.getTileEntity(x, y, z) instanceof TileEntityWheel) {
 			return ((TileEntityWheel) world.getTileEntity(x, y, z))
 					.onBlockActivated(p, side, hitX, hitY, hitZ);
