@@ -41,11 +41,9 @@ public class RenderTileEntityWheel extends TileEntitySpecialRenderer {
 		TileEntityWheel wheel = (TileEntityWheel) tile;
 
 		GL11.glPushMatrix();
-		GL11.glEnable(GL12.GL_RESCALE_NORMAL);
 		GL11.glColor4f(1F, 1F, 1F, 1F);
-		GL11.glTranslated(x, y, z);
+		GL11.glTranslated(x + 0.5, y + 1.5, z + 0.5);
 		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
-		GL11.glTranslatef(0.5F, 1.5F, 0.5F);
 		GL11.glScalef(1F, -1F, -1F);
 		ForgeDirection direction = wheel.getOrientation();
 		short angle = 0;
@@ -62,11 +60,7 @@ public class RenderTileEntityWheel extends TileEntitySpecialRenderer {
 		}
 		GL11.glRotatef(angle, 0.0F, 1.0F, 0.0F);
 		model.render(wheel.getRotationAngleRad());
-		GL11.glDisable(GL12.GL_RESCALE_NORMAL);
 		GL11.glPopMatrix();
-
-		Minecraft.getMinecraft().renderEngine
-				.bindTexture(TextureMap.locationBlocksTexture);
 
 	}
 }
