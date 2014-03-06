@@ -2,21 +2,21 @@ package com.iTitus.MyMod.block;
 
 import java.util.List;
 
-import com.iTitus.MyMod.helper.InventoryHelper;
+import net.minecraft.block.Block;
+import net.minecraft.block.ITileEntityProvider;
+import net.minecraft.creativetab.CreativeTabs;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+import net.minecraft.tileentity.TileEntity;
+import net.minecraft.world.IBlockAccess;
+import net.minecraft.world.World;
+
 import com.iTitus.MyMod.lib.LibRender;
-import com.iTitus.MyMod.lib.LibTextures;
 import com.iTitus.MyMod.tileentiy.TileEntityWheel;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.*;
-import net.minecraft.client.renderer.texture.*;
-import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.item.ItemStack;
-import net.minecraft.tileentity.*;
-import net.minecraft.util.*;
-import net.minecraft.world.*;
 
 public class BlockWheel extends MyBlock implements ITileEntityProvider {
 
@@ -25,17 +25,9 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	}
 
 	@Override
-	public boolean onBlockActivated(World world, int x, int y, int z,
-			EntityPlayer p, int side, float hitX, float hitY, float hitZ) {
-		if (world.isRemote)
-			return false;
-
-		if (world.getTileEntity(x, y, z) instanceof TileEntityWheel) {
-			return ((TileEntityWheel) world.getTileEntity(x, y, z))
-					.onBlockActivated(p, side, hitX, hitY, hitZ);
-		}
-
-		return false;
+	public void onBlockPlacedBy(World world, int x, int y, int z,
+			EntityLivingBase entityLiving, ItemStack stack) {
+		super.onBlockPlacedBy(world, x, y, z, entityLiving, stack);
 	}
 
 	@Override
@@ -87,9 +79,10 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	}
 
 	@SideOnly(Side.CLIENT)
-	public void getSubBlocks(int par1, CreativeTabs tab, List subItems) {
-		for (int ix = 0; ix < 2; ix++) {
-			subItems.add(new ItemStack(this, 1, ix));
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tab, List subItems) {
+		for (int i = 0; i < 2; i++) {
+			subItems.add(new ItemStack(item, 1, i));
 		}
 	}
 
