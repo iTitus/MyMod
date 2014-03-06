@@ -6,6 +6,7 @@ import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
@@ -25,9 +26,16 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	}
 
 	@Override
-	public void onBlockPlacedBy(World world, int x, int y, int z,
-			EntityLivingBase entityLiving, ItemStack stack) {
-		super.onBlockPlacedBy(world, x, y, z, entityLiving, stack);
+	public boolean onBlockActivated(World world, int x, int y, int z,
+			EntityPlayer p, int side, float hitX, float hitY, float hitZ) {
+
+		if (world.isRemote
+				&& world.getTileEntity(x, y, z) instanceof TileEntityWheel) {
+			return ((TileEntityWheel) world.getTileEntity(x, y, z))
+					.onBlockActivated(p, side, hitX, hitY, hitZ);
+		}
+
+		return false;
 	}
 
 	@Override
