@@ -1,19 +1,32 @@
 package com.iTitus.MyMod.network;
 
-import java.util.*;
+import io.netty.buffer.ByteBuf;
+import io.netty.buffer.Unpooled;
+import io.netty.channel.ChannelHandler;
+import io.netty.channel.ChannelHandlerContext;
+import io.netty.handler.codec.MessageToMessageCodec;
+
+import java.util.Collections;
+import java.util.Comparator;
+import java.util.EnumMap;
+import java.util.LinkedList;
+import java.util.List;
+
+import net.minecraft.client.Minecraft;
+import net.minecraft.entity.player.EntityPlayer;
+import net.minecraft.entity.player.EntityPlayerMP;
+import net.minecraft.network.INetHandler;
+import net.minecraft.network.NetHandlerPlayServer;
 
 import com.iTitus.MyMod.lib.LibNetwork;
 
-import io.netty.buffer.*;
-import io.netty.channel.*;
-import io.netty.handler.codec.*;
-import net.minecraft.client.*;
-import net.minecraft.entity.player.*;
-import net.minecraft.network.*;
-import cpw.mods.fml.common.*;
-import cpw.mods.fml.common.network.*;
-import cpw.mods.fml.common.network.internal.*;
-import cpw.mods.fml.relauncher.*;
+import cpw.mods.fml.common.FMLCommonHandler;
+import cpw.mods.fml.common.network.FMLEmbeddedChannel;
+import cpw.mods.fml.common.network.FMLOutboundHandler;
+import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.network.internal.FMLProxyPacket;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 /**
  * Packet pipeline class. Directs all registered packet data to be handled by
@@ -27,62 +40,8 @@ public class PacketPipeline extends
 
 	public static final PacketPipeline INSTANCE = new PacketPipeline();
 	private EnumMap<Side, FMLEmbeddedChannel> channels;
-	private LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
 	private boolean isPostInitialised = false;
-
-	public void registerPackets() {
-		registerPacket(PacketWheel.class);
-	}
-
-	/**
-	 * Register your packet with the pipeline. Discriminators are automatically
-	 * set.
-	 * 
-	 * @param clazz
-	 *            the class to register
-	 * 
-	 * @return whether registration was successful. Failure may occur if 256
-	 *         packets have been registered or if the registry already contains
-	 *         this packet
-	 */
-	public boolean registerPacket(Class<? extends AbstractPacket> clazz) {
-		if (this.packets.size() > 256) {
-			// You should log here!!
-			return false;
-		}
-
-		if (this.packets.contains(clazz)) {
-			// You should log here!!
-			return false;
-		}
-
-		if (this.isPostInitialised) {
-			// You should log here!!
-			return false;
-		}
-
-		this.packets.add(clazz);
-		return true;
-	}
-
-	// In line encoding of the packet, including discriminator setting
-	@Override
-	protected void encode(ChannelHandlerContext ctx, AbstractPacket msg,
-			List<Object> out) throws Exception {
-		ByteBuf buffer = Unpooled.buffer();
-		Class<? extends AbstractPacket> clazz = msg.getClass();
-		if (!this.packets.contains(msg.getClass())) {
-			throw new NullPointerException("No Packet Registered for: "
-					+ msg.getClass().getCanonicalName());
-		}
-
-		byte discriminator = (byte) this.packets.indexOf(clazz);
-		buffer.writeByte(discriminator);
-		msg.encodeInto(ctx, buffer);
-		FMLProxyPacket proxyPacket = new FMLProxyPacket(buffer.copy(), ctx
-				.channel().attr(NetworkRegistry.FML_CHANNEL).get());
-		out.add(proxyPacket);
-	}
+	private LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
 
 	// In line decoding and handling of the packet
 	@Override
@@ -117,6 +76,30 @@ public class PacketPipeline extends
 		}
 
 		out.add(pkt);
+	}
+
+	// In line encoding of the packet, including discriminator setting
+	@Override
+	protected void encode(ChannelHandlerContext ctx, AbstractPacket msg,
+			List<Object> out) throws Exception {
+		ByteBuf buffer = Unpooled.buffer();
+		Class<? extends AbstractPacket> clazz = msg.getClass();
+		if (!this.packets.contains(msg.getClass())) {
+			throw new NullPointerException("No Packet Registered for: "
+					+ msg.getClass().getCanonicalName());
+		}
+
+		byte discriminator = (byte) this.packets.indexOf(clazz);
+		buffer.writeByte(discriminator);
+		msg.encodeInto(ctx, buffer);
+		FMLProxyPacket proxyPacket = new FMLProxyPacket(buffer.copy(), ctx
+				.channel().attr(NetworkRegistry.FML_CHANNEL).get());
+		out.add(proxyPacket);
+	}
+
+	@SideOnly(Side.CLIENT)
+	private EntityPlayer getClientPlayer() {
+		return Minecraft.getMinecraft().thePlayer;
 	}
 
 	// Method to call from FMLInitializationEvent
@@ -154,25 +137,36 @@ public class PacketPipeline extends
 				});
 	}
 
-	@SideOnly(Side.CLIENT)
-	private EntityPlayer getClientPlayer() {
-		return Minecraft.getMinecraft().thePlayer;
+	/**
+	 * Register your packet with the pipeline. Discriminators are automatically
+	 * set.
+	 * 
+	 * @param clazz
+	 *            the class to register
+	 * 
+	 * @return whether registration was successful. Failure may occur if 256
+	 *         packets have been registered or if the registry already contains
+	 *         this packet
+	 */
+	public boolean registerPacket(Class<? extends AbstractPacket> clazz) {
+		if (this.packets.size() > 256) {
+			return false;
+		}
+
+		if (this.packets.contains(clazz)) {
+			return false;
+		}
+
+		if (this.isPostInitialised) {
+			return false;
+		}
+
+		this.packets.add(clazz);
+		return true;
 	}
 
-	/**
-	 * Send this message to everyone.
-	 * <p/>
-	 * Adapted from CPW's code in
-	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
-	 * 
-	 * @param message
-	 *            The message to send
-	 */
-	public void sendToAll(AbstractPacket message) {
-		this.channels.get(Side.SERVER)
-				.attr(FMLOutboundHandler.FML_MESSAGETARGET)
-				.set(FMLOutboundHandler.OutboundTarget.ALL);
-		this.channels.get(Side.SERVER).writeAndFlush(message);
+	public void registerPackets() {
+		registerPacket(PacketWheel.class);
 	}
 
 	/**
@@ -192,6 +186,22 @@ public class PacketPipeline extends
 				.set(FMLOutboundHandler.OutboundTarget.PLAYER);
 		this.channels.get(Side.SERVER)
 				.attr(FMLOutboundHandler.FML_MESSAGETARGETARGS).set(player);
+		this.channels.get(Side.SERVER).writeAndFlush(message);
+	}
+
+	/**
+	 * Send this message to everyone.
+	 * <p/>
+	 * Adapted from CPW's code in
+	 * cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper
+	 * 
+	 * @param message
+	 *            The message to send
+	 */
+	public void sendToAll(AbstractPacket message) {
+		this.channels.get(Side.SERVER)
+				.attr(FMLOutboundHandler.FML_MESSAGETARGET)
+				.set(FMLOutboundHandler.OutboundTarget.ALL);
 		this.channels.get(Side.SERVER).writeAndFlush(message);
 	}
 

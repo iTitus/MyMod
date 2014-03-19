@@ -1,7 +1,5 @@
 package com.iTitus.MyMod.lib;
 
-import java.util.*;
-
 public class LibMod {
 
 	public static final String MODID = "mymod";

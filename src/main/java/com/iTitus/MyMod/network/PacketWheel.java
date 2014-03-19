@@ -1,38 +1,28 @@
 package com.iTitus.MyMod.network;
 
-import com.iTitus.MyMod.tileentiy.TileEntityWheel;
-
-import cpw.mods.fml.common.network.ByteBufUtils;
 import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 
+import com.iTitus.MyMod.tileentiy.TileEntityWheel;
+
 public class PacketWheel extends AbstractPacket {
 
-	private int x, y, z;
 	private double acc, velo, deg;
+	private int x, y, z, mode;
 
 	public PacketWheel() {
-
 	}
 
-	public PacketWheel(int x, int y, int z, double acc, double velo, double deg) {
+	public PacketWheel(int x, int y, int z, double acc, double velo,
+			double deg, int mode) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
 		this.acc = acc;
 		this.velo = velo;
 		this.deg = deg;
-	}
-
-	@Override
-	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
-		buffer.writeInt(x);
-		buffer.writeInt(y);
-		buffer.writeInt(z);
-		buffer.writeDouble(acc);
-		buffer.writeDouble(velo);
-		buffer.writeDouble(deg);
+		this.mode = mode;
 	}
 
 	@Override
@@ -43,6 +33,18 @@ public class PacketWheel extends AbstractPacket {
 		acc = buffer.readDouble();
 		velo = buffer.readDouble();
 		deg = buffer.readDouble();
+		mode = buffer.readInt();
+	}
+
+	@Override
+	public void encodeInto(ChannelHandlerContext ctx, ByteBuf buffer) {
+		buffer.writeInt(x);
+		buffer.writeInt(y);
+		buffer.writeInt(z);
+		buffer.writeDouble(acc);
+		buffer.writeDouble(velo);
+		buffer.writeDouble(deg);
+		buffer.writeInt(mode);
 	}
 
 	@Override
@@ -56,6 +58,9 @@ public class PacketWheel extends AbstractPacket {
 			wheel.setAcc(acc);
 			wheel.setVelo(velo);
 			wheel.setDeg(deg);
+
+			wheel.setMode(TileEntityWheel.Mode.getModeForOrdinal(mode));
+
 		}
 
 	}

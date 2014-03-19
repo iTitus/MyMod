@@ -1,21 +1,21 @@
 package com.iTitus.MyMod.block;
 
-import com.iTitus.MyMod.lib.LibNames;
-
 import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
-public enum EnumBlockType {
-	ZERO(LibNames.ZERO_NAME, Material.glass, 2F, 5F, Block.soundTypeGlass, 0, 0), TIMESHIFTER(
-			LibNames.TIMESHIFTER, Material.wood, 2F, 5F, Block.soundTypeWood), WHEEL(
-			LibNames.WHEEL_NAME, Material.circuits, 3.5F, 6F,
-			Block.soundTypeStone, 0, 0);
+import com.iTitus.MyMod.lib.LibNames;
 
-	public final String name;
-	public final Material material;
+public enum EnumBlockType {
+	TIMESHIFTER(LibNames.TIMESHIFTER, Material.wood, 2F, 5F,
+			Block.soundTypeWood), WHEEL(LibNames.WHEEL_NAME, Material.circuits,
+			3.5F, 6F, Block.soundTypeStone, 0, 0), ZERO(LibNames.ZERO_NAME,
+			Material.glass, 2F, 5F, Block.soundTypeGlass, 0, 0);
+
 	public final float hardness, resistance;
-	public final Block.SoundType soundType;
 	public final int lightLevel, lightOpacity;
+	public final Material material;
+	public final String name;
+	public final Block.SoundType soundType;
 
 	private EnumBlockType(String name, Material material, float hardness,
 			float resistance, Block.SoundType soundType) {

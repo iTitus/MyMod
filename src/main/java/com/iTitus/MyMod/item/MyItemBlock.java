@@ -1,12 +1,10 @@
 package com.iTitus.MyMod.item;
 
-import com.iTitus.MyMod.block.EnumBlockType;
-import com.iTitus.MyMod.block.ModBlocks;
-import com.iTitus.MyMod.lib.LibTextures;
-import com.iTitus.MyMod.lib.MyCreativeTab;
-
 import net.minecraft.block.Block;
 import net.minecraft.item.ItemBlock;
+
+import com.iTitus.MyMod.block.EnumBlockType;
+import com.iTitus.MyMod.lib.LibTextures;
 
 public abstract class MyItemBlock extends ItemBlock {
 

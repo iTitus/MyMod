@@ -1,6 +1,6 @@
 package com.iTitus.MyMod.helper;
 
-import net.minecraft.nbt.*;
+import net.minecraft.nbt.NBTTagCompound;
 
 public class NBTHelper {
 

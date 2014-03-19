@@ -1,5 +1,9 @@
 package com.iTitus.MyMod.client.gui;
 
+import net.minecraft.client.gui.inventory.GuiContainer;
+import net.minecraft.util.ResourceLocation;
+import net.minecraft.util.StatCollector;
+
 import org.lwjgl.opengl.GL11;
 
 import com.iTitus.MyMod.helper.LangHelper;
@@ -7,16 +11,11 @@ import com.iTitus.MyMod.inventory.container.ContainerWheel;
 import com.iTitus.MyMod.lib.LibGUI;
 import com.iTitus.MyMod.lib.LibTextures;
 
-import net.minecraft.client.gui.inventory.GuiContainer;
-import net.minecraft.inventory.Container;
-import net.minecraft.util.ResourceLocation;
-import net.minecraft.util.StatCollector;
-
 public class GUIWheel extends GuiContainer {
 
-	private ContainerWheel container;
 	private static final ResourceLocation texture = new ResourceLocation(
 			LibTextures.TEXTURE_LOCATION, LibGUI.getTextureLoc("wheel"));
+	private ContainerWheel container;
 
 	public GUIWheel(ContainerWheel container) {
 		super(container);

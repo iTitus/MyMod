@@ -22,33 +22,6 @@ import cpw.mods.fml.common.network.NetworkRegistry;
 
 public class CommonProxy implements IGuiHandler {
 
-	public void registerRenderers() {
-	}
-
-	public void registerSounds() {
-	}
-
-	public void preInit(FMLPreInitializationEvent event) {
-		ConfigHandler.init(event.getSuggestedConfigurationFile());
-
-		ModBlocks.init();
-		ModItems.init();
-		VanillaRecipes.init();
-	}
-
-	public void init(FMLInitializationEvent event) {
-		PacketPipeline.INSTANCE.init();
-		NetworkRegistry.INSTANCE
-				.registerGuiHandler(MyMod.instance, MyMod.proxy);
-
-		registerRenderers();
-		registerSounds();
-	}
-
-	public void postInit(FMLPostInitializationEvent event) {
-		PacketPipeline.INSTANCE.postInit();
-	}
-
 	@Override
 	public Object getClientGuiElement(int ID, EntityPlayer player, World world,
 			int x, int y, int z) {
@@ -68,6 +41,33 @@ public class CommonProxy implements IGuiHandler {
 		}
 
 		return null;
+	}
+
+	public void init(FMLInitializationEvent event) {
+		PacketPipeline.INSTANCE.init();
+		NetworkRegistry.INSTANCE
+				.registerGuiHandler(MyMod.instance, MyMod.proxy);
+
+		registerRenderers();
+		registerSounds();
+	}
+
+	public void postInit(FMLPostInitializationEvent event) {
+		PacketPipeline.INSTANCE.postInit();
+	}
+
+	public void preInit(FMLPreInitializationEvent event) {
+		ConfigHandler.init(event.getSuggestedConfigurationFile());
+
+		ModBlocks.init();
+		ModItems.init();
+		VanillaRecipes.init();
+	}
+
+	public void registerRenderers() {
+	}
+
+	public void registerSounds() {
 	}
 
 }

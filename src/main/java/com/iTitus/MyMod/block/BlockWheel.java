@@ -5,7 +5,6 @@ import java.util.List;
 import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -26,6 +25,44 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	}
 
 	@Override
+	public TileEntity createNewTileEntity(World world, int meta) {
+		return new TileEntityWheel();
+	}
+
+	@Override
+	public int damageDropped(int dmg) {
+		switch (dmg) {
+		case 0:
+			return 0;
+		default:
+			return 1;
+		}
+	}
+
+	@Override
+	public boolean dropAllItems() {
+		return false;
+	}
+
+	@Override
+	public int getRenderType() {
+		return LibRender.WHEEL_ID;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public void getSubBlocks(Item item, CreativeTabs tab, List subItems) {
+		for (int i = 0; i < 2; i++) {
+			subItems.add(new ItemStack(item, 1, i));
+		}
+	}
+
+	@Override
+	public boolean isOpaqueCube() {
+		return false;
+	}
+
+	@Override
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer p, int side, float hitX, float hitY, float hitZ) {
 
@@ -39,13 +76,15 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
+	public void onPostBlockPlaced(World world, int x, int y, int z, int meta) {
 
-	@Override
-	public int getRenderType() {
-		return LibRender.WHEEL_ID;
+		if (!world.isRemote
+				&& world.getTileEntity(x, y, z) instanceof TileEntityWheel) {
+			((TileEntityWheel) world.getTileEntity(x, y, z))
+					.setMode((world.getBlockMetadata(x, y, z) == 0) ? (TileEntityWheel.Mode.FILLED)
+							: (TileEntityWheel.Mode.EMPTY));
+		}
+
 	}
 
 	@Override
@@ -57,41 +96,6 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y,
 			int z, int side) {
 		return false;
-	}
-
-	@Override
-	public TileEntity createNewTileEntity(World world, int meta) {
-		return new TileEntityWheel();
-	}
-
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block,
-			int meta) {
-
-		super.breakBlock(world, x, y, z, block, meta);
-	}
-
-	@Override
-	public boolean dropAllItems() {
-		return false;
-	}
-
-	@Override
-	public int damageDropped(int dmg) {
-		switch (dmg) {
-		case 0:
-			return 0;
-		default:
-			return 1;
-		}
-	}
-
-	@SideOnly(Side.CLIENT)
-	@Override
-	public void getSubBlocks(Item item, CreativeTabs tab, List subItems) {
-		for (int i = 0; i < 2; i++) {
-			subItems.add(new ItemStack(item, 1, i));
-		}
 	}
 
 }

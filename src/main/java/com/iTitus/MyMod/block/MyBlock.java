@@ -1,25 +1,16 @@
 package com.iTitus.MyMod.block;
 
+import net.minecraft.block.Block;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.item.ItemStack;
+import net.minecraft.util.MathHelper;
+import net.minecraft.world.World;
+import net.minecraftforge.common.util.ForgeDirection;
+
 import com.iTitus.MyMod.helper.InventoryHelper;
 import com.iTitus.MyMod.lib.LibTextures;
 import com.iTitus.MyMod.lib.MyCreativeTab;
 import com.iTitus.MyMod.tileentiy.MyTileEntity;
-
-import scala.collection.SetLike;
-import cpw.mods.fml.common.registry.GameRegistry;
-import cpw.mods.fml.relauncher.Side;
-import cpw.mods.fml.relauncher.SideOnly;
-import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.entity.EntityLivingBase;
-import net.minecraft.init.Blocks;
-import net.minecraft.item.ItemStack;
-import net.minecraft.util.IIcon;
-import net.minecraft.util.MathHelper;
-import net.minecraft.world.IBlockAccess;
-import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 public abstract class MyBlock extends Block {
 
@@ -36,13 +27,21 @@ public abstract class MyBlock extends Block {
 			setCreativeTab(MyCreativeTab.INSTANCE);
 	}
 
-	public boolean putInTab() {
-		return true;
+	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block,
+			int meta) {
+		if (dropAllItems())
+			InventoryHelper.dropInventory(world, x, y, z);
+		super.breakBlock(world, x, y, z, block, meta);
 	}
 
 	@Override
 	public int damageDropped(int dmg) {
 		return super.damageDropped(0);
+	}
+
+	public boolean dropAllItems() {
+		return true;
 	}
 
 	@Override
@@ -73,15 +72,7 @@ public abstract class MyBlock extends Block {
 		}
 	}
 
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block,
-			int meta) {
-		if (dropAllItems())
-			InventoryHelper.dropInventory(world, x, y, z);
-		super.breakBlock(world, x, y, z, block, meta);
-	}
-
-	public boolean dropAllItems() {
+	public boolean putInTab() {
 		return true;
 	}
 

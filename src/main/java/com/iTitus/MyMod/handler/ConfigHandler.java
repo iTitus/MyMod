@@ -2,10 +2,11 @@ package com.iTitus.MyMod.handler;
 
 import java.io.File;
 
+import net.minecraftforge.common.config.Configuration;
+
 import org.apache.logging.log4j.Level;
 
 import cpw.mods.fml.common.FMLLog;
-import net.minecraftforge.common.config.Configuration;
 
 public class ConfigHandler {
 
@@ -14,9 +15,9 @@ public class ConfigHandler {
 		Configuration cfg = new Configuration(suggestedConfigurationFile);
 		try {
 			cfg.load();
-			
+
 			loadValues(cfg);
-			
+
 		} catch (Exception e) {
 			FMLLog.log(Level.ERROR, e,
 					"iTitus' MyMod has a problem loading its configuration!");
@@ -27,10 +28,8 @@ public class ConfigHandler {
 
 	}
 
-	private static void loadValues(Configuration cfg) throws Exception{
-		
-		
-		
+	private static void loadValues(Configuration cfg) throws Exception {
+
 	}
 
 }

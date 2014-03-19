@@ -4,9 +4,9 @@ import net.minecraft.block.Block;
 
 import com.iTitus.MyMod.item.ItemWheel;
 import com.iTitus.MyMod.lib.LibNames;
-import com.iTitus.MyMod.tileentiy.*;
+import com.iTitus.MyMod.tileentiy.TileEntityWheel;
 
-import cpw.mods.fml.common.registry.*;
+import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
 

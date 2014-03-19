@@ -1,9 +1,10 @@
 package com.iTitus.MyMod.lib;
 
-import com.iTitus.MyMod.block.ModBlocks;
-
 import net.minecraft.creativetab.CreativeTabs;
-import net.minecraft.item.*;
+import net.minecraft.item.Item;
+import net.minecraft.item.ItemStack;
+
+import com.iTitus.MyMod.block.ModBlocks;
 
 public class MyCreativeTab extends CreativeTabs {
 

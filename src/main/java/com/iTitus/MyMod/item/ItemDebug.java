@@ -3,13 +3,8 @@ package com.iTitus.MyMod.item;
 import java.util.List;
 
 import net.minecraft.block.Block;
-import net.minecraft.block.material.Material;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.renderer.texture.IIconRegister;
-import net.minecraft.enchantment.EnchantmentDamage;
-import net.minecraft.enchantment.EnchantmentHelper;
 import net.minecraft.entity.Entity;
-import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.SharedMonsterAttributes;
 import net.minecraft.entity.ai.attributes.AttributeModifier;
 import net.minecraft.entity.player.EntityPlayer;
@@ -17,15 +12,12 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
-import net.minecraft.util.IIcon;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.util.ForgeDirection;
 
 import com.google.common.collect.Multimap;
 import com.iTitus.MyMod.helper.LangHelper;
 import com.iTitus.MyMod.helper.NBTHelper;
-import com.iTitus.MyMod.lib.LibTextures;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -38,26 +30,40 @@ public class ItemDebug extends MyItem {
 	}
 
 	@Override
-	public boolean putInTab() {
-		return true;
-	}
-
-	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list,
 			boolean b) {
 		list.add(LangHelper.localize("lore.debug"));
 		super.addInformation(stack, player, list, b);
 	}
 
-	@SideOnly(Side.CLIENT)
 	@Override
-	public boolean isFull3D() {
+	public boolean canHarvestBlock(Block block, ItemStack stack) {
 		return true;
+	}
+
+	@Override
+	public float func_150893_a(ItemStack stack, Block block) {
+		return 10F;
+	}
+
+	@Override
+	public Multimap getItemAttributeModifiers() {
+		Multimap multimap = super.getItemAttributeModifiers();
+		multimap.put(SharedMonsterAttributes.attackDamage
+				.getAttributeUnlocalizedName(), new AttributeModifier(
+				field_111210_e, "Weapon modifier", 1000D, 0));
+		return multimap;
 	}
 
 	@SideOnly(Side.CLIENT)
 	@Override
 	public boolean hasEffect(ItemStack par1ItemStack, int pass) {
+		return true;
+	}
+
+	@SideOnly(Side.CLIENT)
+	@Override
+	public boolean isFull3D() {
 		return true;
 	}
 
@@ -117,7 +123,7 @@ public class ItemDebug extends MyItem {
 					b.getUnlocalizedName()));
 			sb.append(String.format(
 					LangHelper.localize("message.debug.block.2"),
-					b.getIdFromBlock(b)));
+					Block.getIdFromBlock(b)));
 			if (world.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ) != 0)
 				sb.append(String.format(LangHelper
 						.localize("message.debug.block.3"), world
@@ -162,22 +168,8 @@ public class ItemDebug extends MyItem {
 	}
 
 	@Override
-	public Multimap getItemAttributeModifiers() {
-		Multimap multimap = super.getItemAttributeModifiers();
-		multimap.put(SharedMonsterAttributes.attackDamage
-				.getAttributeUnlocalizedName(), new AttributeModifier(
-				field_111210_e, "Weapon modifier", 1000D, 0));
-		return multimap;
-	}
-
-	@Override
-	public boolean canHarvestBlock(Block block, ItemStack stack) {
+	public boolean putInTab() {
 		return true;
-	}
-
-	@Override
-	public float func_150893_a(ItemStack stack, Block block) {
-		return 10F;
 	}
 
 }

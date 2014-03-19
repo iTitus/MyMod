@@ -9,36 +9,24 @@ public class MyTileEntity extends TileEntity {
 	public static final String TAG_ORIENTATION = "orientation",
 			TAG_NAME = "customName";
 
-	private ForgeDirection orientation;
 	protected String customName;
+	private ForgeDirection orientation;
 
 	public MyTileEntity() {
 		orientation = ForgeDirection.SOUTH;
 		customName = "";
 	}
 
-	public ForgeDirection getOrientation() {
-		return orientation;
-	}
-
-	public void setOrientation(ForgeDirection orientation) {
-		this.orientation = orientation;
-	}
-
-	public void setOrientation(int orientation) {
-		this.orientation = ForgeDirection.getOrientation(orientation);
-	}
-
-	public boolean hasCustomName() {
-		return customName != null && customName.length() > 0;
-	}
-
 	public String getCustomName() {
 		return customName;
 	}
 
-	public void setCustomName(String customName) {
-		this.customName = customName;
+	public ForgeDirection getOrientation() {
+		return orientation;
+	}
+
+	public boolean hasCustomName() {
+		return customName != null && customName.length() > 0;
 	}
 
 	@Override
@@ -48,6 +36,18 @@ public class MyTileEntity extends TileEntity {
 				.getByte(TAG_ORIENTATION));
 		customName = nbtTagCompound.getString(TAG_NAME);
 
+	}
+
+	public void setCustomName(String customName) {
+		this.customName = customName;
+	}
+
+	public void setOrientation(ForgeDirection orientation) {
+		this.orientation = orientation;
+	}
+
+	public void setOrientation(int orientation) {
+		this.orientation = ForgeDirection.getOrientation(orientation);
 	}
 
 	@Override

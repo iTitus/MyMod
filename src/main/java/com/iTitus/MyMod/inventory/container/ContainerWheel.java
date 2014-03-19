@@ -1,12 +1,11 @@
 package com.iTitus.MyMod.inventory.container;
 
-import com.iTitus.MyMod.tileentiy.TileEntityWheel;
-
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.player.InventoryPlayer;
-import net.minecraft.inventory.Container;
 import net.minecraft.inventory.Slot;
 import net.minecraft.item.ItemStack;
+
+import com.iTitus.MyMod.tileentiy.TileEntityWheel;
 
 public class ContainerWheel extends MyContainer {
 
@@ -24,6 +23,17 @@ public class ContainerWheel extends MyContainer {
 		addSlotToContainer(new Slot(wheel, 0, 31, 35));
 		addSlotToContainer(new Slot(wheel, 1, 80, 35));
 		addSlotToContainer(new Slot(wheel, 2, 129, 35));
+	}
+
+	@Override
+	public boolean canInteractWith(EntityPlayer player) {
+		return wheel.isUseableByPlayer(player);
+	}
+
+	@Override
+	public void onContainerClosed(EntityPlayer player) {
+		super.onContainerClosed(player);
+		wheel.closeInventory();
 	}
 
 	@Override
@@ -62,17 +72,6 @@ public class ContainerWheel extends MyContainer {
 		}
 
 		return retStack;
-	}
-
-	@Override
-	public boolean canInteractWith(EntityPlayer player) {
-		return wheel.isUseableByPlayer(player);
-	}
-
-	@Override
-	public void onContainerClosed(EntityPlayer player) {
-		super.onContainerClosed(player);
-		wheel.closeInventory();
 	}
 
 }

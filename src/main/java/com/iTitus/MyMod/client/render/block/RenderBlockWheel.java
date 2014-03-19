@@ -1,14 +1,15 @@
 package com.iTitus.MyMod.client.render.block;
 
+import net.minecraft.block.Block;
+import net.minecraft.client.renderer.RenderBlocks;
+import net.minecraft.world.IBlockAccess;
+
 import org.lwjgl.opengl.GL11;
 
 import com.iTitus.MyMod.client.render.tileentity.RenderTileEntityWheel;
 import com.iTitus.MyMod.lib.LibRender;
 import com.iTitus.MyMod.tileentiy.TileEntityWheel;
 
-import net.minecraft.block.Block;
-import net.minecraft.client.renderer.RenderBlocks;
-import net.minecraft.world.IBlockAccess;
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
