@@ -8,7 +8,7 @@
   "url": "",
   "updateUrl": "",
   "authors": ["iTitus"],
-  "credits": "The Forge and FML team, for making Forge :D",
+  "credits": "Mojang AB, for making Minecraft, the Forge and FML team, for making Forge and of course the whole community :D",
   "logoFile": "assets/mymod/textures/logo.png",
   "screenshots": [],
   "dependencies": []
