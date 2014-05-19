@@ -1,5 +1,7 @@
 package com.iTitus.MyMod.lib;
 
+import java.util.List;
+
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
@@ -22,6 +24,12 @@ public class MyCreativeTab extends CreativeTabs {
 	@Override
 	public Item getTabIconItem() {
 		return null;
+	}
+
+	@Override
+	public void displayAllReleventItems(List list) {
+		super.displayAllReleventItems(list);
+
 	}
 
 }

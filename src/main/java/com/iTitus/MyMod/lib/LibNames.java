@@ -11,4 +11,8 @@ public class LibNames {
 
 	public static final String ZERO_NAME = "zero";
 
+	public static final String GUN_NAME = "gun";
+
+	public static final String AMMO_NAME = "ammo";
+
 }

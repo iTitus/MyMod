@@ -4,10 +4,8 @@ import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
-
-import com.iTitus.MyMod.helper.LangHelper;
-
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -28,12 +26,12 @@ public class BlockTimeshifter extends MyBlock {
 		if (!world.isRemote && player.isSneaking()) {
 			if (world.getBlockMetadata(x, y, z) != 1) {
 				world.setBlockMetadataWithNotify(x, y, z, 1, 3);
-				player.addChatMessage(new ChatComponentText(LangHelper
-						.localize("message.timeshifter.nightmode")));
+				player.addChatMessage(new ChatComponentText(StatCollector
+						.translateToLocal("message.timeshifter.nightmode")));
 			} else {
 				world.setBlockMetadataWithNotify(x, y, z, 0, 3);
-				player.addChatMessage(new ChatComponentText(LangHelper
-						.localize("message.timeshifter.daymode")));
+				player.addChatMessage(new ChatComponentText(StatCollector
+						.translateToLocal("message.timeshifter.daymode")));
 			}
 		}
 

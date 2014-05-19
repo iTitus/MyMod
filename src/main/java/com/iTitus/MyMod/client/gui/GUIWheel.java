@@ -6,7 +6,6 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-import com.iTitus.MyMod.helper.LangHelper;
 import com.iTitus.MyMod.inventory.container.ContainerWheel;
 import com.iTitus.MyMod.lib.LibGUI;
 import com.iTitus.MyMod.lib.LibTextures;
@@ -32,8 +31,9 @@ public class GUIWheel extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		fontRendererObj.drawString(LangHelper.localize("gui.wheel.name"), 8, 6,
-				4210752);
+		fontRendererObj
+				.drawString(StatCollector.translateToLocal("gui.wheel.name"),
+						8, 6, 4210752);
 		fontRendererObj.drawString(
 				StatCollector.translateToLocal("container.inventory"), 8,
 				ySize - 96 + 2, 4210752);

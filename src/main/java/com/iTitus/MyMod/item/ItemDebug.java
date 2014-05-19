@@ -13,10 +13,10 @@ import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.MovingObjectPosition;
+import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
 import com.google.common.collect.Multimap;
-import com.iTitus.MyMod.helper.LangHelper;
 import com.iTitus.MyMod.helper.NBTHelper;
 
 import cpw.mods.fml.relauncher.Side;
@@ -32,7 +32,7 @@ public class ItemDebug extends MyItem {
 	@Override
 	public void addInformation(ItemStack stack, EntityPlayer player, List list,
 			boolean b) {
-		list.add(LangHelper.localize("lore.debug"));
+		list.add(StatCollector.translateToLocal("lore.debug"));
 		super.addInformation(stack, player, list, b);
 	}
 
@@ -89,7 +89,7 @@ public class ItemDebug extends MyItem {
 			e.writeToNBT(nbt);
 
 			player.addChatMessage(new ChatComponentText(String.format(
-					LangHelper.localize("message.debug.entity.0"),
+					StatCollector.translateToLocal("message.debug.entity.0"),
 					e.getCommandSenderName(), e.getEntityId(),
 					NBTHelper.readNBT(nbt))));
 
@@ -116,38 +116,39 @@ public class ItemDebug extends MyItem {
 			StringBuilder sb = new StringBuilder();
 
 			sb.append(String.format(
-					LangHelper.localize("message.debug.block.0"),
+					StatCollector.translateToLocal("message.debug.block.0"),
 					b.getLocalizedName()));
 			sb.append(String.format(
-					LangHelper.localize("message.debug.block.1"),
+					StatCollector.translateToLocal("message.debug.block.1"),
 					b.getUnlocalizedName()));
 			sb.append(String.format(
-					LangHelper.localize("message.debug.block.2"),
+					StatCollector.translateToLocal("message.debug.block.2"),
 					Block.getIdFromBlock(b)));
 			if (world.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ) != 0)
-				sb.append(String.format(LangHelper
-						.localize("message.debug.block.3"), world
+				sb.append(String.format(StatCollector
+						.translateToLocal("message.debug.block.3"), world
 						.getBlockMetadata(mop.blockX, mop.blockY, mop.blockZ)));
-			sb.append(String.format(LangHelper
-					.localize("message.debug.block.4"), b.getBlockHardness(
-					world, mop.blockX, mop.blockY, mop.blockZ)));
-			sb.append(String.format(LangHelper
-					.localize("message.debug.block.5"), b
+			sb.append(String.format(StatCollector
+					.translateToLocal("message.debug.block.4"),
+					b.getBlockHardness(world, mop.blockX, mop.blockY,
+							mop.blockZ)));
+			sb.append(String.format(StatCollector
+					.translateToLocal("message.debug.block.5"), b
 					.getExplosionResistance(player, world, mop.blockX,
 							mop.blockY, mop.blockZ, mop.blockX, mop.blockY,
 							mop.blockZ)));
 			if (b.slipperiness != 0.6F)
 				sb.append(String.format(
-						LangHelper.localize("message.debug.block.6"),
+						StatCollector.translateToLocal("message.debug.block.6"),
 						b.slipperiness));
 			if (b.hasTileEntity(world.getBlockMetadata(mop.blockX, mop.blockY,
 					mop.blockZ))) {
 				sb.append(String.format(
-						LangHelper.localize("message.debug.block.7"),
+						StatCollector.translateToLocal("message.debug.block.7"),
 						NBTHelper.readNBT(nbt)));
 			} else {
 				sb.append(String.format(
-						LangHelper.localize("message.debug.block.8"),
+						StatCollector.translateToLocal("message.debug.block.8"),
 						mop.blockX, mop.blockY, mop.blockZ));
 			}
 
@@ -156,8 +157,8 @@ public class ItemDebug extends MyItem {
 		}
 		case MISS: {
 
-			player.addChatMessage(new ChatComponentText(LangHelper
-					.localize("message.debug.nothing")));
+			player.addChatMessage(new ChatComponentText(StatCollector
+					.translateToLocal("message.debug.nothing")));
 		}
 		default:
 			break;
@@ -165,11 +166,6 @@ public class ItemDebug extends MyItem {
 		}
 
 		return stack;
-	}
-
-	@Override
-	public boolean putInTab() {
-		return true;
 	}
 
 }

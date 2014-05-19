@@ -14,14 +14,14 @@ public class ModBlocks {
 
 	public static void init() {
 		zero = new BlockZero();
-		GameRegistry.registerBlock(zero, EnumBlockType.ZERO.name);
+		GameRegistry.registerBlock(zero, zero.getUnlocalizedName());
 
 		daymaker = new BlockTimeshifter();
-		GameRegistry.registerBlock(daymaker, EnumBlockType.TIMESHIFTER.name);
+		GameRegistry.registerBlock(daymaker, daymaker.getUnlocalizedName());
 
 		wheel = new BlockWheel();
 		GameRegistry.registerBlock(wheel, ItemWheel.class,
-				EnumBlockType.WHEEL.name);
+				wheel.getUnlocalizedName());
 
 		initTileEntities();
 

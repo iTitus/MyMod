@@ -5,6 +5,8 @@ tile.wheel.name=§1W§2h§3e§4e§5l §6o§7f §8F§9o§ar§bt§cu§dn§ee§r
 
 ### ITEMS ###
 item.debug.name=Debug Item
+item.gun.name=Gun
+item.ammo.name=Bullet
 
 ### GUI ###
 gui.wheel.name=Wheel of Fortune
@@ -29,5 +31,7 @@ message.debug.block.8=X -> '%d' Y -> '%d' Z -> '%d' }
 itemGroup.mymod=§4iTitus' MyMod§r
 
 lore.debug=Creative-only debug item
+lore.gun=Can shoot any bullet
+lore.ammo=Can be shot with a gun
 lore.wheel.0=Filled
 lore.wheel.1=Empty
