@@ -22,7 +22,8 @@ public class ItemAmmo extends MyItem {
 		list.add("");
 		if (getModifiers(stack) != null) {
 			for (Item i : getModifiers(stack)) {
-				list.add(StatCollector.translateToLocal(i.getUnlocalizedName()));
+				list.add(StatCollector.translateToLocal(i.getUnlocalizedName()
+						+ ".name"));
 			}
 		}
 
