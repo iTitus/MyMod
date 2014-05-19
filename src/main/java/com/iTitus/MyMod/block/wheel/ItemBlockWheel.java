@@ -1,4 +1,4 @@
-package com.iTitus.MyMod.item;
+package com.iTitus.MyMod.block.wheel;
 
 import java.util.List;
 
@@ -9,10 +9,11 @@ import net.minecraft.util.StatCollector;
 
 import com.iTitus.MyMod.block.EnumBlockType;
 import com.iTitus.MyMod.block.ModBlocks;
+import com.iTitus.MyMod.item.MyItemBlock;
 
-public class ItemWheel extends MyItemBlock {
+public class ItemBlockWheel extends MyItemBlock {
 
-	public ItemWheel(Block b) {
+	public ItemBlockWheel(Block b) {
 		super(ModBlocks.wheel, EnumBlockType.WHEEL);
 		setHasSubtypes(true);
 	}

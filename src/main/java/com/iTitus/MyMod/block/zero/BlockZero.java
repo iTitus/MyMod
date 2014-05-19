@@ -1,4 +1,7 @@
-package com.iTitus.MyMod.block;
+package com.iTitus.MyMod.block.zero;
+
+import com.iTitus.MyMod.block.EnumBlockType;
+import com.iTitus.MyMod.block.MyBlock;
 
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.AxisAlignedBB;
@@ -7,7 +10,7 @@ import net.minecraft.world.World;
 
 public class BlockZero extends MyBlock {
 
-	protected BlockZero() {
+	public BlockZero() {
 		super(EnumBlockType.ZERO);
 	}
 

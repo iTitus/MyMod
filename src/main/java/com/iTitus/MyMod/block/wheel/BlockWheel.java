@@ -1,4 +1,4 @@
-package com.iTitus.MyMod.block;
+package com.iTitus.MyMod.block.wheel;
 
 import java.util.List;
 
@@ -12,6 +12,8 @@ import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
 
+import com.iTitus.MyMod.block.EnumBlockType;
+import com.iTitus.MyMod.block.MyBlock;
 import com.iTitus.MyMod.lib.LibRender;
 import com.iTitus.MyMod.tileentiy.TileEntityWheel;
 

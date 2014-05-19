@@ -1,4 +1,4 @@
-package com.iTitus.MyMod.item;
+package com.iTitus.MyMod.item.debug;
 
 import java.util.List;
 
@@ -18,6 +18,8 @@ import net.minecraft.world.World;
 
 import com.google.common.collect.Multimap;
 import com.iTitus.MyMod.helper.NBTHelper;
+import com.iTitus.MyMod.item.EnumItemType;
+import com.iTitus.MyMod.item.MyItem;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

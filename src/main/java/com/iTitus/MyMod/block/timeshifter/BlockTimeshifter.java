@@ -1,4 +1,7 @@
-package com.iTitus.MyMod.block;
+package com.iTitus.MyMod.block.timeshifter;
+
+import com.iTitus.MyMod.block.EnumBlockType;
+import com.iTitus.MyMod.block.MyBlock;
 
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;

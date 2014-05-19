@@ -2,7 +2,10 @@ package com.iTitus.MyMod.block;
 
 import net.minecraft.block.Block;
 
-import com.iTitus.MyMod.item.ItemWheel;
+import com.iTitus.MyMod.block.timeshifter.BlockTimeshifter;
+import com.iTitus.MyMod.block.wheel.BlockWheel;
+import com.iTitus.MyMod.block.wheel.ItemBlockWheel;
+import com.iTitus.MyMod.block.zero.BlockZero;
 import com.iTitus.MyMod.lib.LibNames;
 import com.iTitus.MyMod.tileentiy.TileEntityWheel;
 
@@ -20,7 +23,7 @@ public class ModBlocks {
 		GameRegistry.registerBlock(daymaker, daymaker.getUnlocalizedName());
 
 		wheel = new BlockWheel();
-		GameRegistry.registerBlock(wheel, ItemWheel.class,
+		GameRegistry.registerBlock(wheel, ItemBlockWheel.class,
 				wheel.getUnlocalizedName());
 
 		initTileEntities();

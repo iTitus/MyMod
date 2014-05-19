@@ -1,6 +1,9 @@
-package com.iTitus.MyMod.item;
+package com.iTitus.MyMod.item.gun;
 
 import java.util.List;
+
+import com.iTitus.MyMod.item.EnumItemType;
+import com.iTitus.MyMod.item.MyItem;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.init.Items;
