@@ -1,29 +1,22 @@
 package com.iTitus.MyMod.entity;
 
-import java.util.ArrayList;
-import java.util.Arrays;
-import java.util.Collections;
+import java.util.HashMap;
 
-import com.iTitus.MyMod.item.gun.EnumModifierType;
-import com.iTitus.MyMod.item.gun.ItemAmmo;
-import com.iTitus.MyMod.item.gun.Modifier;
-
-import net.minecraft.entity.Entity;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.entity.projectile.EntitySnowball;
-import net.minecraft.entity.projectile.EntityThrowable;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
 import net.minecraft.world.World;
-import net.minecraftforge.common.IExtendedEntityProperties;
 
-public class EntityBullet extends EntitySnowball { // EntityThrowable {
+import com.iTitus.MyMod.item.gun.EnumModifierType;
+import com.iTitus.MyMod.item.gun.ItemAmmo;
 
-	private ArrayList<Modifier> modifiers;
+public class EntityBullet extends EntitySnowball {
+
+	private HashMap<EnumModifierType, Integer> modifiers;
 
 	public EntityBullet(World world, EntityLivingBase entity,
-			ArrayList<Modifier> modifiers) {
+			HashMap<EnumModifierType, Integer> modifiers) {
 		super(world, entity);
 		this.modifiers = modifiers;
 		onShoot();
@@ -31,22 +24,22 @@ public class EntityBullet extends EntitySnowball { // EntityThrowable {
 
 	@Override
 	protected void onImpact(MovingObjectPosition mop) {
-		for (Modifier modifier : modifiers) {
-			modifier.getModifierType().onImpact(this, mop, modifier.getCount());
+		for (EnumModifierType modifier : modifiers.keySet()) {
+			modifier.onImpact(this, mop, modifiers.get(modifier));
 		}
 	}
 
 	@Override
 	public void onUpdate() {
 		super.onUpdate();
-		for (Modifier modifier : modifiers) {
-			modifier.getModifierType().onUpdate(this, modifier.getCount());
+		for (EnumModifierType modifier : modifiers.keySet()) {
+			modifier.onUpdate(this, modifiers.get(modifier));
 		}
 	}
 
 	private void onShoot() {
-		for (Modifier modifier : modifiers) {
-			modifier.getModifierType().onShoot(this, modifier.getCount());
+		for (EnumModifierType modifier : modifiers.keySet()) {
+			modifier.onShoot(this, modifiers.get(modifier));
 		}
 	}
 

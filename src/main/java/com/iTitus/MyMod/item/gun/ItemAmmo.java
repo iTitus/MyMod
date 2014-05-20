@@ -2,6 +2,7 @@ package com.iTitus.MyMod.item.gun;
 
 import java.util.ArrayList;
 import java.util.Arrays;
+import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
@@ -40,9 +41,13 @@ public class ItemAmmo extends MyItem {
 
 		if (NBTHelper.hasNBT(stack)) {
 			list.add("");
-			for (Modifier modifier : readFromNBT(stack.getTagCompound())) {
-				list.add(modifier.getModifierType().getItemStack()
-						.getDisplayName());
+
+			HashMap<EnumModifierType, Integer> modifiers = readFromNBT(stack
+					.getTagCompound());
+
+			for (EnumModifierType modifier : modifiers.keySet()) {
+				list.add(modifiers.get(modifier) + "x "
+						+ modifier.getItemStack().getDisplayName());
 			}
 		}
 
@@ -52,42 +57,70 @@ public class ItemAmmo extends MyItem {
 	@SideOnly(Side.CLIENT)
 	public void getSubItems(Item item, CreativeTabs tab, List list) {
 		super.getSubItems(item, tab, list);
-		ItemStack stack = new ItemStack(item);
-		stack.setTagCompound(ItemAmmo.writeToNBT(
-				new ArrayList<Modifier>(Arrays.asList(new Modifier[] {
-						new Modifier(EnumModifierType.gunpowder, 2),
-						new Modifier(EnumModifierType.tnt, 1) })),
-				new NBTTagCompound()));
-		list.add(stack);
+
+		HashMap<EnumModifierType, Integer> modifiers = new HashMap<EnumModifierType, Integer>();
+		for (EnumModifierType modifier : EnumModifierType.values()) {
+
+			ItemStack stack = new ItemStack(item);
+
+			System.out.println("--- " + modifier.name() + " ---");
+
+			modifiers.put(modifier, 1);
+			System.out.println(modifiers);
+			stack.setTagCompound(writeToNBT(modifiers, new NBTTagCompound()));
+			list.add(stack);
+			modifiers.clear();
+		}
+
 	}
 
-	public static NBTTagCompound writeToNBT(ArrayList<Modifier> modifiers,
-			NBTTagCompound nbt) {
+	public static NBTTagCompound writeToNBT(
+			HashMap<EnumModifierType, Integer> modifiers, NBTTagCompound nbt) {
+
+		if (modifiers == null)
+			return nbt;
+
+		HashMap<EnumModifierType, Integer> map = readFromNBT(nbt);
+
+		for (EnumModifierType modifier : map.keySet()) {
+			if (modifiers.containsKey(modifier)) {
+				int count = modifiers.get(modifier) + map.get(modifier);
+				modifiers.remove(modifier);
+				modifiers.put(modifier, count);
+			}
+		}
 
 		NBTTagList tags = new NBTTagList();
-		for (Modifier modifier : modifiers) {
+
+		for (EnumModifierType modifier : modifiers.keySet()) {
 			NBTTagCompound tag = new NBTTagCompound();
-			tag.setString(TAG_MODIFIER_ID, modifier.getModifierType().name());
-			tag.setInteger(TAG_MODIFIER_COUNT, modifier.getCount());
+			tag.setString(TAG_MODIFIER_ID, modifier.name());
+			tag.setInteger(TAG_MODIFIER_COUNT, modifiers.get(modifier));
 			tags.appendTag(tag);
 		}
+
 		nbt.setTag(TAG_MODIFIER, tags);
 
 		return nbt;
 	}
 
-	public static ArrayList<Modifier> readFromNBT(NBTTagCompound nbt) {
+	public static HashMap<EnumModifierType, Integer> readFromNBT(
+			NBTTagCompound nbt) {
 
-		ArrayList<Modifier> list = new ArrayList<Modifier>();
+		HashMap<EnumModifierType, Integer> modifiers = new HashMap<EnumModifierType, Integer>();
+
+		if (nbt == null || !nbt.hasKey(TAG_MODIFIER))
+			return modifiers;
+
 		NBTTagList tags = nbt.getTagList(TAG_MODIFIER, 10);
 
 		for (int i = 0; i < tags.tagCount(); ++i) {
 			NBTTagCompound tag = tags.getCompoundTagAt(i);
-			list.add(new Modifier(EnumModifierType.valueOf(tag
-					.getString(TAG_MODIFIER_ID)), tag
-					.getInteger(TAG_MODIFIER_COUNT)));
+			modifiers.put(
+					EnumModifierType.valueOf(tag.getString(TAG_MODIFIER_ID)),
+					tag.getInteger(TAG_MODIFIER_COUNT));
 		}
 
-		return list;
+		return modifiers;
 	}
 }
