@@ -7,6 +7,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
+import com.iTitus.MyMod.client.particle.EntityBulletCasingFX;
 import com.iTitus.MyMod.entity.EntityBullet;
 import com.iTitus.MyMod.item.EnumItemType;
 import com.iTitus.MyMod.item.ModItems;
@@ -41,14 +42,16 @@ public class ItemGun extends MyItem {
 			if (ammo == null || !ammo.getItem().equals(ModItems.ammo))
 				continue;
 			else {
-				EntityBullet bullet = new EntityBullet(world, player,
-						ItemAmmo.readFromNBT(ammo.getTagCompound()));
 
 				if (!player.capabilities.isCreativeMode)
 					player.inventory.decrStackSize(i, 1);
 
-				if (!world.isRemote)
-					world.spawnEntityInWorld(bullet);
+				if (!world.isRemote) {
+					world.spawnEntityInWorld(new EntityBullet(world, player,
+							ItemAmmo.readFromNBT(ammo.getTagCompound())));
+					world.spawnEntityInWorld(EntityBulletCasingFX
+							.makeCasing(player));
+				}
 
 				break;
 			}
