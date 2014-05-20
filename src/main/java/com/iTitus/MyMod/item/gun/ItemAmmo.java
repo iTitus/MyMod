@@ -41,12 +41,8 @@ public class ItemAmmo extends MyItem {
 		if (NBTHelper.hasNBT(stack)) {
 			list.add("");
 			for (Modifier modifier : readFromNBT(stack.getTagCompound())) {
-				list.add(StatCollector.translateToLocal(modifier
-						.getModifierType().getItemStack().getUnlocalizedName()
-						+ ".name")
-						+ " - "
-						+ modifier.getModifierType().getItemStack()
-								.getDisplayName());
+				list.add(modifier.getModifierType().getItemStack()
+						.getDisplayName());
 			}
 		}
 
