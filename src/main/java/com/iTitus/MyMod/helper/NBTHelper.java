@@ -1,8 +1,13 @@
 package com.iTitus.MyMod.helper;
 
+import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
 public class NBTHelper {
+
+	public static boolean hasNBT(ItemStack stack) {
+		return stack.hasTagCompound() && stack.getTagCompound() != null;
+	}
 
 	/**
 	 * @param nbt

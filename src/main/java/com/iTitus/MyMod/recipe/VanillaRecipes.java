@@ -12,9 +12,9 @@ public class VanillaRecipes {
 
 	public static void init() {
 
-		GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.wheel, 1, 1),
-				new Object[] { " i ", "isi", "hih", 'i', Items.iron_ingot, 's',
-						Items.stick, 'h', Blocks.wooden_slab });
+		// GameRegistry.addShapedRecipe(new ItemStack(ModBlocks.wheel, 1, 1),
+		// new Object[] { " i ", "isi", "hih", 'i', Items.iron_ingot, 's',
+		// Items.stick, 'h', Blocks.wooden_slab });
 	}
 
 }

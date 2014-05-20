@@ -26,10 +26,4 @@ public class MyCreativeTab extends CreativeTabs {
 		return null;
 	}
 
-	@Override
-	public void displayAllReleventItems(List list) {
-		super.displayAllReleventItems(list);
-
-	}
-
 }
