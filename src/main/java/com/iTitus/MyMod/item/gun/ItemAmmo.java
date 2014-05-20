@@ -1,16 +1,12 @@
 package com.iTitus.MyMod.item.gun;
 
-import java.util.ArrayList;
-import java.util.Arrays;
 import java.util.HashMap;
 import java.util.List;
 
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
-import net.minecraft.init.Items;
 import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
-import net.minecraft.nbt.NBTBase;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
 import net.minecraft.util.StatCollector;
@@ -60,13 +56,8 @@ public class ItemAmmo extends MyItem {
 
 		HashMap<EnumModifierType, Integer> modifiers = new HashMap<EnumModifierType, Integer>();
 		for (EnumModifierType modifier : EnumModifierType.values()) {
-
 			ItemStack stack = new ItemStack(item);
-
-			System.out.println("--- " + modifier.name() + " ---");
-
 			modifiers.put(modifier, 1);
-			System.out.println(modifiers);
 			stack.setTagCompound(writeToNBT(modifiers, new NBTTagCompound()));
 			list.add(stack);
 			modifiers.clear();
