@@ -13,15 +13,17 @@ public class EntityBulletCasing extends EntityArrow {
 		motionX = rand.nextGaussian() * 0.05;
 		motionY = rand.nextGaussian() * 0.05 + 0.2F;
 		motionZ = rand.nextGaussian() * 0.05;
-	}
 
-	@Override
-	public double getDamage() {
-		return 0;
+		setDamage(0);
 	}
 
 	@Override
 	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
 	}
-	
+
+	@Override
+	public boolean getIsCritical() {
+		return false;
+	}
+
 }
