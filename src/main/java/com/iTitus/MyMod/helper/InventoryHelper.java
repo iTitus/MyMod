@@ -4,6 +4,7 @@ import java.util.Random;
 
 import net.minecraft.entity.item.EntityItem;
 import net.minecraft.inventory.IInventory;
+import net.minecraft.item.Item;
 import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -59,6 +60,18 @@ public class InventoryHelper {
 		}
 
 		return true;
+	}
+
+	public static boolean hasItem(IInventory inventory, Item item) {
+
+		for (int i = 0; i < inventory.getSizeInventory(); i++) {
+			ItemStack stack = inventory.getStackInSlot(i);
+			if (stack != null && stack.getItem() == item)
+				return true;
+
+		}
+
+		return false;
 	}
 
 }

@@ -1,13 +1,13 @@
 package com.iTitus.MyMod.item.gun;
 
-import com.iTitus.MyMod.entity.EntityBullet;
+import java.util.ArrayList;
 
-import net.minecraft.entity.item.EntityTNTPrimed;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
-import net.minecraft.util.MathHelper;
 import net.minecraft.util.MovingObjectPosition;
+
+import com.iTitus.MyMod.entity.EntityBullet;
 
 public enum EnumModifierType {
 
@@ -59,4 +59,25 @@ public enum EnumModifierType {
 	public void onShoot(EntityBullet bullet, int count) {
 	}
 
+	public static boolean contains(ItemStack stack) {
+
+		for (EnumModifierType modifier : values()) {
+			if (ItemStack.areItemStacksEqual(stack, modifier.stack))
+				return true;
+
+		}
+
+		return false;
+	}
+
+	public static ArrayList<ItemStack> getAllPossibleModifiers() {
+
+		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
+
+		for (EnumModifierType modifier : values()) {
+			items.add(modifier.stack);
+		}
+
+		return items;
+	}
 }
