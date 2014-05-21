@@ -71,15 +71,7 @@ public class ItemAmmo extends MyItem {
 		if (modifiers == null)
 			return nbt;
 
-		HashMap<EnumModifierType, Integer> map = readFromNBT(nbt);
-
-		for (EnumModifierType modifier : map.keySet()) {
-			if (modifiers.containsKey(modifier)) {
-				int count = modifiers.get(modifier) + map.get(modifier);
-				modifiers.remove(modifier);
-				modifiers.put(modifier, count);
-			}
-		}
+		merge(modifiers, readFromNBT(nbt));
 
 		NBTTagList tags = new NBTTagList();
 
@@ -113,5 +105,33 @@ public class ItemAmmo extends MyItem {
 		}
 
 		return modifiers;
+	}
+
+	public static void merge(HashMap<EnumModifierType, Integer> to,
+			HashMap<EnumModifierType, Integer> from) {
+
+		for (EnumModifierType modifier : from.keySet()) {
+			if (to.containsKey(modifier)) {
+				int count = from.get(modifier) + to.get(modifier);
+				to.remove(modifier);
+				to.put(modifier, count);
+			} else {
+				to.put(modifier, from.get(modifier));
+			}
+		}
+
+	}
+
+	public static boolean isValidAmmo(
+			HashMap<EnumModifierType, Integer> modifiers) {
+
+		for (EnumModifierType modifier : modifiers.keySet()) {
+			if (modifier.getMaxCount() != 0
+					&& modifiers.get(modifier) > modifier.getMaxCount()) {
+				return false;
+			}
+		}
+
+		return true;
 	}
 }

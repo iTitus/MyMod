@@ -9,9 +9,19 @@ public class EntityBulletCasing extends EntityArrow {
 		super(player.worldObj);
 
 		setPosition(player.posX, player.posY + 0.8, player.posZ);
-		
+
 		motionX = rand.nextGaussian() * 0.05;
 		motionY = rand.nextGaussian() * 0.05 + 0.2F;
 		motionZ = rand.nextGaussian() * 0.05;
 	}
+
+	@Override
+	public double getDamage() {
+		return 0;
+	}
+
+	@Override
+	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
+	}
+	
 }

@@ -11,7 +11,7 @@ import com.iTitus.MyMod.entity.EntityBullet;
 
 public enum EnumModifierType {
 
-	gunpowder(new ItemStack(Items.gunpowder), 0) {
+	gunpowder(new ItemStack(Items.gunpowder), 3) {
 
 		@Override
 		public void onShoot(EntityBullet bullet, int count) {
@@ -49,6 +49,10 @@ public enum EnumModifierType {
 		return stack;
 	}
 
+	public int getMaxCount() {
+		return maxStackSize;
+	}
+
 	public void onUpdate(EntityBullet bullet, int count) {
 	}
 
@@ -59,25 +63,29 @@ public enum EnumModifierType {
 	public void onShoot(EntityBullet bullet, int count) {
 	}
 
-	public static boolean contains(ItemStack stack) {
+	public static boolean isModifier(ItemStack stack) {
 
 		for (EnumModifierType modifier : values()) {
-			if (ItemStack.areItemStacksEqual(stack, modifier.stack))
+			if (ItemStack.areItemStacksEqual(stack.copy().splitStack(1),
+					modifier.getItemStack().copy().splitStack(1))) {
 				return true;
-
+			}
 		}
 
 		return false;
 	}
 
-	public static ArrayList<ItemStack> getAllPossibleModifiers() {
+	public static EnumModifierType getForStack(ItemStack stack) {
 
-		ArrayList<ItemStack> items = new ArrayList<ItemStack>();
-
-		for (EnumModifierType modifier : values()) {
-			items.add(modifier.stack);
+		if (isModifier(stack)) {
+			for (EnumModifierType modifier : values()) {
+				if (ItemStack.areItemStacksEqual(stack.copy().splitStack(1),
+						modifier.getItemStack().copy().splitStack(1))) {
+					return modifier;
+				}
+			}
 		}
-
-		return items;
+		return null;
 	}
+
 }
