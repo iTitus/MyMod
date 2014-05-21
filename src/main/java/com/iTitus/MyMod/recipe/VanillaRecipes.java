@@ -1,10 +1,9 @@
 package com.iTitus.MyMod.recipe;
 
-import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
 
-import com.iTitus.MyMod.block.ModBlocks;
+import com.iTitus.MyMod.item.ModItems;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 
@@ -17,6 +16,15 @@ public class VanillaRecipes {
 		// Items.stick, 'h', Blocks.wooden_slab });
 
 		GameRegistry.addRecipe(new RecipeAmmo());
+
+		GameRegistry.addShapedRecipe(new ItemStack(ModItems.ammo, 8),
+				new Object[] { " i ", "iii", "igi", 'i', Items.iron_ingot, 'g',
+						Items.gunpowder });
+
+		GameRegistry.addShapedRecipe(new ItemStack(ModItems.gun), new Object[] {
+				"iii", "fi ", "i  ", 'i', Items.iron_ingot, 'f',
+				Items.flint_and_steel });
+
 	}
 
 }
