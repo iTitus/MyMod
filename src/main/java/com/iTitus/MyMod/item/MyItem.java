@@ -10,13 +10,10 @@ public abstract class MyItem extends Item {
 	public MyItem(EnumItemType type) {
 		super();
 		setUnlocalizedName(type.name);
-		setTextureName(LibTextures.getTextureLoc(type));
-		if (putInTab())
+		if (type.hasTexture)
+			setTextureName(LibTextures.getTextureLoc(type));
+		if (type.putInTab)
 			setCreativeTab(MyCreativeTab.INSTANCE);
-	}
-
-	public boolean putInTab() {
-		return true;
 	}
 
 }

@@ -23,7 +23,7 @@ public abstract class MyBlock extends Block {
 		setStepSound(type.soundType);
 		setLightLevel(type.lightLevel);
 		setLightOpacity(type.lightOpacity);
-		if (putInTab())
+		if (type.putInTab)
 			setCreativeTab(MyCreativeTab.INSTANCE);
 	}
 
@@ -70,10 +70,6 @@ public abstract class MyBlock extends Block {
 			((MyTileEntity) world.getTileEntity(x, y, z))
 					.setOrientation(direction);
 		}
-	}
-
-	public boolean putInTab() {
-		return true;
 	}
 
 }
