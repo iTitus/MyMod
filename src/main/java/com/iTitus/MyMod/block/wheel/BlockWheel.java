@@ -14,7 +14,7 @@ import net.minecraft.world.World;
 import com.iTitus.MyMod.block.EnumBlockType;
 import com.iTitus.MyMod.block.MyBlock;
 import com.iTitus.MyMod.lib.LibRender;
-import com.iTitus.MyMod.tileentiy.TileEntityWheel;
+import com.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -7,7 +7,7 @@ import com.iTitus.MyMod.block.wheel.BlockWheel;
 import com.iTitus.MyMod.block.wheel.ItemBlockWheel;
 import com.iTitus.MyMod.block.zero.BlockZero;
 import com.iTitus.MyMod.lib.LibNames;
-import com.iTitus.MyMod.tileentiy.TileEntityWheel;
+import com.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 
 import cpw.mods.fml.common.registry.GameRegistry;
 

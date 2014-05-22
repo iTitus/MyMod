@@ -1,4 +1,4 @@
-package com.iTitus.MyMod.tileentiy;
+package com.iTitus.MyMod.tileentity;
 
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;

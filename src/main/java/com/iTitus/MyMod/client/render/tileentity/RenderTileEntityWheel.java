@@ -11,7 +11,7 @@ import org.lwjgl.opengl.GL11;
 import com.iTitus.MyMod.block.EnumBlockType;
 import com.iTitus.MyMod.client.model.ModelWheel;
 import com.iTitus.MyMod.lib.LibTextures;
-import com.iTitus.MyMod.tileentiy.TileEntityWheel;
+import com.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

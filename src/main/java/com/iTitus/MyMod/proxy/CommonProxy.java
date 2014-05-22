@@ -12,7 +12,7 @@ import com.iTitus.MyMod.item.ModItems;
 import com.iTitus.MyMod.lib.LibGUI;
 import com.iTitus.MyMod.network.PacketPipeline;
 import com.iTitus.MyMod.recipe.VanillaRecipes;
-import com.iTitus.MyMod.tileentiy.TileEntityWheel;
+import com.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 
 import cpw.mods.fml.common.event.FMLInitializationEvent;
 import cpw.mods.fml.common.event.FMLPostInitializationEvent;

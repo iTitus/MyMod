@@ -1,4 +1,4 @@
-package com.iTitus.MyMod.tileentiy;
+package com.iTitus.MyMod.tileentity.wheel;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.inventory.ISidedInventory;
@@ -14,6 +14,7 @@ import com.iTitus.MyMod.helper.InventoryHelper;
 import com.iTitus.MyMod.lib.LibGUI;
 import com.iTitus.MyMod.network.PacketPipeline;
 import com.iTitus.MyMod.network.PacketWheel;
+import com.iTitus.MyMod.tileentity.MyTileEntity;
 
 public class TileEntityWheel extends MyTileEntity implements ISidedInventory {
 

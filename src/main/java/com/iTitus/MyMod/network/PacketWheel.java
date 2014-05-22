@@ -4,7 +4,7 @@ import io.netty.buffer.ByteBuf;
 import io.netty.channel.ChannelHandlerContext;
 import net.minecraft.entity.player.EntityPlayer;
 
-import com.iTitus.MyMod.tileentiy.TileEntityWheel;
+import com.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 
 public class PacketWheel extends AbstractPacket {
 

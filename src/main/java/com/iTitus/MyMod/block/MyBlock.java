@@ -10,7 +10,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 import com.iTitus.MyMod.helper.InventoryHelper;
 import com.iTitus.MyMod.lib.LibTextures;
 import com.iTitus.MyMod.lib.MyCreativeTab;
-import com.iTitus.MyMod.tileentiy.MyTileEntity;
+import com.iTitus.MyMod.tileentity.MyTileEntity;
 
 public abstract class MyBlock extends Block {
 

@@ -8,7 +8,7 @@ import org.lwjgl.opengl.GL11;
 
 import com.iTitus.MyMod.client.render.tileentity.RenderTileEntityWheel;
 import com.iTitus.MyMod.lib.LibRender;
-import com.iTitus.MyMod.tileentiy.TileEntityWheel;
+import com.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 
 import cpw.mods.fml.client.registry.ISimpleBlockRenderingHandler;
 import cpw.mods.fml.relauncher.Side;
@@ -18,6 +18,10 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class RenderBlockWheel implements ISimpleBlockRenderingHandler {
 
 	public static final ISimpleBlockRenderingHandler INSTANCE = new RenderBlockWheel();
+
+	private RenderBlockWheel() {
+
+	}
 
 	@Override
 	public int getRenderId() {
