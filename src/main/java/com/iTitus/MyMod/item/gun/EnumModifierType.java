@@ -1,7 +1,5 @@
 package com.iTitus.MyMod.item.gun;
 
-import java.util.ArrayList;
-
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
@@ -11,7 +9,7 @@ import com.iTitus.MyMod.entity.EntityBullet;
 
 public enum EnumModifierType {
 
-	gunpowder(new ItemStack(Items.gunpowder), 3) {
+	gunpowder {
 
 		@Override
 		public void onShoot(EntityBullet bullet, int count) {
@@ -20,8 +18,27 @@ public enum EnumModifierType {
 					bullet.motionZ * d);
 		}
 
+		@Override
+		public ItemStack getItemStack() {
+			return new ItemStack(Items.gunpowder);
+		}
+
+		@Override
+		public int getMaxCount() {
+			return 3;
+		}
+
+		@Override
+		public void onUpdate(EntityBullet bullet, int count) {
+		}
+
+		@Override
+		public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
+				int count) {
+		}
+
 	},
-	tnt(new ItemStack(Blocks.tnt), 1) {
+	tnt {
 
 		@Override
 		public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
@@ -35,33 +52,36 @@ public enum EnumModifierType {
 
 		}
 
+		@Override
+		public ItemStack getItemStack() {
+			return new ItemStack(Blocks.tnt);
+		}
+
+		@Override
+		public int getMaxCount() {
+			return 1;
+		}
+
+		@Override
+		public void onUpdate(EntityBullet bullet, int count) {
+		}
+
+		@Override
+		public void onShoot(EntityBullet bullet, int count) {
+		}
+
 	};
 
-	private ItemStack stack;
-	private int maxStackSize;
+	public abstract ItemStack getItemStack();
 
-	private EnumModifierType(ItemStack stack, int maxStackSize) {
-		this.stack = stack;
-		this.maxStackSize = maxStackSize;
-	}
+	public abstract int getMaxCount();
 
-	public ItemStack getItemStack() {
-		return stack;
-	}
+	public abstract void onUpdate(EntityBullet bullet, int count);
 
-	public int getMaxCount() {
-		return maxStackSize;
-	}
+	public abstract void onImpact(EntityBullet bullet,
+			MovingObjectPosition mop, int count);
 
-	public void onUpdate(EntityBullet bullet, int count) {
-	}
-
-	public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
-			int count) {
-	}
-
-	public void onShoot(EntityBullet bullet, int count) {
-	}
+	public abstract void onShoot(EntityBullet bullet, int count);
 
 	public static boolean isModifier(ItemStack stack) {
 

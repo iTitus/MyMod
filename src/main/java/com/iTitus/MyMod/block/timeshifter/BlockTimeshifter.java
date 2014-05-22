@@ -1,14 +1,15 @@
 package com.iTitus.MyMod.block.timeshifter;
 
-import com.iTitus.MyMod.block.EnumBlockType;
-import com.iTitus.MyMod.block.MyBlock;
-
 import net.minecraft.block.Block;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.util.ChatComponentText;
 import net.minecraft.util.IIcon;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
+
+import com.iTitus.MyMod.block.EnumBlockType;
+import com.iTitus.MyMod.block.MyBlock;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 

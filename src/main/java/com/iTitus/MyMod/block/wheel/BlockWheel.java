@@ -2,7 +2,6 @@ package com.iTitus.MyMod.block.wheel;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;

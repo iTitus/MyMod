@@ -1,12 +1,12 @@
 package com.iTitus.MyMod.block.zero;
 
-import com.iTitus.MyMod.block.EnumBlockType;
-import com.iTitus.MyMod.block.MyBlock;
-
 import net.minecraft.entity.EnumCreatureType;
 import net.minecraft.util.AxisAlignedBB;
 import net.minecraft.world.IBlockAccess;
 import net.minecraft.world.World;
+
+import com.iTitus.MyMod.block.EnumBlockType;
+import com.iTitus.MyMod.block.MyBlock;
 
 public class BlockZero extends MyBlock {
 
