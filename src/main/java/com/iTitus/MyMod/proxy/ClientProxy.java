@@ -1,6 +1,5 @@
 package com.iTitus.MyMod.proxy;
 
-import net.minecraft.client.renderer.ItemRenderer;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;

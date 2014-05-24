@@ -6,6 +6,7 @@ import java.util.List;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
+import net.minecraft.item.ItemPotion;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -26,6 +27,7 @@ public class ItemAmmo extends MyItem {
 
 	public ItemAmmo() {
 		super(EnumItemType.ammo);
+		setHasSubtypes(true);
 	}
 
 	@Override
@@ -34,6 +36,8 @@ public class ItemAmmo extends MyItem {
 			boolean par4) {
 		super.addInformation(stack, player, list, par4);
 		list.add(StatCollector.translateToLocal("lore.ammo"));
+
+		ItemPotion p = new ItemPotion();
 
 		if (NBTHelper.hasNBT(stack)) {
 			list.add("");

@@ -7,8 +7,8 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.util.StatCollector;
 import net.minecraft.world.World;
 
-import com.iTitus.MyMod.entity.EntityBullet;
-import com.iTitus.MyMod.entity.EntityBulletCasing;
+import com.iTitus.MyMod.entity.gun.EntityBullet;
+import com.iTitus.MyMod.entity.gun.EntityBulletCasing;
 import com.iTitus.MyMod.item.EnumItemType;
 import com.iTitus.MyMod.item.ModItems;
 import com.iTitus.MyMod.item.MyItem;
@@ -48,7 +48,8 @@ public class ItemGun extends MyItem {
 
 				if (!world.isRemote) {
 					world.spawnEntityInWorld(new EntityBullet(world, player,
-							ItemAmmo.readFromNBT(ammo.getTagCompound())));
+							ItemAmmo.readFromNBT(ammo.getTagCompound()))
+							.onShoot());
 					world.spawnEntityInWorld(new EntityBulletCasing(player));
 				}
 

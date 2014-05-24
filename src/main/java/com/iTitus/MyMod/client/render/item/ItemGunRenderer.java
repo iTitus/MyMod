@@ -1,6 +1,5 @@
 package com.iTitus.MyMod.client.render.item;
 
-import net.minecraft.client.entity.EntityClientPlayerMP;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 

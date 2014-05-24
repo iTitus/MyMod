@@ -1,8 +1,8 @@
-package com.iTitus.MyMod.entity;
+package com.iTitus.MyMod.entity.gun;
 
 import java.util.HashMap;
 
-import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntitySnowball;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.util.MovingObjectPosition;
@@ -14,12 +14,13 @@ import com.iTitus.MyMod.item.gun.ItemAmmo;
 public class EntityBullet extends EntitySnowball {
 
 	private HashMap<EnumModifierType, Integer> modifiers;
+	private EntityPlayer shooter;
 
-	public EntityBullet(World world, EntityLivingBase entity,
+	public EntityBullet(World world, EntityPlayer shooter,
 			HashMap<EnumModifierType, Integer> modifiers) {
-		super(world, entity);
+		super(world, shooter);
 		this.modifiers = modifiers;
-		onShoot();
+		this.shooter = shooter;
 	}
 
 	@Override
@@ -37,10 +38,11 @@ public class EntityBullet extends EntitySnowball {
 		}
 	}
 
-	private void onShoot() {
+	public EntityBullet onShoot() {
 		for (EnumModifierType modifier : modifiers.keySet()) {
 			modifier.onShoot(this, modifiers.get(modifier));
 		}
+		return this;
 	}
 
 	@Override
@@ -53,6 +55,10 @@ public class EntityBullet extends EntitySnowball {
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		modifiers = ItemAmmo.readFromNBT(nbt);
+	}
+
+	public EntityPlayer getShooter() {
+		return shooter;
 	}
 
 }

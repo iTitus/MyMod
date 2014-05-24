@@ -7,6 +7,7 @@ import net.minecraft.world.World;
 import com.iTitus.MyMod.MyMod;
 import com.iTitus.MyMod.block.ModBlocks;
 import com.iTitus.MyMod.handler.ConfigHandler;
+import com.iTitus.MyMod.handler.CraftingHandler;
 import com.iTitus.MyMod.inventory.container.ContainerWheel;
 import com.iTitus.MyMod.item.ModItems;
 import com.iTitus.MyMod.lib.LibGUI;
@@ -54,6 +55,8 @@ public class CommonProxy implements IGuiHandler {
 
 	public void postInit(FMLPostInitializationEvent event) {
 		PacketPipeline.INSTANCE.postInit();
+
+		CraftingHandler.init();
 	}
 
 	public void preInit(FMLPreInitializationEvent event) {

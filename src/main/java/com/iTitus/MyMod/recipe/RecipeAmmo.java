@@ -50,10 +50,7 @@ public class RecipeAmmo implements IRecipe {
 					HashMap<EnumModifierType, Integer> modifierOnStack = new HashMap<EnumModifierType, Integer>();
 					modifierOnStack.put(
 							EnumModifierType.getForStack(itemstack1), 1);
-					System.out.println("modifiers -> " + modifiers);
-					System.out.println("modifierOnStack -> " + modifierOnStack);
 					ItemAmmo.merge(modifiers, modifierOnStack);
-					System.out.println("After merging ->" + modifiers);
 
 					arraylist.add(itemstack1);
 				}

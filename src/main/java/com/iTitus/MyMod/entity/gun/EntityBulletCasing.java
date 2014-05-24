@@ -1,4 +1,4 @@
-package com.iTitus.MyMod.entity;
+package com.iTitus.MyMod.entity.gun;
 
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityArrow;

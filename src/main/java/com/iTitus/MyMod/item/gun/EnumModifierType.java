@@ -1,11 +1,17 @@
 package com.iTitus.MyMod.item.gun;
 
+import net.minecraft.entity.Entity;
+import net.minecraft.entity.EntityLivingBase;
+import net.minecraft.entity.item.EntityBoat;
+import net.minecraft.entity.item.EntityMinecart;
 import net.minecraft.init.Blocks;
 import net.minecraft.init.Items;
 import net.minecraft.item.ItemStack;
+import net.minecraft.item.ItemSword;
+import net.minecraft.util.DamageSource;
 import net.minecraft.util.MovingObjectPosition;
 
-import com.iTitus.MyMod.entity.EntityBullet;
+import com.iTitus.MyMod.entity.gun.EntityBullet;
 
 public enum EnumModifierType {
 
@@ -35,6 +41,16 @@ public enum EnumModifierType {
 		@Override
 		public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
 				int count) {
+		}
+
+		@Override
+		public boolean strictMeta() {
+			return false;
+		}
+
+		@Override
+		public boolean strictNBT() {
+			return false;
 		}
 
 	},
@@ -70,9 +86,71 @@ public enum EnumModifierType {
 		public void onShoot(EntityBullet bullet, int count) {
 		}
 
+		@Override
+		public boolean strictMeta() {
+			return false;
+		}
+
+		@Override
+		public boolean strictNBT() {
+			return false;
+		}
+
+	},
+	diamond_sword {
+		@Override
+		public ItemStack getItemStack() {
+			return new ItemStack(Items.diamond_sword);
+		}
+
+		@Override
+		public int getMaxCount() {
+			return 1;
+		}
+
+		@Override
+		public void onUpdate(EntityBullet bullet, int count) {
+		}
+
+		@Override
+		public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
+				int count) {
+
+			if (mop.entityHit != null
+					&& (mop.entityHit instanceof EntityLivingBase)
+					|| mop.entityHit instanceof EntityMinecart
+					|| mop.entityHit instanceof EntityBoat) {
+
+				Entity e = mop.entityHit;
+
+				e.attackEntityFrom(
+						DamageSource.causePlayerDamage(bullet.getShooter()),
+						((ItemSword) Items.diamond_sword).func_150931_i());
+
+			}
+
+		}
+
+		@Override
+		public void onShoot(EntityBullet bullet, int count) {
+		}
+
+		@Override
+		public boolean strictMeta() {
+			return false;
+		}
+
+		@Override
+		public boolean strictNBT() {
+			return false;
+		}
 	};
 
 	public abstract ItemStack getItemStack();
+
+	public abstract boolean strictMeta();
+
+	public abstract boolean strictNBT();
 
 	public abstract int getMaxCount();
 
@@ -84,27 +162,33 @@ public enum EnumModifierType {
 	public abstract void onShoot(EntityBullet bullet, int count);
 
 	public static boolean isModifier(ItemStack stack) {
-
-		for (EnumModifierType modifier : values()) {
-			if (ItemStack.areItemStacksEqual(stack.copy().splitStack(1),
-					modifier.getItemStack().copy().splitStack(1))) {
-				return true;
-			}
-		}
-
-		return false;
+		return getForStack(stack) != null;
 	}
 
 	public static EnumModifierType getForStack(ItemStack stack) {
 
-		if (isModifier(stack)) {
+		if (stack != null) {
+
 			for (EnumModifierType modifier : values()) {
-				if (ItemStack.areItemStacksEqual(stack.copy().splitStack(1),
-						modifier.getItemStack().copy().splitStack(1))) {
-					return modifier;
-				}
+
+				if (stack.getItem() != modifier.getItemStack().getItem())
+					continue;
+
+				if (modifier.strictMeta()
+						&& modifier.getItemStack().getItemDamage() != stack
+								.getItemDamage())
+					continue;
+
+				if (modifier.strictNBT()
+						&& !ItemStack.areItemStackTagsEqual(
+								modifier.getItemStack(), stack))
+					continue;
+
+				return modifier;
+
 			}
 		}
+
 		return null;
 	}
 
