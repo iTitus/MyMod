@@ -20,15 +20,10 @@ public class CraftingHandler {
 	@SubscribeEvent
 	public void onPlayerItemCrafted(PlayerEvent.ItemCraftedEvent event) {
 
-		System.out.println("Crafted!");
-
 		if (event.crafting.isItemEqual(new ItemStack(ModItems.ammo))) {
 			for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++) {
 				ItemStack stack = event.craftMatrix.getStackInSlot(i);
 				if (stack != null && stack.getItem() instanceof ItemSword) {
-
-					System.out.println("--- " + stack.getItemDamage() + " - "
-							+ stack.getMaxDamage());
 
 					if (stack.getItemDamage() <= stack.getMaxDamage() - 1) {
 						stack.setItemDamage(stack.getItemDamage() + 1);

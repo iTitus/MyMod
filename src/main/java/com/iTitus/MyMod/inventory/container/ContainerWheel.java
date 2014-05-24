@@ -38,7 +38,6 @@ public class ContainerWheel extends MyContainer {
 
 	@Override
 	public ItemStack transferStackInSlot(EntityPlayer player, int slotID) {
-		System.out.println("Slot -> " + slotID);
 		ItemStack retStack = null;
 		Slot slot = (Slot) inventorySlots.get(slotID);
 
@@ -46,10 +45,7 @@ public class ContainerWheel extends MyContainer {
 			ItemStack stack = slot.getStack();
 			retStack = stack.copy();
 
-			System.out.println(slotID + " - "
-					+ (inventorySlots.size() - wheel.getSizeInventory()));
 			if (slotID >= (inventorySlots.size() - wheel.getSizeInventory())) {
-				System.out.println("Im Wheel!");
 				if (!mergeItemStack(stack,
 						(inventorySlots.size() - wheel.getSizeInventory() - 9),
 						(inventorySlots.size() - wheel.getSizeInventory()),
