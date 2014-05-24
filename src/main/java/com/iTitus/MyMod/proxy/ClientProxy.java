@@ -7,8 +7,10 @@ import net.minecraftforge.client.MinecraftForgeClient;
 
 import com.iTitus.MyMod.client.gui.GUIWheel;
 import com.iTitus.MyMod.client.render.block.RenderBlockWheel;
+import com.iTitus.MyMod.client.render.entity.RenderEntityBullet;
 import com.iTitus.MyMod.client.render.item.ItemGunRenderer;
 import com.iTitus.MyMod.client.render.tileentity.RenderTileEntityWheel;
+import com.iTitus.MyMod.entity.gun.EntityBullet;
 import com.iTitus.MyMod.inventory.container.ContainerWheel;
 import com.iTitus.MyMod.item.ModItems;
 import com.iTitus.MyMod.lib.LibGUI;
@@ -50,6 +52,8 @@ public class ClientProxy extends CommonProxy {
 
 		MinecraftForgeClient.registerItemRenderer(ModItems.gun,
 				ItemGunRenderer.INSTANCE);
+		
+		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderEntityBullet.INSTANCE);
 
 	}
 

@@ -53,6 +53,13 @@ public class ItemGun extends MyItem {
 					world.spawnEntityInWorld(new EntityBulletCasing(player));
 				}
 
+				else {
+					for (int j = 0; i < 8; i++) {
+						world.spawnParticle("largesmoke", player.posX,
+								player.posY, player.posZ, 0.0D, 0.0D, 0.0D);
+					}
+				}
+
 				break;
 			}
 

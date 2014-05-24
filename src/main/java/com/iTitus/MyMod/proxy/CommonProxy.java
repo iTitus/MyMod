@@ -6,6 +6,7 @@ import net.minecraft.world.World;
 
 import com.iTitus.MyMod.MyMod;
 import com.iTitus.MyMod.block.ModBlocks;
+import com.iTitus.MyMod.entity.gun.EntityBullet;
 import com.iTitus.MyMod.handler.ConfigHandler;
 import com.iTitus.MyMod.handler.CraftingHandler;
 import com.iTitus.MyMod.inventory.container.ContainerWheel;
@@ -20,6 +21,7 @@ import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.common.network.IGuiHandler;
 import cpw.mods.fml.common.network.NetworkRegistry;
+import cpw.mods.fml.common.registry.EntityRegistry;
 
 public class CommonProxy implements IGuiHandler {
 
@@ -49,8 +51,15 @@ public class CommonProxy implements IGuiHandler {
 		NetworkRegistry.INSTANCE
 				.registerGuiHandler(MyMod.instance, MyMod.proxy);
 
+		registerEntities();
 		registerRenderers();
 		registerSounds();
+
+	}
+
+	public void registerEntities() {
+		EntityRegistry.registerModEntity(EntityBullet.class, "", 0,
+				MyMod.instance, 120, 3, true);
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {

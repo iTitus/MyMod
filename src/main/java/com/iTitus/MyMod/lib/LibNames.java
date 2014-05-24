@@ -15,4 +15,6 @@ public class LibNames {
 
 	public static final String AMMO_NAME = "ammo";
 
+	public static final String BULLET_NAME = "bullet";
+
 }

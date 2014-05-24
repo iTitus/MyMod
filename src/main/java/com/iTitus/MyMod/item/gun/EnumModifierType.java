@@ -98,6 +98,7 @@ public enum EnumModifierType {
 
 	},
 	diamond_sword {
+
 		@Override
 		public ItemStack getItemStack() {
 			return new ItemStack(Items.diamond_sword);
@@ -143,6 +144,44 @@ public enum EnumModifierType {
 		@Override
 		public boolean strictNBT() {
 			return false;
+		}
+	},
+	fire {
+
+		@Override
+		public ItemStack getItemStack() {
+			return new ItemStack(Items.flint_and_steel);
+		}
+
+		@Override
+		public boolean strictMeta() {
+			return false;
+		}
+
+		@Override
+		public boolean strictNBT() {
+			return false;
+		}
+
+		@Override
+		public int getMaxCount() {
+			return 1;
+		}
+
+		@Override
+		public void onUpdate(EntityBullet bullet, int count) {
+
+		}
+
+		@Override
+		public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
+				int count) {
+
+		}
+
+		@Override
+		public void onShoot(EntityBullet bullet, int count) {
+			bullet.setIsFirey(true);
 		}
 	};
 
