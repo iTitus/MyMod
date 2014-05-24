@@ -1,18 +1,21 @@
-.settings/
+#  Folders #
 .gradle/
-eclipse/
+.settings/
 bin/
-build/
-misc/
+build/classes/
+build/dependency-cache
+build/natives
+build/resources
+build/sources
+build/tmp
+eclipse/
 mcp/
-.classpath
-.project
+misc/
 
 # Package Files #
-*.jar
-*.war
-*.ear
-*.class
-*.txt
 *.bat
+*.class
+*.classpath
+*.project
+*.txt
 *.xcf
