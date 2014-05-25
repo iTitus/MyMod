@@ -75,8 +75,8 @@ public class EntityBullet extends EntityThrowable {
 				modifier.onUpdate(this, modifiers.get(modifier));
 			}
 		}
-		System.out.println((shooter != null) ? (shooter.getDisplayName())
-				: "null");
+		// System.out.println((shooter != null) ? (shooter.getDisplayName())
+		// : "null");
 	}
 
 	public EntityBullet onShoot() {

@@ -12,7 +12,7 @@ public class RenderEntityBullet extends Render {
 	public void doRender(Entity entity, double x, double y, double z,
 			float var8, float ticks) {
 
-		System.out.println(ticks);
+		System.out.println(var8);
 
 	}
 
