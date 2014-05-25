@@ -2,7 +2,6 @@ package io.github.iTitus.MyMod.handler;
 
 import io.github.iTitus.MyMod.item.ModItems;
 import net.minecraft.item.ItemStack;
-import net.minecraft.item.ItemSword;
 import net.minecraftforge.common.MinecraftForge;
 import net.minecraftforge.event.entity.player.PlayerDestroyItemEvent;
 import cpw.mods.fml.common.FMLCommonHandler;
@@ -21,7 +20,7 @@ public class CraftingHandler {
 		if (event.crafting.isItemEqual(new ItemStack(ModItems.ammo))) {
 			for (int i = 0; i < event.craftMatrix.getSizeInventory(); i++) {
 				ItemStack stack = event.craftMatrix.getStackInSlot(i);
-				if (stack != null && stack.getItem() instanceof ItemSword) {
+				if (stack != null && stack.isItemStackDamageable()) {
 
 					if (stack.getItemDamage() <= stack.getMaxDamage() - 1) {
 						stack.setItemDamage(stack.getItemDamage() + 1);

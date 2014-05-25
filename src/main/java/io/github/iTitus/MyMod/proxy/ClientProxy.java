@@ -50,8 +50,9 @@ public class ClientProxy extends CommonProxy {
 
 		MinecraftForgeClient.registerItemRenderer(ModItems.gun,
 				ItemGunRenderer.INSTANCE);
-		
-		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class, RenderEntityBullet.INSTANCE);
+
+		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class,
+				RenderEntityBullet.INSTANCE);
 
 	}
 
