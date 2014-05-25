@@ -18,7 +18,7 @@ buildscript {
 apply plugin: 'forge'
 
 version = "0.1"
-group= "com.iTitus"
+group= "io.github.iTitus"
 archivesBaseName = "MyMod"
 
 minecraft {
