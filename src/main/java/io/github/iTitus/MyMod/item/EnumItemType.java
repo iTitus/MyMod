@@ -4,7 +4,7 @@ import io.github.iTitus.MyMod.lib.LibNames;
 
 public enum EnumItemType {
 
-	debug(LibNames.DEBUG_NAME, true, true), gun(LibNames.GUN_NAME, true, false), ammo(
+	DEBUG(LibNames.DEBUG_NAME, true, true), GUN(LibNames.GUN_NAME, true, false), AMMO(
 			LibNames.AMMO_NAME, true, true);
 
 	public final String name;

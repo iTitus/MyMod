@@ -92,8 +92,7 @@ public class EntityBullet extends EntityThrowable {
 				}
 
 				if (worldObj.isAirBlock(x, y, z)) {
-					worldObj.playSoundEffect(x + 0.5D,
-							y + 0.5D, z + 0.5D,
+					worldObj.playSoundEffect(x + 0.5D, y + 0.5D, z + 0.5D,
 							"fire.ignite", 1.0F, rand.nextFloat() * 0.4F + 0.8F);
 					worldObj.setBlock(x, y, z, Blocks.fire);
 				}
@@ -115,7 +114,7 @@ public class EntityBullet extends EntityThrowable {
 
 	@Override
 	public void onUpdate() {
-		super.onUpdate();
+		// super.onUpdate();
 		if (modifiers != null) {
 			for (EnumModifierType modifier : modifiers.keySet()) {
 				modifier.onUpdate(this, modifiers.get(modifier));

@@ -27,8 +27,7 @@ public class RenderTileEntityWheel extends TileEntitySpecialRenderer {
 
 	public RenderTileEntityWheel() {
 		model = new ModelWheel();
-		texture = new ResourceLocation(LibTextures.TEXTURE_LOCATION,
-				LibTextures.getModelTextureLoc(EnumBlockType.WHEEL));
+		texture = LibTextures.getModelResourceLoc(EnumBlockType.WHEEL);
 	}
 
 	@Override

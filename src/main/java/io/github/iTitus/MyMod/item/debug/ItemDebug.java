@@ -28,7 +28,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class ItemDebug extends MyItem {
 
 	public ItemDebug() {
-		super(EnumItemType.debug);
+		super(EnumItemType.DEBUG);
 		setMaxStackSize(1);
 	}
 

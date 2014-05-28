@@ -14,8 +14,11 @@ misc/
 
 # Package Files #
 *.bat
+*.blend
+*.blend1
 *.class
 *.classpath
+*.mtl
 *.project
 *.txt
 *.xcf

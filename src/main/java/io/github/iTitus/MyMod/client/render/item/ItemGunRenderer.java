@@ -1,8 +1,13 @@
 package io.github.iTitus.MyMod.client.render.item;
 
+import org.lwjgl.opengl.GL11;
+
 import io.github.iTitus.MyMod.client.model.ModelGun;
+import io.github.iTitus.MyMod.item.EnumItemType;
+import io.github.iTitus.MyMod.lib.LibTextures;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -11,7 +16,7 @@ public class ItemGunRenderer implements IItemRenderer {
 
 	public static final ItemGunRenderer INSTANCE = new ItemGunRenderer();
 
-	public static ModelGun model;
+	private final ModelGun model;
 
 	private ItemGunRenderer() {
 		model = new ModelGun();
@@ -25,13 +30,49 @@ public class ItemGunRenderer implements IItemRenderer {
 	@Override
 	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
 			ItemRendererHelper helper) {
-		return false;
+		return true;
 	}
 
 	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 
-		model.renderAll();
+		switch (type) {
+		case ENTITY: {
+			renderItemGun(-0.5F, 0.0F, 0.5F);
+			return;
+		}
+		case EQUIPPED: {
+			renderItemGun(0.0F, 0.0F, 1.0F);
+			return;
+		}
+		case EQUIPPED_FIRST_PERSON: {
+			renderItemGun(0.0F, 0.0F, 1.0F);
+			return;
+		}
+		case INVENTORY: {
+			renderItemGun(0.0F, -0.1F, 1.0F);
+			return;
+		}
+		default:
+		}
+
+	}
+
+	private void renderItemGun(float scaleX, float scaleY, float scaleZ) {
+
+		GL11.glPushMatrix();
+		GL11.glDisable(GL11.GL_LIGHTING);
+
+		GL11.glScalef(1.0F, 1.0F, 1.0F);
+		GL11.glTranslatef(scaleX, scaleY, scaleZ);
+
+		FMLClientHandler.instance().getClient().renderEngine
+				.bindTexture(LibTextures.getModelResourceLoc(EnumItemType.GUN));
+
+		model.render();
+
+		GL11.glEnable(GL11.GL_LIGHTING);
+		GL11.glPopMatrix();
 
 	}
 

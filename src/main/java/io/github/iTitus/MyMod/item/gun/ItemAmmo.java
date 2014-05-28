@@ -25,7 +25,7 @@ public class ItemAmmo extends MyItem {
 			TAG_MODIFIER_COUNT = "modifier_count";
 
 	public ItemAmmo() {
-		super(EnumItemType.ammo);
+		super(EnumItemType.AMMO);
 		setHasSubtypes(true);
 	}
 
