@@ -138,14 +138,12 @@ public class EntityBullet extends EntityThrowable {
 	public void writeEntityToNBT(NBTTagCompound nbt) {
 		super.writeEntityToNBT(nbt);
 		ItemAmmo.writeToNBT(modifiers, nbt);
-		nbt.setTag(TAG_SHOOTER, shooter.getEntityData());
 	}
 
 	@Override
 	public void readEntityFromNBT(NBTTagCompound nbt) {
 		super.readEntityFromNBT(nbt);
 		modifiers = ItemAmmo.readFromNBT(nbt);
-		shooter.readFromNBT(nbt.getCompoundTag(TAG_SHOOTER));
 	}
 
 	public EntityPlayer getShooter() {

@@ -9,14 +9,16 @@ import net.minecraft.util.ResourceLocation;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
+
+@SideOnly(Side.CLIENT)
 public class RenderEntityBullet extends Render {
 
 	public static final RenderEntityBullet INSTANCE = new RenderEntityBullet();
-	private static ModelBullet model;
-
-	private RenderEntityBullet() {
-		model = new ModelBullet();
-	}
+	private static final ResourceLocation texture = LibTextures
+			.getModelTextureResourceLoc(LibModels.Models.BULLET);
+	private static final ModelBullet model = new ModelBullet();
 
 	@Override
 	public void doRender(Entity entity, double x, double y, double z,
@@ -24,9 +26,6 @@ public class RenderEntityBullet extends Render {
 
 		GL11.glPushMatrix();
 		GL11.glTranslated(x, y, z);
-
-		// GL11.glRotatef(180, 1, 0, 0);
-		// GL11.glTranslatef(0, 0.9F, 0);
 
 		bindEntityTexture(entity);
 
@@ -37,7 +36,7 @@ public class RenderEntityBullet extends Render {
 
 	@Override
 	protected ResourceLocation getEntityTexture(Entity entity) {
-		return LibTextures.getModelTextureResourceLoc(LibModels.Models.BULLET);
+		return texture;
 	}
 
 }

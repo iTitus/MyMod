@@ -4,7 +4,6 @@ import io.github.iTitus.MyMod.block.EnumBlockType;
 import io.github.iTitus.MyMod.client.model.ModelWheel;
 import io.github.iTitus.MyMod.lib.LibTextures;
 import io.github.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
-import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;
@@ -12,6 +11,7 @@ import net.minecraftforge.common.util.ForgeDirection;
 
 import org.lwjgl.opengl.GL11;
 
+import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -20,9 +20,7 @@ public class RenderTileEntityWheel extends TileEntitySpecialRenderer {
 
 	public static final TileEntitySpecialRenderer INSTANCE = new RenderTileEntityWheel();
 
-	@SideOnly(Side.CLIENT)
 	private final ModelWheel model;
-	@SideOnly(Side.CLIENT)
 	private final ResourceLocation texture;
 
 	public RenderTileEntityWheel() {
@@ -39,7 +37,8 @@ public class RenderTileEntityWheel extends TileEntitySpecialRenderer {
 		GL11.glPushMatrix();
 		GL11.glColor4f(1F, 1F, 1F, 1F);
 		GL11.glTranslated(x + 0.5, y + 1.5, z + 0.5);
-		Minecraft.getMinecraft().renderEngine.bindTexture(texture);
+		FMLClientHandler.instance().getClient().renderEngine
+				.bindTexture(texture);
 		GL11.glScalef(1F, -1F, -1F);
 		ForgeDirection direction = wheel.getOrientation();
 		short angle = 0;
