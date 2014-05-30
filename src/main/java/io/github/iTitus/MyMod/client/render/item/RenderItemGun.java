@@ -12,13 +12,13 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class ItemGunRenderer implements IItemRenderer {
+public class RenderItemGun implements IItemRenderer {
 
-	public static final ItemGunRenderer INSTANCE = new ItemGunRenderer();
+	public static final RenderItemGun INSTANCE = new RenderItemGun();
 
 	private final ModelGun model;
 
-	private ItemGunRenderer() {
+	private RenderItemGun() {
 		model = new ModelGun();
 	}
 

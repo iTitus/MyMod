@@ -3,7 +3,7 @@ package io.github.iTitus.MyMod.proxy;
 import io.github.iTitus.MyMod.client.gui.GUIWheel;
 import io.github.iTitus.MyMod.client.render.block.RenderBlockWheel;
 import io.github.iTitus.MyMod.client.render.entity.RenderEntityBullet;
-import io.github.iTitus.MyMod.client.render.item.ItemGunRenderer;
+import io.github.iTitus.MyMod.client.render.item.RenderItemGun;
 import io.github.iTitus.MyMod.client.render.tileentity.RenderTileEntityWheel;
 import io.github.iTitus.MyMod.entity.gun.EntityBullet;
 import io.github.iTitus.MyMod.inventory.container.ContainerWheel;
@@ -49,7 +49,7 @@ public class ClientProxy extends CommonProxy {
 				RenderTileEntityWheel.INSTANCE);
 
 		MinecraftForgeClient.registerItemRenderer(ModItems.gun,
-				ItemGunRenderer.INSTANCE);
+				RenderItemGun.INSTANCE);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class,
 				RenderEntityBullet.INSTANCE);
