@@ -18,10 +18,6 @@ public class RenderBlockWheel implements ISimpleBlockRenderingHandler {
 
 	public static final ISimpleBlockRenderingHandler INSTANCE = new RenderBlockWheel();
 
-	private RenderBlockWheel() {
-
-	}
-
 	@Override
 	public int getRenderId() {
 		return LibRender.WHEEL_ID;

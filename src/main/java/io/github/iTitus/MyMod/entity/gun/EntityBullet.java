@@ -114,14 +114,13 @@ public class EntityBullet extends EntityThrowable {
 
 	@Override
 	public void onUpdate() {
-		// super.onUpdate();
+		super.onUpdate();
 		if (modifiers != null) {
 			for (EnumModifierType modifier : modifiers.keySet()) {
 				modifier.onUpdate(this, modifiers.get(modifier));
 			}
 		}
-		// System.out.println((shooter != null) ? (shooter.getDisplayName())
-		// : "null");
+
 	}
 
 	public EntityBullet onShoot() {

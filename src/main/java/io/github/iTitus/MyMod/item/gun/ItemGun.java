@@ -1,7 +1,6 @@
 package io.github.iTitus.MyMod.item.gun;
 
 import io.github.iTitus.MyMod.entity.gun.EntityBullet;
-import io.github.iTitus.MyMod.entity.gun.EntityBulletCasing;
 import io.github.iTitus.MyMod.item.EnumItemType;
 import io.github.iTitus.MyMod.item.ModItems;
 import io.github.iTitus.MyMod.item.MyItem;
@@ -54,7 +53,7 @@ public class ItemGun extends MyItem {
 					world.spawnEntityInWorld(new EntityBullet(world, player,
 							ItemAmmo.readFromNBT(ammo.getTagCompound()))
 							.onShoot());
-					world.spawnEntityInWorld(new EntityBulletCasing(player));
+					// world.spawnEntityInWorld(new EntityBulletCasing(player));
 				}
 
 				else {
@@ -62,6 +61,7 @@ public class ItemGun extends MyItem {
 						world.spawnParticle("largesmoke", player.posX,
 								player.posY, player.posZ, 0.0D, 0.0D, 0.0D);
 					}
+					player.playSound("mob.wither.shoot", 1.0F, 1.0F);
 				}
 
 				break;
