@@ -1,5 +1,6 @@
 package io.github.iTitus.MyMod.client.render.entity;
 
+import io.github.iTitus.MyMod.entity.gun.EntityBullet;
 import io.github.iTitus.MyMod.lib.LibModels;
 import io.github.iTitus.MyMod.lib.LibTextures;
 import net.minecraft.client.renderer.entity.Render;
@@ -24,11 +25,20 @@ public class RenderEntityBullet extends Render {
 	public void doRender(Entity entity, double x, double y, double z,
 			float rotaionYaw, float ticks) {
 
+		EntityBullet bullet = (EntityBullet) entity;
+
 		GL11.glPushMatrix();
 		GL11.glDisable(GL11.GL_LIGHTING);
 		GL11.glDisable(GL11.GL_CULL_FACE);
 
 		GL11.glTranslated(x, y, z);
+		GL11.glRotatef(
+				bullet.prevRotationYaw
+						+ (bullet.rotationYaw - bullet.prevRotationYaw) * ticks
+						- 90.0F, 0.0F, 1.0F, 0.0F);
+		GL11.glRotatef(bullet.prevRotationPitch
+				+ (bullet.rotationPitch - bullet.prevRotationPitch) * ticks,
+				0.0F, 0.0F, 1.0F);
 		GL11.glScalef(1F / 32F, 1F / 32F, 1F / 32F);
 
 		bindEntityTexture(entity);

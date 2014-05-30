@@ -1,12 +1,13 @@
 package io.github.iTitus.MyMod.client.render.item;
 
-import org.lwjgl.opengl.GL11;
-
 import io.github.iTitus.MyMod.client.model.ModelGun;
 import io.github.iTitus.MyMod.item.EnumItemType;
 import io.github.iTitus.MyMod.lib.LibTextures;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
+
+import org.lwjgl.opengl.GL11;
+
 import cpw.mods.fml.client.FMLClientHandler;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;

@@ -18,9 +18,10 @@ public enum EnumModifierType {
 
 		@Override
 		public void onShoot(EntityBullet bullet, int count) {
-			double d = Math.pow(1.5, count);
-			bullet.addVelocity(bullet.motionX * d, bullet.motionY * d,
-					bullet.motionZ * d);
+			double d = count * 1.1;
+			bullet.motionX *= d;
+			bullet.motionY *= d;
+			bullet.motionZ *= d;
 		}
 
 		@Override

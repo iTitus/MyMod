@@ -60,7 +60,7 @@ public class ItemAmmo extends MyItem {
 		HashMap<EnumModifierType, Integer> modifiers = new HashMap<EnumModifierType, Integer>();
 		for (EnumModifierType modifier : EnumModifierType.values()) {
 			ItemStack stack = new ItemStack(item);
-			modifiers.put(modifier, 1);
+			modifiers.put(modifier, modifier.getMaxCount());
 			stack.setTagCompound(writeToNBT(modifiers, new NBTTagCompound()));
 			list.add(stack);
 			modifiers.clear();
