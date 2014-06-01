@@ -1,0 +1,37 @@
+### BLOCKS ###
+tile.zero.name=Zero
+tile.timeshifter.name=Zeitmaschine
+tile.wheel.name=§1G§2l§3ü§4c§5k§6s§7r§8a§9d
+
+### ITEMS ###
+item.debug.name=Debug Item
+item.gun.name=Pistole
+item.ammo.name=Kugel
+
+### GUI ###
+gui.wheel.name=Glücksrad
+
+### CHAT/MESSAGES ###
+message.timeshifter.daymode=Zeitmaschine auf §6Tag §rModus gesetzt.
+message.timeshifter.nightmode=Zeitmaschine auf §8Nacht §rModus gesetzt.
+message.debug.nothing=Da ist nichts
+message.debug.entity.0=Rechtsklick auf Entity %s ( %d ) -> { %s }
+message.debug.block.0=Rechtsklick auf Block '%s' -> { 
+message.debug.block.1=Interner Name -> '%s' 
+message.debug.block.2=Block-ID -> '%d' 
+message.debug.block.3=Metadata - > '%d' 
+message.debug.block.4=Härte - > '%d' 
+message.debug.block.5=Resistenz - > '%d' 
+message.debug.block.6=Rutschigkeit - > '%d' 
+message.debug.block.7=NBT -> { %s } }
+message.debug.block.8=X -> '%d' Y -> '%d' Z -> '%d' }
+
+
+### MISC ###
+itemGroup.mymod=§4iTitus' MyMod§r
+
+lore.debug=Creative-only Debug Item
+lore.gun=Kann jede Kugel schießen
+lore.ammo=Kann mit jeder Kugel abgeschossen werden
+lore.wheel.0=Gefüllt
+lore.wheel.1=Leer
