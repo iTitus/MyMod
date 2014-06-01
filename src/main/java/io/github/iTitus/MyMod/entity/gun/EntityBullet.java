@@ -5,7 +5,6 @@ import io.github.iTitus.MyMod.item.gun.ItemAmmo;
 
 import java.util.HashMap;
 
-import net.minecraft.block.BlockCauldron;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.entity.projectile.EntityThrowable;
 import net.minecraft.init.Blocks;
@@ -58,7 +57,6 @@ public class EntityBullet extends EntityThrowable {
 
 		if (isBurning() && !worldObj.isRemote) {
 			if (mop.typeOfHit == MovingObjectType.BLOCK) {
-				BlockCauldron c;
 
 				int x = mop.blockX, y = mop.blockY, z = mop.blockZ;
 
