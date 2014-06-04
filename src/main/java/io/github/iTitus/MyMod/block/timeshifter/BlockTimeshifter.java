@@ -18,7 +18,6 @@ public class BlockTimeshifter extends MyBlock {
 
 	public BlockTimeshifter() {
 		super(EnumBlockType.TIMESHIFTER);
-		setTickRandomly(true);
 	}
 
 	@Override

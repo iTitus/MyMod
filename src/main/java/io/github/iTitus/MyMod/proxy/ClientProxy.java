@@ -4,12 +4,14 @@ import io.github.iTitus.MyMod.client.gui.GUIWheel;
 import io.github.iTitus.MyMod.client.render.block.RenderBlockWheel;
 import io.github.iTitus.MyMod.client.render.entity.RenderEntityBullet;
 import io.github.iTitus.MyMod.client.render.item.RenderItemGun;
+import io.github.iTitus.MyMod.client.render.tileentity.RenderTileEntitySphere;
 import io.github.iTitus.MyMod.client.render.tileentity.RenderTileEntityWheel;
 import io.github.iTitus.MyMod.entity.gun.EntityBullet;
 import io.github.iTitus.MyMod.inventory.container.ContainerWheel;
 import io.github.iTitus.MyMod.item.ModItems;
 import io.github.iTitus.MyMod.lib.LibGUI;
 import io.github.iTitus.MyMod.lib.LibRender;
+import io.github.iTitus.MyMod.tileentity.sphere.TileEntitySphere;
 import io.github.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
@@ -43,10 +45,14 @@ public class ClientProxy extends CommonProxy {
 
 	@Override
 	public void registerRenderers() {
+
 		LibRender.WHEEL_ID = RenderingRegistry.getNextAvailableRenderId();
 		RenderingRegistry.registerBlockHandler(RenderBlockWheel.INSTANCE);
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWheel.class,
 				RenderTileEntityWheel.INSTANCE);
+
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySphere.class,
+				RenderTileEntitySphere.INSTANCE);
 
 		MinecraftForgeClient.registerItemRenderer(ModItems.gun,
 				RenderItemGun.INSTANCE);

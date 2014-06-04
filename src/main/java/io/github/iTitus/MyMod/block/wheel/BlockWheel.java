@@ -7,6 +7,7 @@ import io.github.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 
 import java.util.List;
 
+import net.minecraft.block.Block;
 import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
@@ -22,6 +23,7 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 
 	public BlockWheel() {
 		super(EnumBlockType.WHEEL);
+		isBlockContainer = true;
 	}
 
 	@Override
@@ -96,6 +98,22 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y,
 			int z, int side) {
 		return false;
+	}
+
+	public void breakBlock(World world, int x, int y, int z, Block block,
+			int meta) {
+		super.breakBlock(world, x, y, z, block, meta);
+		world.removeTileEntity(x, y, z);
+	}
+
+	public boolean onBlockEventReceived(World world, int x, int y, int z,
+			int eventNumber, int argument) {
+
+		super.onBlockEventReceived(world, x, y, z, eventNumber, argument);
+		TileEntity tileentity = world.getTileEntity(x, y, z);
+		return tileentity != null ? tileentity.receiveClientEvent(eventNumber,
+				argument) : false;
+
 	}
 
 }

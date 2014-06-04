@@ -17,4 +17,7 @@ public class LibNames {
 
 	public static final String BULLET_NAME = "bullet";
 
+	public static final String SPHERE = "sphere";
+	public static final String SPHERE_TE = "mymod:sphere_te";
+
 }
