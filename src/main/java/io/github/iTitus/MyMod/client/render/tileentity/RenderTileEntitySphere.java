@@ -53,16 +53,10 @@ public class RenderTileEntitySphere extends TileEntitySpecialRenderer {
 
 		GL11.glBegin(GL11.GL_LINE_LOOP);
 
-		// for (int i = 0; i < 360; i++) {
-		// GL11.glVertex3d(radius * MathHelper.sin(MathHelper.degToRad(i))
-		// + tile.xCoord + 0.5, tile.yCoord + 1,
-		// radius * MathHelper.cos(MathHelper.degToRad(i))
-		// + tile.zCoord + 0.5);
-		// }
-
 		for (float angle1 = 0; angle1 <= 180; angle1++) {
 
 			for (float angle2 = 0; angle2 < 360; angle2++) {
+
 				GL11.glVertex3d(
 						radius * MathHelper.sin(MathHelper.degToRad(angle1))
 								* MathHelper.cos(MathHelper.degToRad(angle2))
@@ -72,7 +66,9 @@ public class RenderTileEntitySphere extends TileEntitySpecialRenderer {
 								+ tile.yCoord + 1.5 + translation, radius
 								* MathHelper.cos(MathHelper.degToRad(angle1))
 								+ tile.zCoord + 0.5);
+
 			}
+
 		}
 
 		GL11.glEnd();

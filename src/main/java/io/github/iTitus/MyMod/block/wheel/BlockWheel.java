@@ -100,12 +100,14 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 		return false;
 	}
 
+	@Override
 	public void breakBlock(World world, int x, int y, int z, Block block,
 			int meta) {
 		super.breakBlock(world, x, y, z, block, meta);
 		world.removeTileEntity(x, y, z);
 	}
 
+	@Override
 	public boolean onBlockEventReceived(World world, int x, int y, int z,
 			int eventNumber, int argument) {
 
