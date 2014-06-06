@@ -72,7 +72,7 @@ public class CommonProxy implements IGuiHandler {
 
 	public void registerEntities() {
 
-		int id = 0;
+		int id = -1;
 
 		EntityRegistry.registerModEntity(EntityBullet.class,
 				LibNames.BULLET_NAME, id++, MyMod.instance, 120, 3, true);

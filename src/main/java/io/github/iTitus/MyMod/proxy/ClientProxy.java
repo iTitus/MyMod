@@ -3,6 +3,7 @@ package io.github.iTitus.MyMod.proxy;
 import io.github.iTitus.MyMod.client.gui.GUIWheel;
 import io.github.iTitus.MyMod.client.render.block.RenderBlockWheel;
 import io.github.iTitus.MyMod.client.render.entity.RenderEntityBullet;
+import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
 import io.github.iTitus.MyMod.client.render.item.RenderItemGun;
 import io.github.iTitus.MyMod.client.render.tileentity.RenderTileEntitySphere;
 import io.github.iTitus.MyMod.client.render.tileentity.RenderTileEntityWheel;
@@ -59,6 +60,8 @@ public class ClientProxy extends CommonProxy {
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class,
 				RenderEntityBullet.INSTANCE);
+
+		RenderClockHUD.init();
 
 	}
 

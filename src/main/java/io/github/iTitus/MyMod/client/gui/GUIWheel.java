@@ -30,12 +30,12 @@ public class GUIWheel extends GuiContainer {
 
 	@Override
 	protected void drawGuiContainerForegroundLayer(int x, int y) {
-		fontRendererObj
-				.drawString(StatCollector.translateToLocal("gui.wheel.name"),
-						8, 6, 4210752);
+		fontRendererObj.drawString(
+				StatCollector.translateToLocal("gui.wheel.name"), 8, 6,
+				0x404040);
 		fontRendererObj.drawString(
 				StatCollector.translateToLocal("container.inventory"), 8,
-				ySize - 96 + 2, 4210752);
+				ySize - 96 + 2, 0x404040);
 
 	}
 
