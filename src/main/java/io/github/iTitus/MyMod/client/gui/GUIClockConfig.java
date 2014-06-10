@@ -1,13 +1,14 @@
 package io.github.iTitus.MyMod.client.gui;
 
-import org.lwjgl.input.Keyboard;
-
 import io.github.iTitus.MyMod.handler.ConfigHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.StatCollector;
+
+import org.lwjgl.input.Keyboard;
+
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -52,6 +53,11 @@ public class GUIClockConfig extends GuiScreen {
 	}
 
 	@Override
+	public void onGuiClosed() {
+		Keyboard.enableRepeatEvents(false);
+	}
+
+	@Override
 	protected void actionPerformed(GuiButton button) {
 
 		switch (button.id) {
@@ -75,8 +81,19 @@ public class GUIClockConfig extends GuiScreen {
 	}
 
 	@Override
-	public void onGuiClosed() {
-		Keyboard.enableRepeatEvents(false);
+	protected void keyTyped(char par1, int par2) {
+		if (separator.textboxKeyTyped(par1, par2)) {
+			ConfigHandler.separator = separator.getText();
+			ConfigHandler.save();
+		} else {
+			super.keyTyped(par1, par2);
+		}
+	}
+
+	@Override
+	protected void mouseClicked(int par1, int par2, int par3) {
+		super.mouseClicked(par1, par2, par3);
+		separator.mouseClicked(par1, par2, par3);
 	}
 
 }
