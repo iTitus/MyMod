@@ -25,6 +25,13 @@ public class GUIClockConfig extends GuiScreen {
 		buttonList.add(new GuiSwitchButton(id, 100, 100 + 50 * id,
 				"Clock format", 2, new String[] { "None", "Analog", "Digital",
 						"Both" }));
+		id++;
+		buttonList.add(new GuiOnOffButton(id, 100, 100 + 25 * id, "Seconds",
+				true));
+		id++;
+		buttonList.add(new GuiOnOffButton(id, 100, 100 + 25 * id, "AM/PM",
+				false));
+
 	}
 
 	@Override
@@ -36,7 +43,14 @@ public class GUIClockConfig extends GuiScreen {
 					.getCurrentIndex();
 			ConfigHandler.save();
 			break;
-
+		case 1:
+			ConfigHandler.seconds = ((GuiOnOffButton) button).getCurrentValue();
+			ConfigHandler.save();
+			break;
+		case 2:
+			ConfigHandler.am_pm = ((GuiOnOffButton) button).getCurrentValue();
+			ConfigHandler.save();
+			break;
 		default:
 			break;
 		}
