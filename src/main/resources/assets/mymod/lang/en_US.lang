@@ -10,7 +10,7 @@ item.gun.name=Gun
 item.ammo.name=Bullet
 
 ### GUI ###
-gui.wheel.name=Wheel of Fortune#
+gui.wheel.name=Wheel of Fortune
 gui.clockConfig.name=Clock configuration
 
 ### CHAT/MESSAGES ###
