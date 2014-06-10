@@ -22,15 +22,15 @@ public class GUIClockConfig extends GuiScreen {
 	@Override
 	public void initGui() {
 		int id = 0;
-		buttonList.add(new GuiSwitchButton(id, 100, 100 + 50 * id,
-				"Clock format", 2, new String[] { "None", "Analog", "Digital",
-						"Both" }));
+		buttonList.add(new GuiSwitchButton(id, (width / 2) - 100, (height / 4)
+				+ (24 * (id + 1)) - 16, "Clock format", 2, new String[] {
+				"None", "Analog", "Digital", "Both" }));
 		id++;
-		buttonList.add(new GuiOnOffButton(id, 100, 100 + 25 * id, "Seconds",
-				true));
+		buttonList.add(new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
+				+ (24 * (id + 1)) - 16, "Seconds", true));
 		id++;
-		buttonList.add(new GuiOnOffButton(id, 100, 100 + 25 * id, "AM/PM",
-				false));
+		buttonList.add(new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
+				+ (24 * (id + 1)) - 16, "AM/PM", false));
 
 	}
 
