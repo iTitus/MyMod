@@ -1,8 +1,12 @@
 package io.github.iTitus.MyMod.client.gui;
 
+import org.lwjgl.input.Keyboard;
+
 import io.github.iTitus.MyMod.handler.ConfigHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiTextField;
+import net.minecraft.client.resources.I18n;
 import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -10,12 +14,15 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class GUIClockConfig extends GuiScreen {
 
+	private GuiTextField separator;
+
 	@Override
 	public void drawScreen(int x, int y, float partialTicks) {
 		drawDefaultBackground();
 		drawCenteredString(fontRendererObj,
 				StatCollector.translateToLocal("gui.clockConfig.name"),
 				width / 2, 40, 16777215);
+		separator.drawTextBox();
 		super.drawScreen(x, y, partialTicks);
 	}
 
@@ -23,14 +30,24 @@ public class GUIClockConfig extends GuiScreen {
 	public void initGui() {
 		int id = 0;
 		buttonList.add(new GuiSwitchButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, "Clock format", 2, new String[] {
-				"None", "Analog", "Digital", "Both" }));
+				+ (24 * (id + 1)) - 16, "Clock format",
+				ConfigHandler.analog_digital, new String[] { "None", "Analog",
+						"Digital", "Both" }));
 		id++;
 		buttonList.add(new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, "Seconds", true));
+				+ (24 * (id + 1)) - 16, "Seconds", ConfigHandler.seconds));
 		id++;
 		buttonList.add(new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, "AM/PM", false));
+				+ (24 * (id + 1)) - 16, "AM/PM", ConfigHandler.am_pm));
+		id++;
+		Keyboard.enableRepeatEvents(true);
+		separator = new GuiTextField(fontRendererObj, (width / 2) - 100,
+				(height / 4) + (24 * (id + 1)) - 16, 200, 20);
+		separator.setText(ConfigHandler.separator);
+
+		id++;
+		buttonList.add(new GuiButton(id, (width / 2) - 100, height / 6 + 168,
+				I18n.format("gui.done", new Object[0])));
 
 	}
 
@@ -52,9 +69,14 @@ public class GUIClockConfig extends GuiScreen {
 			ConfigHandler.save();
 			break;
 		default:
-			break;
+			mc.setIngameFocus();
 		}
 
+	}
+
+	@Override
+	public void onGuiClosed() {
+		Keyboard.enableRepeatEvents(false);
 	}
 
 }
