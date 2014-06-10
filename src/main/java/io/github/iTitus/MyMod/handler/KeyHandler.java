@@ -16,6 +16,7 @@ public class KeyHandler {
 
 	private static final String[] desc = { "key.openClockGUI.desc" };
 	private static final int[] keyValues = { Keyboard.KEY_C };
+
 	public static void init() {
 		FMLCommonHandler.instance().bus().register(new KeyHandler());
 	}
