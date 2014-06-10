@@ -23,6 +23,8 @@ public class GUIClockConfig extends GuiScreen {
 		drawCenteredString(fontRendererObj,
 				StatCollector.translateToLocal("gui.clockConfig.name"),
 				width / 2, 40, 16777215);
+		drawCenteredString(this.fontRendererObj, "Separator", width / 2,
+				(height / 4) + 88, 16777215);
 		separator.drawTextBox();
 		super.drawScreen(x, y, partialTicks);
 	}
@@ -40,7 +42,7 @@ public class GUIClockConfig extends GuiScreen {
 		id++;
 		buttonList.add(new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
 				+ (24 * (id + 1)) - 16, "AM/PM", ConfigHandler.am_pm));
-		id++;
+		id += 2;
 		Keyboard.enableRepeatEvents(true);
 		separator = new GuiTextField(fontRendererObj, (width / 2) - 100,
 				(height / 4) + (24 * (id + 1)) - 16, 200, 20);
