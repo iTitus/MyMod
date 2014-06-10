@@ -12,6 +12,8 @@ import cpw.mods.fml.common.FMLLog;
 
 public class ConfigHandler {
 
+	private static Configuration cfg;
+
 	public static int analog_digital = 2, color = 0xFF0000;
 
 	public static boolean seconds = true, am_pm = false;
@@ -22,7 +24,7 @@ public class ConfigHandler {
 
 	public static void init(File suggestedConfigurationFile) {
 
-		Configuration cfg = new Configuration(suggestedConfigurationFile);
+		cfg = new Configuration(suggestedConfigurationFile);
 		try {
 			cfg.load();
 
@@ -52,7 +54,38 @@ public class ConfigHandler {
 		seconds = cfg.get(CATEGORY_CLOCK, KEY_SECONDS, seconds,
 				"Whether seconds should be displayed").getBoolean(seconds);
 		color = cfg.get(CATEGORY_CLOCK, KEY_COLOR, color,
-				"The color of the clock").getInt();
+				"The color of the clock").getInt(color);
 
+	}
+
+	private static void saveValues(Configuration cfg) throws Exception {
+
+		if (analog_digital < 0 || analog_digital > 3)
+			analog_digital = 2;
+		cfg.get(CATEGORY_CLOCK, KEY_ANALOG, analog_digital,
+				"The format used: 0 = None, 1 = Analog, 2 = Digital, 3 = Both")
+				.set(analog_digital);
+		cfg.get(CATEGORY_CLOCK, KEY_AM_PM, am_pm,
+				"Whether the 12hrs format should be used").set(am_pm);
+		cfg.get(CATEGORY_CLOCK, KEY_SEPARATOR, separator,
+				"The separator used in the digital clock").set(separator);
+		cfg.get(CATEGORY_CLOCK, KEY_SECONDS, seconds,
+				"Whether seconds should be displayed").set(seconds);
+		cfg.get(CATEGORY_CLOCK, KEY_COLOR, color, "The color of the clock")
+				.set(color);
+
+	}
+
+	public static void save() {
+
+		try {
+			saveValues(cfg);
+		} catch (Exception e) {
+			FMLLog.log(Level.ERROR, e, LibMod.NAME
+					+ " has a problem editing its configuration!");
+		} finally {
+			if (cfg.hasChanged())
+				cfg.save();
+		}
 	}
 }
