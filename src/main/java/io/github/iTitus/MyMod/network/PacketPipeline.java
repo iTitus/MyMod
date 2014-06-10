@@ -41,65 +41,6 @@ public class PacketPipeline extends
 	private boolean isPostInitialised = false;
 	private LinkedList<Class<? extends AbstractPacket>> packets = new LinkedList<Class<? extends AbstractPacket>>();
 
-	// In line decoding and handling of the packet
-	@Override
-	protected void decode(ChannelHandlerContext ctx, FMLProxyPacket msg,
-			List<Object> out) throws Exception {
-		ByteBuf payload = msg.payload();
-		byte discriminator = payload.readByte();
-		Class<? extends AbstractPacket> clazz = this.packets.get(discriminator);
-		if (clazz == null) {
-			throw new NullPointerException(
-					"No packet registered for discriminator: " + discriminator);
-		}
-
-		AbstractPacket pkt = clazz.newInstance();
-		pkt.decodeInto(ctx, payload.slice());
-
-		EntityPlayer player;
-		switch (FMLCommonHandler.instance().getEffectiveSide()) {
-		case CLIENT:
-			player = this.getClientPlayer();
-			pkt.handleClientSide(player);
-			break;
-
-		case SERVER:
-			INetHandler netHandler = ctx.channel()
-					.attr(NetworkRegistry.NET_HANDLER).get();
-			player = ((NetHandlerPlayServer) netHandler).playerEntity;
-			pkt.handleServerSide(player);
-			break;
-
-		default:
-		}
-
-		out.add(pkt);
-	}
-
-	// In line encoding of the packet, including discriminator setting
-	@Override
-	protected void encode(ChannelHandlerContext ctx, AbstractPacket msg,
-			List<Object> out) throws Exception {
-		ByteBuf buffer = Unpooled.buffer();
-		Class<? extends AbstractPacket> clazz = msg.getClass();
-		if (!this.packets.contains(msg.getClass())) {
-			throw new NullPointerException("No Packet Registered for: "
-					+ msg.getClass().getCanonicalName());
-		}
-
-		byte discriminator = (byte) this.packets.indexOf(clazz);
-		buffer.writeByte(discriminator);
-		msg.encodeInto(ctx, buffer);
-		FMLProxyPacket proxyPacket = new FMLProxyPacket(buffer.copy(), ctx
-				.channel().attr(NetworkRegistry.FML_CHANNEL).get());
-		out.add(proxyPacket);
-	}
-
-	@SideOnly(Side.CLIENT)
-	private EntityPlayer getClientPlayer() {
-		return Minecraft.getMinecraft().thePlayer;
-	}
-
 	// Method to call from FMLInitializationEvent
 	public void init() {
 		this.channels = NetworkRegistry.INSTANCE.newChannel(
@@ -261,5 +202,64 @@ public class PacketPipeline extends
 				.attr(FMLOutboundHandler.FML_MESSAGETARGET)
 				.set(FMLOutboundHandler.OutboundTarget.TOSERVER);
 		this.channels.get(Side.CLIENT).writeAndFlush(message);
+	}
+
+	@SideOnly(Side.CLIENT)
+	private EntityPlayer getClientPlayer() {
+		return Minecraft.getMinecraft().thePlayer;
+	}
+
+	// In line decoding and handling of the packet
+	@Override
+	protected void decode(ChannelHandlerContext ctx, FMLProxyPacket msg,
+			List<Object> out) throws Exception {
+		ByteBuf payload = msg.payload();
+		byte discriminator = payload.readByte();
+		Class<? extends AbstractPacket> clazz = this.packets.get(discriminator);
+		if (clazz == null) {
+			throw new NullPointerException(
+					"No packet registered for discriminator: " + discriminator);
+		}
+
+		AbstractPacket pkt = clazz.newInstance();
+		pkt.decodeInto(ctx, payload.slice());
+
+		EntityPlayer player;
+		switch (FMLCommonHandler.instance().getEffectiveSide()) {
+		case CLIENT:
+			player = this.getClientPlayer();
+			pkt.handleClientSide(player);
+			break;
+
+		case SERVER:
+			INetHandler netHandler = ctx.channel()
+					.attr(NetworkRegistry.NET_HANDLER).get();
+			player = ((NetHandlerPlayServer) netHandler).playerEntity;
+			pkt.handleServerSide(player);
+			break;
+
+		default:
+		}
+
+		out.add(pkt);
+	}
+
+	// In line encoding of the packet, including discriminator setting
+	@Override
+	protected void encode(ChannelHandlerContext ctx, AbstractPacket msg,
+			List<Object> out) throws Exception {
+		ByteBuf buffer = Unpooled.buffer();
+		Class<? extends AbstractPacket> clazz = msg.getClass();
+		if (!this.packets.contains(msg.getClass())) {
+			throw new NullPointerException("No Packet Registered for: "
+					+ msg.getClass().getCanonicalName());
+		}
+
+		byte discriminator = (byte) this.packets.indexOf(clazz);
+		buffer.writeByte(discriminator);
+		msg.encodeInto(ctx, buffer);
+		FMLProxyPacket proxyPacket = new FMLProxyPacket(buffer.copy(), ctx
+				.channel().attr(NetworkRegistry.FML_CHANNEL).get());
+		out.add(proxyPacket);
 	}
 }

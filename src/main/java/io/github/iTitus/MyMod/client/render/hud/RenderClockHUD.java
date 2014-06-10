@@ -3,8 +3,6 @@ package io.github.iTitus.MyMod.client.render.hud;
 import io.github.iTitus.MyMod.handler.ConfigHandler;
 import io.github.iTitus.MyMod.helper.TimeHelper;
 import net.minecraft.client.Minecraft;
-import net.minecraft.client.gui.GuiChat;
-import net.minecraft.client.renderer.InventoryEffectRenderer;
 import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
 import net.minecraftforge.common.MinecraftForge;
@@ -21,10 +19,8 @@ public class RenderClockHUD {
 
 	@SubscribeEvent
 	public void onRenderGameOverlayPost(RenderGameOverlayEvent.Post event) {
-		if (event.type == ElementType.ALL
-				&& (Minecraft.getMinecraft().currentScreen == null
-						|| Minecraft.getMinecraft().currentScreen instanceof GuiChat || Minecraft
-							.getMinecraft().currentScreen instanceof InventoryEffectRenderer)) {
+		if (event.type == ElementType.ALL) {
+
 			switch (ConfigHandler.analog_digital) {
 			case 0: // None
 				return;
@@ -45,7 +41,9 @@ public class RenderClockHUD {
 						ConfigHandler.color);
 				break;
 			}
+
 		}
+
 	}
 
 }

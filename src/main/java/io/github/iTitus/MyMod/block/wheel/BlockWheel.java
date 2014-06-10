@@ -27,6 +27,13 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	}
 
 	@Override
+	public void breakBlock(World world, int x, int y, int z, Block block,
+			int meta) {
+		super.breakBlock(world, x, y, z, block, meta);
+		world.removeTileEntity(x, y, z);
+	}
+
+	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityWheel();
 	}
@@ -78,6 +85,17 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	}
 
 	@Override
+	public boolean onBlockEventReceived(World world, int x, int y, int z,
+			int eventNumber, int argument) {
+
+		super.onBlockEventReceived(world, x, y, z, eventNumber, argument);
+		TileEntity tileentity = world.getTileEntity(x, y, z);
+		return tileentity != null ? tileentity.receiveClientEvent(eventNumber,
+				argument) : false;
+
+	}
+
+	@Override
 	public void onPostBlockPlaced(World world, int x, int y, int z, int meta) {
 
 		if (!world.isRemote
@@ -98,24 +116,6 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	public boolean shouldSideBeRendered(IBlockAccess world, int x, int y,
 			int z, int side) {
 		return false;
-	}
-
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block,
-			int meta) {
-		super.breakBlock(world, x, y, z, block, meta);
-		world.removeTileEntity(x, y, z);
-	}
-
-	@Override
-	public boolean onBlockEventReceived(World world, int x, int y, int z,
-			int eventNumber, int argument) {
-
-		super.onBlockEventReceived(world, x, y, z, eventNumber, argument);
-		TileEntity tileentity = world.getTileEntity(x, y, z);
-		return tileentity != null ? tileentity.receiveClientEvent(eventNumber,
-				argument) : false;
-
 	}
 
 }

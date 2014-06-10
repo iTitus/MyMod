@@ -11,6 +11,7 @@ item.ammo.name=Kugel
 
 ### GUI ###
 gui.wheel.name=Glücksrad
+gui.clockConfig.name=Uhr-Einstellungen
 
 ### CHAT/MESSAGES ###
 message.timeshifter.daymode=Zeitmaschine auf §6Tag §rModus gesetzt.
@@ -30,6 +31,9 @@ message.debug.block.8=X -> '%d' Y -> '%d' Z -> '%d' }
 
 ### MISC ###
 itemGroup.mymod=§4iTitus' MyMod§r
+
+key.categories.mymod=iTitus' MyMod - Tastenkürzel
+key.openClockGUI.desc=Öffne Uhr-Einstellungen
 
 lore.debug=Creative-only Debug Item
 lore.gun=Kann jede Kugel schießen

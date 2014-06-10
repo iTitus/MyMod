@@ -29,12 +29,6 @@ public class RenderItemGun implements IItemRenderer {
 	}
 
 	@Override
-	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
-			ItemRendererHelper helper) {
-		return true;
-	}
-
-	@Override
 	public void renderItem(ItemRenderType type, ItemStack item, Object... data) {
 
 		switch (type) {
@@ -57,6 +51,12 @@ public class RenderItemGun implements IItemRenderer {
 		default:
 		}
 
+	}
+
+	@Override
+	public boolean shouldUseRenderHelper(ItemRenderType type, ItemStack item,
+			ItemRendererHelper helper) {
+		return true;
 	}
 
 	private void renderItemGun(float scaleX, float scaleY, float scaleZ) {

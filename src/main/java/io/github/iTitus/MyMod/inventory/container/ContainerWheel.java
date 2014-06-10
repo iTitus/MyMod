@@ -18,12 +18,6 @@ public class ContainerWheel extends MyContainer {
 		addSlots();
 	}
 
-	protected void addSlots() {
-		addSlotToContainer(new Slot(wheel, 0, 31, 35));
-		addSlotToContainer(new Slot(wheel, 1, 80, 35));
-		addSlotToContainer(new Slot(wheel, 2, 129, 35));
-	}
-
 	@Override
 	public boolean canInteractWith(EntityPlayer player) {
 		return wheel.isUseableByPlayer(player);
@@ -67,6 +61,12 @@ public class ContainerWheel extends MyContainer {
 		}
 
 		return retStack;
+	}
+
+	protected void addSlots() {
+		addSlotToContainer(new Slot(wheel, 0, 31, 35));
+		addSlotToContainer(new Slot(wheel, 1, 80, 35));
+		addSlotToContainer(new Slot(wheel, 2, 129, 35));
 	}
 
 }

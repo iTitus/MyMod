@@ -14,89 +14,6 @@ import net.minecraft.util.MovingObjectPosition;
 
 public enum EnumModifierType {
 
-	gunpowder {
-
-		@Override
-		public void onShoot(EntityBullet bullet, int count) {
-			double d = count * 1.1;
-			bullet.motionX *= d;
-			bullet.motionY *= d;
-			bullet.motionZ *= d;
-		}
-
-		@Override
-		public ItemStack getItemStack() {
-			return new ItemStack(Items.gunpowder);
-		}
-
-		@Override
-		public int getMaxCount() {
-			return 3;
-		}
-
-		@Override
-		public void onUpdate(EntityBullet bullet, int count) {
-		}
-
-		@Override
-		public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
-				int count) {
-		}
-
-		@Override
-		public boolean strictMeta() {
-			return false;
-		}
-
-		@Override
-		public boolean strictNBT() {
-			return false;
-		}
-
-	},
-	tnt {
-
-		@Override
-		public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
-				int count) {
-
-			if (!bullet.worldObj.isRemote) {
-				bullet.worldObj.createExplosion(bullet, mop.hitVec.xCoord,
-						mop.hitVec.yCoord, mop.hitVec.zCoord, 2F, false);
-				bullet.setDead();
-			}
-
-		}
-
-		@Override
-		public ItemStack getItemStack() {
-			return new ItemStack(Blocks.tnt);
-		}
-
-		@Override
-		public int getMaxCount() {
-			return 1;
-		}
-
-		@Override
-		public void onUpdate(EntityBullet bullet, int count) {
-		}
-
-		@Override
-		public void onShoot(EntityBullet bullet, int count) {
-		}
-
-		@Override
-		public boolean strictMeta() {
-			return false;
-		}
-
-		@Override
-		public boolean strictNBT() {
-			return false;
-		}
-
-	},
 	diamond_sword {
 
 		@Override
@@ -107,10 +24,6 @@ public enum EnumModifierType {
 		@Override
 		public int getMaxCount() {
 			return 1;
-		}
-
-		@Override
-		public void onUpdate(EntityBullet bullet, int count) {
 		}
 
 		@Override
@@ -137,6 +50,10 @@ public enum EnumModifierType {
 		}
 
 		@Override
+		public void onUpdate(EntityBullet bullet, int count) {
+		}
+
+		@Override
 		public boolean strictMeta() {
 			return false;
 		}
@@ -154,23 +71,8 @@ public enum EnumModifierType {
 		}
 
 		@Override
-		public boolean strictMeta() {
-			return false;
-		}
-
-		@Override
-		public boolean strictNBT() {
-			return false;
-		}
-
-		@Override
 		public int getMaxCount() {
 			return 1;
-		}
-
-		@Override
-		public void onUpdate(EntityBullet bullet, int count) {
-
 		}
 
 		@Override
@@ -183,26 +85,105 @@ public enum EnumModifierType {
 		public void onShoot(EntityBullet bullet, int count) {
 			bullet.setIsFirey(true);
 		}
+
+		@Override
+		public void onUpdate(EntityBullet bullet, int count) {
+
+		}
+
+		@Override
+		public boolean strictMeta() {
+			return false;
+		}
+
+		@Override
+		public boolean strictNBT() {
+			return false;
+		}
+	},
+	gunpowder {
+
+		@Override
+		public ItemStack getItemStack() {
+			return new ItemStack(Items.gunpowder);
+		}
+
+		@Override
+		public int getMaxCount() {
+			return 3;
+		}
+
+		@Override
+		public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
+				int count) {
+		}
+
+		@Override
+		public void onShoot(EntityBullet bullet, int count) {
+			double d = count * 1.1;
+			bullet.motionX *= d;
+			bullet.motionY *= d;
+			bullet.motionZ *= d;
+		}
+
+		@Override
+		public void onUpdate(EntityBullet bullet, int count) {
+		}
+
+		@Override
+		public boolean strictMeta() {
+			return false;
+		}
+
+		@Override
+		public boolean strictNBT() {
+			return false;
+		}
+
+	},
+	tnt {
+
+		@Override
+		public ItemStack getItemStack() {
+			return new ItemStack(Blocks.tnt);
+		}
+
+		@Override
+		public int getMaxCount() {
+			return 1;
+		}
+
+		@Override
+		public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
+				int count) {
+
+			if (!bullet.worldObj.isRemote) {
+				bullet.worldObj.createExplosion(bullet, mop.hitVec.xCoord,
+						mop.hitVec.yCoord, mop.hitVec.zCoord, 2F, false);
+				bullet.setDead();
+			}
+
+		}
+
+		@Override
+		public void onShoot(EntityBullet bullet, int count) {
+		}
+
+		@Override
+		public void onUpdate(EntityBullet bullet, int count) {
+		}
+
+		@Override
+		public boolean strictMeta() {
+			return false;
+		}
+
+		@Override
+		public boolean strictNBT() {
+			return false;
+		}
+
 	};
-
-	public abstract ItemStack getItemStack();
-
-	public abstract boolean strictMeta();
-
-	public abstract boolean strictNBT();
-
-	public abstract int getMaxCount();
-
-	public abstract void onUpdate(EntityBullet bullet, int count);
-
-	public abstract void onImpact(EntityBullet bullet,
-			MovingObjectPosition mop, int count);
-
-	public abstract void onShoot(EntityBullet bullet, int count);
-
-	public static boolean isModifier(ItemStack stack) {
-		return getForStack(stack) != null;
-	}
 
 	public static EnumModifierType getForStack(ItemStack stack) {
 
@@ -230,5 +211,24 @@ public enum EnumModifierType {
 
 		return null;
 	}
+
+	public static boolean isModifier(ItemStack stack) {
+		return getForStack(stack) != null;
+	}
+
+	public abstract ItemStack getItemStack();
+
+	public abstract int getMaxCount();
+
+	public abstract void onImpact(EntityBullet bullet,
+			MovingObjectPosition mop, int count);
+
+	public abstract void onShoot(EntityBullet bullet, int count);
+
+	public abstract void onUpdate(EntityBullet bullet, int count);
+
+	public abstract boolean strictMeta();
+
+	public abstract boolean strictNBT();
 
 }

@@ -1,5 +1,6 @@
 package io.github.iTitus.MyMod.proxy;
 
+import io.github.iTitus.MyMod.client.gui.GUIClockConfig;
 import io.github.iTitus.MyMod.client.gui.GUIWheel;
 import io.github.iTitus.MyMod.client.render.block.RenderBlockWheel;
 import io.github.iTitus.MyMod.client.render.entity.RenderEntityBullet;
@@ -36,6 +37,9 @@ public class ClientProxy extends CommonProxy {
 		case LibGUI.WHEEL_GUI_ID:
 			return new GUIWheel(new ContainerWheel(player.inventory,
 					(TileEntityWheel) tile));
+
+		case LibGUI.CLOCK_CONFIG_GUI:
+			return new GUIClockConfig();
 
 		default:
 			break;

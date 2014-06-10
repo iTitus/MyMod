@@ -5,6 +5,7 @@ import io.github.iTitus.MyMod.block.ModBlocks;
 import io.github.iTitus.MyMod.entity.gun.EntityBullet;
 import io.github.iTitus.MyMod.handler.ConfigHandler;
 import io.github.iTitus.MyMod.handler.CraftingHandler;
+import io.github.iTitus.MyMod.handler.KeyHandler;
 import io.github.iTitus.MyMod.inventory.container.ContainerWheel;
 import io.github.iTitus.MyMod.item.ModItems;
 import io.github.iTitus.MyMod.lib.LibGUI;
@@ -60,6 +61,7 @@ public class CommonProxy implements IGuiHandler {
 		PacketPipeline.INSTANCE.postInit();
 
 		CraftingHandler.init();
+		KeyHandler.init();
 	}
 
 	public void preInit(FMLPreInitializationEvent event) {
@@ -83,5 +85,4 @@ public class CommonProxy implements IGuiHandler {
 
 	public void registerSounds() {
 	}
-
 }

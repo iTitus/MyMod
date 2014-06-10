@@ -16,8 +16,8 @@ import net.minecraft.world.World;
 
 public class EntityBullet extends EntityThrowable {
 
-	private static final String TAG_SHOOTER = "shooter";
 	private static final int ID_FIREY = 2;
+	private static final String TAG_SHOOTER = "shooter";
 
 	private HashMap<EnumModifierType, Integer> modifiers;
 	private EntityPlayer shooter;
@@ -31,6 +31,63 @@ public class EntityBullet extends EntityThrowable {
 		super(world, shooter);
 		this.modifiers = modifiers;
 		this.shooter = shooter;
+	}
+
+	public boolean getIsFirey() {
+		byte b0 = dataWatcher.getWatchableObjectByte(ID_FIREY);
+		return (b0 & 1) != 0;
+	}
+
+	public EntityPlayer getShooter() {
+		return shooter;
+	}
+
+	@Override
+	public boolean isBurning() {
+		return super.isBurning() || getIsFirey();
+	}
+
+	public EntityBullet onShoot() {
+		if (modifiers != null) {
+			for (EnumModifierType modifier : modifiers.keySet()) {
+				modifier.onShoot(this, modifiers.get(modifier));
+			}
+		}
+
+		return this;
+	}
+
+	@Override
+	public void onUpdate() {
+		super.onUpdate();
+		if (modifiers != null) {
+			for (EnumModifierType modifier : modifiers.keySet()) {
+				modifier.onUpdate(this, modifiers.get(modifier));
+			}
+		}
+
+	}
+
+	@Override
+	public void readEntityFromNBT(NBTTagCompound nbt) {
+		super.readEntityFromNBT(nbt);
+		modifiers = ItemAmmo.readFromNBT(nbt);
+	}
+
+	public void setIsFirey(boolean firey) {
+		byte b0 = dataWatcher.getWatchableObjectByte(ID_FIREY);
+
+		if (firey) {
+			dataWatcher.updateObject(ID_FIREY, Byte.valueOf((byte) (b0 | 1)));
+		} else {
+			dataWatcher.updateObject(ID_FIREY, Byte.valueOf((byte) (b0 & -2)));
+		}
+	}
+
+	@Override
+	public void writeEntityToNBT(NBTTagCompound nbt) {
+		super.writeEntityToNBT(nbt);
+		ItemAmmo.writeToNBT(modifiers, nbt);
 	}
 
 	@Override
@@ -108,63 +165,6 @@ public class EntityBullet extends EntityThrowable {
 
 		setDead();
 
-	}
-
-	@Override
-	public void onUpdate() {
-		super.onUpdate();
-		if (modifiers != null) {
-			for (EnumModifierType modifier : modifiers.keySet()) {
-				modifier.onUpdate(this, modifiers.get(modifier));
-			}
-		}
-
-	}
-
-	public EntityBullet onShoot() {
-		if (modifiers != null) {
-			for (EnumModifierType modifier : modifiers.keySet()) {
-				modifier.onShoot(this, modifiers.get(modifier));
-			}
-		}
-
-		return this;
-	}
-
-	@Override
-	public void writeEntityToNBT(NBTTagCompound nbt) {
-		super.writeEntityToNBT(nbt);
-		ItemAmmo.writeToNBT(modifiers, nbt);
-	}
-
-	@Override
-	public void readEntityFromNBT(NBTTagCompound nbt) {
-		super.readEntityFromNBT(nbt);
-		modifiers = ItemAmmo.readFromNBT(nbt);
-	}
-
-	public EntityPlayer getShooter() {
-		return shooter;
-	}
-
-	@Override
-	public boolean isBurning() {
-		return super.isBurning() || getIsFirey();
-	}
-
-	public void setIsFirey(boolean firey) {
-		byte b0 = dataWatcher.getWatchableObjectByte(ID_FIREY);
-
-		if (firey) {
-			dataWatcher.updateObject(ID_FIREY, Byte.valueOf((byte) (b0 | 1)));
-		} else {
-			dataWatcher.updateObject(ID_FIREY, Byte.valueOf((byte) (b0 & -2)));
-		}
-	}
-
-	public boolean getIsFirey() {
-		byte b0 = dataWatcher.getWatchableObjectByte(ID_FIREY);
-		return (b0 & 1) != 0;
 	}
 
 }

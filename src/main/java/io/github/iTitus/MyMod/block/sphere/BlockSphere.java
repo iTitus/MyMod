@@ -17,13 +17,10 @@ public class BlockSphere extends MyBlock implements ITileEntityProvider {
 	}
 
 	@Override
-	public boolean isOpaqueCube() {
-		return false;
-	}
-
-	@Override
-	public boolean renderAsNormalBlock() {
-		return false;
+	public void breakBlock(World world, int x, int y, int z, Block block,
+			int meta) {
+		super.breakBlock(world, x, y, z, block, meta);
+		world.removeTileEntity(x, y, z);
 	}
 
 	@Override
@@ -32,10 +29,8 @@ public class BlockSphere extends MyBlock implements ITileEntityProvider {
 	}
 
 	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block,
-			int meta) {
-		super.breakBlock(world, x, y, z, block, meta);
-		world.removeTileEntity(x, y, z);
+	public boolean isOpaqueCube() {
+		return false;
 	}
 
 	@Override
@@ -47,6 +42,11 @@ public class BlockSphere extends MyBlock implements ITileEntityProvider {
 		return tileentity != null ? tileentity.receiveClientEvent(eventNumber,
 				argument) : false;
 
+	}
+
+	@Override
+	public boolean renderAsNormalBlock() {
+		return false;
 	}
 
 }

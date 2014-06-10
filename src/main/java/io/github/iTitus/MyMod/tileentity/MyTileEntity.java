@@ -9,8 +9,8 @@ public class MyTileEntity extends TileEntity {
 	public static final String TAG_ORIENTATION = "orientation",
 			TAG_NAME = "customName";
 
-	protected String customName;
 	private ForgeDirection orientation;
+	protected String customName;
 
 	public MyTileEntity() {
 		orientation = ForgeDirection.SOUTH;

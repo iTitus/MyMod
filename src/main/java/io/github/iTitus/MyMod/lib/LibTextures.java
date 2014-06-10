@@ -22,20 +22,20 @@ public class LibTextures {
 		return new ResourceLocation(TEXTURE_LOCATION, getModelTextureLoc(type));
 	}
 
-	public static ResourceLocation getTextureResourceLoc(EnumBlockType type) {
-		return new ResourceLocation(TEXTURE_LOCATION, getTextureLoc(type));
-	}
-
-	public static ResourceLocation getTextureResourceLoc(EnumItemType type) {
-		return new ResourceLocation(TEXTURE_LOCATION, getTextureLoc(type));
-	}
-
 	public static String getModelTextureLoc(EnumBlockType type) {
 		return MODEL_TEXTURE_LOCATION + type.name + ".png";
 	}
 
 	public static String getModelTextureLoc(EnumItemType type) {
 		return MODEL_TEXTURE_LOCATION + type.name + ".png";
+	}
+
+	public static String getModelTextureLoc(Models type) {
+		return MODEL_TEXTURE_LOCATION + type.model + ".png";
+	}
+
+	public static ResourceLocation getModelTextureResourceLoc(Models type) {
+		return new ResourceLocation(TEXTURE_LOCATION, getModelTextureLoc(type));
 	}
 
 	public static String getTextureLoc(EnumBlockType type) {
@@ -46,12 +46,12 @@ public class LibTextures {
 		return TEXTURE_LOCATION + ":" + type.name;
 	}
 
-	public static ResourceLocation getModelTextureResourceLoc(Models type) {
-		return new ResourceLocation(TEXTURE_LOCATION, getModelTextureLoc(type));
+	public static ResourceLocation getTextureResourceLoc(EnumBlockType type) {
+		return new ResourceLocation(TEXTURE_LOCATION, getTextureLoc(type));
 	}
 
-	public static String getModelTextureLoc(Models type) {
-		return MODEL_TEXTURE_LOCATION + type.model + ".png";
+	public static ResourceLocation getTextureResourceLoc(EnumItemType type) {
+		return new ResourceLocation(TEXTURE_LOCATION, getTextureLoc(type));
 	}
 
 }

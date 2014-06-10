@@ -23,10 +23,6 @@ public class ItemGun extends MyItem {
 	}
 
 	@Override
-	public void registerIcons(IIconRegister par1IconRegister) {
-	}
-
-	@Override
 	@SideOnly(Side.CLIENT)
 	public void addInformation(ItemStack stack, EntityPlayer player, List list,
 			boolean par4) {
@@ -70,5 +66,9 @@ public class ItemGun extends MyItem {
 		}
 
 		return stack;
+	}
+
+	@Override
+	public void registerIcons(IIconRegister par1IconRegister) {
 	}
 }

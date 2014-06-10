@@ -18,12 +18,12 @@ public class EntityBulletCasing extends EntityArrow {
 	}
 
 	@Override
-	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
+	public boolean getIsCritical() {
+		return false;
 	}
 
 	@Override
-	public boolean getIsCritical() {
-		return false;
+	public void onCollideWithPlayer(EntityPlayer par1EntityPlayer) {
 	}
 
 }

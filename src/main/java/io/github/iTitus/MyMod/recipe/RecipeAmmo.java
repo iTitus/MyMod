@@ -18,6 +18,21 @@ public class RecipeAmmo implements IRecipe {
 	private ItemStack output;
 
 	@Override
+	public ItemStack getCraftingResult(InventoryCrafting crafting) {
+		return output.copy();
+	}
+
+	@Override
+	public ItemStack getRecipeOutput() {
+		return output;
+	}
+
+	@Override
+	public int getRecipeSize() {
+		return 10;
+	}
+
+	@Override
 	public boolean matches(InventoryCrafting crafting, World world) {
 
 		output = null;
@@ -63,21 +78,6 @@ public class RecipeAmmo implements IRecipe {
 
 		return itemstack != null && !arraylist.isEmpty()
 				&& ItemAmmo.isValidAmmo(modifiers);
-	}
-
-	@Override
-	public ItemStack getCraftingResult(InventoryCrafting crafting) {
-		return output.copy();
-	}
-
-	@Override
-	public int getRecipeSize() {
-		return 10;
-	}
-
-	@Override
-	public ItemStack getRecipeOutput() {
-		return output;
 	}
 
 }

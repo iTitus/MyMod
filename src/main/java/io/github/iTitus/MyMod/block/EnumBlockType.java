@@ -5,19 +5,19 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 public enum EnumBlockType {
-	TIMESHIFTER(LibNames.TIMESHIFTER, Material.wood, 2F, 5F,
-			Block.soundTypeWood), WHEEL(LibNames.WHEEL_NAME, Material.circuits,
+	SPHERE(LibNames.SPHERE, Material.rock, 4F, 6F,
+	Block.soundTypeStone, 0, 0, true), TIMESHIFTER(LibNames.TIMESHIFTER, Material.wood, 2F, 5F,
+					Block.soundTypeWood), WHEEL(LibNames.WHEEL_NAME, Material.circuits,
 			3.5F, 6F, Block.soundTypeStone, 0, 0, true), ZERO(
 			LibNames.ZERO_NAME, Material.glass, 2F, 5F, Block.soundTypeGlass,
-			0, 0, true), SPHERE(LibNames.SPHERE, Material.rock, 4F, 6F,
-			Block.soundTypeStone, 0, 0, true);
+			0, 0, true);
 
 	public final float hardness, resistance;
 	public final int lightLevel, lightOpacity;
 	public final Material material;
 	public final String name;
-	public final Block.SoundType soundType;
 	public final boolean putInTab;
+	public final Block.SoundType soundType;
 
 	private EnumBlockType(String name, Material material, float hardness,
 			float resistance, Block.SoundType soundType) {

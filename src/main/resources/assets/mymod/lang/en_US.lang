@@ -10,7 +10,8 @@ item.gun.name=Gun
 item.ammo.name=Bullet
 
 ### GUI ###
-gui.wheel.name=Wheel of Fortune
+gui.wheel.name=Wheel of Fortune#
+gui.clockConfig.name=Clock configuration
 
 ### CHAT/MESSAGES ###
 message.timeshifter.daymode=Timeshifter set to §6day §rmode.
@@ -30,6 +31,9 @@ message.debug.block.8=X -> '%d' Y -> '%d' Z -> '%d' }
 
 ### MISC ###
 itemGroup.mymod=§4iTitus' MyMod§r
+
+key.categories.mymod=iTitus' MyMod - Keybindings
+key.openClockGUI.desc=Open clock configuration
 
 lore.debug=Creative-only debug item
 lore.gun=Can shoot any bullet

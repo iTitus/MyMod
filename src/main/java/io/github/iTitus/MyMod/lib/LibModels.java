@@ -6,9 +6,6 @@ import net.minecraft.util.ResourceLocation;
 
 public class LibModels {
 
-	public static final String MODEL_LOCATION = LibMod.MODID
-			.toLowerCase(Locale.ENGLISH);
-
 	public static enum Models {
 		BULLET("bullet");
 
@@ -24,5 +21,8 @@ public class LibModels {
 		}
 
 	}
+
+	public static final String MODEL_LOCATION = LibMod.MODID
+			.toLowerCase(Locale.ENGLISH);
 
 }

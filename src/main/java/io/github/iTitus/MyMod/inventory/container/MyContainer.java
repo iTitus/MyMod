@@ -15,6 +15,11 @@ public abstract class MyContainer extends Container {
 
 	}
 
+	@Override
+	public boolean canInteractWith(EntityPlayer var1) {
+		return false;
+	}
+
 	private void bindPlayerInventory(InventoryPlayer inventoryPlayer) {
 		for (int i = 0; i < 3; i++) {
 			for (int j = 0; j < 9; j++) {
@@ -26,11 +31,6 @@ public abstract class MyContainer extends Container {
 		for (int i = 0; i < 9; i++) {
 			addSlotToContainer(new Slot(inventoryPlayer, i, 8 + i * 18, 142));
 		}
-	}
-
-	@Override
-	public boolean canInteractWith(EntityPlayer var1) {
-		return false;
 	}
 
 }

@@ -12,13 +12,13 @@ import cpw.mods.fml.common.FMLLog;
 
 public class ConfigHandler {
 
+	public static int analog_digital = 2, color = 0xFF0000;
+
+	public static boolean seconds = true, am_pm = false;
+	public static String separator = ":";
 	private static final String CATEGORY_CLOCK = "CLOCK",
 			KEY_SEPARATOR = "separator", KEY_SECONDS = "seconds",
 			KEY_AM_PM = "am_pm", KEY_ANALOG = "analog", KEY_COLOR = "color";
-
-	public static String separator = ":";
-	public static boolean seconds = true, am_pm = false;
-	public static int analog_digital = 2, color = 0xFF0000;
 
 	public static void init(File suggestedConfigurationFile) {
 

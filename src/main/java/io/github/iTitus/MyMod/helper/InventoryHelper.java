@@ -52,16 +52,6 @@ public class InventoryHelper {
 		}
 	}
 
-	public static boolean isInventoryEmpty(IInventory inv) {
-		for (int i = 0; i < inv.getSizeInventory(); i++) {
-			if (inv.getStackInSlot(i) != null
-					&& inv.getStackInSlot(i).stackSize != 0)
-				return false;
-		}
-
-		return true;
-	}
-
 	public static boolean hasItem(IInventory inventory, Item item) {
 
 		for (int i = 0; i < inventory.getSizeInventory(); i++) {
@@ -72,6 +62,16 @@ public class InventoryHelper {
 		}
 
 		return false;
+	}
+
+	public static boolean isInventoryEmpty(IInventory inv) {
+		for (int i = 0; i < inv.getSizeInventory(); i++) {
+			if (inv.getStackInSlot(i) != null
+					&& inv.getStackInSlot(i).stackSize != 0)
+				return false;
+		}
+
+		return true;
 	}
 
 }

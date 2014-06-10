@@ -24,6 +24,76 @@ public class ItemAmmo extends MyItem {
 			TAG_MODIFIER_ID = "modifier_ID",
 			TAG_MODIFIER_COUNT = "modifier_count";
 
+	public static boolean isValidAmmo(
+			HashMap<EnumModifierType, Integer> modifiers) {
+
+		for (EnumModifierType modifier : modifiers.keySet()) {
+			if (modifier.getMaxCount() != 0
+					&& modifiers.get(modifier) > modifier.getMaxCount()) {
+				return false;
+			}
+		}
+
+		return true;
+	}
+
+	public static void merge(HashMap<EnumModifierType, Integer> to,
+			HashMap<EnumModifierType, Integer> from) {
+
+		for (EnumModifierType modifier : from.keySet()) {
+			if (to.containsKey(modifier)) {
+				int count = from.get(modifier) + to.get(modifier);
+				to.remove(modifier);
+				to.put(modifier, count);
+			} else {
+				to.put(modifier, from.get(modifier));
+			}
+		}
+
+	}
+
+	public static HashMap<EnumModifierType, Integer> readFromNBT(
+			NBTTagCompound nbt) {
+
+		HashMap<EnumModifierType, Integer> modifiers = new HashMap<EnumModifierType, Integer>();
+
+		if (nbt == null || !nbt.hasKey(TAG_MODIFIER))
+			return modifiers;
+
+		NBTTagList tags = nbt.getTagList(TAG_MODIFIER, 10);
+
+		for (int i = 0; i < tags.tagCount(); ++i) {
+			NBTTagCompound tag = tags.getCompoundTagAt(i);
+			modifiers.put(
+					EnumModifierType.valueOf(tag.getString(TAG_MODIFIER_ID)),
+					tag.getInteger(TAG_MODIFIER_COUNT));
+		}
+
+		return modifiers;
+	}
+
+	public static NBTTagCompound writeToNBT(
+			HashMap<EnumModifierType, Integer> modifiers, NBTTagCompound nbt) {
+
+		if (modifiers == null)
+			return nbt;
+
+		merge(modifiers, readFromNBT(nbt));
+
+		NBTTagList tags = new NBTTagList();
+
+		for (EnumModifierType modifier : modifiers.keySet()) {
+			NBTTagCompound tag = new NBTTagCompound();
+			tag.setString(TAG_MODIFIER_ID, modifier.name());
+			tag.setInteger(TAG_MODIFIER_COUNT, modifiers.get(modifier));
+			tags.appendTag(tag);
+		}
+
+		nbt.setTag(TAG_MODIFIER, tags);
+
+		return nbt;
+	}
+
 	public ItemAmmo() {
 		super(EnumItemType.AMMO);
 		setHasSubtypes(true);
@@ -66,75 +136,5 @@ public class ItemAmmo extends MyItem {
 			modifiers.clear();
 		}
 
-	}
-
-	public static NBTTagCompound writeToNBT(
-			HashMap<EnumModifierType, Integer> modifiers, NBTTagCompound nbt) {
-
-		if (modifiers == null)
-			return nbt;
-
-		merge(modifiers, readFromNBT(nbt));
-
-		NBTTagList tags = new NBTTagList();
-
-		for (EnumModifierType modifier : modifiers.keySet()) {
-			NBTTagCompound tag = new NBTTagCompound();
-			tag.setString(TAG_MODIFIER_ID, modifier.name());
-			tag.setInteger(TAG_MODIFIER_COUNT, modifiers.get(modifier));
-			tags.appendTag(tag);
-		}
-
-		nbt.setTag(TAG_MODIFIER, tags);
-
-		return nbt;
-	}
-
-	public static HashMap<EnumModifierType, Integer> readFromNBT(
-			NBTTagCompound nbt) {
-
-		HashMap<EnumModifierType, Integer> modifiers = new HashMap<EnumModifierType, Integer>();
-
-		if (nbt == null || !nbt.hasKey(TAG_MODIFIER))
-			return modifiers;
-
-		NBTTagList tags = nbt.getTagList(TAG_MODIFIER, 10);
-
-		for (int i = 0; i < tags.tagCount(); ++i) {
-			NBTTagCompound tag = tags.getCompoundTagAt(i);
-			modifiers.put(
-					EnumModifierType.valueOf(tag.getString(TAG_MODIFIER_ID)),
-					tag.getInteger(TAG_MODIFIER_COUNT));
-		}
-
-		return modifiers;
-	}
-
-	public static void merge(HashMap<EnumModifierType, Integer> to,
-			HashMap<EnumModifierType, Integer> from) {
-
-		for (EnumModifierType modifier : from.keySet()) {
-			if (to.containsKey(modifier)) {
-				int count = from.get(modifier) + to.get(modifier);
-				to.remove(modifier);
-				to.put(modifier, count);
-			} else {
-				to.put(modifier, from.get(modifier));
-			}
-		}
-
-	}
-
-	public static boolean isValidAmmo(
-			HashMap<EnumModifierType, Integer> modifiers) {
-
-		for (EnumModifierType modifier : modifiers.keySet()) {
-			if (modifier.getMaxCount() != 0
-					&& modifiers.get(modifier) > modifier.getMaxCount()) {
-				return false;
-			}
-		}
-
-		return true;
 	}
 }
