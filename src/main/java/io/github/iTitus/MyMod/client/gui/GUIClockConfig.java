@@ -23,7 +23,7 @@ public class GUIClockConfig extends GuiScreen {
 		drawCenteredString(fontRendererObj,
 				StatCollector.translateToLocal("gui.clockConfig.name"),
 				width / 2, 40, 16777215);
-		drawCenteredString(this.fontRendererObj, "Separator", width / 2,
+		drawCenteredString(this.fontRendererObj, "Separator", (width / 2) - 50,
 				(height / 4) + 88, 16777215);
 		separator.drawTextBox();
 		super.drawScreen(x, y, partialTicks);
@@ -42,15 +42,15 @@ public class GUIClockConfig extends GuiScreen {
 		id++;
 		buttonList.add(new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
 				+ (24 * (id + 1)) - 16, "AM/PM", ConfigHandler.am_pm));
-		id += 2;
+		id++;
 		Keyboard.enableRepeatEvents(true);
-		separator = new GuiTextField(fontRendererObj, (width / 2) - 100,
-				(height / 4) + (24 * (id + 1)) - 16, 200, 20);
+		separator = new GuiTextField(fontRendererObj, (width / 2), (height / 4)
+				+ (24 * (id + 1)) - 16, 100, 20);
 		separator.setText(ConfigHandler.separator);
 
 		id++;
 		buttonList.add(new GuiButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, "Alarms"));
+				+ (24 * (id + 1)) - 16, "Alarm configuration"));
 
 		id++;
 		buttonList.add(new GuiButton(id, (width / 2) - 100, height / 6 + 168,
@@ -66,8 +66,6 @@ public class GUIClockConfig extends GuiScreen {
 	@Override
 	protected void actionPerformed(GuiButton button) {
 
-		System.out.println(button.id);
-
 		switch (button.id) {
 		case 0:
 			ConfigHandler.analog_digital = ((GuiSwitchButton) button)
@@ -82,7 +80,7 @@ public class GUIClockConfig extends GuiScreen {
 			ConfigHandler.am_pm = ((GuiOnOffButton) button).getCurrentValue();
 			ConfigHandler.save();
 			break;
-		case 5:
+		case 4:
 			mc.displayGuiScreen(new GUIAlarmConfig());
 			break;
 		default:

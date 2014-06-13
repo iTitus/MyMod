@@ -35,7 +35,11 @@ public class GUIAlarmConfig extends GuiScreen {
 	}
 
 	private ArrayList<Alarm> loadAlarms() {
-		return new ArrayList<Alarm>();
+		ArrayList<Alarm> list = new ArrayList<Alarm>();
+		list.add(new Alarm());
+		list.add(new Alarm());
+		list.add(new Alarm());
+		return list;
 	}
 
 }
