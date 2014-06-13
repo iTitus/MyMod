@@ -49,6 +49,10 @@ public class GUIClockConfig extends GuiScreen {
 		separator.setText(ConfigHandler.separator);
 
 		id++;
+		buttonList.add(new GuiButton(id, (width / 2) - 100, (height / 4)
+				+ (24 * (id + 1)) - 16, "Alarms"));
+
+		id++;
 		buttonList.add(new GuiButton(id, (width / 2) - 100, height / 6 + 168,
 				I18n.format("gui.done", new Object[0])));
 
@@ -61,6 +65,8 @@ public class GUIClockConfig extends GuiScreen {
 
 	@Override
 	protected void actionPerformed(GuiButton button) {
+
+		System.out.println(button.id);
 
 		switch (button.id) {
 		case 0:
@@ -75,6 +81,9 @@ public class GUIClockConfig extends GuiScreen {
 		case 2:
 			ConfigHandler.am_pm = ((GuiOnOffButton) button).getCurrentValue();
 			ConfigHandler.save();
+			break;
+		case 5:
+			mc.displayGuiScreen(new GUIAlarmConfig());
 			break;
 		default:
 			mc.setIngameFocus();
