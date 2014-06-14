@@ -1,5 +1,6 @@
 package io.github.iTitus.MyMod.client.gui;
 
+import io.github.iTitus.MyMod.handler.AlarmHandler;
 import io.github.iTitus.MyMod.helper.TimeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiListExtended.IGuiListEntry;
@@ -14,16 +15,31 @@ public class GuiAlarm implements IGuiListEntry {
 	public static class Alarm {
 
 		private static final String TAG_TITLE = "Title", TAG_HOUR = "Hour",
-				TAG_MIN = "Min", TAG_REPEAT = "Repeats";
+				TAG_MIN = "Min", TAG_REPEAT = "Repeats",
+				TAG_ENABLED = "Enabled";
 
 		public static Alarm readFromNBT(NBTTagCompound nbt) {
-
 			return new Alarm(nbt.getString(TAG_TITLE),
 					nbt.getInteger(TAG_HOUR), nbt.getInteger(TAG_MIN),
-					nbt.getBoolean(TAG_REPEAT));
+					nbt.getBoolean(TAG_REPEAT)).setEnabled(nbt
+					.getBoolean(TAG_ENABLED));
+		}
+
+		public static NBTTagCompound writeToNBT(Alarm alarm) {
+
+			NBTTagCompound nbt = new NBTTagCompound();
+
+			nbt.setString(TAG_TITLE, alarm.title);
+			nbt.setInteger(TAG_HOUR, alarm.hour);
+			nbt.setInteger(TAG_MIN, alarm.min);
+			nbt.setBoolean(TAG_REPEAT, alarm.repeat);
+			nbt.setBoolean(TAG_ENABLED, alarm.enabled);
+
+			return nbt;
 		}
 
 		private boolean enabled, repeat;
+
 		private int hour, min;
 
 		private String title;
@@ -56,20 +72,9 @@ public class GuiAlarm implements IGuiListEntry {
 			return repeat;
 		}
 
-		public void setEnabled(boolean enabled) {
+		public Alarm setEnabled(boolean enabled) {
 			this.enabled = enabled;
-		}
-
-		public NBTTagCompound writeToNBT() {
-
-			NBTTagCompound nbt = new NBTTagCompound();
-
-			nbt.setString(TAG_TITLE, title);
-			nbt.setInteger(TAG_HOUR, hour);
-			nbt.setInteger(TAG_MIN, min);
-			nbt.setBoolean(TAG_REPEAT, repeat);
-
-			return nbt;
+			return this;
 		}
 
 	}
@@ -109,7 +114,7 @@ public class GuiAlarm implements IGuiListEntry {
 		parent.select(index);
 
 		if (Minecraft.getSystemTime() - timeLastHit < 250L) {
-			alarm.setEnabled(!alarm.isEnabled());
+			AlarmHandler.editAlarm(index, alarm.setEnabled(!alarm.isEnabled()));
 		}
 
 		timeLastHit = Minecraft.getSystemTime();

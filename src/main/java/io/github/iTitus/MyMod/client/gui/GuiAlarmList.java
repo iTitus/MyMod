@@ -6,6 +6,7 @@ import java.util.ArrayList;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiListExtended;
+import net.minecraft.client.renderer.Tessellator;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -78,6 +79,10 @@ public class GuiAlarmList extends GuiListExtended {
 	@Override
 	protected int getSize() {
 		return alarmList.size();
+	}
+
+	@Override
+	protected void drawContainerBackground(Tessellator tessellator) {
 	}
 
 }

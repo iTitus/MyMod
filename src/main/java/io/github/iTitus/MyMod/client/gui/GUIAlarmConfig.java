@@ -50,23 +50,25 @@ public class GUIAlarmConfig extends GuiScreen {
 		alarmList.setAlarms(AlarmHandler.alarms);
 
 		int id = 0;
-		editButton = new GuiButton(id, 10, height - 32, 100, 20, "Edit");
+		editButton = new GuiButton(id, (id * ((100 + (width - 400) / 5)))
+				+ ((width - 400) / 5), height - 32, 100, 20, "Edit");
 		editButton.enabled = false;
 		buttonList.add(editButton);
 
 		id++;
-		buttonList.add(new GuiButton(id, (width / 3) - 50, height - 32, 100,
-				20, "Add alarm"));
+		buttonList.add(new GuiButton(id, (id * ((100 + (width - 400) / 5)))
+				+ ((width - 400) / 5), height - 32, 100, 20, "Add alarm"));
 
 		id++;
-		deleteButton = new GuiButton(id, ((2 * width) / 3) - 50, height - 32,
-				100, 20, "Delete");
+		deleteButton = new GuiButton(id, (id * ((100 + (width - 400) / 5)))
+				+ ((width - 400) / 5), height - 32, 100, 20, "Delete");
 		deleteButton.enabled = false;
 		buttonList.add(deleteButton);
 
 		id++;
-		buttonList.add(new GuiButton(id, width - 110, height - 32, 100, 20,
-				I18n.format("gui.done", new Object[0])));
+		buttonList.add(new GuiButton(id, (id * ((100 + (width - 400) / 5)))
+				+ ((width - 400) / 5), height - 32, 100, 20, I18n.format(
+				"gui.done", new Object[0])));
 
 	}
 
@@ -89,7 +91,8 @@ public class GUIAlarmConfig extends GuiScreen {
 				GuiAlarm guiAlarm = (GuiAlarm) alarmList.getListEntry(alarmList
 						.getSelected());
 				mc.displayGuiScreen(new GUIEditAlarm(this,
-						(guiAlarm != null) ? (guiAlarm.getAlarm()) : null));
+						((guiAlarm != null) ? (guiAlarm.getAlarm()) : null),
+						button.id == 1));
 				break;
 			case 2:
 				mc.displayGuiScreen(new GuiYesNo(

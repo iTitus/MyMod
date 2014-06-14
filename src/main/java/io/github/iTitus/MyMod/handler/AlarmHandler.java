@@ -26,6 +26,17 @@ public class AlarmHandler {
 		save();
 	}
 
+	public static void editAlarm(int index, Alarm alarm) {
+		alarms.set(index, alarm);
+		save();
+	}
+
+	public static Alarm getAlarm(int index) {
+		if (index < 0 || index >= alarms.size())
+			return null;
+		return alarms.get(index);
+	}
+
 	public static ArrayList<Alarm> getAlarms() {
 		return alarms;
 	}
@@ -81,7 +92,7 @@ public class AlarmHandler {
 		NBTTagList list = new NBTTagList();
 
 		for (Alarm alarm : alarms) {
-			list.appendTag(alarm.writeToNBT());
+			list.appendTag(Alarm.writeToNBT(alarm));
 		}
 
 		NBTTagCompound nbt = new NBTTagCompound();
