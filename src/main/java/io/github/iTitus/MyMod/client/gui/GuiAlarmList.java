@@ -24,16 +24,21 @@ public class GuiAlarmList extends GuiListExtended {
 		indexSelected = -1;
 	}
 
-	public void addAlarms(ArrayList<Alarm> arrayList) {
+	public ArrayList<Alarm> getAlarms() {
 
-		for (Alarm alarm : arrayList) {
-			alarmList.add(new GuiAlarm(alarm, parent));
+		ArrayList<Alarm> alarms = new ArrayList<Alarm>();
+
+		for (GuiAlarm alarm : alarmList) {
+			alarms.add(alarm.getAlarm());
 		}
 
+		return alarms;
 	}
 
 	@Override
 	public IGuiListEntry getListEntry(int index) {
+		if (index < 0 || index > alarmList.size())
+			return null;
 		return alarmList.get(index);
 	}
 
@@ -53,6 +58,16 @@ public class GuiAlarmList extends GuiListExtended {
 
 	public void select(int index) {
 		indexSelected = index;
+	}
+
+	public void setAlarms(ArrayList<Alarm> arrayList) {
+
+		alarmList.clear();
+
+		for (Alarm alarm : arrayList) {
+			alarmList.add(new GuiAlarm(alarm, parent));
+		}
+
 	}
 
 	@Override

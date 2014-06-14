@@ -4,6 +4,7 @@ import io.github.iTitus.MyMod.helper.TimeHelper;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiListExtended.IGuiListEntry;
 import net.minecraft.client.renderer.Tessellator;
+import net.minecraft.nbt.NBTTagCompound;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -12,8 +13,19 @@ public class GuiAlarm implements IGuiListEntry {
 
 	public static class Alarm {
 
+		private static final String TAG_TITLE = "Title", TAG_HOUR = "Hour",
+				TAG_MIN = "Min", TAG_REPEAT = "Repeats";
+
+		public static Alarm readFromNBT(NBTTagCompound nbt) {
+
+			return new Alarm(nbt.getString(TAG_TITLE),
+					nbt.getInteger(TAG_HOUR), nbt.getInteger(TAG_MIN),
+					nbt.getBoolean(TAG_REPEAT));
+		}
+
 		private boolean enabled, repeat;
 		private int hour, min;
+
 		private String title;
 
 		public Alarm(String title, int hour, int min, boolean repeat) {
@@ -48,6 +60,18 @@ public class GuiAlarm implements IGuiListEntry {
 			this.enabled = enabled;
 		}
 
+		public NBTTagCompound writeToNBT() {
+
+			NBTTagCompound nbt = new NBTTagCompound();
+
+			nbt.setString(TAG_TITLE, title);
+			nbt.setInteger(TAG_HOUR, hour);
+			nbt.setInteger(TAG_MIN, min);
+			nbt.setBoolean(TAG_REPEAT, repeat);
+
+			return nbt;
+		}
+
 	}
 
 	private Alarm alarm;
@@ -72,6 +96,10 @@ public class GuiAlarm implements IGuiListEntry {
 								: ("")), var2 + 32,
 				var3 + Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT + 2,
 				(alarm.isEnabled() ? (65280) : (16711680)));
+	}
+
+	public Alarm getAlarm() {
+		return alarm;
 	}
 
 	@Override

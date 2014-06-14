@@ -3,6 +3,7 @@ package io.github.iTitus.MyMod.proxy;
 import io.github.iTitus.MyMod.MyMod;
 import io.github.iTitus.MyMod.block.ModBlocks;
 import io.github.iTitus.MyMod.entity.gun.EntityBullet;
+import io.github.iTitus.MyMod.handler.AlarmHandler;
 import io.github.iTitus.MyMod.handler.ConfigHandler;
 import io.github.iTitus.MyMod.handler.CraftingHandler;
 import io.github.iTitus.MyMod.handler.KeyHandler;
@@ -13,6 +14,9 @@ import io.github.iTitus.MyMod.lib.LibNames;
 import io.github.iTitus.MyMod.network.PacketPipeline;
 import io.github.iTitus.MyMod.recipe.VanillaRecipes;
 import io.github.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
+
+import java.io.File;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
@@ -66,6 +70,8 @@ public class CommonProxy implements IGuiHandler {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
+		AlarmHandler.init(new File(event.getSuggestedConfigurationFile()
+				.getParentFile() + "/mymod-alarms.dat"));
 
 		ModBlocks.init();
 		ModItems.init();

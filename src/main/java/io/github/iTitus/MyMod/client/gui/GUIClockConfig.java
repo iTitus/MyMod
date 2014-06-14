@@ -81,7 +81,7 @@ public class GUIClockConfig extends GuiScreen {
 			ConfigHandler.save();
 			break;
 		case 4:
-			mc.displayGuiScreen(new GUIAlarmConfig());
+			mc.displayGuiScreen(new GUIAlarmConfig(this));
 			break;
 		default:
 			mc.setIngameFocus();

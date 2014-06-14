@@ -1,12 +1,10 @@
 package io.github.iTitus.MyMod.client.gui;
 
-import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
-
-import java.util.ArrayList;
-
+import io.github.iTitus.MyMod.handler.AlarmHandler;
 import net.minecraft.client.gui.GuiButton;
-import net.minecraft.client.gui.GuiListExtended.IGuiListEntry;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.client.gui.GuiYesNo;
+import net.minecraft.client.resources.I18n;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -14,9 +12,26 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GUIAlarmConfig extends GuiScreen {
 
 	private GuiAlarmList alarmList;
-	private ArrayList<Alarm> alarms;
-
 	private GuiButton editButton, deleteButton;
+
+	private GUIClockConfig parent;
+
+	public GUIAlarmConfig(GUIClockConfig parent) {
+		this.parent = parent;
+	}
+
+	@Override
+	public void confirmClicked(boolean accepted, int index) {
+
+		if (accepted) {
+			AlarmHandler.remove(index);
+			alarmList.select(-1);
+			alarmList.setAlarms(AlarmHandler.alarms);
+		}
+
+		mc.displayGuiScreen(this);
+
+	}
 
 	@Override
 	public void drawScreen(int x, int y, float partialTicks) {
@@ -30,38 +45,67 @@ public class GUIAlarmConfig extends GuiScreen {
 	@Override
 	public void initGui() {
 
-		alarms = loadAlarms();
 		alarmList = new GuiAlarmList(this, mc, width, height, 48, height - 48,
 				25);
-		alarmList.addAlarms(alarms);
+		alarmList.setAlarms(AlarmHandler.alarms);
 
 		int id = 0;
-		editButton = new GuiButton(id, 10, height - 32, 50, 20, "Edit");
+		editButton = new GuiButton(id, 10, height - 32, 100, 20, "Edit");
 		editButton.enabled = false;
 		buttonList.add(editButton);
+
+		id++;
+		buttonList.add(new GuiButton(id, (width / 3) - 50, height - 32, 100,
+				20, "Add alarm"));
+
+		id++;
+		deleteButton = new GuiButton(id, ((2 * width) / 3) - 50, height - 32,
+				100, 20, "Delete");
+		deleteButton.enabled = false;
+		buttonList.add(deleteButton);
+
+		id++;
+		buttonList.add(new GuiButton(id, width - 110, height - 32, 100, 20,
+				I18n.format("gui.done", new Object[0])));
 
 	}
 
 	public void select(int index) {
 		alarmList.select(index);
-		IGuiListEntry entry = index < 0 ? null : alarmList.getListEntry(index);
-		if (entry != null) {
-
+		if (index >= 0) {
+			editButton.enabled = true;
+			deleteButton.enabled = true;
 		}
 
 	}
 
-	private ArrayList<Alarm> loadAlarms() {
-		ArrayList<Alarm> list = new ArrayList<Alarm>();
+	@Override
+	protected void actionPerformed(GuiButton button) {
 
-		list.add(new Alarm("Testing AM/PM", 0, 0, true));
-		list.add(new Alarm("Testing AM/PM 2 ", 12, 00, true));
-
-		for (int i = 1; i < 43; i++) {
-			list.add(new Alarm("Test Alarm " + i, i % 12, 60 % i, i % 2 == 1));
+		if (button.enabled) {
+			switch (button.id) {
+			case 0:
+			case 1:
+				GuiAlarm guiAlarm = (GuiAlarm) alarmList.getListEntry(alarmList
+						.getSelected());
+				mc.displayGuiScreen(new GUIEditAlarm(this,
+						(guiAlarm != null) ? (guiAlarm.getAlarm()) : null));
+				break;
+			case 2:
+				mc.displayGuiScreen(new GuiYesNo(
+						this,
+						"Do you really want to delete this alarm?",
+						"'"
+								+ ((GuiAlarm) alarmList.getListEntry(alarmList
+										.getSelected())).getAlarm().getTitle()
+								+ "'" + " will be lost forever! (A long time!)",
+						alarmList.getSelected()));
+				break;
+			default:
+				mc.displayGuiScreen(parent);
+			}
 		}
 
-		return list;
 	}
 
 	@Override
