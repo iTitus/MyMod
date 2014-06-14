@@ -42,6 +42,10 @@ public class GUIAlarmConfig extends GuiScreen {
 		super.drawScreen(x, y, partialTicks);
 	}
 
+	public GuiAlarmList getGuiAlarmList() {
+		return alarmList;
+	}
+
 	@Override
 	public void initGui() {
 
@@ -90,9 +94,9 @@ public class GUIAlarmConfig extends GuiScreen {
 			case 1:
 				GuiAlarm guiAlarm = (GuiAlarm) alarmList.getListEntry(alarmList
 						.getSelected());
-				mc.displayGuiScreen(new GUIEditAlarm(this,
-						((guiAlarm != null) ? (guiAlarm.getAlarm()) : null),
-						button.id == 1));
+				mc.displayGuiScreen(new GUIEditAlarm(this, alarmList
+						.getSelected(), ((guiAlarm != null) ? (guiAlarm
+						.getAlarm()) : null), button.id == 1));
 				break;
 			case 2:
 				mc.displayGuiScreen(new GuiYesNo(

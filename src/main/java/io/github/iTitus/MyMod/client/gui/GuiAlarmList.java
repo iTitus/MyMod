@@ -72,6 +72,10 @@ public class GuiAlarmList extends GuiListExtended {
 	}
 
 	@Override
+	protected void drawContainerBackground(Tessellator tessellator) {
+	}
+
+	@Override
 	protected int getScrollBarX() {
 		return super.getScrollBarX() + 16;
 	}
@@ -79,10 +83,6 @@ public class GuiAlarmList extends GuiListExtended {
 	@Override
 	protected int getSize() {
 		return alarmList.size();
-	}
-
-	@Override
-	protected void drawContainerBackground(Tessellator tessellator) {
 	}
 
 }
