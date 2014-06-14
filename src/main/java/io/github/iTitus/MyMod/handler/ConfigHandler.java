@@ -12,7 +12,7 @@ import cpw.mods.fml.common.FMLLog;
 
 public class ConfigHandler {
 
-	public static int analog_digital = 2, color = 0xFF0000;
+	public static int analog_digital = 2, color = 16711680;
 
 	public static boolean seconds = true, am_pm = false;
 	public static String separator = ":";

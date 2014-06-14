@@ -13,6 +13,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiAlarmList extends GuiListExtended {
 
 	private ArrayList<GuiAlarm> alarmList;
+	private int indexSelected;
 	private final GUIAlarmConfig parent;
 
 	public GuiAlarmList(GUIAlarmConfig parent, Minecraft mc, int width,
@@ -20,12 +21,13 @@ public class GuiAlarmList extends GuiListExtended {
 		super(mc, width, height, top, bottom, slotHeight);
 		this.parent = parent;
 		alarmList = new ArrayList<GuiAlarm>();
+		indexSelected = -1;
 	}
 
 	public void addAlarms(ArrayList<Alarm> arrayList) {
 
 		for (Alarm alarm : arrayList) {
-			alarmList.add(new GuiAlarm(alarm));
+			alarmList.add(new GuiAlarm(alarm, parent));
 		}
 
 	}
@@ -33,6 +35,29 @@ public class GuiAlarmList extends GuiListExtended {
 	@Override
 	public IGuiListEntry getListEntry(int index) {
 		return alarmList.get(index);
+	}
+
+	@Override
+	public int getListWidth() {
+		return super.getListWidth() + 32;
+	}
+
+	public int getSelected() {
+		return indexSelected;
+	}
+
+	@Override
+	public boolean isSelected(int index) {
+		return indexSelected == index;
+	}
+
+	public void select(int index) {
+		indexSelected = index;
+	}
+
+	@Override
+	protected int getScrollBarX() {
+		return super.getScrollBarX() + 16;
 	}
 
 	@Override
