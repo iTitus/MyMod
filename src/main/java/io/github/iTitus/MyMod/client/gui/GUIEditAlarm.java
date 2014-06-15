@@ -2,6 +2,8 @@ package io.github.iTitus.MyMod.client.gui;
 
 import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
 import io.github.iTitus.MyMod.handler.AlarmHandler;
+import io.github.iTitus.MyMod.handler.ConfigHandler;
+import io.github.iTitus.MyMod.helper.TimeHelper;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
@@ -23,6 +25,7 @@ public class GUIEditAlarm extends GuiScreen {
 	private GUIAlarmConfig parent;
 	private GuiTextField title;
 	GuiOnOffButton enabledButton, repeatButton;
+	GuiSwitchButton hourButton, minButton;
 
 	public GUIEditAlarm(GUIAlarmConfig parent, int index, Alarm alarm,
 			boolean isNewAlarm) {
@@ -37,9 +40,11 @@ public class GUIEditAlarm extends GuiScreen {
 		drawDefaultBackground();
 		title.drawTextBox();
 		drawCenteredString(fontRendererObj, (isNewAlarm ? "New Alarm"
-				: "Edit alarm"), this.width / 2, 20, 16777215);
+				: "Edit alarm"), width / 2, 20, 16777215);
 		fontRendererObj.drawString("Title", (width / 2) - 100, (height / 4) + 8
 				- fontRendererObj.FONT_HEIGHT - 1, 16777215);
+		drawCenteredString(fontRendererObj, ConfigHandler.separator, width / 2,
+				(height / 4) + 37, 16777215);
 		super.drawScreen(x, y, partialTicks);
 	}
 
@@ -52,9 +57,20 @@ public class GUIEditAlarm extends GuiScreen {
 		if (!isNewAlarm)
 			title.setText(alarm.getTitle());
 
-		// TODO: special fields for input of hour and min
-
 		int id = 1;
+		hourButton = new GuiSwitchButton(id, (width / 2) - 100, (height / 4)
+				+ (24 * (id + 1)) - 16, 75, 20, null, (isNewAlarm ? 0
+				: alarm.getHour()), TimeHelper.getAllHours());
+		buttonList.add(hourButton);
+
+		id++;
+		minButton = new GuiSwitchButton(id, (width / 2) + 25, (height / 4)
+				+ (24 * id) - 16, 75, 20, null, (isNewAlarm ? 0
+				: alarm.getMin()), TimeHelper.getAllMins());
+		buttonList.add(minButton);
+		id--;
+
+		id++;
 		enabledButton = new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
 				+ (24 * (id + 1)) - 16, "Enabled", (isNewAlarm ? true
 				: alarm.isEnabled()));
@@ -67,7 +83,7 @@ public class GUIEditAlarm extends GuiScreen {
 		buttonList.add(repeatButton);
 
 		id++;
-		doneButton = new GuiButton(id, ((id - 3) * ((200 + (width - 400) / 3)))
+		doneButton = new GuiButton(id, ((id - 4) * ((200 + (width - 400) / 3)))
 				+ ((width - 400) / 3), height - 32, (isNewAlarm ? "Add alarm"
 				: "Save changes"));
 		doneButton.enabled = !isNewAlarm;
@@ -75,7 +91,7 @@ public class GUIEditAlarm extends GuiScreen {
 
 		id++;
 		buttonList.add(new GuiButton(id,
-				((id - 3) * ((200 + (width - 400) / 3))) + ((width - 400) / 3),
+				((id - 4) * ((200 + (width - 400) / 3))) + ((width - 400) / 3),
 				height - 32, I18n.format("gui.cancel", new Object[0])));
 
 	}
@@ -95,8 +111,8 @@ public class GUIEditAlarm extends GuiScreen {
 
 	private void saveAlarm() {
 
-		// TODO: Dynamic input of hour and min
-		alarm = new Alarm(title.getText(), 0, 0, repeatButton.getCurrentValue());
+		alarm = new Alarm(title.getText(), hourButton.getCurrentIndex(),
+				minButton.getCurrentIndex(), repeatButton.getCurrentValue());
 		alarm.setEnabled(enabledButton.getCurrentValue());
 
 		if (isNewAlarm) {
@@ -116,8 +132,9 @@ public class GUIEditAlarm extends GuiScreen {
 			switch (button.id) {
 			case 1:
 			case 2:
-				break;
 			case 3:
+				break;
+			case 4:
 				saveAlarm();
 			default:
 				mc.displayGuiScreen(parent);
@@ -135,8 +152,12 @@ public class GUIEditAlarm extends GuiScreen {
 	}
 
 	@Override
-	protected void mouseClicked(int par1, int par2, int par3) {
-		super.mouseClicked(par1, par2, par3);
-		title.mouseClicked(par1, par2, par3);
+	protected void mouseClicked(int x, int y, int button) {
+		super.mouseClicked(x, y, button);
+		title.mouseClicked(x, y, button);
+		if (button == 1) {
+			hourButton.mouseRightPressed(mc, x, y);
+			minButton.mouseRightPressed(mc, x, y);
+		}
 	}
 }

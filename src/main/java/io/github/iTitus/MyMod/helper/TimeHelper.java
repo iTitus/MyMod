@@ -6,33 +6,60 @@ import java.util.Calendar;
 
 public class TimeHelper {
 
+	public static int convertToAMPM(int hour) {
+
+		if (!ConfigHandler.am_pm || (hour < 12 && hour > 0))
+			return hour;
+
+		if (hour == 0 || hour == 12)
+			hour = 12;
+		else
+			hour -= 12;
+
+		return hour;
+
+	}
+
+	public static String[] getAllHours() {
+
+		String[] hours = new String[24];
+
+		for (int i = 0; i < hours.length; i++) {
+			hours[i] = make2Digits(convertToAMPM(i))
+					+ (ConfigHandler.am_pm ? ((i >= 12) ? " PM" : " AM") : "");
+		}
+
+		return hours;
+	}
+
+	public static String[] getAllMins() {
+
+		String[] mins = new String[60];
+
+		for (int i = 0; i < mins.length; i++) {
+			mins[i] = make2Digits(i);
+		}
+
+		return mins;
+	}
+
 	public static String getTime() {
 
 		StringBuilder sb = new StringBuilder();
 
-		String hours = ""
-				+ Calendar.getInstance().get(
-						(ConfigHandler.am_pm) ? (Calendar.HOUR)
-								: (Calendar.HOUR_OF_DAY));
-		if (hours.length() < 2)
-			hours = "0" + hours;
-		sb.append(hours);
+		sb.append(make2Digits(Calendar.getInstance().get(
+				(ConfigHandler.am_pm) ? (Calendar.HOUR)
+						: (Calendar.HOUR_OF_DAY))));
 
 		sb.append(ConfigHandler.separator);
 
-		String mins = "" + Calendar.getInstance().get(Calendar.MINUTE);
-		if (mins.length() < 2)
-			mins = "0" + mins;
-		sb.append(mins);
+		sb.append(make2Digits(Calendar.getInstance().get(Calendar.MINUTE)));
 
 		if (ConfigHandler.seconds) {
 
 			sb.append(ConfigHandler.separator);
 
-			String seconds = "" + Calendar.getInstance().get(Calendar.SECOND);
-			if (seconds.length() < 2)
-				seconds = "0" + seconds;
-			sb.append(seconds);
+			sb.append(make2Digits(Calendar.getInstance().get(Calendar.SECOND)));
 		}
 
 		if (ConfigHandler.am_pm)
@@ -46,29 +73,26 @@ public class TimeHelper {
 	public static String getTimeString(int hour, int min) {
 		StringBuilder sb = new StringBuilder();
 
-		String hours = "";
-		if (ConfigHandler.am_pm) {
-			if (hour == 0 || hour == 12)
-				hours += 12;
-			else if (hour < 12)
-				hours += hour;
-			else
-				hours += hour - 12;
-		}
-		if (hours.length() < 2)
-			hours = "0" + hours;
-		sb.append(hours);
+		sb.append(make2Digits(convertToAMPM(hour)));
 
 		sb.append(ConfigHandler.separator);
 
-		String mins = "" + min;
-		if (mins.length() < 2)
-			mins = "0" + mins;
-		sb.append(mins);
+		sb.append(make2Digits(min));
 
 		if (ConfigHandler.am_pm)
 			sb.append(" " + ((hour >= 12) ? ("PM") : ("AM")));
 
 		return sb.toString();
 	}
+
+	public static String make2Digits(int number) {
+
+		String ret = "" + number;
+
+		if (ret.length() < 2)
+			ret = "0" + ret;
+
+		return ret;
+	}
+
 }
