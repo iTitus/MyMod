@@ -2,8 +2,10 @@ package io.github.iTitus.MyMod.proxy;
 
 import io.github.iTitus.MyMod.client.gui.GUIClockConfig;
 import io.github.iTitus.MyMod.client.gui.GUIWheel;
+import io.github.iTitus.MyMod.client.handler.AlarmHandler;
 import io.github.iTitus.MyMod.client.render.block.RenderBlockWheel;
 import io.github.iTitus.MyMod.client.render.entity.RenderEntityBullet;
+import io.github.iTitus.MyMod.client.render.hud.RenderAlarmHUD;
 import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
 import io.github.iTitus.MyMod.client.render.item.RenderItemGun;
 import io.github.iTitus.MyMod.client.render.tileentity.RenderTileEntitySphere;
@@ -15,12 +17,16 @@ import io.github.iTitus.MyMod.lib.LibGUI;
 import io.github.iTitus.MyMod.lib.LibRender;
 import io.github.iTitus.MyMod.tileentity.sphere.TileEntitySphere;
 import io.github.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
+
+import java.io.File;
+
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -49,6 +55,14 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
+	public void preInit(FMLPreInitializationEvent event) {
+		super.preInit(event);
+
+		AlarmHandler.init(new File(event.getSuggestedConfigurationFile()
+				.getParentFile() + "/mymod-alarms.dat"));
+	}
+
+	@Override
 	public void registerRenderers() {
 
 		LibRender.WHEEL_ID = RenderingRegistry.getNextAvailableRenderId();
@@ -66,6 +80,7 @@ public class ClientProxy extends CommonProxy {
 				RenderEntityBullet.INSTANCE);
 
 		RenderClockHUD.init();
+		RenderAlarmHUD.init();
 
 	}
 

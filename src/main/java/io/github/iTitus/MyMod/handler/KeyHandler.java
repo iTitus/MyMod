@@ -1,6 +1,8 @@
 package io.github.iTitus.MyMod.handler;
 
 import io.github.iTitus.MyMod.MyMod;
+import io.github.iTitus.MyMod.client.render.hud.RenderAlarmHUD;
+import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
 import io.github.iTitus.MyMod.lib.LibGUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
@@ -42,12 +44,15 @@ public class KeyHandler {
 			for (int i = 0; i < desc.length; i++) {
 
 				if (keys[i].isPressed()) {
-					Minecraft.getMinecraft().thePlayer.openGui(MyMod.instance,
-							LibGUI.CLOCK_CONFIG_GUI,
-							Minecraft.getMinecraft().theWorld,
-							(int) Minecraft.getMinecraft().thePlayer.posX,
-							(int) Minecraft.getMinecraft().thePlayer.posY,
-							(int) Minecraft.getMinecraft().thePlayer.posZ);
+					if (!RenderAlarmHUD.getInstance().isShowing())
+						Minecraft.getMinecraft().thePlayer.openGui(
+								MyMod.instance, LibGUI.CLOCK_CONFIG_GUI,
+								Minecraft.getMinecraft().theWorld,
+								(int) Minecraft.getMinecraft().thePlayer.posX,
+								(int) Minecraft.getMinecraft().thePlayer.posY,
+								(int) Minecraft.getMinecraft().thePlayer.posZ);
+					else
+						RenderAlarmHUD.getInstance().next();
 				}
 
 			}

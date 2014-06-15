@@ -1,11 +1,14 @@
-package io.github.iTitus.MyMod.handler;
+package io.github.iTitus.MyMod.client.handler;
 
 import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
+import io.github.iTitus.MyMod.client.render.hud.RenderAlarmHUD;
+import io.github.iTitus.MyMod.helper.TimeHelper;
 import io.github.iTitus.MyMod.lib.LibMod;
 
 import java.io.File;
 import java.util.ArrayList;
 
+import net.minecraft.client.Minecraft;
 import net.minecraft.nbt.CompressedStreamTools;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.nbt.NBTTagList;
@@ -13,13 +16,52 @@ import net.minecraftforge.common.util.Constants.NBT;
 
 import org.apache.logging.log4j.Level;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
+import cpw.mods.fml.common.eventhandler.SubscribeEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.ClientTickEvent;
+import cpw.mods.fml.common.gameevent.TickEvent.Phase;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class AlarmHandler {
 
 	public static ArrayList<Alarm> alarms;
 	private static File alarmFile;
 	private static final String TAG_ALARMS = "Alarms";
+
+	private int minLastChecked;
+
+	@SubscribeEvent
+	public void onClientTick(ClientTickEvent event) {
+		if (event.side == Side.CLIENT && event.phase == Phase.END
+				&& Minecraft.getMinecraft().thePlayer != null
+				&& !TimeHelper.isMin(minLastChecked)) {
+			checkAlarms();
+			minLastChecked = TimeHelper.getMin();
+		}
+	}
+
+	private void checkAlarms() {
+		for (Alarm alarm : alarms) {
+			if (check(alarm))
+				showAlert(alarm);
+		}
+
+	}
+
+	private void showAlert(Alarm alarm) {
+		RenderAlarmHUD.getInstance().add(alarm);
+	}
+
+	private boolean check(Alarm alarm) {
+		System.out.println("Check");
+		if (alarm.isEnabled() && TimeHelper.isHour(alarm.getHour())
+				&& TimeHelper.isMin(alarm.getMin()))
+			return true;
+		return false;
+	}
 
 	public static void add(Alarm alarm) {
 		alarms.add(alarm);
@@ -42,6 +84,8 @@ public class AlarmHandler {
 	}
 
 	public static void init(File suggestedAlarmFile) {
+
+		FMLCommonHandler.instance().bus().register(new AlarmHandler());
 
 		try {
 
