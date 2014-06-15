@@ -23,8 +23,9 @@ public class GUIClockConfig extends GuiScreen {
 		drawCenteredString(fontRendererObj,
 				StatCollector.translateToLocal("gui.clockConfig.name"),
 				width / 2, 40, 16777215);
-		drawCenteredString(this.fontRendererObj, "Separator", (width / 2) - 50,
-				(height / 4) + 88, 16777215);
+		drawCenteredString(this.fontRendererObj,
+				StatCollector.translateToLocal("gui.clockConfig.separator"),
+				(width / 2) - 50, (height / 4) + 88, 16777215);
 		separator.drawTextBox();
 		super.drawScreen(x, y, partialTicks);
 	}
@@ -32,16 +33,34 @@ public class GUIClockConfig extends GuiScreen {
 	@Override
 	public void initGui() {
 		int id = 0;
-		buttonList.add(new GuiSwitchButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, "Clock format",
-				ConfigHandler.analog_digital, new String[] { "None", "Analog",
-						"Digital", "Both" }));
+		buttonList
+				.add(new GuiSwitchButton(
+						id,
+						(width / 2) - 100,
+						(height / 4) + (24 * (id + 1)) - 16,
+						StatCollector
+								.translateToLocal("gui.clockConfig.clockFormat"),
+						ConfigHandler.analog_digital,
+						new String[] {
+								StatCollector
+										.translateToLocal("gui.clockConfig.clockFormat.none"),
+								StatCollector
+										.translateToLocal("gui.clockConfig.clockFormat.analog"),
+								StatCollector
+										.translateToLocal("gui.clockConfig.clockFormat.digital"),
+								StatCollector
+										.translateToLocal("gui.clockConfig.clockFormat.both") }));
 		id++;
 		buttonList.add(new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, "Seconds", ConfigHandler.seconds));
+				+ (24 * (id + 1)) - 16, StatCollector
+				.translateToLocal("gui.clockConfig.seconds"),
+				ConfigHandler.seconds));
 		id++;
-		buttonList.add(new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, "AM/PM", ConfigHandler.am_pm));
+		buttonList
+				.add(new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
+						+ (24 * (id + 1)) - 16, StatCollector
+						.translateToLocal("gui.clockConfig.am/pm"),
+						ConfigHandler.am_pm));
 		id++;
 		Keyboard.enableRepeatEvents(true);
 		separator = new GuiTextField(fontRendererObj, (width / 2), (height / 4)
@@ -50,7 +69,8 @@ public class GUIClockConfig extends GuiScreen {
 
 		id++;
 		buttonList.add(new GuiButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, "Alarm configuration"));
+				+ (24 * (id + 1)) - 16, StatCollector
+				.translateToLocal("gui.alarmConfig.name")));
 
 		id++;
 		buttonList

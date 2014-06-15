@@ -5,6 +5,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiYesNo;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -37,7 +38,8 @@ public class GUIAlarmConfig extends GuiScreen {
 	public void drawScreen(int x, int y, float partialTicks) {
 		drawDefaultBackground();
 		alarmList.drawScreen(x, y, partialTicks);
-		drawCenteredString(fontRendererObj, "Alarm configuration",
+		drawCenteredString(fontRendererObj,
+				StatCollector.translateToLocal("gui.alarmConfig.name"),
 				this.width / 2, 20, 16777215);
 		super.drawScreen(x, y, partialTicks);
 	}
@@ -55,17 +57,20 @@ public class GUIAlarmConfig extends GuiScreen {
 
 		int id = 0;
 		editButton = new GuiButton(id, (id * ((100 + (width - 400) / 5)))
-				+ ((width - 400) / 5), height - 32, 100, 20, "Edit");
+				+ ((width - 400) / 5), height - 32, 100, 20,
+				StatCollector.translateToLocal("gui.alarmConfig.edit"));
 		editButton.enabled = false;
 		buttonList.add(editButton);
 
 		id++;
 		buttonList.add(new GuiButton(id, (id * ((100 + (width - 400) / 5)))
-				+ ((width - 400) / 5), height - 32, 100, 20, "Add alarm"));
+				+ ((width - 400) / 5), height - 32, 100, 20, StatCollector
+				.translateToLocal("gui.alarmConfig.add")));
 
 		id++;
 		deleteButton = new GuiButton(id, (id * ((100 + (width - 400) / 5)))
-				+ ((width - 400) / 5), height - 32, 100, 20, "Delete");
+				+ ((width - 400) / 5), height - 32, 100, 20,
+				StatCollector.translateToLocal("gui.alarmConfig.delete"));
 		deleteButton.enabled = false;
 		buttonList.add(deleteButton);
 
@@ -101,11 +106,12 @@ public class GUIAlarmConfig extends GuiScreen {
 			case 2:
 				mc.displayGuiScreen(new GuiYesNo(
 						this,
-						"Do you really want to delete this alarm?",
-						"'"
-								+ ((GuiAlarm) alarmList.getListEntry(alarmList
-										.getSelected())).getAlarm().getTitle()
-								+ "'" + " will be lost forever! (A long time!)",
+						StatCollector
+								.translateToLocal("gui.alarmConfig.delete.question"),
+						StatCollector.translateToLocalFormatted(
+								"gui.alarmConfig.delete.warning",
+								((GuiAlarm) alarmList.getListEntry(alarmList
+										.getSelected())).getAlarm().getTitle()),
 						alarmList.getSelected()));
 				break;
 			default:

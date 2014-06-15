@@ -8,6 +8,7 @@ import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
 import net.minecraft.client.resources.I18n;
+import net.minecraft.util.StatCollector;
 
 import org.lwjgl.input.Keyboard;
 
@@ -38,10 +39,16 @@ public class GUIEditAlarm extends GuiScreen {
 	public void drawScreen(int x, int y, float partialTicks) {
 		drawDefaultBackground();
 		title.drawTextBox();
-		drawCenteredString(fontRendererObj, (isNewAlarm ? "New Alarm"
-				: "Edit alarm"), width / 2, 20, 16777215);
-		fontRendererObj.drawString("Title", (width / 2) - 100, (height / 4) + 8
-				- fontRendererObj.FONT_HEIGHT - 1, 16777215);
+		drawCenteredString(
+				fontRendererObj,
+				(isNewAlarm ? StatCollector
+						.translateToLocal("gui.editAlarm.new.name")
+						: StatCollector.translateToLocal("gui.editAlarm.name")),
+				width / 2, 20, 16777215);
+		fontRendererObj.drawString(
+				StatCollector.translateToLocal("gui.editAlarm.alarmTitle"),
+				(width / 2) - 100, (height / 4) + 8
+						- fontRendererObj.FONT_HEIGHT - 1, 16777215);
 		drawCenteredString(fontRendererObj, ConfigHandler.separator, width / 2,
 				(height / 4) + 37, 16777215);
 		super.drawScreen(x, y, partialTicks);
@@ -71,20 +78,29 @@ public class GUIEditAlarm extends GuiScreen {
 
 		id++;
 		enabledButton = new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, "Enabled", (isNewAlarm ? true
-				: alarm.isEnabled()));
+				+ (24 * (id + 1)) - 16,
+				StatCollector.translateToLocal("gui.editAlarm.enabled"),
+				(isNewAlarm ? true : alarm.isEnabled()));
 		buttonList.add(enabledButton);
 
 		id++;
 		repeatButton = new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, "Repeat", (isNewAlarm ? false
-				: alarm.isRepeating()));
+				+ (24 * (id + 1)) - 16,
+				StatCollector.translateToLocal("gui.editAlarm.repeat"),
+				(isNewAlarm ? false : alarm.isRepeating()));
 		buttonList.add(repeatButton);
 
 		id++;
-		buttonList.add(new GuiButton(id,
-				((id - 5) * ((200 + (width - 400) / 3))) + ((width - 400) / 3),
-				height - 32, (isNewAlarm ? "Add alarm" : "Save changes")));
+		buttonList
+				.add(new GuiButton(
+						id,
+						((id - 5) * ((200 + (width - 400) / 3)))
+								+ ((width - 400) / 3),
+						height - 32,
+						(isNewAlarm ? StatCollector
+								.translateToLocal("gui.editAlarm.new.done")
+								: StatCollector
+										.translateToLocal("gui.editAlarm.done"))));
 
 		id++;
 		buttonList.add(new GuiButton(id,

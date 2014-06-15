@@ -11,7 +11,35 @@ item.ammo.name=Bullet
 
 ### GUI ###
 gui.wheel.name=Wheel of Fortune
+
 gui.clockConfig.name=Clock configuration
+gui.clockConfig.separator=Separator
+gui.clockConfig.clockFormat=Clock format
+gui.clockConfig.clockFormat.none=None/Deactivated
+gui.clockConfig.clockFormat.analog=Only analog
+gui.clockConfig.clockFormat.digital=Only digital
+gui.clockConfig.clockFormat.both=Analog and digital
+gui.clockConfig.seconds=Seconds
+gui.clockConfig.am/pm=AM/PM
+
+gui.alarmConfig.name=Alarm configuration
+gui.alarmConfig.edit=Edit alarm
+gui.alarmConfig.add=Add new alarm
+gui.alarmConfig.delete=Delete alarm
+gui.alarmConfig.delete.question=Do you really want to delete this alarm?
+gui.alarmConfig.delete.warning='%s' will be lost forever! (A long time!)
+gui.alarmConfig.repeat=Repeats every day
+
+gui.editAlarm.name=Edit alarm
+gui.editAlarm.new.name=Create new alarm
+gui.editAlarm.alarmTitle=Alarm title
+gui.editAlarm.enabled=Enabled
+gui.editAlarm.repeat=Repeats every day
+gui.editAlarm.done=Save changes
+gui.editAlarm.new.done=Create alarm
+
+gui.on=On
+gui.off=Off
 
 ### CHAT/MESSAGES ###
 message.timeshifter.daymode=Timeshifter set to §6day §rmode.

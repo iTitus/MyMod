@@ -11,7 +11,35 @@ item.ammo.name=Kugel
 
 ### GUI ###
 gui.wheel.name=Glücksrad
+
 gui.clockConfig.name=Uhr-Einstellungen
+gui.clockConfig.separator=Trenner
+gui.clockConfig.clockFormat=Uhrenformat
+gui.clockConfig.clockFormat.none=Deaktiviert
+gui.clockConfig.clockFormat.analog=Nur analog
+gui.clockConfig.clockFormat.digital=Nur digital
+gui.clockConfig.clockFormat.both=Analog und Digital
+gui.clockConfig.seconds=Sekunden
+gui.clockConfig.am/pm=AM/PM
+
+gui.alarmConfig.name=Wecker-Einstellungen
+gui.alarmConfig.edit=Wecker bearbeiten
+gui.alarmConfig.add=Neuen Wecker hinzufügen
+gui.alarmConfig.delete=Wecker entfernen
+gui.alarmConfig.delete.question=Bist du dir sicher, dass du diesen Wecker entfernen möchtest?
+gui.alarmConfig.delete.warning='%s' wird für immer verloren sein! (Eine lange Zeit!)
+gui.alarmConfig.repeat=Wiederholt sich jeden Tag
+
+gui.editAlarm.name=Wecker bearbeiten
+gui.editAlarm.new.name=Neuer Wecker
+gui.editAlarm.alarmTitle=Wecker-Titel
+gui.editAlarm.enabled=Aktiviert
+gui.editAlarm.repeat=Wiederholt sich jeden Tag
+gui.editAlarm.done=Änderungen speichern
+gui.editAlarm.new.done=Wecker erstellen
+
+gui.on=An
+gui.off=Aus
 
 ### CHAT/MESSAGES ###
 message.timeshifter.daymode=Zeitmaschine auf §6Tag §rModus gesetzt.

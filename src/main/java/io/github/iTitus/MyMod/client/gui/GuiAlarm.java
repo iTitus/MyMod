@@ -6,6 +6,7 @@ import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiListExtended.IGuiListEntry;
 import net.minecraft.client.renderer.Tessellator;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -97,7 +98,8 @@ public class GuiAlarm implements IGuiListEntry {
 						(alarm.isEnabled() ? (65280) : (16711680)));
 		Minecraft.getMinecraft().fontRenderer.drawString(
 				TimeHelper.getTimeString(alarm.getHour(), alarm.getMin())
-						+ ((alarm.isRepeating()) ? (" - Repeats every day")
+						+ ((alarm.isRepeating()) ? (" - " + StatCollector
+								.translateToLocal("gui.alarmConfig.repeat"))
 								: ("")), var2 + 32,
 				var3 + Minecraft.getMinecraft().fontRenderer.FONT_HEIGHT + 2,
 				(alarm.isEnabled() ? (65280) : (16711680)));
