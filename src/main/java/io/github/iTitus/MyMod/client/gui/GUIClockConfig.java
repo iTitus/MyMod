@@ -53,8 +53,10 @@ public class GUIClockConfig extends GuiScreen {
 				+ (24 * (id + 1)) - 16, "Alarm configuration"));
 
 		id++;
-		buttonList.add(new GuiButton(id, (width / 2) - 100, height / 6 + 168,
-				I18n.format("gui.done", new Object[0])));
+		buttonList
+				.add(new GuiButton(id, (width / 2) - 100, (height / 4)
+						+ (24 * (id + 2)) - 16, I18n.format("gui.done",
+						new Object[0])));
 
 	}
 

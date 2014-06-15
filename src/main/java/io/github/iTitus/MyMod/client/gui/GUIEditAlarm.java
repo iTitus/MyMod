@@ -18,7 +18,6 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GUIEditAlarm extends GuiScreen {
 
 	private Alarm alarm;
-	private GuiButton doneButton;
 	private int index;
 	private boolean isNewAlarm;
 
@@ -57,7 +56,7 @@ public class GUIEditAlarm extends GuiScreen {
 		if (!isNewAlarm)
 			title.setText(alarm.getTitle());
 
-		int id = 1;
+		int id = 2;
 		hourButton = new GuiSwitchButton(id, (width / 2) - 100, (height / 4)
 				+ (24 * (id + 1)) - 16, 75, 20, null, (isNewAlarm ? 0
 				: alarm.getHour()), TimeHelper.getAllHours());
@@ -83,15 +82,13 @@ public class GUIEditAlarm extends GuiScreen {
 		buttonList.add(repeatButton);
 
 		id++;
-		doneButton = new GuiButton(id, ((id - 4) * ((200 + (width - 400) / 3)))
-				+ ((width - 400) / 3), height - 32, (isNewAlarm ? "Add alarm"
-				: "Save changes"));
-		doneButton.enabled = !isNewAlarm;
-		buttonList.add(doneButton);
+		buttonList.add(new GuiButton(id,
+				((id - 5) * ((200 + (width - 400) / 3))) + ((width - 400) / 3),
+				height - 32, (isNewAlarm ? "Add alarm" : "Save changes")));
 
 		id++;
 		buttonList.add(new GuiButton(id,
-				((id - 4) * ((200 + (width - 400) / 3))) + ((width - 400) / 3),
+				((id - 5) * ((200 + (width - 400) / 3))) + ((width - 400) / 3),
 				height - 32, I18n.format("gui.cancel", new Object[0])));
 
 	}
@@ -99,14 +96,6 @@ public class GUIEditAlarm extends GuiScreen {
 	@Override
 	public void onGuiClosed() {
 		Keyboard.enableRepeatEvents(false);
-	}
-
-	@Override
-	public void updateScreen() {
-		if (title.getText() != null && title.getText() != "")
-			doneButton.enabled = true;
-		else
-			doneButton.enabled = false;
 	}
 
 	private void saveAlarm() {
@@ -130,14 +119,12 @@ public class GUIEditAlarm extends GuiScreen {
 
 		if (button.enabled) {
 			switch (button.id) {
-			case 1:
-			case 2:
-			case 3:
-				break;
-			case 4:
+			case 5:
 				saveAlarm();
-			default:
+			case 6:
 				mc.displayGuiScreen(parent);
+			default:
+
 			}
 
 		}
