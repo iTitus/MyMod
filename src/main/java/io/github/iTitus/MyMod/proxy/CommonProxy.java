@@ -2,10 +2,10 @@ package io.github.iTitus.MyMod.proxy;
 
 import io.github.iTitus.MyMod.MyMod;
 import io.github.iTitus.MyMod.block.ModBlocks;
+import io.github.iTitus.MyMod.client.handler.KeyHandler;
 import io.github.iTitus.MyMod.entity.gun.EntityBullet;
 import io.github.iTitus.MyMod.handler.ConfigHandler;
 import io.github.iTitus.MyMod.handler.CraftingHandler;
-import io.github.iTitus.MyMod.handler.KeyHandler;
 import io.github.iTitus.MyMod.inventory.container.ContainerWheel;
 import io.github.iTitus.MyMod.item.ModItems;
 import io.github.iTitus.MyMod.lib.LibGUI;

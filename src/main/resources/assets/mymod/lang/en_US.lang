@@ -9,7 +9,7 @@ item.debug.name=Debug Item
 item.gun.name=Gun
 item.ammo.name=Bullet
 
-### GUI ###
+### GUI / HUD ###
 gui.wheel.name=Wheel of Fortune
 
 gui.clockConfig.name=Clock configuration
@@ -41,6 +41,8 @@ gui.editAlarm.new.done=Create alarm
 gui.on=On
 gui.off=Off
 
+hud.alarmAlert.close=Press '%s' to close this alert
+
 ### CHAT/MESSAGES ###
 message.timeshifter.daymode=Timeshifter set to §6day §rmode.
 message.timeshifter.nightmode=Timeshifter set to §8night §rmode.
@@ -61,7 +63,7 @@ message.debug.block.8=X -> '%d' Y -> '%d' Z -> '%d' }
 itemGroup.mymod=§4iTitus' MyMod§r
 
 key.categories.mymod=iTitus' MyMod - Keybindings
-key.openClockGUI.desc=Open clock configuration
+key.openClockGUI.desc=Open clock configuration / Close alarm alert
 
 lore.debug=Creative-only debug item
 lore.gun=Can shoot any bullet

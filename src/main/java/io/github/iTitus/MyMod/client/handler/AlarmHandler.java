@@ -1,7 +1,7 @@
 package io.github.iTitus.MyMod.client.handler;
 
 import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
-import io.github.iTitus.MyMod.client.render.hud.RenderAlarmHUD;
+import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
 import io.github.iTitus.MyMod.helper.TimeHelper;
 import io.github.iTitus.MyMod.lib.LibMod;
 
@@ -30,38 +30,6 @@ public class AlarmHandler {
 	public static ArrayList<Alarm> alarms;
 	private static File alarmFile;
 	private static final String TAG_ALARMS = "Alarms";
-
-	private int minLastChecked;
-
-	@SubscribeEvent
-	public void onClientTick(ClientTickEvent event) {
-		if (event.side == Side.CLIENT && event.phase == Phase.END
-				&& Minecraft.getMinecraft().thePlayer != null
-				&& !TimeHelper.isMin(minLastChecked)) {
-			checkAlarms();
-			minLastChecked = TimeHelper.getMin();
-		}
-	}
-
-	private void checkAlarms() {
-		for (Alarm alarm : alarms) {
-			if (check(alarm))
-				showAlert(alarm);
-		}
-
-	}
-
-	private void showAlert(Alarm alarm) {
-		RenderAlarmHUD.getInstance().add(alarm);
-	}
-
-	private boolean check(Alarm alarm) {
-		System.out.println("Check");
-		if (alarm.isEnabled() && TimeHelper.isHour(alarm.getHour())
-				&& TimeHelper.isMin(alarm.getMin()))
-			return true;
-		return false;
-	}
 
 	public static void add(Alarm alarm) {
 		alarms.add(alarm);
@@ -142,6 +110,37 @@ public class AlarmHandler {
 		NBTTagCompound nbt = new NBTTagCompound();
 		nbt.setTag(TAG_ALARMS, list);
 		CompressedStreamTools.safeWrite(nbt, alarmFile);
+	}
+
+	private int minLastChecked;
+
+	@SubscribeEvent
+	public void onClientTick(ClientTickEvent event) {
+		if (event.side == Side.CLIENT && event.phase == Phase.END
+				&& Minecraft.getMinecraft().thePlayer != null
+				&& !TimeHelper.isMin(minLastChecked)) {
+			checkAlarms();
+			minLastChecked = TimeHelper.getMin();
+		}
+	}
+
+	private boolean check(Alarm alarm) {
+		if (alarm.isEnabled() && TimeHelper.isHour(alarm.getHour())
+				&& TimeHelper.isMin(alarm.getMin()))
+			return true;
+		return false;
+	}
+
+	private void checkAlarms() {
+		for (Alarm alarm : alarms) {
+			if (check(alarm))
+				showAlert(alarm);
+		}
+
+	}
+
+	private void showAlert(Alarm alarm) {
+		RenderClockHUD.add(alarm);
 	}
 
 }

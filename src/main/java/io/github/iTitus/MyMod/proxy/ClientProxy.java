@@ -5,7 +5,6 @@ import io.github.iTitus.MyMod.client.gui.GUIWheel;
 import io.github.iTitus.MyMod.client.handler.AlarmHandler;
 import io.github.iTitus.MyMod.client.render.block.RenderBlockWheel;
 import io.github.iTitus.MyMod.client.render.entity.RenderEntityBullet;
-import io.github.iTitus.MyMod.client.render.hud.RenderAlarmHUD;
 import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
 import io.github.iTitus.MyMod.client.render.item.RenderItemGun;
 import io.github.iTitus.MyMod.client.render.tileentity.RenderTileEntitySphere;
@@ -80,7 +79,6 @@ public class ClientProxy extends CommonProxy {
 				RenderEntityBullet.INSTANCE);
 
 		RenderClockHUD.init();
-		RenderAlarmHUD.init();
 
 	}
 

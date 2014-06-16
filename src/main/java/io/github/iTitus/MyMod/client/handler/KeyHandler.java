@@ -1,7 +1,6 @@
-package io.github.iTitus.MyMod.handler;
+package io.github.iTitus.MyMod.client.handler;
 
 import io.github.iTitus.MyMod.MyMod;
-import io.github.iTitus.MyMod.client.render.hud.RenderAlarmHUD;
 import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
 import io.github.iTitus.MyMod.lib.LibGUI;
 import net.minecraft.client.Minecraft;
@@ -13,21 +12,31 @@ import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.eventhandler.SubscribeEvent;
 import cpw.mods.fml.common.gameevent.InputEvent.KeyInputEvent;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
+@SideOnly(Side.CLIENT)
 public class KeyHandler {
 
+	public static final int KEYBINDING_CLOCK = 0;
 	private static final String[] desc = { "key.openClockGUI.desc" };
+
+	private static final KeyBinding[] keys = new KeyBinding[desc.length];
+
 	private static final int[] keyValues = { Keyboard.KEY_C };
+
+	public static KeyBinding getKeyBinding(int index) {
+		if (index < 0 || index >= keys.length)
+			return null;
+		return keys[index];
+	}
 
 	public static void init() {
 		FMLCommonHandler.instance().bus().register(new KeyHandler());
 	}
 
-	private final KeyBinding[] keys;
-
 	public KeyHandler() {
 
-		keys = new KeyBinding[desc.length];
 		for (int i = 0; i < desc.length; i++) {
 			keys[i] = new KeyBinding(desc[i], keyValues[i],
 					"key.categories.mymod");
@@ -44,7 +53,7 @@ public class KeyHandler {
 			for (int i = 0; i < desc.length; i++) {
 
 				if (keys[i].isPressed()) {
-					if (!RenderAlarmHUD.getInstance().isShowing())
+					if (!RenderClockHUD.isShowing())
 						Minecraft.getMinecraft().thePlayer.openGui(
 								MyMod.instance, LibGUI.CLOCK_CONFIG_GUI,
 								Minecraft.getMinecraft().theWorld,
@@ -52,7 +61,7 @@ public class KeyHandler {
 								(int) Minecraft.getMinecraft().thePlayer.posY,
 								(int) Minecraft.getMinecraft().thePlayer.posZ);
 					else
-						RenderAlarmHUD.getInstance().next();
+						RenderClockHUD.nextAlarm();
 				}
 
 			}
