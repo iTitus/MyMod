@@ -1,5 +1,6 @@
-#  Folders #
+### Folders ###
 .gradle/
+.idea/
 .settings/
 bin/
 build/classes/
@@ -11,14 +12,19 @@ build/tmp
 eclipse/
 mcp/
 misc/
+out/
 
-# Package Files #
+### Files ###
 *.bat
 *.blend
 *.blend1
 *.class
 *.classpath
+*.iml
+*.ipr
+*.iws
 *.mtl
 *.project
 *.txt
 *.xcf
+*.xml
