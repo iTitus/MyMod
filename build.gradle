@@ -2,14 +2,17 @@ buildscript {
     repositories {
         mavenCentral()
         maven {
+		
             name = "forge"
             url = "http://files.minecraftforge.net/maven"
         }
+		
         maven {
             name = "sonatype"
             url = "https://oss.sonatype.org/content/repositories/snapshots/"
         }
     }
+	
     dependencies {
         classpath 'net.minecraftforge.gradle:ForgeGradle:1.2-SNAPSHOT'
     }
@@ -17,15 +20,23 @@ buildscript {
 
 apply plugin: 'forge'
 
-version = "0.1"
+ext.configFile = file "build.properties"
+
+configFile.withReader {
+	def prop = new Properties()
+	prop.load(it)
+	ext.config = new ConfigSlurper().parse prop
+}
+
+
+version = "${config.minecraft_version}-${config.mod_version}.${config.build}"
 group= "io.github.iTitus" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "MyMod"
 
 minecraft {
-    version = "1.7.2-10.12.2.1121"
+
+    version = "${config.minecraft_version}-${config.forge_version}"
     assetDir = "eclipse/assets"
-	
-	replace '@VERSION@', project.version
 	
 }
 
@@ -42,11 +53,19 @@ dependencies {
     // for more info...
     // http://www.gradle.org/docs/current/userguide/artifact_dependencies_tutorial.html
     // http://www.gradle.org/docs/current/userguide/dependency_management.html
-
 }
 
-processResources
-{
+processResources {
+	
+	// increment
+    config.build = (config.build.toString().toInteger()) + 1
+    
+    // write back to the file
+    configFile.withWriter
+    {
+        config.toProperties().store(it, "")
+    }
+	
     // this will ensure that this task is redone when the versions change.
     inputs.property "version", project.version
     inputs.property "mcversion", project.minecraft.version
@@ -63,10 +82,5 @@ processResources
     from(sourceSets.main.resources.srcDirs) {
         exclude 'mcmod.info'
     }
-}
-
-// The result is files named <projectname>-<mcversion>-<version>.jar
-jar {
-    version = "${project.minecraft.version}-${project.version}"
-
+	
 }
