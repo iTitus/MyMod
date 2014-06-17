@@ -17,10 +17,10 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 
-@Mod(modid = LibMod.MODID, name = LibMod.NAME, version = LibMod.VERSION)
+@Mod(modid = LibMod.MOD_ID, name = LibMod.NAME, version = LibMod.VERSION)
 public class MyMod {
 
-	@Instance(LibMod.MODID)
+	@Instance(LibMod.MOD_ID)
 	public static MyMod instance;
 
 	@SidedProxy(clientSide = "io.github.iTitus.MyMod.proxy.ClientProxy", serverSide = "io.github.iTitus.MyMod.proxy.CommonProxy")

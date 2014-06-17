@@ -1,10 +1,14 @@
-package io.github.iTitus.MyMod.helper;
+package io.github.iTitus.MyMod.util;
 
 import io.github.iTitus.MyMod.handler.ConfigHandler;
 
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
 import java.util.Calendar;
 
-public class TimeHelper {
+public class TimeUtil {
+
+	public static DateFormat dateFormat = new SimpleDateFormat();
 
 	public static int convertToAMPMIfNecessary(int hour) {
 
@@ -73,9 +77,7 @@ public class TimeHelper {
 		sb.append(make2Digits(getMin()));
 
 		if (ConfigHandler.seconds) {
-
 			sb.append(ConfigHandler.separator);
-
 			sb.append(make2Digits(getSecs()));
 		}
 

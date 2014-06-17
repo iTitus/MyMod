@@ -1,8 +1,8 @@
 package io.github.iTitus.MyMod.item.gun;
 
-import io.github.iTitus.MyMod.helper.NBTHelper;
 import io.github.iTitus.MyMod.item.EnumItemType;
 import io.github.iTitus.MyMod.item.MyItem;
+import io.github.iTitus.MyMod.util.NBTUtil;
 
 import java.util.HashMap;
 import java.util.List;
@@ -108,7 +108,7 @@ public class ItemAmmo extends MyItem {
 
 		ItemPotion p = new ItemPotion();
 
-		if (NBTHelper.hasNBT(stack)) {
+		if (NBTUtil.hasNBT(stack)) {
 			list.add("");
 
 			HashMap<EnumModifierType, Integer> modifiers = readFromNBT(stack

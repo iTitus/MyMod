@@ -3,7 +3,7 @@ package io.github.iTitus.MyMod.client.render.hud;
 import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
 import io.github.iTitus.MyMod.client.handler.KeyHandler;
 import io.github.iTitus.MyMod.handler.ConfigHandler;
-import io.github.iTitus.MyMod.helper.TimeHelper;
+import io.github.iTitus.MyMod.util.TimeUtil;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
@@ -67,12 +67,12 @@ public class RenderClockHUD {
 
 			case 2: // Digital
 				Minecraft.getMinecraft().fontRenderer.drawString(
-						TimeHelper.getTime(), 8, 6, ConfigHandler.color);
+						TimeUtil.getTime(), 8, 6, ConfigHandler.color);
 				break;
 
 			case 3: // Both
 				Minecraft.getMinecraft().fontRenderer.drawString(
-						"FANCY CLOCK! " + TimeHelper.getTime(), 8, 6,
+						"FANCY CLOCK! " + TimeUtil.getTime(), 8, 6,
 						ConfigHandler.color);
 				break;
 			}
@@ -82,20 +82,20 @@ public class RenderClockHUD {
 						.drawString(
 								currentAlarm.getTitle()
 										+ " - "
-										+ TimeHelper.make2Digits(currentAlarm
+										+ TimeUtil.make2Digits(currentAlarm
 												.getHour())
 										+ ConfigHandler.separator
-										+ TimeHelper.make2Digits(currentAlarm
+										+ TimeUtil.make2Digits(currentAlarm
 												.getMin()),
 								(event.resolution.getScaledWidth() / 2)
 										- (Minecraft.getMinecraft().fontRenderer.getStringWidth(currentAlarm
 												.getTitle()
 												+ " - "
-												+ TimeHelper
+												+ TimeUtil
 														.make2Digits(currentAlarm
 																.getHour())
 												+ ConfigHandler.separator
-												+ TimeHelper
+												+ TimeUtil
 														.make2Digits(currentAlarm
 																.getMin())) / 2),
 								(event.resolution.getScaledHeight() / 2)

@@ -2,8 +2,8 @@ package io.github.iTitus.MyMod.client.handler;
 
 import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
 import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
-import io.github.iTitus.MyMod.helper.TimeHelper;
 import io.github.iTitus.MyMod.lib.LibMod;
+import io.github.iTitus.MyMod.util.TimeUtil;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -118,15 +118,15 @@ public class AlarmHandler {
 	public void onClientTick(ClientTickEvent event) {
 		if (event.side == Side.CLIENT && event.phase == Phase.END
 				&& Minecraft.getMinecraft().thePlayer != null
-				&& !TimeHelper.isMin(minLastChecked)) {
+				&& !TimeUtil.isMin(minLastChecked)) {
 			checkAlarms();
-			minLastChecked = TimeHelper.getMin();
+			minLastChecked = TimeUtil.getMin();
 		}
 	}
 
 	private boolean check(Alarm alarm) {
-		if (alarm.isEnabled() && TimeHelper.isHour(alarm.getHour())
-				&& TimeHelper.isMin(alarm.getMin()))
+		if (alarm.isEnabled() && TimeUtil.isHour(alarm.getHour())
+				&& TimeUtil.isMin(alarm.getMin()))
 			return true;
 		return false;
 	}

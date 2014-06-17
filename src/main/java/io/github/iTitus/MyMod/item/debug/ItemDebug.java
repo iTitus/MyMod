@@ -1,8 +1,8 @@
 package io.github.iTitus.MyMod.item.debug;
 
-import io.github.iTitus.MyMod.helper.NBTHelper;
 import io.github.iTitus.MyMod.item.EnumItemType;
 import io.github.iTitus.MyMod.item.MyItem;
+import io.github.iTitus.MyMod.util.NBTUtil;
 
 import java.util.List;
 
@@ -94,7 +94,7 @@ public class ItemDebug extends MyItem {
 			player.addChatMessage(new ChatComponentText(String.format(
 					StatCollector.translateToLocal("message.debug.entity.0"),
 					e.getCommandSenderName(), e.getEntityId(),
-					NBTHelper.readNBT(nbt))));
+					NBTUtil.readNBT(nbt))));
 
 			break;
 		}
@@ -148,7 +148,7 @@ public class ItemDebug extends MyItem {
 					mop.blockZ))) {
 				sb.append(String.format(
 						StatCollector.translateToLocal("message.debug.block.7"),
-						NBTHelper.readNBT(nbt)));
+						NBTUtil.readNBT(nbt)));
 			} else {
 				sb.append(String.format(
 						StatCollector.translateToLocal("message.debug.block.8"),

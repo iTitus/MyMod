@@ -22,7 +22,7 @@ public class LibModels {
 
 	}
 
-	public static final String MODEL_LOCATION = LibMod.MODID
+	public static final String MODEL_LOCATION = LibMod.MOD_ID
 			.toLowerCase(Locale.ENGLISH);
 
 }

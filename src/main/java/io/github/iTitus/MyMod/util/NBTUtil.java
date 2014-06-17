@@ -1,9 +1,9 @@
-package io.github.iTitus.MyMod.helper;
+package io.github.iTitus.MyMod.util;
 
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
 
-public class NBTHelper {
+public class NBTUtil {
 
 	public static boolean hasNBT(ItemStack stack) {
 		return stack.hasTagCompound() && stack.getTagCompound() != null;

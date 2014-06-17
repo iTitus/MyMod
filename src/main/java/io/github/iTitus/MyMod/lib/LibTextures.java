@@ -10,7 +10,7 @@ import net.minecraft.util.ResourceLocation;
 
 public class LibTextures {
 
-	public static final String TEXTURE_LOCATION = LibMod.MODID
+	public static final String TEXTURE_LOCATION = LibMod.MOD_ID
 			.toLowerCase(Locale.ENGLISH),
 			MODEL_TEXTURE_LOCATION = "textures/models/";
 

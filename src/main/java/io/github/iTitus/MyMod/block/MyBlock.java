@@ -1,9 +1,9 @@
 package io.github.iTitus.MyMod.block;
 
-import io.github.iTitus.MyMod.helper.InventoryHelper;
 import io.github.iTitus.MyMod.lib.LibTextures;
 import io.github.iTitus.MyMod.lib.MyCreativeTab;
 import io.github.iTitus.MyMod.tileentity.MyTileEntity;
+import io.github.iTitus.MyMod.util.InventoryUtil;
 import net.minecraft.block.Block;
 import net.minecraft.entity.EntityLivingBase;
 import net.minecraft.item.ItemStack;
@@ -30,7 +30,7 @@ public abstract class MyBlock extends Block {
 	public void breakBlock(World world, int x, int y, int z, Block block,
 			int meta) {
 		if (dropAllItems())
-			InventoryHelper.dropInventory(world, x, y, z);
+			InventoryUtil.dropInventory(world, x, y, z);
 		super.breakBlock(world, x, y, z, block, meta);
 	}
 

@@ -75,11 +75,11 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	public boolean onBlockActivated(World world, int x, int y, int z,
 			EntityPlayer p, int side, float hitX, float hitY, float hitZ) {
 
-		if (!world.isRemote
-				&& world.getTileEntity(x, y, z) instanceof TileEntityWheel) {
-			return ((TileEntityWheel) world.getTileEntity(x, y, z))
-					.onBlockActivated(p, side, hitX, hitY, hitZ);
-		}
+		// if (!world.isRemote
+		// && world.getTileEntity(x, y, z) instanceof TileEntityWheel) {
+		// return ((TileEntityWheel) world.getTileEntity(x, y, z))
+		// .onBlockActivated(p, side, hitX, hitY, hitZ);
+		// }
 
 		return false;
 	}
@@ -98,12 +98,13 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 	@Override
 	public void onPostBlockPlaced(World world, int x, int y, int z, int meta) {
 
-		if (!world.isRemote
-				&& world.getTileEntity(x, y, z) instanceof TileEntityWheel) {
-			((TileEntityWheel) world.getTileEntity(x, y, z))
-					.setMode((world.getBlockMetadata(x, y, z) == 0) ? (TileEntityWheel.Mode.FILLED)
-							: (TileEntityWheel.Mode.EMPTY));
-		}
+		// if (!world.isRemote
+		// && world.getTileEntity(x, y, z) instanceof TileEntityWheel) {
+		// ((TileEntityWheel) world.getTileEntity(x, y, z))
+		// .setMode((world.getBlockMetadata(x, y, z) == 0) ?
+		// (TileEntityWheel.Mode.FILLED)
+		// : (TileEntityWheel.Mode.EMPTY));
+		// }
 
 	}
 

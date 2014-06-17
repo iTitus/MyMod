@@ -10,7 +10,7 @@ import io.github.iTitus.MyMod.inventory.container.ContainerWheel;
 import io.github.iTitus.MyMod.item.ModItems;
 import io.github.iTitus.MyMod.lib.LibGUI;
 import io.github.iTitus.MyMod.lib.LibNames;
-import io.github.iTitus.MyMod.network.PacketPipeline;
+import io.github.iTitus.MyMod.network.NetworkHandler;
 import io.github.iTitus.MyMod.recipe.VanillaRecipes;
 import io.github.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 import net.minecraft.entity.player.EntityPlayer;
@@ -47,7 +47,6 @@ public class CommonProxy implements IGuiHandler {
 	}
 
 	public void init(FMLInitializationEvent event) {
-		PacketPipeline.INSTANCE.init();
 		NetworkRegistry.INSTANCE
 				.registerGuiHandler(MyMod.instance, MyMod.proxy);
 
@@ -58,7 +57,6 @@ public class CommonProxy implements IGuiHandler {
 	}
 
 	public void postInit(FMLPostInitializationEvent event) {
-		PacketPipeline.INSTANCE.postInit();
 
 		CraftingHandler.init();
 		KeyHandler.init();
@@ -66,6 +64,7 @@ public class CommonProxy implements IGuiHandler {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
+		NetworkHandler.init();
 
 		ModBlocks.init();
 		ModItems.init();

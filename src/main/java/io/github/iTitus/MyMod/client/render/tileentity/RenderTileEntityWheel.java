@@ -54,7 +54,7 @@ public class RenderTileEntityWheel extends TileEntitySpecialRenderer {
 			}
 		}
 		GL11.glRotatef(angle, 0.0F, 1.0F, 0.0F);
-		model.render(wheel.getRotationAngleRad());
+		model.render(0);
 		GL11.glPopMatrix();
 
 	}

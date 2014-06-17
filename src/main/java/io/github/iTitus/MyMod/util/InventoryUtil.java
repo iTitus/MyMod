@@ -1,4 +1,4 @@
-package io.github.iTitus.MyMod.helper;
+package io.github.iTitus.MyMod.util;
 
 import java.util.Random;
 
@@ -9,7 +9,7 @@ import net.minecraft.item.ItemStack;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.world.World;
 
-public class InventoryHelper {
+public class InventoryUtil {
 
 	public static void dropInventory(World world, int x, int y, int z) {
 		TileEntity tileEntity = world.getTileEntity(x, y, z);

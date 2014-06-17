@@ -1,7 +1,7 @@
 package io.github.iTitus.MyMod.client.gui;
 
 import io.github.iTitus.MyMod.client.handler.AlarmHandler;
-import io.github.iTitus.MyMod.helper.TimeHelper;
+import io.github.iTitus.MyMod.util.TimeUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiListExtended.IGuiListEntry;
 import net.minecraft.client.renderer.Tessellator;
@@ -97,7 +97,7 @@ public class GuiAlarm implements IGuiListEntry {
 				.drawString(alarm.getTitle(), var2 + 32, var3 + 1,
 						(alarm.isEnabled() ? (65280) : (16711680)));
 		Minecraft.getMinecraft().fontRenderer.drawString(
-				TimeHelper.getTimeString(alarm.getHour(), alarm.getMin())
+				TimeUtil.getTimeString(alarm.getHour(), alarm.getMin())
 						+ ((alarm.isRepeating()) ? (" - " + StatCollector
 								.translateToLocal("gui.alarmConfig.repeat"))
 								: ("")), var2 + 32,

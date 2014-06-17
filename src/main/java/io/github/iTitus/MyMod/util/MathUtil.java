@@ -1,11 +1,13 @@
-package io.github.iTitus.MyMod.helper;
+package io.github.iTitus.MyMod.util;
 
-public class MathHelper {
+import net.minecraft.util.MathHelper;
+
+public class MathUtil {
 
 	public static final float PI = (float) Math.PI;
 
 	public static float cos(float f) {
-		return net.minecraft.util.MathHelper.cos(f);
+		return MathHelper.cos(f);
 	}
 
 	public static float degToRad(float deg) {
@@ -13,7 +15,7 @@ public class MathHelper {
 	}
 
 	public static float sin(float f) {
-		return net.minecraft.util.MathHelper.sin(f);
+		return MathHelper.sin(f);
 	}
 
 }

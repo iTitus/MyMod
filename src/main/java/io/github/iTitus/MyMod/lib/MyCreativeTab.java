@@ -10,7 +10,7 @@ public class MyCreativeTab extends CreativeTabs {
 	public static final CreativeTabs INSTANCE = new MyCreativeTab();
 
 	private MyCreativeTab() {
-		super(LibMod.MODID);
+		super(LibMod.MOD_ID);
 	}
 
 	@Override

@@ -3,7 +3,7 @@ package io.github.iTitus.MyMod.client.gui;
 import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
 import io.github.iTitus.MyMod.client.handler.AlarmHandler;
 import io.github.iTitus.MyMod.handler.ConfigHandler;
-import io.github.iTitus.MyMod.helper.TimeHelper;
+import io.github.iTitus.MyMod.util.TimeUtil;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
@@ -66,13 +66,13 @@ public class GUIEditAlarm extends GuiScreen {
 		int id = 2;
 		hourButton = new GuiSwitchButton(id, (width / 2) - 100, (height / 4)
 				+ (24 * (id + 1)) - 16, 75, 20, null, (isNewAlarm ? 0
-				: alarm.getHour()), TimeHelper.getAllHours());
+				: alarm.getHour()), TimeUtil.getAllHours());
 		buttonList.add(hourButton);
 
 		id++;
 		minButton = new GuiSwitchButton(id, (width / 2) + 25, (height / 4)
 				+ (24 * id) - 16, 75, 20, null, (isNewAlarm ? 0
-				: alarm.getMin()), TimeHelper.getAllMins());
+				: alarm.getMin()), TimeUtil.getAllMins());
 		buttonList.add(minButton);
 		id--;
 
