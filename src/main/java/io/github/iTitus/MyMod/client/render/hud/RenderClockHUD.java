@@ -3,14 +3,15 @@ package io.github.iTitus.MyMod.client.render.hud;
 import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
 import io.github.iTitus.MyMod.client.handler.KeyHandler;
 import io.github.iTitus.MyMod.handler.ConfigHandler;
+import io.github.iTitus.MyMod.util.RenderUtil;
 import io.github.iTitus.MyMod.util.TimeUtil;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 
 import net.minecraft.client.Minecraft;
 import net.minecraft.util.StatCollector;
-import net.minecraftforge.client.event.RenderGameOverlayEvent;
 import net.minecraftforge.client.event.RenderGameOverlayEvent.ElementType;
+import net.minecraftforge.client.event.RenderGameOverlayEvent.Post;
 import net.minecraftforge.common.MinecraftForge;
 
 import org.lwjgl.input.Keyboard;
@@ -53,7 +54,7 @@ public class RenderClockHUD {
 	private Alarm currentAlarm, previousAlarm;
 
 	@SubscribeEvent
-	public void onRenderGameOverlayPost(RenderGameOverlayEvent.Post event) {
+	public void onRenderGameOverlayPost(Post event) {
 		if (event.type == ElementType.ALL) {
 
 			switch (ConfigHandler.analog_digital) {
@@ -61,18 +62,23 @@ public class RenderClockHUD {
 				return;
 
 			case 1: // Analog
-				Minecraft.getMinecraft().fontRenderer.drawString(
-						"FANCY CLOCK!", 8, 6, ConfigHandler.color);
+				RenderUtil.drawClock(
+						(!TimeUtil.isPM() || ConfigHandler.am_pm) ? 31 : 37,
+						34, 24);
 				break;
 
 			case 2: // Digital
 				Minecraft.getMinecraft().fontRenderer.drawString(
-						TimeUtil.getTime(), 8, 6, ConfigHandler.color);
+						TimeUtil.getTime(), 1, 1, ConfigHandler.color);
 				break;
 
 			case 3: // Both
+				RenderUtil.drawClock(
+						(!TimeUtil.isPM() || ConfigHandler.am_pm) ? 31 : 37,
+						34, 24);
 				Minecraft.getMinecraft().fontRenderer.drawString(
-						"FANCY CLOCK! " + TimeUtil.getTime(), 8, 6,
+						TimeUtil.getTime(),
+						(!TimeUtil.isPM() || ConfigHandler.am_pm) ? 62 : 74, 1,
 						ConfigHandler.color);
 				break;
 			}

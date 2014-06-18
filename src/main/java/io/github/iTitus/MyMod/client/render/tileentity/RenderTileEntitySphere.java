@@ -4,6 +4,7 @@ import io.github.iTitus.MyMod.util.MathUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
+import net.minecraft.util.MathHelper;
 
 import org.lwjgl.opengl.GL11;
 
@@ -46,7 +47,7 @@ public class RenderTileEntitySphere extends TileEntitySpecialRenderer {
 						.getMinecraft().renderViewEntity.lastTickPosZ)
 				* partialTicks;
 
-		double translation = MathUtil
+		double translation = MathHelper
 				.sin((Minecraft.getMinecraft().renderViewEntity.ticksExisted + partialTicks) / 10.0F) * 0.1F + 0.1F;
 
 		GL11.glTranslated(-posX, -posY, -posZ);
@@ -58,13 +59,13 @@ public class RenderTileEntitySphere extends TileEntitySpecialRenderer {
 			for (float angle2 = 0; angle2 < 360; angle2++) {
 
 				GL11.glVertex3d(
-						radius * MathUtil.sin(MathUtil.degToRad(angle1))
-								* MathUtil.cos(MathUtil.degToRad(angle2))
+						radius * MathHelper.sin(MathUtil.degToRad(angle1))
+								* MathHelper.cos(MathUtil.degToRad(angle2))
 								+ tile.xCoord + 0.5,
-						radius * MathUtil.sin(MathUtil.degToRad(angle1))
-								* MathUtil.sin(MathUtil.degToRad(angle2))
+						radius * MathHelper.sin(MathUtil.degToRad(angle1))
+								* MathHelper.sin(MathUtil.degToRad(angle2))
 								+ tile.yCoord + 1.5 + translation, radius
-								* MathUtil.cos(MathUtil.degToRad(angle1))
+								* MathHelper.cos(MathUtil.degToRad(angle1))
 								+ tile.zCoord + 0.5);
 
 			}

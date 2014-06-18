@@ -48,8 +48,11 @@ public class TimeUtil {
 	}
 
 	public static String getAMPM() {
-		return ((Calendar.getInstance().get(Calendar.AM_PM) == 0) ? ("AM")
-				: ("PM"));
+		return (isPM()) ? ("PM") : ("AM");
+	}
+
+	public static float getHour() {
+		return Calendar.getInstance().get(Calendar.HOUR);
 	}
 
 	public static int getHourOfDay() {
@@ -60,7 +63,7 @@ public class TimeUtil {
 		return Calendar.getInstance().get(Calendar.MINUTE);
 	}
 
-	public static int getSecs() {
+	public static int getSec() {
 		return Calendar.getInstance().get(Calendar.SECOND);
 	}
 
@@ -78,11 +81,11 @@ public class TimeUtil {
 
 		if (ConfigHandler.seconds) {
 			sb.append(ConfigHandler.separator);
-			sb.append(make2Digits(getSecs()));
+			sb.append(make2Digits(getSec()));
 		}
 
 		if (ConfigHandler.am_pm)
-			sb.append(getAMPM());
+			sb.append(" " + getAMPM());
 
 		return sb.toString();
 	}
@@ -108,6 +111,10 @@ public class TimeUtil {
 
 	public static boolean isMin(int min) {
 		return getMin() == min;
+	}
+
+	public static boolean isPM() {
+		return Calendar.getInstance().get(Calendar.AM_PM) == 1;
 	}
 
 	public static String make2Digits(int number) {
