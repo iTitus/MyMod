@@ -3,16 +3,13 @@
 .idea/
 .settings/
 bin/
-build/classes/
-build/dependency-cache
-build/natives
-build/resources
-build/sources
-build/tmp
+build/
 eclipse/
 mcp/
 misc/
 out/
+
+!build/libs/
 
 ### Files ###
 *.bat
