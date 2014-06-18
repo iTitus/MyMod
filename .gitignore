@@ -9,8 +9,6 @@ mcp/
 misc/
 out/
 
-!build/libs/
-
 ### Files ###
 *.bat
 *.blend
