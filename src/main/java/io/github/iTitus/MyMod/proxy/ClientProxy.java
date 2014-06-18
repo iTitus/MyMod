@@ -1,7 +1,7 @@
 package io.github.iTitus.MyMod.proxy;
 
-import io.github.iTitus.MyMod.client.gui.GUIClockConfig;
-import io.github.iTitus.MyMod.client.gui.GUIWheel;
+import io.github.iTitus.MyMod.client.gui.GuiContainerWheel;
+import io.github.iTitus.MyMod.client.gui.GuiScreenClockConfig;
 import io.github.iTitus.MyMod.client.handler.AlarmHandler;
 import io.github.iTitus.MyMod.client.render.block.RenderBlockWheel;
 import io.github.iTitus.MyMod.client.render.entity.RenderEntityBullet;
@@ -40,11 +40,11 @@ public class ClientProxy extends CommonProxy {
 
 		switch (ID) {
 		case LibGUI.WHEEL_GUI_ID:
-			return new GUIWheel(new ContainerWheel(player.inventory,
+			return new GuiContainerWheel(new ContainerWheel(player.inventory,
 					(TileEntityWheel) tile));
 
 		case LibGUI.CLOCK_CONFIG_GUI:
-			return new GUIClockConfig();
+			return new GuiScreenClockConfig();
 
 		default:
 			break;

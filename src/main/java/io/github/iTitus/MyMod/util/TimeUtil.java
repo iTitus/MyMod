@@ -118,13 +118,7 @@ public class TimeUtil {
 	}
 
 	public static String make2Digits(int number) {
-
-		String ret = "" + number;
-
-		if (ret.length() < 2)
-			ret = "0" + ret;
-
-		return ret;
+		return StringUtil.makeNDigits(number + "", 2, "0");
 	}
 
 }

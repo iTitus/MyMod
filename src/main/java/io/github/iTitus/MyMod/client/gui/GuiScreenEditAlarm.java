@@ -16,19 +16,19 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GUIEditAlarm extends GuiScreen {
+public class GuiScreenEditAlarm extends GuiScreen {
 
 	private Alarm alarm;
 	private int index;
 	private boolean isNewAlarm;
 
-	private GUIAlarmConfig parent;
+	private GuiScreenAlarmConfig parent;
 	private GuiTextField title;
 	GuiOnOffButton enabledButton, repeatButton;
 	GuiSwitchButton hourButton, minButton;
 
-	public GUIEditAlarm(GUIAlarmConfig parent, int index, Alarm alarm,
-			boolean isNewAlarm) {
+	public GuiScreenEditAlarm(GuiScreenAlarmConfig parent, int index,
+			Alarm alarm, boolean isNewAlarm) {
 		this.parent = parent;
 		this.index = index;
 		this.alarm = alarm;

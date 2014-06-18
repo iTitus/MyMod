@@ -10,14 +10,14 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GUIAlarmConfig extends GuiScreen {
+public class GuiScreenAlarmConfig extends GuiScreen {
 
 	private GuiAlarmList alarmList;
 	private GuiButton editButton, deleteButton;
 
-	private GUIClockConfig parent;
+	private GuiScreenClockConfig parent;
 
-	public GUIAlarmConfig(GUIClockConfig parent) {
+	public GuiScreenAlarmConfig(GuiScreenClockConfig parent) {
 		this.parent = parent;
 	}
 
@@ -99,7 +99,7 @@ public class GUIAlarmConfig extends GuiScreen {
 			case 1:
 				GuiAlarm guiAlarm = (GuiAlarm) alarmList.getListEntry(alarmList
 						.getSelected());
-				mc.displayGuiScreen(new GUIEditAlarm(this, alarmList
+				mc.displayGuiScreen(new GuiScreenEditAlarm(this, alarmList
 						.getSelected(), ((guiAlarm != null) ? (guiAlarm
 						.getAlarm()) : null), button.id == 1));
 				break;

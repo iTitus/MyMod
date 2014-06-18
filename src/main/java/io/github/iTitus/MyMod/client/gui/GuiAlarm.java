@@ -81,10 +81,10 @@ public class GuiAlarm implements IGuiListEntry {
 	}
 
 	private Alarm alarm;
-	private GUIAlarmConfig parent;
+	private GuiScreenAlarmConfig parent;
 	private long timeLastHit;
 
-	public GuiAlarm(Alarm alarm, GUIAlarmConfig parent) {
+	public GuiAlarm(Alarm alarm, GuiScreenAlarmConfig parent) {
 		this.alarm = alarm;
 		this.parent = parent;
 		timeLastHit = 0L;

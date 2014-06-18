@@ -1,6 +1,7 @@
 package io.github.iTitus.MyMod.client.gui;
 
 import io.github.iTitus.MyMod.handler.ConfigHandler;
+import io.github.iTitus.MyMod.util.RenderUtil;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;
@@ -13,8 +14,9 @@ import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GUIClockConfig extends GuiScreen {
+public class GuiScreenClockConfig extends GuiScreen {
 
+	private GuiIntSliderButton rColor, gColor, bColor;
 	private GuiTextField separator;
 
 	@Override
@@ -22,10 +24,10 @@ public class GUIClockConfig extends GuiScreen {
 		drawDefaultBackground();
 		drawCenteredString(fontRendererObj,
 				StatCollector.translateToLocal("gui.clockConfig.name"),
-				width / 2, 40, 16777215);
+				width / 2, 16, 16777215);
 		drawCenteredString(this.fontRendererObj,
 				StatCollector.translateToLocal("gui.clockConfig.separator"),
-				(width / 2) - 50, (height / 4) + 88, 16777215);
+				(width / 2) - 40, (height / 8) + 110, 16777215);
 		separator.drawTextBox();
 		super.drawScreen(x, y, partialTicks);
 	}
@@ -36,8 +38,8 @@ public class GUIClockConfig extends GuiScreen {
 		buttonList
 				.add(new GuiSwitchButton(
 						id,
-						(width / 2) - 100,
-						(height / 4) + (24 * (id + 1)) - 16,
+						(width / 2) - 210,
+						(height / 8) + (24 * (id + 2)) - 16,
 						StatCollector
 								.translateToLocal("gui.clockConfig.clockFormat"),
 						ConfigHandler.analog_digital,
@@ -51,38 +53,65 @@ public class GUIClockConfig extends GuiScreen {
 								StatCollector
 										.translateToLocal("gui.clockConfig.clockFormat.both") }));
 		id++;
-		buttonList.add(new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, StatCollector
+		buttonList.add(new GuiOnOffButton(id, (width / 2) - 210, (height / 8)
+				+ (24 * (id + 2)) - 16, StatCollector
 				.translateToLocal("gui.clockConfig.seconds"),
 				ConfigHandler.seconds));
 		id++;
 		buttonList
-				.add(new GuiOnOffButton(id, (width / 2) - 100, (height / 4)
-						+ (24 * (id + 1)) - 16, StatCollector
+				.add(new GuiOnOffButton(id, (width / 2) - 210, (height / 8)
+						+ (24 * (id + 2)) - 16, StatCollector
 						.translateToLocal("gui.clockConfig.am/pm"),
 						ConfigHandler.am_pm));
+
+		id++;
+		rColor = new GuiIntSliderButton(id, (width / 2) + 10, (height / 8)
+				+ (24 * (id - 1)) - 16, "Red",
+				RenderUtil.getColor(ConfigHandler.color)[0], 0, 255);
+		buttonList.add(rColor);
+
+		id++;
+		gColor = new GuiIntSliderButton(id, (width / 2) + 10, (height / 8)
+				+ (24 * (id - 1)) - 16, "Green",
+				RenderUtil.getColor(ConfigHandler.color)[1], 0, 255);
+		buttonList.add(gColor);
+
+		id++;
+		bColor = new GuiIntSliderButton(id, (width / 2) + 10, (height / 8)
+				+ (24 * (id - 1)) - 16, "Blue",
+				RenderUtil.getColor(ConfigHandler.color)[2], 0, 255);
+		buttonList.add(bColor);
+
 		id++;
 		Keyboard.enableRepeatEvents(true);
-		separator = new GuiTextField(fontRendererObj, (width / 2), (height / 4)
-				+ (24 * (id + 1)) - 16, 100, 20);
+		separator = new GuiTextField(fontRendererObj, (width / 2), (height / 8)
+				+ (24 * (id - 1)) - 16, 100, 20);
 		separator.setText(ConfigHandler.separator);
 
 		id++;
-		buttonList.add(new GuiButton(id, (width / 2) - 100, (height / 4)
-				+ (24 * (id + 1)) - 16, StatCollector
+		buttonList.add(new GuiButton(id, (width / 2) - 100, (height / 8)
+				+ (24 * id) - 16, StatCollector
 				.translateToLocal("gui.alarmConfig.name")));
 
 		id++;
-		buttonList
-				.add(new GuiButton(id, (width / 2) - 100, (height / 4)
-						+ (24 * (id + 2)) - 16, I18n.format("gui.done",
-						new Object[0])));
+		buttonList.add(new GuiButton(id, (width / 2) - 100, (height / 8)
+				+ (24 * id) - 16, I18n.format("gui.done", new Object[0])));
 
 	}
 
 	@Override
 	public void onGuiClosed() {
 		Keyboard.enableRepeatEvents(false);
+	}
+
+	@Override
+	public void updateScreen() {
+		if (rColor.isSliding() || gColor.isSliding() || bColor.isSliding()) {
+			ConfigHandler.color = RenderUtil.getColor(
+					rColor.getSliderPosition(), gColor.getSliderPosition(),
+					bColor.getSliderPosition());
+			ConfigHandler.save();
+		}
 	}
 
 	@Override
@@ -102,11 +131,12 @@ public class GUIClockConfig extends GuiScreen {
 			ConfigHandler.am_pm = ((GuiOnOffButton) button).getCurrentValue();
 			ConfigHandler.save();
 			break;
-		case 4:
-			mc.displayGuiScreen(new GUIAlarmConfig(this));
+		case 7:
+			mc.displayGuiScreen(new GuiScreenAlarmConfig(this));
 			break;
-		default:
+		case 8:
 			mc.setIngameFocus();
+		default:
 		}
 
 	}

@@ -9,13 +9,13 @@ import net.minecraft.util.StatCollector;
 
 import org.lwjgl.opengl.GL11;
 
-public class GUIWheel extends GuiContainer {
+public class GuiContainerWheel extends GuiContainer {
 
 	private static final ResourceLocation texture = new ResourceLocation(
 			LibTextures.TEXTURE_LOCATION, LibGUI.getTextureLoc("wheel"));
 	private ContainerWheel container;
 
-	public GUIWheel(ContainerWheel container) {
+	public GuiContainerWheel(ContainerWheel container) {
 		super(container);
 		this.container = container;
 	}

@@ -47,17 +47,31 @@ public class RenderUtil {
 
 	}
 
+	public static int[] getColor(int color) {
+
+		String hexColor = StringUtil.makeNDigits(Integer.toHexString(color), 6,
+				"0");
+
+		return new int[] { Integer.valueOf(hexColor.substring(0, 2), 16),
+				Integer.valueOf(hexColor.substring(2, 4), 16),
+				Integer.valueOf(hexColor.substring(4, 6), 16) };
+	}
+
+	public static int getColor(int r, int g, int b) {
+		return Integer
+				.valueOf(
+						StringUtil.makeNDigits(Integer.toHexString(r), 2, "0")
+								+ StringUtil.makeNDigits(
+										Integer.toHexString(g), 2, "0")
+								+ StringUtil.makeNDigits(
+										Integer.toHexString(b), 2, "0"), 16);
+	}
+
 	public static void setColor(int color) {
 
-		String hexColor = Integer.toHexString(color);
+		int[] colors = getColor(color);
 
-		while (hexColor.length() < 6) {
-			hexColor = 0 + hexColor;
-		}
-
-		GL11.glColor3d(Integer.valueOf(hexColor.substring(0, 2), 16) / 255D,
-				Integer.valueOf(hexColor.substring(2, 4), 16) / 255D,
-				Integer.valueOf(hexColor.substring(4, 6), 16) / 255D);
+		GL11.glColor3d(colors[0] / 255D, colors[1] / 255D, colors[2] / 255D);
 
 	}
 
@@ -78,12 +92,14 @@ public class RenderUtil {
 		GL11.glVertex2d(x, y);
 		GL11.glVertex2d(
 				x
-						+ ((radius - (radius / 2D)) * MathHelper.cos(MathUtil
-								.degToRad((TimeUtil.getHour() / 12F) * 360F)
+						+ ((radius - (radius / 2D)) * MathHelper.cos(MathUtil.degToRad(((TimeUtil
+								.getHour() + ((TimeUtil.getMin() + (TimeUtil
+								.getSec() / 60F)) / 60F)) / 12F) * 360F)
 								- (MathUtil.PI / 2))),
 				y
-						+ ((radius - (radius / 2D)) * MathHelper.sin(MathUtil
-								.degToRad((TimeUtil.getHour() / 12F) * 360F)
+						+ ((radius - (radius / 2D)) * MathHelper.sin(MathUtil.degToRad(((TimeUtil
+								.getHour() + ((TimeUtil.getMin() + (TimeUtil
+								.getSec() / 60F)) / 60F)) / 12F) * 360F)
 								- (MathUtil.PI / 2))));
 		GL11.glEnd();
 	}
@@ -116,11 +132,13 @@ public class RenderUtil {
 		GL11.glVertex2d(
 				x
 						+ ((radius - (radius / 5D)) * MathHelper.cos(MathUtil
-								.degToRad((TimeUtil.getMin() / 60F) * 360F)
+								.degToRad(((TimeUtil.getMin() + (TimeUtil
+										.getSec() / 60F)) / 60F) * 360F)
 								- (MathUtil.PI / 2))),
 				y
 						+ ((radius - (radius / 5D)) * MathHelper.sin(MathUtil
-								.degToRad((TimeUtil.getMin() / 60F) * 360F)
+								.degToRad(((TimeUtil.getMin() + (TimeUtil
+										.getSec() / 60F)) / 60F) * 360F)
 								- (MathUtil.PI / 2))));
 		GL11.glEnd();
 	}

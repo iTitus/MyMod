@@ -15,9 +15,9 @@ public class GuiAlarmList extends GuiListExtended {
 
 	private ArrayList<GuiAlarm> alarmList;
 	private int indexSelected;
-	private final GUIAlarmConfig parent;
+	private final GuiScreenAlarmConfig parent;
 
-	public GuiAlarmList(GUIAlarmConfig parent, Minecraft mc, int width,
+	public GuiAlarmList(GuiScreenAlarmConfig parent, Minecraft mc, int width,
 			int height, int top, int bottom, int slotHeight) {
 		super(mc, width, height, top, bottom, slotHeight);
 		this.parent = parent;
