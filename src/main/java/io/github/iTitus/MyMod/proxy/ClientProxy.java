@@ -3,6 +3,7 @@ package io.github.iTitus.MyMod.proxy;
 import io.github.iTitus.MyMod.client.gui.GuiContainerWheel;
 import io.github.iTitus.MyMod.client.gui.GuiScreenClockConfig;
 import io.github.iTitus.MyMod.client.handler.AlarmHandler;
+import io.github.iTitus.MyMod.client.handler.KeyHandler;
 import io.github.iTitus.MyMod.client.render.block.RenderBlockWheel;
 import io.github.iTitus.MyMod.client.render.entity.RenderEntityBullet;
 import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
@@ -25,6 +26,7 @@ import net.minecraft.world.World;
 import net.minecraftforge.client.MinecraftForgeClient;
 import cpw.mods.fml.client.registry.ClientRegistry;
 import cpw.mods.fml.client.registry.RenderingRegistry;
+import cpw.mods.fml.common.event.FMLPostInitializationEvent;
 import cpw.mods.fml.common.event.FMLPreInitializationEvent;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
@@ -54,11 +56,18 @@ public class ClientProxy extends CommonProxy {
 	}
 
 	@Override
+	public void postInit(FMLPostInitializationEvent event) {
+		super.postInit(event);
+
+		KeyHandler.init();
+	}
+
+	@Override
 	public void preInit(FMLPreInitializationEvent event) {
 		super.preInit(event);
 
-		AlarmHandler.init(new File(event.getSuggestedConfigurationFile()
-				.getParentFile() + "/mymod-alarms.dat"));
+		AlarmHandler.init(new File(event.getModConfigurationDirectory()
+				+ "/mymod-alarms.dat"));
 	}
 
 	@Override

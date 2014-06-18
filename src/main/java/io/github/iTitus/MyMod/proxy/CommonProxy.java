@@ -2,7 +2,6 @@ package io.github.iTitus.MyMod.proxy;
 
 import io.github.iTitus.MyMod.MyMod;
 import io.github.iTitus.MyMod.block.ModBlocks;
-import io.github.iTitus.MyMod.client.handler.KeyHandler;
 import io.github.iTitus.MyMod.entity.gun.EntityBullet;
 import io.github.iTitus.MyMod.handler.ConfigHandler;
 import io.github.iTitus.MyMod.handler.CraftingHandler;
@@ -59,7 +58,7 @@ public class CommonProxy implements IGuiHandler {
 	public void postInit(FMLPostInitializationEvent event) {
 
 		CraftingHandler.init();
-		KeyHandler.init();
+
 	}
 
 	public void preInit(FMLPreInitializationEvent event) {
