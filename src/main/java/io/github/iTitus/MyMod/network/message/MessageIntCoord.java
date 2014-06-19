@@ -4,16 +4,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 
-public abstract class IntCoordMessage<REQ extends IMessage> extends
-		AbstractMessage<REQ> {
+public abstract class MessageIntCoord<REQ extends IMessage> implements
+		IMessage, IMessageHandler<REQ, IMessage> {
 
 	protected int x, y, z;
 
-	public IntCoordMessage() {
+	public MessageIntCoord() {
 	}
 
-	public IntCoordMessage(int x, int y, int z) {
+	public MessageIntCoord(int x, int y, int z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -42,4 +43,5 @@ public abstract class IntCoordMessage<REQ extends IMessage> extends
 		buf.writeInt(y);
 		buf.writeInt(z);
 	}
+
 }

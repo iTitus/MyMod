@@ -43,32 +43,55 @@ public abstract class MyBlock extends Block {
 		return true;
 	}
 
+	public boolean is6Sided() {
+		return false;
+	}
+
 	@Override
 	public void onBlockPlacedBy(World world, int x, int y, int z,
 			EntityLivingBase entityLiving, ItemStack stack) {
-		if (world.getTileEntity(x, y, z) instanceof MyTileEntity) {
-			int direction = 0;
-			int facing = MathHelper
-					.floor_double(entityLiving.rotationYaw * 4.0F / 360.0F + 0.5D) & 3;
 
-			if (facing == 0) {
-				direction = ForgeDirection.NORTH.ordinal();
-			} else if (facing == 1) {
-				direction = ForgeDirection.EAST.ordinal();
-			} else if (facing == 2) {
-				direction = ForgeDirection.SOUTH.ordinal();
-			} else if (facing == 3) {
-				direction = ForgeDirection.WEST.ordinal();
-			}
+		MyTileEntity te = ((MyTileEntity) world.getTileEntity(x, y, z));
 
-			if (stack.hasDisplayName()) {
-				((MyTileEntity) world.getTileEntity(x, y, z))
-						.setCustomName(stack.getDisplayName());
-			}
+		int facing;
+		if (is6Sided() && entityLiving.rotationPitch > 45)
+			facing = 4;
+		else if (is6Sided() && entityLiving.rotationPitch < -45)
+			facing = 5;
+		else
+			facing = MathHelper
+					.floor_double(entityLiving.rotationYaw / 90F + 0.5D) & 3;
 
-			((MyTileEntity) world.getTileEntity(x, y, z))
-					.setOrientation(direction);
+		int direction = 0;
+
+		switch (facing) {
+		case 0:
+			direction = ForgeDirection.NORTH.ordinal();
+			break;
+		case 1:
+			direction = ForgeDirection.EAST.ordinal();
+			break;
+		case 2:
+			direction = ForgeDirection.SOUTH.ordinal();
+			break;
+		case 3:
+			direction = ForgeDirection.WEST.ordinal();
+			break;
+		case 4:
+			direction = ForgeDirection.UP.ordinal();
+			break;
+		case 5:
+			direction = ForgeDirection.DOWN.ordinal();
+			break;
+		default:
+			break;
 		}
+
+		te.setOrientation(direction);
+
+		if (stack.hasDisplayName())
+			te.setCustomName(stack.getDisplayName());
+
 	}
 
 }

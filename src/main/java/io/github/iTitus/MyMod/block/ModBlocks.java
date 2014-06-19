@@ -1,11 +1,14 @@
 package io.github.iTitus.MyMod.block;
 
+import io.github.iTitus.MyMod.block.display.BlockDisplay;
+import io.github.iTitus.MyMod.block.display.ItemBlockDisplay;
 import io.github.iTitus.MyMod.block.sphere.BlockSphere;
 import io.github.iTitus.MyMod.block.timeshifter.BlockTimeshifter;
 import io.github.iTitus.MyMod.block.wheel.BlockWheel;
 import io.github.iTitus.MyMod.block.wheel.ItemBlockWheel;
 import io.github.iTitus.MyMod.block.zero.BlockZero;
 import io.github.iTitus.MyMod.lib.LibNames;
+import io.github.iTitus.MyMod.tileentity.display.TileEntityDisplay;
 import io.github.iTitus.MyMod.tileentity.sphere.TileEntitySphere;
 import io.github.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 import net.minecraft.block.Block;
@@ -13,7 +16,7 @@ import cpw.mods.fml.common.registry.GameRegistry;
 
 public class ModBlocks {
 
-	public static Block zero, daymaker, wheel, sphere;
+	public static Block zero, daymaker, wheel, sphere, display;
 
 	public static void init() {
 		zero = new BlockZero();
@@ -29,6 +32,10 @@ public class ModBlocks {
 		sphere = new BlockSphere();
 		GameRegistry.registerBlock(sphere, sphere.getUnlocalizedName());
 
+		display = new BlockDisplay();
+		GameRegistry.registerBlock(display, ItemBlockDisplay.class,
+				display.getUnlocalizedName());
+
 		initTileEntities();
 
 	}
@@ -39,6 +46,9 @@ public class ModBlocks {
 
 		GameRegistry.registerTileEntity(TileEntitySphere.class,
 				LibNames.SPHERE_TE);
+
+		GameRegistry.registerTileEntity(TileEntityDisplay.class,
+				LibNames.DISPLAY_TE);
 	}
 
 }

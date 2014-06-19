@@ -1,32 +1,51 @@
 package io.github.iTitus.MyMod.tileentity;
 
+import io.github.iTitus.MyMod.network.NetworkHandler;
+import io.github.iTitus.MyMod.network.message.MessageMyTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.Packet;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class MyTileEntity extends TileEntity {
 
-	public static final String TAG_ORIENTATION = "orientation",
+	private static final String TAG_ORIENTATION = "orientation",
 			TAG_NAME = "customName";
 
-	private ForgeDirection orientation;
-	protected String customName;
+	protected String customName, owner;
+	protected ForgeDirection orientation;
+	protected byte state;
 
 	public MyTileEntity() {
-		orientation = ForgeDirection.SOUTH;
-		customName = "";
+		customName = owner = "";
+		orientation = ForgeDirection.UP;
+		state = 0;
 	}
 
 	public String getCustomName() {
 		return customName;
 	}
 
+	@Override
+	public Packet getDescriptionPacket() {
+		return NetworkHandler.INSTANCE.getPacketFrom(new MessageMyTileEntity(
+				this));
+	}
+
 	public ForgeDirection getOrientation() {
 		return orientation;
 	}
 
+	public String getOwner() {
+		return owner;
+	}
+
 	public boolean hasCustomName() {
 		return customName != null && customName.length() > 0;
+	}
+
+	public boolean hasOwner() {
+		return owner != null && owner.length() > 0;
 	}
 
 	@Override
@@ -57,6 +76,18 @@ public class MyTileEntity extends TileEntity {
 		if (this.hasCustomName()) {
 			nbtTagCompound.setString(TAG_NAME, customName);
 		}
+	}
+
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public byte getState() {
+		return state;
+	}
+
+	public void setState(byte state) {
+		this.state = state;
 	}
 
 }

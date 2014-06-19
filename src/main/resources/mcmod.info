@@ -7,7 +7,7 @@
   "mcversion": "${mcversion}",
   "url": "",
   "updateUrl": "",
-  "authors": ["iTitus"],
+  "authorList": ["iTitus"],
   "credits": "Mojang AB, for making Minecraft, the Forge and FML team, for making Forge, all the open source modders, the tutorial makers and of course the whole rest of the community :D",
   "logoFile": "assets/mymod/textures/logo.png",
   "screenshots": [],

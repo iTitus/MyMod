@@ -1,8 +1,10 @@
 package io.github.iTitus.MyMod.network;
 
 import io.github.iTitus.MyMod.lib.LibMod;
-import io.github.iTitus.MyMod.network.message.DoubleCoordMessage;
-import io.github.iTitus.MyMod.network.message.IntCoordMessage;
+import io.github.iTitus.MyMod.network.message.MessageDoubleCoord;
+import io.github.iTitus.MyMod.network.message.MessageIntCoord;
+import io.github.iTitus.MyMod.network.message.MessageMyTileEntity;
+import io.github.iTitus.MyMod.network.message.MessageTileEntityDisplay;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.NetworkRegistry;
@@ -15,35 +17,13 @@ public class NetworkHandler {
 
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE
 			.newSimpleChannel(LibMod.MOD_ID);
-	private static int discriminator;
+	private static int discriminator = -1;
 
 	public static void init() {
-	}
-
-	/**
-	 * Registers a message handled by the {@link Side#CLIENT}
-	 * 
-	 * @param messageHandler
-	 * @param requestMessageType
-	 */
-	public static void registerClientMessage(
-			Class<IMessageHandler<IMessage, IMessage>> messageHandler,
-			Class<IMessage> requestMessageType) {
-		INSTANCE.registerMessage(messageHandler, requestMessageType,
-				discriminator++, Side.CLIENT);
-	}
-
-	/**
-	 * Registers a message handled by the {@link Side#SERVER}
-	 * 
-	 * @param messageHandler
-	 * @param requestMessageType
-	 */
-	public static void registerServerMessage(
-			Class<IMessageHandler<IMessage, IMessage>> messageHandler,
-			Class<IMessage> requestMessageType) {
-		INSTANCE.registerMessage(messageHandler, requestMessageType,
-				discriminator++, Side.SERVER);
+		INSTANCE.registerMessage(MessageMyTileEntity.class,
+				MessageMyTileEntity.class, discriminator++, Side.CLIENT);
+		INSTANCE.registerMessage(MessageTileEntityDisplay.class,
+				MessageTileEntityDisplay.class, discriminator++, Side.CLIENT);
 	}
 
 	public static void sendTo(IMessage message, EntityPlayerMP player) {
@@ -54,25 +34,25 @@ public class NetworkHandler {
 		INSTANCE.sendToAll(message);
 	}
 
-	public static void sendToAllAround(DoubleCoordMessage message, World world) {
-		sendToAllAround(message, message.getTargetPoint(world));
-	}
-
-	public static void sendToAllAround(DoubleCoordMessage message, World world,
-			double distance) {
-		sendToAllAround(message, message.getTargetPoint(world, distance));
-	}
-
 	public static void sendToAllAround(IMessage message,
 			NetworkRegistry.TargetPoint point) {
 		INSTANCE.sendToAllAround(message, point);
 	}
 
-	public static void sendToAllAround(IntCoordMessage message, World world) {
+	public static void sendToAllAround(MessageDoubleCoord message, World world) {
 		sendToAllAround(message, message.getTargetPoint(world));
 	}
 
-	public static void sendToAllAround(IntCoordMessage message, World world,
+	public static void sendToAllAround(MessageDoubleCoord message, World world,
+			double distance) {
+		sendToAllAround(message, message.getTargetPoint(world, distance));
+	}
+
+	public static void sendToAllAround(MessageIntCoord message, World world) {
+		sendToAllAround(message, message.getTargetPoint(world));
+	}
+
+	public static void sendToAllAround(MessageIntCoord message, World world,
 			double distance) {
 		sendToAllAround(message, message.getTargetPoint(world, distance));
 	}

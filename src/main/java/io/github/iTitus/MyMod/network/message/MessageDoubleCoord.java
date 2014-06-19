@@ -4,16 +4,17 @@ import io.netty.buffer.ByteBuf;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
+import cpw.mods.fml.common.network.simpleimpl.IMessageHandler;
 
-public abstract class DoubleCoordMessage<REQ extends IMessage> extends
-		AbstractMessage<REQ> {
+public abstract class MessageDoubleCoord<REQ extends IMessage> implements
+		IMessage, IMessageHandler<REQ, IMessage> {
 
 	protected double x, y, z;
 
-	public DoubleCoordMessage() {
+	public MessageDoubleCoord() {
 	}
 
-	public DoubleCoordMessage(double x, double y, double z) {
+	public MessageDoubleCoord(double x, double y, double z) {
 		this.x = x;
 		this.y = y;
 		this.z = z;
@@ -41,5 +42,17 @@ public abstract class DoubleCoordMessage<REQ extends IMessage> extends
 		buf.writeDouble(x);
 		buf.writeDouble(y);
 		buf.writeDouble(z);
+	}
+
+	public double getX() {
+		return x;
+	}
+
+	public double getY() {
+		return y;
+	}
+
+	public double getZ() {
+		return z;
 	}
 }

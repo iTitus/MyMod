@@ -15,6 +15,7 @@ import io.github.iTitus.MyMod.inventory.container.ContainerWheel;
 import io.github.iTitus.MyMod.item.ModItems;
 import io.github.iTitus.MyMod.lib.LibGUI;
 import io.github.iTitus.MyMod.lib.LibRender;
+import io.github.iTitus.MyMod.tileentity.display.TileEntityDisplay;
 import io.github.iTitus.MyMod.tileentity.sphere.TileEntitySphere;
 import io.github.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 
@@ -78,11 +79,14 @@ public class ClientProxy extends CommonProxy {
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityWheel.class,
 				RenderTileEntityWheel.INSTANCE);
 
+		MinecraftForgeClient.registerItemRenderer(ModItems.gun,
+				RenderItemGun.INSTANCE);
+
 		ClientRegistry.bindTileEntitySpecialRenderer(TileEntitySphere.class,
 				RenderTileEntitySphere.INSTANCE);
 
-		MinecraftForgeClient.registerItemRenderer(ModItems.gun,
-				RenderItemGun.INSTANCE);
+		ClientRegistry.bindTileEntitySpecialRenderer(TileEntityDisplay.class,
+				RenderTileEntityDisplay.INSTANCE);
 
 		RenderingRegistry.registerEntityRenderingHandler(EntityBullet.class,
 				RenderEntityBullet.INSTANCE);

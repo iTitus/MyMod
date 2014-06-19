@@ -16,7 +16,7 @@ import cpw.mods.fml.relauncher.SideOnly;
 @SideOnly(Side.CLIENT)
 public class RenderBlockWheel implements ISimpleBlockRenderingHandler {
 
-	public static final ISimpleBlockRenderingHandler INSTANCE = new RenderBlockWheel();
+	public static final RenderBlockWheel INSTANCE = new RenderBlockWheel();
 
 	@Override
 	public int getRenderId() {
@@ -28,8 +28,8 @@ public class RenderBlockWheel implements ISimpleBlockRenderingHandler {
 			RenderBlocks renderer) {
 		GL11.glPushMatrix();
 		GL11.glTranslatef(-0.5F, -0.5F, -0.5F);
-		new RenderTileEntityWheel().renderTileEntityAt(new TileEntityWheel(),
-				0.0D, 0.0D, 0.0D, 0.0F);
+		RenderTileEntityWheel.INSTANCE.renderTileEntityAt(
+				new TileEntityWheel(), 0.0D, 0.0D, 0.0D, 0.0F);
 		GL11.glPopMatrix();
 
 	}
