@@ -36,18 +36,6 @@ public class MessageMyTileEntity extends MessageIntCoord<MessageMyTileEntity> {
 	}
 
 	@Override
-	public void toBytes(ByteBuf buf) {
-		super.toBytes(buf);
-		buf.writeByte(orientation);
-		buf.writeByte(state);
-		buf.writeInt(customName.length());
-		buf.writeBytes(customName.getBytes());
-		buf.writeInt(owner.length());
-		buf.writeBytes(owner.getBytes());
-
-	}
-
-	@Override
 	public IMessage onMessage(MessageMyTileEntity message, MessageContext ctx) {
 
 		MyTileEntity tile = (MyTileEntity) Minecraft.getMinecraft().theWorld
@@ -59,6 +47,18 @@ public class MessageMyTileEntity extends MessageIntCoord<MessageMyTileEntity> {
 		tile.setOwner(message.owner);
 
 		return null;
+	}
+
+	@Override
+	public void toBytes(ByteBuf buf) {
+		super.toBytes(buf);
+		buf.writeByte(orientation);
+		buf.writeByte(state);
+		buf.writeInt(customName.length());
+		buf.writeBytes(customName.getBytes());
+		buf.writeInt(owner.length());
+		buf.writeBytes(owner.getBytes());
+
 	}
 
 }

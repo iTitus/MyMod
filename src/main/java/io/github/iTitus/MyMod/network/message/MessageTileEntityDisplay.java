@@ -1,18 +1,17 @@
 package io.github.iTitus.MyMod.network.message;
 
+import io.github.iTitus.MyMod.tileentity.display.TileEntityDisplay;
+import io.netty.buffer.ByteBuf;
 import net.minecraft.client.Minecraft;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.MessageContext;
-import io.github.iTitus.MyMod.tileentity.MyTileEntity;
-import io.github.iTitus.MyMod.tileentity.display.TileEntityDisplay;
-import io.netty.buffer.ByteBuf;
 
 public class MessageTileEntityDisplay extends
 		MessageIntCoord<MessageTileEntityDisplay> {
 
+	private String[] text;
 	protected String customName, owner;
 	protected byte orientation, state;
-	private String[] text;
 
 	public MessageTileEntityDisplay() {
 		super();
@@ -25,22 +24,6 @@ public class MessageTileEntityDisplay extends
 		orientation = (byte) tile.getOrientation().ordinal();
 		state = tile.getState();
 		this.text = tile.getText();
-	}
-
-	@Override
-	public void toBytes(ByteBuf buf) {
-		super.toBytes(buf);
-		buf.writeByte(orientation);
-		buf.writeByte(state);
-		buf.writeInt(customName.length());
-		buf.writeBytes(customName.getBytes());
-		buf.writeInt(owner.length());
-		buf.writeBytes(owner.getBytes());
-		buf.writeInt(text.length);
-		for (String str : text) {
-			buf.writeInt(str.length());
-			buf.writeBytes(str.getBytes());
-		}
 	}
 
 	@Override
@@ -75,6 +58,22 @@ public class MessageTileEntityDisplay extends
 		tile.setText(text);
 
 		return null;
+	}
+
+	@Override
+	public void toBytes(ByteBuf buf) {
+		super.toBytes(buf);
+		buf.writeByte(orientation);
+		buf.writeByte(state);
+		buf.writeInt(customName.length());
+		buf.writeBytes(customName.getBytes());
+		buf.writeInt(owner.length());
+		buf.writeBytes(owner.getBytes());
+		buf.writeInt(text.length);
+		for (String str : text) {
+			buf.writeInt(str.length());
+			buf.writeBytes(str.getBytes());
+		}
 	}
 
 }

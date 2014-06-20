@@ -5,13 +5,13 @@ import net.minecraft.block.Block;
 import net.minecraft.block.material.Material;
 
 public enum EnumBlockType {
-	DISPLAY(LibNames.DISPLAY_NAME, Material.iron, 4F, 6F,
-	Block.soundTypeMetal), SPHERE(LibNames.SPHERE, Material.rock, 4F, 6F, Block.soundTypeStone, 0, 0,
-					true), TIMESHIFTER(LibNames.TIMESHIFTER, Material.wood, 2F, 5F,
-			Block.soundTypeWood), WHEEL(LibNames.WHEEL_NAME, Material.circuits,
-			3.5F, 6F, Block.soundTypeStone, 0, 0, true), ZERO(
-			LibNames.ZERO_NAME, Material.glass, 2F, 5F, Block.soundTypeGlass,
-			0, 0, true);
+	DISPLAY(LibNames.DISPLAY_NAME, Material.iron, 4F, 6F, Block.soundTypeMetal,
+			0, 0, true), SPHERE(LibNames.SPHERE, Material.rock, 4F, 6F,
+			Block.soundTypeStone, 0, 0, true), TIMESHIFTER(
+			LibNames.TIMESHIFTER, Material.wood, 2F, 5F, Block.soundTypeWood), WHEEL(
+			LibNames.WHEEL_NAME, Material.circuits, 3.5F, 6F,
+			Block.soundTypeStone, 0, 0, true), ZERO(LibNames.ZERO_NAME,
+			Material.glass, 2F, 5F, Block.soundTypeGlass, 0, 0, true);
 
 	public final float hardness, resistance;
 	public final int lightLevel, lightOpacity;

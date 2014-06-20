@@ -37,13 +37,6 @@ public abstract class MessageDoubleCoord<REQ extends IMessage> implements
 				y, z, updateDistance);
 	}
 
-	@Override
-	public void toBytes(ByteBuf buf) {
-		buf.writeDouble(x);
-		buf.writeDouble(y);
-		buf.writeDouble(z);
-	}
-
 	public double getX() {
 		return x;
 	}
@@ -54,5 +47,12 @@ public abstract class MessageDoubleCoord<REQ extends IMessage> implements
 
 	public double getZ() {
 		return z;
+	}
+
+	@Override
+	public void toBytes(ByteBuf buf) {
+		buf.writeDouble(x);
+		buf.writeDouble(y);
+		buf.writeDouble(z);
 	}
 }

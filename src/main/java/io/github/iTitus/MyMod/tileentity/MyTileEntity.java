@@ -40,6 +40,10 @@ public class MyTileEntity extends TileEntity {
 		return owner;
 	}
 
+	public byte getState() {
+		return state;
+	}
+
 	public boolean hasCustomName() {
 		return customName != null && customName.length() > 0;
 	}
@@ -69,6 +73,14 @@ public class MyTileEntity extends TileEntity {
 		this.orientation = ForgeDirection.getOrientation(orientation);
 	}
 
+	public void setOwner(String owner) {
+		this.owner = owner;
+	}
+
+	public void setState(byte state) {
+		this.state = state;
+	}
+
 	@Override
 	public void writeToNBT(NBTTagCompound nbtTagCompound) {
 		super.writeToNBT(nbtTagCompound);
@@ -76,18 +88,6 @@ public class MyTileEntity extends TileEntity {
 		if (this.hasCustomName()) {
 			nbtTagCompound.setString(TAG_NAME, customName);
 		}
-	}
-
-	public void setOwner(String owner) {
-		this.owner = owner;
-	}
-
-	public byte getState() {
-		return state;
-	}
-
-	public void setState(byte state) {
-		this.state = state;
 	}
 
 }

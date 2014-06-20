@@ -1,14 +1,12 @@
 package io.github.iTitus.MyMod.block.wheel;
 
 import io.github.iTitus.MyMod.block.EnumBlockType;
-import io.github.iTitus.MyMod.block.MyBlock;
+import io.github.iTitus.MyMod.block.MyBlockContainer;
 import io.github.iTitus.MyMod.lib.LibRender;
 import io.github.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
 
 import java.util.List;
 
-import net.minecraft.block.Block;
-import net.minecraft.block.ITileEntityProvider;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.Item;
@@ -19,33 +17,15 @@ import net.minecraft.world.World;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
-public class BlockWheel extends MyBlock implements ITileEntityProvider {
+public class BlockWheel extends MyBlockContainer {
 
 	public BlockWheel() {
 		super(EnumBlockType.WHEEL);
-		isBlockContainer = true;
-	}
-
-	@Override
-	public void breakBlock(World world, int x, int y, int z, Block block,
-			int meta) {
-		super.breakBlock(world, x, y, z, block, meta);
-		world.removeTileEntity(x, y, z);
 	}
 
 	@Override
 	public TileEntity createNewTileEntity(World world, int meta) {
 		return new TileEntityWheel();
-	}
-
-	@Override
-	public int damageDropped(int dmg) {
-		switch (dmg) {
-		case 0:
-			return 0;
-		default:
-			return 1;
-		}
 	}
 
 	@Override
@@ -82,17 +62,6 @@ public class BlockWheel extends MyBlock implements ITileEntityProvider {
 		// }
 
 		return false;
-	}
-
-	@Override
-	public boolean onBlockEventReceived(World world, int x, int y, int z,
-			int eventNumber, int argument) {
-
-		super.onBlockEventReceived(world, x, y, z, eventNumber, argument);
-		TileEntity tileentity = world.getTileEntity(x, y, z);
-		return tileentity != null ? tileentity.receiveClientEvent(eventNumber,
-				argument) : false;
-
 	}
 
 	@Override
