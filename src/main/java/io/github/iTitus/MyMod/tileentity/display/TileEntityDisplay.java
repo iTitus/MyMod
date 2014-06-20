@@ -1,10 +1,7 @@
 package io.github.iTitus.MyMod.tileentity.display;
 
-import io.github.iTitus.MyMod.network.NetworkHandler;
-import io.github.iTitus.MyMod.network.message.MessageTileEntityDisplay;
 import io.github.iTitus.MyMod.tileentity.MyTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
-import net.minecraft.network.Packet;
 
 public class TileEntityDisplay extends MyTileEntity {
 
@@ -15,12 +12,6 @@ public class TileEntityDisplay extends MyTileEntity {
 		super();
 		// TODO:
 		text = new String[0];
-	}
-
-	@Override
-	public Packet getDescriptionPacket() {
-		return NetworkHandler.INSTANCE
-				.getPacketFrom(new MessageTileEntityDisplay(this));
 	}
 
 	public String[] getText() {
@@ -64,7 +55,6 @@ public class TileEntityDisplay extends MyTileEntity {
 	@Override
 	public void writeToNBT(NBTTagCompound nbt) {
 		super.writeToNBT(nbt);
-
 	}
 
 }

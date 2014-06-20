@@ -3,14 +3,11 @@ package io.github.iTitus.MyMod.network;
 import io.github.iTitus.MyMod.lib.LibMod;
 import io.github.iTitus.MyMod.network.message.MessageDoubleCoord;
 import io.github.iTitus.MyMod.network.message.MessageIntCoord;
-import io.github.iTitus.MyMod.network.message.MessageMyTileEntity;
-import io.github.iTitus.MyMod.network.message.MessageTileEntityDisplay;
 import net.minecraft.entity.player.EntityPlayerMP;
 import net.minecraft.world.World;
 import cpw.mods.fml.common.network.NetworkRegistry;
 import cpw.mods.fml.common.network.simpleimpl.IMessage;
 import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
-import cpw.mods.fml.relauncher.Side;
 
 public class NetworkHandler {
 
@@ -19,10 +16,7 @@ public class NetworkHandler {
 	private static int discriminator = -1;
 
 	public static void init() {
-		INSTANCE.registerMessage(MessageMyTileEntity.class,
-				MessageMyTileEntity.class, discriminator++, Side.CLIENT);
-		INSTANCE.registerMessage(MessageTileEntityDisplay.class,
-				MessageTileEntityDisplay.class, discriminator++, Side.CLIENT);
+
 	}
 
 	public static void sendTo(IMessage message, EntityPlayerMP player) {

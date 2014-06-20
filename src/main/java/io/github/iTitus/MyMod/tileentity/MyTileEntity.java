@@ -1,16 +1,16 @@
 package io.github.iTitus.MyMod.tileentity;
 
-import io.github.iTitus.MyMod.network.NetworkHandler;
-import io.github.iTitus.MyMod.network.message.MessageMyTileEntity;
 import net.minecraft.nbt.NBTTagCompound;
+import net.minecraft.network.NetworkManager;
 import net.minecraft.network.Packet;
+import net.minecraft.network.play.server.S35PacketUpdateTileEntity;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraftforge.common.util.ForgeDirection;
 
 public class MyTileEntity extends TileEntity {
 
 	private static final String TAG_ORIENTATION = "orientation",
-			TAG_NAME = "customName";
+			TAG_NAME = "customName", TAG_OWNER = "owner";
 
 	protected String customName, owner;
 	protected ForgeDirection orientation;
@@ -28,8 +28,9 @@ public class MyTileEntity extends TileEntity {
 
 	@Override
 	public Packet getDescriptionPacket() {
-		return NetworkHandler.INSTANCE.getPacketFrom(new MessageMyTileEntity(
-				this));
+		NBTTagCompound tag = new NBTTagCompound();
+		writeToNBT(tag);
+		return new S35PacketUpdateTileEntity(xCoord, yCoord, zCoord, 0, tag);
 	}
 
 	public ForgeDirection getOrientation() {
@@ -53,11 +54,17 @@ public class MyTileEntity extends TileEntity {
 	}
 
 	@Override
-	public void readFromNBT(NBTTagCompound nbtTagCompound) {
-		super.readFromNBT(nbtTagCompound);
-		orientation = ForgeDirection.getOrientation(nbtTagCompound
+	public void onDataPacket(NetworkManager net, S35PacketUpdateTileEntity pkt) {
+		readFromNBT(pkt.func_148857_g());
+	}
+
+	@Override
+	public void readFromNBT(NBTTagCompound nbt) {
+		super.readFromNBT(nbt);
+		orientation = ForgeDirection.getOrientation(nbt
 				.getByte(TAG_ORIENTATION));
-		customName = nbtTagCompound.getString(TAG_NAME);
+		customName = nbt.getString(TAG_NAME);
+		owner = nbt.getString(TAG_OWNER);
 
 	}
 
@@ -82,12 +89,13 @@ public class MyTileEntity extends TileEntity {
 	}
 
 	@Override
-	public void writeToNBT(NBTTagCompound nbtTagCompound) {
-		super.writeToNBT(nbtTagCompound);
-		nbtTagCompound.setByte(TAG_ORIENTATION, (byte) orientation.ordinal());
-		if (this.hasCustomName()) {
-			nbtTagCompound.setString(TAG_NAME, customName);
+	public void writeToNBT(NBTTagCompound nbt) {
+		super.writeToNBT(nbt);
+		nbt.setByte(TAG_ORIENTATION, (byte) orientation.ordinal());
+		if (hasCustomName()) {
+			nbt.setString(TAG_NAME, customName);
 		}
+		nbt.setString(TAG_OWNER, owner);
 	}
 
 }
