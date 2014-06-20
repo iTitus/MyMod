@@ -1,7 +1,7 @@
 ### BLOCKS ###
 tile.zero.name=Zero
 tile.timeshifter.name=Zeitmaschine
-tile.wheel.name=§1G§2l§3ü§4c§5k§6s§7r§8a§9d
+tile.wheel.name=[WIP] §1G§2l§3ü§4c§5k§6s§7r§8a§9d
 tile.sphere.name=Sphären-Projektor
 
 ### ITEMS ###
@@ -10,7 +10,7 @@ item.gun.name=Pistole
 item.ammo.name=Kugel
 
 ### GUI / HUD ###
-gui.wheel.name=Glücksrad
+gui.wheel.name=[WIP] Glücksrad
 
 gui.clockConfig.name=Uhr-Einstellungen
 gui.clockConfig.separator=Trenner
