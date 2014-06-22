@@ -1,7 +1,5 @@
 package io.github.iTitus.MyMod.lib;
 
-import java.util.Locale;
-
 import net.minecraft.util.ResourceLocation;
 
 public class LibModels {
@@ -16,13 +14,9 @@ public class LibModels {
 		}
 
 		public ResourceLocation getModelResoureLoc() {
-			return new ResourceLocation(MODEL_LOCATION, "models/" + model
+			return new ResourceLocation(LibMod.MOD_ID, "models/" + model
 					+ ".obj");
 		}
 
 	}
-
-	public static final String MODEL_LOCATION = LibMod.MOD_ID
-			.toLowerCase(Locale.ENGLISH);
-
 }

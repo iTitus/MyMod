@@ -21,6 +21,9 @@ gui.clockConfig.clockFormat.digital=Only digital
 gui.clockConfig.clockFormat.both=Analog and digital
 gui.clockConfig.seconds=Seconds
 gui.clockConfig.am/pm=AM/PM
+gui.clockConfig.color.red=Red
+gui.clockConfig.color.green=Green
+gui.clockConfig.color.blue=Blue
 
 gui.alarmConfig.name=Alarm configuration
 gui.alarmConfig.edit=Edit alarm

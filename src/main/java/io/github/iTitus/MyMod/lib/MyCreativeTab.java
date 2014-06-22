@@ -3,7 +3,8 @@ package io.github.iTitus.MyMod.lib;
 import io.github.iTitus.MyMod.block.ModBlocks;
 import net.minecraft.creativetab.CreativeTabs;
 import net.minecraft.item.Item;
-import net.minecraft.item.ItemStack;
+import cpw.mods.fml.relauncher.Side;
+import cpw.mods.fml.relauncher.SideOnly;
 
 public class MyCreativeTab extends CreativeTabs {
 
@@ -14,13 +15,9 @@ public class MyCreativeTab extends CreativeTabs {
 	}
 
 	@Override
-	public ItemStack getIconItemStack() {
-		return new ItemStack(ModBlocks.zero);
-	}
-
-	@Override
+	@SideOnly(Side.CLIENT)
 	public Item getTabIconItem() {
-		return null;
+		return ModBlocks.zero.getItem(null, 0, 0, 0);
 	}
 
 }

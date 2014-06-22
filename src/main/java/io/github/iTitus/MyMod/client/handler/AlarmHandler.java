@@ -61,7 +61,7 @@ public class AlarmHandler {
 			loadAlarms(alarmFile);
 
 		} catch (Exception e) {
-			FMLLog.log(Level.ERROR, e, LibMod.NAME
+			FMLLog.log(Level.ERROR, e, LibMod.MOD_NAME
 					+ " has a problem loading its alarm configuration!");
 		}
 
@@ -79,7 +79,7 @@ public class AlarmHandler {
 		try {
 			saveAlarms();
 		} catch (Exception e) {
-			FMLLog.log(Level.ERROR, e, LibMod.NAME
+			FMLLog.log(Level.ERROR, e, LibMod.MOD_NAME
 					+ " has a problem editing its alarm configuration!");
 		}
 	}

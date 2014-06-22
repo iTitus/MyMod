@@ -29,6 +29,9 @@ gui.alarmConfig.delete=Wecker entfernen
 gui.alarmConfig.delete.question=Bist du dir sicher, dass du diesen Wecker entfernen möchtest?
 gui.alarmConfig.delete.warning='%s' wird für immer verloren sein! (Eine lange Zeit!)
 gui.alarmConfig.repeat=Wiederholt sich jeden Tag
+gui.clockConfig.color.red=Rot
+gui.clockConfig.color.green=Grün
+gui.clockConfig.color.blue=Blau
 
 gui.editAlarm.name=Wecker bearbeiten
 gui.editAlarm.new.name=Neuer Wecker

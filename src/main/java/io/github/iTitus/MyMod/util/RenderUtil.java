@@ -106,15 +106,16 @@ public class RenderUtil {
 
 	private static void drawLines(double x, double y, double radius) {
 		GL11.glLineWidth(1);
-		for (int angle = 30; angle <= 360; angle += 30) {
+		for (int angle = 6; angle <= 360; angle += 6) {
 			GL11.glBegin(GL11.GL_LINE_STRIP);
 			GL11.glVertex2d(
 					x
-							+ ((radius - (radius / 10D)) * MathHelper
+							+ ((radius - (radius / ((angle % 5 == 0) ? 8D : 16D))) * MathHelper
 									.sin(MathUtil.degToRad(angle))),
 					y
-							+ ((radius - (radius / 10D)) * MathHelper
+							+ ((radius - (radius / ((angle % 5 == 0) ? 8D : 16D))) * MathHelper
 									.cos(MathUtil.degToRad(angle))));
+
 			GL11.glVertex2d(
 					x + (radius * MathHelper.sin(MathUtil.degToRad(angle))),
 					y + (radius * MathHelper.cos(MathUtil.degToRad(angle))));

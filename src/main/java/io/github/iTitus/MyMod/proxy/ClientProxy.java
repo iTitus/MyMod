@@ -8,6 +8,7 @@ import io.github.iTitus.MyMod.client.render.block.RenderBlockWheel;
 import io.github.iTitus.MyMod.client.render.entity.RenderEntityBullet;
 import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
 import io.github.iTitus.MyMod.client.render.item.RenderItemGun;
+import io.github.iTitus.MyMod.client.render.tileentity.RenderTileEntityDisplay;
 import io.github.iTitus.MyMod.client.render.tileentity.RenderTileEntitySphere;
 import io.github.iTitus.MyMod.client.render.tileentity.RenderTileEntityWheel;
 import io.github.iTitus.MyMod.entity.gun.EntityBullet;

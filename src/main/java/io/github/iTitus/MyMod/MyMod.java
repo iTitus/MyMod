@@ -17,7 +17,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 
-@Mod(modid = LibMod.MOD_ID, name = LibMod.NAME)
+@Mod(modid = LibMod.MOD_ID, name = LibMod.MOD_NAME)
 public class MyMod {
 
 	@Instance(LibMod.MOD_ID)

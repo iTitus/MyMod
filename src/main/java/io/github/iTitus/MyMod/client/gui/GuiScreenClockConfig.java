@@ -66,19 +66,22 @@ public class GuiScreenClockConfig extends GuiScreen {
 
 		id++;
 		rColor = new GuiIntSliderButton(id, (width / 2) + 10, (height / 8)
-				+ (24 * (id - 1)) - 16, "Red",
+				+ (24 * (id - 1)) - 16,
+				StatCollector.translateToLocal("gui.clockConfig.color.red"),
 				RenderUtil.getColor(ConfigHandler.color)[0], 0, 255);
 		buttonList.add(rColor);
 
 		id++;
 		gColor = new GuiIntSliderButton(id, (width / 2) + 10, (height / 8)
-				+ (24 * (id - 1)) - 16, "Green",
+				+ (24 * (id - 1)) - 16,
+				StatCollector.translateToLocal("gui.clockConfig.color.green"),
 				RenderUtil.getColor(ConfigHandler.color)[1], 0, 255);
 		buttonList.add(gColor);
 
 		id++;
 		bColor = new GuiIntSliderButton(id, (width / 2) + 10, (height / 8)
-				+ (24 * (id - 1)) - 16, "Blue",
+				+ (24 * (id - 1)) - 16,
+				StatCollector.translateToLocal("gui.clockConfig.color.blue"),
 				RenderUtil.getColor(ConfigHandler.color)[2], 0, 255);
 		buttonList.add(bColor);
 

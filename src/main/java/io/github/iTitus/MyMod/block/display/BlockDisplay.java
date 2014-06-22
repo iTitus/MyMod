@@ -76,6 +76,13 @@ public class BlockDisplay extends MyBlockContainer {
 
 		setBlockBoundsBasedOnState(world, x, y, z);
 
+		if (isStanding(world, x, y, z))
+			return AxisAlignedBB.getBoundingBox(x + minX, y + minY, z + minZ, x
+					+ maxX, y + maxY + (7 / 16D), z + maxZ);
+		else if (isHanging(world, x, y, z))
+			return AxisAlignedBB.getBoundingBox(x + minX, y + minY - (7 / 16D),
+					z + minZ, x + maxX, y + maxY, z + maxZ);
+
 		return AxisAlignedBB.getBoundingBox(x + minX, y + minY, z + minZ, x
 				+ maxX, y + maxY, z + maxZ);
 	}
@@ -88,14 +95,21 @@ public class BlockDisplay extends MyBlockContainer {
 		}
 	}
 
-	@Override
-	public boolean is6Sided() {
-		return true;
+	public boolean isAttached(World world, int x, int y, int z) {
+		return world.getBlockMetadata(x, y, z) == 0;
+	}
+
+	public boolean isHanging(World world, int x, int y, int z) {
+		return world.getBlockMetadata(x, y, z) == 2;
 	}
 
 	@Override
 	public boolean isOpaqueCube() {
 		return false;
+	}
+
+	public boolean isStanding(World world, int x, int y, int z) {
+		return world.getBlockMetadata(x, y, z) == 1;
 	}
 
 	@Override
@@ -166,8 +180,8 @@ public class BlockDisplay extends MyBlockContainer {
 				minX = minZ = maxY = 1 / 16F;
 				maxX = maxZ = 15 / 16F;
 			} else {
-				minY = maxX = maxZ = 15 / 16F;
 				minX = minZ = 1 / 16F;
+				minY = maxX = maxZ = 15 / 16F;
 			}
 
 			setBlockBounds(minX, minY, minZ, maxX, maxY, maxZ);

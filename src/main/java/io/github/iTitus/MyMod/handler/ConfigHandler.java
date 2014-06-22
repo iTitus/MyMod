@@ -31,7 +31,7 @@ public class ConfigHandler {
 			loadValues(cfg);
 
 		} catch (Exception e) {
-			FMLLog.log(Level.ERROR, e, LibMod.NAME
+			FMLLog.log(Level.ERROR, e, LibMod.MOD_NAME
 					+ " has a problem loading its configuration!");
 		} finally {
 			if (cfg.hasChanged())
@@ -45,7 +45,7 @@ public class ConfigHandler {
 		try {
 			saveValues(cfg);
 		} catch (Exception e) {
-			FMLLog.log(Level.ERROR, e, LibMod.NAME
+			FMLLog.log(Level.ERROR, e, LibMod.MOD_NAME
 					+ " has a problem editing its configuration!");
 		} finally {
 			if (cfg.hasChanged())

@@ -16,7 +16,8 @@ public class TileEntityDisplay extends MyTileEntity {
 
 	public String[] getText() {
 		// TODO:
-		return new String[0];
+		return new String[] { "Im a test string", "Another test string",
+				"Too many test strings", "AAAHHHHH" };
 	}
 
 	public boolean isActive() {
