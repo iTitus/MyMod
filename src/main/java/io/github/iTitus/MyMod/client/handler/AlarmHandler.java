@@ -116,7 +116,7 @@ public class AlarmHandler {
 
 	@SubscribeEvent
 	public void onClientTick(ClientTickEvent event) {
-		if (event.side == Side.CLIENT && event.phase == Phase.END
+		if (event.phase == Phase.END
 				&& Minecraft.getMinecraft().thePlayer != null
 				&& !TimeUtil.isMin(minLastChecked)) {
 			checkAlarms();
