@@ -23,7 +23,7 @@ public class MyMod {
 	@Instance(LibMod.MOD_ID)
 	public static MyMod instance;
 
-	@SidedProxy(clientSide = "io.github.iTitus.MyMod.common.proxy.ClientProxy", serverSide = "io.github.iTitus.MyMod.common.proxy.CommonProxy")
+	@SidedProxy(clientSide = "io.github.iTitus.MyMod.client.proxy.ClientProxy", serverSide = "io.github.iTitus.MyMod.common.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
 	@EventHandler
