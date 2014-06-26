@@ -1,8 +1,8 @@
 package io.github.iTitus.MyMod.client.render.tileentity;
 
+import io.github.iTitus.MyMod.MyMod;
 import io.github.iTitus.MyMod.client.util.RenderUtil;
 import io.github.iTitus.MyMod.common.block.EnumBlockType;
-import io.github.iTitus.MyMod.common.lib.LibMod;
 import io.github.iTitus.MyMod.common.lib.LibTextures;
 import io.github.iTitus.MyMod.common.tileentity.display.TileEntityDisplay;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
@@ -16,7 +16,7 @@ public class RenderTileEntityDisplay extends TileEntitySpecialRenderer {
 	public static final TileEntitySpecialRenderer INSTANCE = new RenderTileEntityDisplay();
 
 	private static final ResourceLocation texture = new ResourceLocation(
-			LibMod.MOD_ID, LibTextures.getTextureLoc(EnumBlockType.DISPLAY));
+			MyMod.MOD_ID, LibTextures.getTextureLoc(EnumBlockType.DISPLAY));
 
 	@Override
 	public void renderTileEntityAt(TileEntity tile, double x, double y,

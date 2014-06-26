@@ -1,9 +1,9 @@
 package io.github.iTitus.MyMod.client.handler;
 
+import io.github.iTitus.MyMod.MyMod;
 import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
 import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
 import io.github.iTitus.MyMod.client.util.TimeUtil;
-import io.github.iTitus.MyMod.common.lib.LibMod;
 
 import java.io.File;
 import java.util.ArrayList;
@@ -61,7 +61,7 @@ public class AlarmHandler {
 			loadAlarms(alarmFile);
 
 		} catch (Exception e) {
-			FMLLog.log(Level.ERROR, e, LibMod.MOD_NAME
+			FMLLog.log(Level.ERROR, e, MyMod.MOD_ID
 					+ " has a problem loading its alarm configuration!");
 		}
 
@@ -79,7 +79,7 @@ public class AlarmHandler {
 		try {
 			saveAlarms();
 		} catch (Exception e) {
-			FMLLog.log(Level.ERROR, e, LibMod.MOD_NAME
+			FMLLog.log(Level.ERROR, e, MyMod.MOD_ID
 					+ " has a problem editing its alarm configuration!");
 		}
 	}

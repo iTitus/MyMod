@@ -1,5 +1,6 @@
 package io.github.iTitus.MyMod.common.lib;
 
+import io.github.iTitus.MyMod.MyMod;
 import io.github.iTitus.MyMod.common.block.EnumBlockType;
 import io.github.iTitus.MyMod.common.item.EnumItemType;
 import io.github.iTitus.MyMod.common.lib.LibModels.Models;
@@ -10,11 +11,11 @@ public class LibTextures {
 	public static final String MODEL_TEXTURE_LOCATION = "textures/models/";
 
 	public static ResourceLocation getModelResourceLoc(EnumBlockType type) {
-		return new ResourceLocation(LibMod.MOD_ID, getModelTextureLoc(type));
+		return new ResourceLocation(MyMod.MOD_ID, getModelTextureLoc(type));
 	}
 
 	public static ResourceLocation getModelResourceLoc(EnumItemType type) {
-		return new ResourceLocation(LibMod.MOD_ID, getModelTextureLoc(type));
+		return new ResourceLocation(MyMod.MOD_ID, getModelTextureLoc(type));
 	}
 
 	public static String getModelTextureLoc(EnumBlockType type) {
@@ -30,23 +31,23 @@ public class LibTextures {
 	}
 
 	public static ResourceLocation getModelTextureResourceLoc(Models type) {
-		return new ResourceLocation(LibMod.MOD_ID, getModelTextureLoc(type));
+		return new ResourceLocation(MyMod.MOD_ID, getModelTextureLoc(type));
 	}
 
 	public static String getTextureLoc(EnumBlockType type) {
-		return LibMod.MOD_ID + ":" + type.name;
+		return MyMod.MOD_ID + ":" + type.name;
 	}
 
 	public static String getTextureLoc(EnumItemType type) {
-		return LibMod.MOD_ID + ":" + type.name;
+		return MyMod.MOD_ID + ":" + type.name;
 	}
 
 	public static ResourceLocation getTextureResourceLoc(EnumBlockType type) {
-		return new ResourceLocation(LibMod.MOD_ID, getTextureLoc(type));
+		return new ResourceLocation(MyMod.MOD_ID, getTextureLoc(type));
 	}
 
 	public static ResourceLocation getTextureResourceLoc(EnumItemType type) {
-		return new ResourceLocation(LibMod.MOD_ID, getTextureLoc(type));
+		return new ResourceLocation(MyMod.MOD_ID, getTextureLoc(type));
 	}
 
 }

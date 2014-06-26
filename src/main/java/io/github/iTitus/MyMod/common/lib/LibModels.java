@@ -1,5 +1,6 @@
 package io.github.iTitus.MyMod.common.lib;
 
+import io.github.iTitus.MyMod.MyMod;
 import net.minecraft.util.ResourceLocation;
 
 public class LibModels {
@@ -14,7 +15,7 @@ public class LibModels {
 		}
 
 		public ResourceLocation getModelResoureLoc() {
-			return new ResourceLocation(LibMod.MOD_ID, "models/" + model
+			return new ResourceLocation(MyMod.MOD_ID, "models/" + model
 					+ ".obj");
 		}
 

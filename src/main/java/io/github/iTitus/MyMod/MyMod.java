@@ -1,6 +1,5 @@
 package io.github.iTitus.MyMod;
 
-import io.github.iTitus.MyMod.common.lib.LibMod;
 import io.github.iTitus.MyMod.common.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
@@ -17,11 +16,13 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 
-@Mod(modid = LibMod.MOD_ID, name = LibMod.MOD_NAME)
+@Mod(modid = MyMod.MOD_ID/* , guiFactory = "io.github.iTitus.MyMod.client.gui.MyModGuiFactory" */)
 public class MyMod {
 
-	@Instance(LibMod.MOD_ID)
+	@Instance
 	public static MyMod instance;
+
+	public static final String MOD_ID = "mymod";
 
 	@SidedProxy(clientSide = "io.github.iTitus.MyMod.client.proxy.ClientProxy", serverSide = "io.github.iTitus.MyMod.common.proxy.CommonProxy")
 	public static CommonProxy proxy;

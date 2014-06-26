@@ -1,6 +1,6 @@
 package io.github.iTitus.MyMod.common.network;
 
-import io.github.iTitus.MyMod.common.lib.LibMod;
+import io.github.iTitus.MyMod.MyMod;
 import io.github.iTitus.MyMod.common.network.message.MessageDoubleCoord;
 import io.github.iTitus.MyMod.common.network.message.MessageIntCoord;
 import net.minecraft.entity.player.EntityPlayerMP;
@@ -12,7 +12,7 @@ import cpw.mods.fml.common.network.simpleimpl.SimpleNetworkWrapper;
 public class NetworkHandler {
 
 	public static final SimpleNetworkWrapper INSTANCE = NetworkRegistry.INSTANCE
-			.newSimpleChannel(LibMod.MOD_ID);
+			.newSimpleChannel(MyMod.MOD_ID);
 	private static int discriminator = -1;
 
 	public static void init() {

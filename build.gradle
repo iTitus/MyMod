@@ -31,7 +31,7 @@ configFile.withReader {
 
 version = "${config.minecraft_version}-${config.mod_version}.${config.build}"
 group= "io.github.iTitus" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
-archivesBaseName = "MyMod"
+archivesBaseName = "iTitusMyMod"
 
 minecraft {
 

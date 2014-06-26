@@ -1,6 +1,6 @@
 package io.github.iTitus.MyMod.common.handler;
 
-import io.github.iTitus.MyMod.common.lib.LibMod;
+import io.github.iTitus.MyMod.MyMod;
 
 import java.io.File;
 
@@ -8,6 +8,7 @@ import net.minecraftforge.common.config.Configuration;
 
 import org.apache.logging.log4j.Level;
 
+import cpw.mods.fml.common.FMLCommonHandler;
 import cpw.mods.fml.common.FMLLog;
 
 public class ConfigHandler {
@@ -16,36 +17,47 @@ public class ConfigHandler {
 
 	public static boolean seconds = true, am_pm = false;
 	public static String separator = ":";
-	private static final String CATEGORY_CLOCK = "CLOCK",
+	private static final String CATEGORY_CLOCK = "clock",
 			KEY_SEPARATOR = "separator", KEY_SECONDS = "seconds",
 			KEY_AM_PM = "am_pm", KEY_ANALOG = "analog", KEY_COLOR = "color";
 
-	private static Configuration cfg;
+	public static Configuration cfg;
 
 	public static void init(File suggestedConfigurationFile) {
 
 		cfg = new Configuration(suggestedConfigurationFile);
+
+		// FMLCommonHandler.instance().bus().register(new ConfigHandler());
+
+	}
+
+	public static void loadConfig() {
 		try {
 			cfg.load();
 
 			loadValues(cfg);
 
 		} catch (Exception e) {
-			FMLLog.log(Level.ERROR, e, LibMod.MOD_NAME
+			FMLLog.log(Level.ERROR, e, MyMod.MOD_ID
 					+ " has a problem loading its configuration!");
 		} finally {
 			if (cfg.hasChanged())
 				cfg.save();
 		}
-
 	}
+
+	// public void onConfigChanged(OnConfigChangedEvent event) {
+	// // if (event.modID == MyMod.MOD_ID)
+	// // loadConfig();
+	//
+	// }
 
 	public static void save() {
 
 		try {
 			saveValues(cfg);
 		} catch (Exception e) {
-			FMLLog.log(Level.ERROR, e, LibMod.MOD_NAME
+			FMLLog.log(Level.ERROR, e, MyMod.MOD_ID
 					+ " has a problem editing its configuration!");
 		} finally {
 			if (cfg.hasChanged())
