@@ -1,8 +1,8 @@
 package io.github.iTitus.MyMod.client.render.block;
 
 import io.github.iTitus.MyMod.client.render.tileentity.RenderTileEntityWheel;
-import io.github.iTitus.MyMod.lib.LibRender;
-import io.github.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
+import io.github.iTitus.MyMod.common.lib.LibRender;
+import io.github.iTitus.MyMod.common.tileentity.wheel.TileEntityWheel;
 import net.minecraft.block.Block;
 import net.minecraft.client.renderer.RenderBlocks;
 import net.minecraft.world.IBlockAccess;

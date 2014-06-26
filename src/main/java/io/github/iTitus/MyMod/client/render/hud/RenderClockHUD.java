@@ -2,9 +2,9 @@ package io.github.iTitus.MyMod.client.render.hud;
 
 import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
 import io.github.iTitus.MyMod.client.handler.KeyHandler;
-import io.github.iTitus.MyMod.handler.ConfigHandler;
-import io.github.iTitus.MyMod.util.RenderUtil;
-import io.github.iTitus.MyMod.util.TimeUtil;
+import io.github.iTitus.MyMod.client.util.RenderUtil;
+import io.github.iTitus.MyMod.client.util.TimeUtil;
+import io.github.iTitus.MyMod.common.handler.ConfigHandler;
 
 import java.util.concurrent.ConcurrentLinkedQueue;
 

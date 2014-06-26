@@ -2,7 +2,7 @@ package io.github.iTitus.MyMod.client.handler;
 
 import io.github.iTitus.MyMod.MyMod;
 import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
-import io.github.iTitus.MyMod.lib.LibGUI;
+import io.github.iTitus.MyMod.common.lib.LibGUI;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.settings.KeyBinding;
 

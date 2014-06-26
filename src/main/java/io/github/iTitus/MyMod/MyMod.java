@@ -1,7 +1,7 @@
 package io.github.iTitus.MyMod;
 
-import io.github.iTitus.MyMod.lib.LibMod;
-import io.github.iTitus.MyMod.proxy.CommonProxy;
+import io.github.iTitus.MyMod.common.lib.LibMod;
+import io.github.iTitus.MyMod.common.proxy.CommonProxy;
 import cpw.mods.fml.common.Mod;
 import cpw.mods.fml.common.Mod.EventHandler;
 import cpw.mods.fml.common.Mod.Instance;
@@ -23,7 +23,7 @@ public class MyMod {
 	@Instance(LibMod.MOD_ID)
 	public static MyMod instance;
 
-	@SidedProxy(clientSide = "io.github.iTitus.MyMod.proxy.ClientProxy", serverSide = "io.github.iTitus.MyMod.proxy.CommonProxy")
+	@SidedProxy(clientSide = "io.github.iTitus.MyMod.common.proxy.ClientProxy", serverSide = "io.github.iTitus.MyMod.common.proxy.CommonProxy")
 	public static CommonProxy proxy;
 
 	@EventHandler

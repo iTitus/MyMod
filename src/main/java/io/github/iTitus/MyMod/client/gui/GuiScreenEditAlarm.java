@@ -2,8 +2,8 @@ package io.github.iTitus.MyMod.client.gui;
 
 import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
 import io.github.iTitus.MyMod.client.handler.AlarmHandler;
-import io.github.iTitus.MyMod.handler.ConfigHandler;
-import io.github.iTitus.MyMod.util.TimeUtil;
+import io.github.iTitus.MyMod.client.util.TimeUtil;
+import io.github.iTitus.MyMod.common.handler.ConfigHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiTextField;

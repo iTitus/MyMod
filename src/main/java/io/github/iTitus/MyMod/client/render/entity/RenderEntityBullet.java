@@ -1,8 +1,8 @@
 package io.github.iTitus.MyMod.client.render.entity;
 
-import io.github.iTitus.MyMod.entity.gun.EntityBullet;
-import io.github.iTitus.MyMod.lib.LibModels;
-import io.github.iTitus.MyMod.lib.LibTextures;
+import io.github.iTitus.MyMod.common.entity.gun.EntityBullet;
+import io.github.iTitus.MyMod.common.lib.LibModels;
+import io.github.iTitus.MyMod.common.lib.LibTextures;
 import net.minecraft.client.renderer.entity.Render;
 import net.minecraft.entity.Entity;
 import net.minecraft.util.ResourceLocation;

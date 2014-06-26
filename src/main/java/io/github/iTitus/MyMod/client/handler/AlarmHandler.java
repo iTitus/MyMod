@@ -2,8 +2,8 @@ package io.github.iTitus.MyMod.client.handler;
 
 import io.github.iTitus.MyMod.client.gui.GuiAlarm.Alarm;
 import io.github.iTitus.MyMod.client.render.hud.RenderClockHUD;
-import io.github.iTitus.MyMod.lib.LibMod;
-import io.github.iTitus.MyMod.util.TimeUtil;
+import io.github.iTitus.MyMod.client.util.TimeUtil;
+import io.github.iTitus.MyMod.common.lib.LibMod;
 
 import java.io.File;
 import java.util.ArrayList;

@@ -1,9 +1,9 @@
 package io.github.iTitus.MyMod.client.render.tileentity;
 
-import io.github.iTitus.MyMod.block.EnumBlockType;
 import io.github.iTitus.MyMod.client.model.ModelWheel;
-import io.github.iTitus.MyMod.lib.LibTextures;
-import io.github.iTitus.MyMod.tileentity.wheel.TileEntityWheel;
+import io.github.iTitus.MyMod.common.block.EnumBlockType;
+import io.github.iTitus.MyMod.common.lib.LibTextures;
+import io.github.iTitus.MyMod.common.tileentity.wheel.TileEntityWheel;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.ResourceLocation;

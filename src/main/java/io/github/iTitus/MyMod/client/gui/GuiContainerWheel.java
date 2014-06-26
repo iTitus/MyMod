@@ -1,8 +1,8 @@
 package io.github.iTitus.MyMod.client.gui;
 
-import io.github.iTitus.MyMod.inventory.container.ContainerWheel;
-import io.github.iTitus.MyMod.lib.LibGUI;
-import io.github.iTitus.MyMod.lib.LibMod;
+import io.github.iTitus.MyMod.common.inventory.container.ContainerWheel;
+import io.github.iTitus.MyMod.common.lib.LibGUI;
+import io.github.iTitus.MyMod.common.lib.LibMod;
 import net.minecraft.client.gui.inventory.GuiContainer;
 import net.minecraft.util.ResourceLocation;
 import net.minecraft.util.StatCollector;

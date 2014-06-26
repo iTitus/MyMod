@@ -1,6 +1,6 @@
 package io.github.iTitus.MyMod.client.render.tileentity;
 
-import io.github.iTitus.MyMod.util.MathUtil;
+import io.github.iTitus.MyMod.common.util.MathUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.renderer.tileentity.TileEntitySpecialRenderer;
 import net.minecraft.tileentity.TileEntity;

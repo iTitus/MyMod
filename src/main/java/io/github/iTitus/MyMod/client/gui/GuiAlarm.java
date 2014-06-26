@@ -1,7 +1,7 @@
 package io.github.iTitus.MyMod.client.gui;
 
 import io.github.iTitus.MyMod.client.handler.AlarmHandler;
-import io.github.iTitus.MyMod.util.TimeUtil;
+import io.github.iTitus.MyMod.client.util.TimeUtil;
 import net.minecraft.client.Minecraft;
 import net.minecraft.client.gui.GuiListExtended.IGuiListEntry;
 import net.minecraft.client.renderer.Tessellator;

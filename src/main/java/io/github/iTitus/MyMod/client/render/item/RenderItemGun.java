@@ -1,8 +1,8 @@
 package io.github.iTitus.MyMod.client.render.item;
 
 import io.github.iTitus.MyMod.client.model.ModelGun;
-import io.github.iTitus.MyMod.item.EnumItemType;
-import io.github.iTitus.MyMod.lib.LibTextures;
+import io.github.iTitus.MyMod.common.item.EnumItemType;
+import io.github.iTitus.MyMod.common.lib.LibTextures;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.client.IItemRenderer;
 
