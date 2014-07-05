@@ -17,19 +17,11 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class GuiScreenModConfig extends GuiConfig {
 
 	public GuiScreenModConfig(GuiScreen parent) {
-		super(
-				parent,
-				new ConfigElement(
-						ConfigHandler.cfg
-								.getCategory(Configuration.CATEGORY_GENERAL))
-						.getChildElements(),
-				MyMod.MOD_ID,
-				false,
-				false,
-				GuiConfig.getAbridgedConfigPath(ConfigHandler.cfg.toString()),
-				"Some properties need a restart!"
-						+ "\n"
-						+ "You can also (and better) edit the clock properties by pressing '"
+		super(parent, new ConfigElement(
+				ConfigHandler.cfg.getCategory(Configuration.CATEGORY_GENERAL))
+				.getChildElements(), MyMod.MOD_ID, false, false, GuiConfig
+				.getAbridgedConfigPath(ConfigHandler.cfg.toString()),
+				"You can also (and better) edit the clock properties by pressing '"
 						+ Keyboard.getKeyName(KeyHandler.getKeyBinding(
 								KeyHandler.KEYBINDING_CLOCK).getKeyCode())
 						+ "' ingame");
