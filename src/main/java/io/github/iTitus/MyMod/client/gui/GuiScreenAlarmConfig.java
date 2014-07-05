@@ -4,13 +4,14 @@ import io.github.iTitus.MyMod.client.handler.AlarmHandler;
 import net.minecraft.client.gui.GuiButton;
 import net.minecraft.client.gui.GuiScreen;
 import net.minecraft.client.gui.GuiYesNo;
+import net.minecraft.client.gui.GuiYesNoCallback;
 import net.minecraft.client.resources.I18n;
 import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
 @SideOnly(Side.CLIENT)
-public class GuiScreenAlarmConfig extends GuiScreen {
+public class GuiScreenAlarmConfig extends GuiScreen implements GuiYesNoCallback {
 
 	private GuiAlarmList alarmList;
 	private GuiButton editButton, deleteButton;

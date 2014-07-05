@@ -12,24 +12,23 @@ import cpw.mods.fml.relauncher.SideOnly;
 public class MyModGuiFactory implements IModGuiFactory {
 
 	@Override
+	public RuntimeOptionGuiHandler getHandlerFor(
+			RuntimeOptionCategoryElement element) {
+		return null;
+	}
+
+	@Override
 	public void initialize(Minecraft minecraftInstance) {
 
 	}
 
 	@Override
 	public Class<? extends GuiScreen> mainConfigGuiClass() {
-		// return GuiScreenModConfig.class;
-		return null;
+		return GuiScreenModConfig.class;
 	}
 
 	@Override
 	public Set<RuntimeOptionCategoryElement> runtimeGuiCategories() {
-		return null;
-	}
-
-	@Override
-	public RuntimeOptionGuiHandler getHandlerFor(
-			RuntimeOptionCategoryElement element) {
 		return null;
 	}
 

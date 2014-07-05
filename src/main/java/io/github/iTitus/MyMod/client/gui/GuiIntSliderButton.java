@@ -31,6 +31,11 @@ public class GuiIntSliderButton extends GuiButton {
 		this(id, x, y, 200, 20, label, startPos, minPos, maxPos);
 	}
 
+	@Override
+	public int getHoverState(boolean b) {
+		return 0;
+	}
+
 	public int getSliderPosition() {
 		return position;
 	}
@@ -63,11 +68,6 @@ public class GuiIntSliderButton extends GuiButton {
 	@Override
 	public void mouseReleased(int x, int y) {
 		isSliding = false;
-	}
-
-	@Override
-	protected int getHoverState(boolean b) {
-		return 0;
 	}
 
 	@Override

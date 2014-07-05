@@ -16,7 +16,7 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 
-@Mod(modid = MyMod.MOD_ID/* , guiFactory = "io.github.iTitus.MyMod.client.gui.MyModGuiFactory" */)
+@Mod(modid = MyMod.MOD_ID, guiFactory = "io.github.iTitus.MyMod.client.gui.MyModGuiFactory")
 public class MyMod {
 
 	@Instance
