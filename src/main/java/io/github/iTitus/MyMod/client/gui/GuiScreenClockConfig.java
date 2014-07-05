@@ -113,7 +113,7 @@ public class GuiScreenClockConfig extends GuiScreen {
 			ConfigHandler.color = RenderUtil.getColor(
 					rColor.getSliderPosition(), gColor.getSliderPosition(),
 					bColor.getSliderPosition());
-			ConfigHandler.save();
+			ConfigHandler.saveConfig();
 		}
 	}
 
@@ -124,15 +124,15 @@ public class GuiScreenClockConfig extends GuiScreen {
 		case 0:
 			ConfigHandler.analog_digital = ((GuiSwitchButton) button)
 					.getCurrentIndex();
-			ConfigHandler.save();
+			ConfigHandler.saveConfig();
 			break;
 		case 1:
 			ConfigHandler.seconds = ((GuiOnOffButton) button).getCurrentValue();
-			ConfigHandler.save();
+			ConfigHandler.saveConfig();
 			break;
 		case 2:
 			ConfigHandler.am_pm = ((GuiOnOffButton) button).getCurrentValue();
-			ConfigHandler.save();
+			ConfigHandler.saveConfig();
 			break;
 		case 7:
 			mc.displayGuiScreen(new GuiScreenAlarmConfig(this));
@@ -148,7 +148,7 @@ public class GuiScreenClockConfig extends GuiScreen {
 	protected void keyTyped(char par1, int par2) {
 		if (separator.textboxKeyTyped(par1, par2)) {
 			ConfigHandler.separator = separator.getText();
-			ConfigHandler.save();
+			ConfigHandler.saveConfig();
 		} else {
 			super.keyTyped(par1, par2);
 		}
