@@ -10,6 +10,8 @@ item.gun.name=Pistole
 item.ammo.name=Kugel
 
 ### GUI / HUD ###
+gui.config.subtitle=Du kannst die Uhr auch (und besser) im Spiel verändern, indem du '%s' drückst
+
 gui.wheel.name=[WIP] Glücksrad
 
 gui.clockConfig.name=Uhr-Einstellungen

@@ -10,6 +10,8 @@ item.gun.name=Gun
 item.ammo.name=Bullet
 
 ### GUI / HUD ###
+gui.config.subtitle=You can also (and better) edit the clock properties by pressing '%s' ingame
+
 gui.wheel.name=[WIP] Wheel of Fortune
 
 gui.clockConfig.name=Clock configuration

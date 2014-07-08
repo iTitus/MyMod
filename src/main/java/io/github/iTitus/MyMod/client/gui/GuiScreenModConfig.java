@@ -4,6 +4,7 @@ import io.github.iTitus.MyMod.MyMod;
 import io.github.iTitus.MyMod.client.handler.KeyHandler;
 import io.github.iTitus.MyMod.common.handler.ConfigHandler;
 import net.minecraft.client.gui.GuiScreen;
+import net.minecraft.util.StatCollector;
 import net.minecraftforge.common.config.ConfigElement;
 import net.minecraftforge.common.config.Configuration;
 
@@ -21,10 +22,10 @@ public class GuiScreenModConfig extends GuiConfig {
 				ConfigHandler.cfg.getCategory(Configuration.CATEGORY_GENERAL))
 				.getChildElements(), MyMod.MOD_ID, false, false, GuiConfig
 				.getAbridgedConfigPath(ConfigHandler.cfg.toString()),
-				"You can also (and better) edit the clock properties by pressing '"
-						+ Keyboard.getKeyName(KeyHandler.getKeyBinding(
-								KeyHandler.KEYBINDING_CLOCK).getKeyCode())
-						+ "' ingame");
+				StatCollector.translateToLocalFormatted(
+						"gui.config.subtitle",
+						Keyboard.getKeyName(KeyHandler.getKeyBinding(
+								KeyHandler.KEYBINDING_CLOCK).getKeyCode())));
 	}
 
 	@Override
