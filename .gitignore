@@ -9,6 +9,7 @@ lib/
 mcp/
 misc/
 out/
+ui/
 
 ### Files ###
 *.bat
@@ -21,6 +22,7 @@ out/
 *.iws
 *.mtl
 *.project
+*.setting
 *.txt
 *.xcf
 *.xml
