@@ -7,7 +7,6 @@ import net.minecraft.item.Item;
 public abstract class MyItem extends Item {
 
 	public MyItem(EnumItemType type) {
-		super();
 		setUnlocalizedName(type.name);
 		if (type.hasTexture)
 			setTextureName(LibTextures.getTextureLoc(type));

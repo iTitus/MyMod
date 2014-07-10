@@ -28,9 +28,4 @@ public class GuiScreenModConfig extends GuiConfig {
 								KeyHandler.KEYBINDING_CLOCK).getKeyCode())));
 	}
 
-	@Override
-	public void drawScreen(int mouseX, int mouseY, float partialTicks) {
-		super.drawScreen(mouseX, mouseY, partialTicks);
-	}
-
 }
