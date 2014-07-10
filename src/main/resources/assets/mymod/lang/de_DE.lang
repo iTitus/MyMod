@@ -3,6 +3,7 @@ tile.zero.name=Zero
 tile.timeshifter.name=Zeitmaschine
 tile.wheel.name=[WIP] §1G§2l§3ü§4c§5k§6s§7r§8a§9d
 tile.sphere.name=Sphären-Projektor
+tile.display.name=Display
 
 ### ITEMS ###
 item.debug.name=Debug Item
@@ -75,3 +76,6 @@ lore.gun=Kann jede Kugel schießen
 lore.ammo=Kann mit jeder Kugel abgeschossen werden
 lore.wheel.0=Gefüllt
 lore.wheel.1=Leer
+lore.display.0='An-der-Wand-hängende'-Version
+lore.display.1=Freistehende Version
+lore.display.2=Freihängende Version

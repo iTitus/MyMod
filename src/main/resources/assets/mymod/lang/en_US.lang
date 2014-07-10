@@ -3,6 +3,7 @@ tile.zero.name=Zero
 tile.timeshifter.name=Timeshifter
 tile.wheel.name=[WIP] §1W§2h§3e§4e§5l §6o§7f §8F§9o§ar§bt§cu§dn§ee§r
 tile.sphere.name=Sphere projector
+tile.display.name=Display
 
 ### ITEMS ###
 item.debug.name=Debug Item
@@ -75,3 +76,6 @@ lore.gun=Can shoot any bullet
 lore.ammo=Can be shot with a gun
 lore.wheel.0=Filled
 lore.wheel.1=Empty
+lore.display.0=Attaching version
+lore.display.1=Free standing version
+lore.display.2=Free hanging version

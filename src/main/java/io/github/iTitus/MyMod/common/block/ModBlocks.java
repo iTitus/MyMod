@@ -18,25 +18,25 @@ import cpw.mods.fml.common.registry.GameRegistry.ObjectHolder;
 @ObjectHolder(MyMod.MOD_ID)
 public class ModBlocks {
 
-	public static final BlockTimeshifter daymaker = new BlockTimeshifter();
-	public static final BlockDisplay display = new BlockDisplay();
-	public static final BlockSphere sphere = new BlockSphere();
-	public static final BlockWheel wheel = new BlockWheel();
-	public static final BlockZero zero = new BlockZero();
+	public static final MyBlock timeshifter = new BlockTimeshifter();
+	public static final MyBlock display = new BlockDisplay();
+	public static final MyBlock sphere = new BlockSphere();
+	public static final MyBlock wheel = new BlockWheel();
+	public static final MyBlock zero = new BlockZero();
 
 	public static void init() {
 
-		GameRegistry.registerBlock(zero, zero.getUnlocalizedName());
+		GameRegistry.registerBlock(zero, LibNames.ZERO_NAME);
 
-		GameRegistry.registerBlock(daymaker, daymaker.getUnlocalizedName());
+		GameRegistry.registerBlock(timeshifter, LibNames.TIMESHIFTER_NAME);
 
 		GameRegistry.registerBlock(wheel, ItemBlockWheel.class,
-				wheel.getUnlocalizedName());
+				LibNames.WHEEL_NAME);
 
-		GameRegistry.registerBlock(sphere, sphere.getUnlocalizedName());
+		GameRegistry.registerBlock(sphere, LibNames.SPHERE_NAME);
 
 		GameRegistry.registerBlock(display, ItemBlockDisplay.class,
-				display.getUnlocalizedName());
+				LibNames.DISPLAY_NAME);
 
 		initTileEntities();
 
@@ -47,10 +47,10 @@ public class ModBlocks {
 				LibNames.WHEEL_TE_NAME);
 
 		GameRegistry.registerTileEntity(TileEntitySphere.class,
-				LibNames.SPHERE_TE);
+				LibNames.SPHERE_TE_NAME);
 
 		GameRegistry.registerTileEntity(TileEntityDisplay.class,
-				LibNames.DISPLAY_TE);
+				LibNames.DISPLAY_TE_NAME);
 	}
 
 }

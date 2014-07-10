@@ -10,6 +10,7 @@ import net.minecraft.client.renderer.texture.IIconRegister;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.util.IIcon;
+import net.minecraft.util.StatCollector;
 import cpw.mods.fml.relauncher.Side;
 import cpw.mods.fml.relauncher.SideOnly;
 
@@ -31,13 +32,13 @@ public class ItemBlockDisplay extends MyItemBlock {
 		list.add("");
 		switch (stack.getItemDamage()) {
 		case 0:
-			list.add("Attaching version");
+			list.add(StatCollector.translateToLocal("lore.display.0"));
 			break;
 		case 1:
-			list.add("Free standing version");
+			list.add(StatCollector.translateToLocal("lore.display.1"));
 			break;
 		case 2:
-			list.add("Free hanging version");
+			list.add(StatCollector.translateToLocal("lore.display.2"));
 			break;
 		}
 	}
@@ -59,7 +60,7 @@ public class ItemBlockDisplay extends MyItemBlock {
 		super.registerIcons(register);
 		iconStanding = register.registerIcon(field_150939_a.getItemIconName()
 				+ "_1");
-		iconStanding = register.registerIcon(field_150939_a.getItemIconName()
+		iconHanging = register.registerIcon(field_150939_a.getItemIconName()
 				+ "_2");
 	}
 

@@ -63,11 +63,10 @@ public class CommonProxy implements IGuiHandler {
 
 	public void preInit(FMLPreInitializationEvent event) {
 		ConfigHandler.init(event.getSuggestedConfigurationFile());
-		NetworkHandler.init();
-
 		ModBlocks.init();
 		ModItems.init();
 		VanillaRecipes.init();
+		NetworkHandler.init();
 	}
 
 	public void registerEntities() {
