@@ -16,13 +16,14 @@ import cpw.mods.fml.common.event.FMLServerStartingEvent;
 import cpw.mods.fml.common.event.FMLServerStoppedEvent;
 import cpw.mods.fml.common.event.FMLServerStoppingEvent;
 
-@Mod(modid = MyMod.MOD_ID, guiFactory = "io.github.iTitus.MyMod.client.gui.MyModGuiFactory")
+@Mod(modid = MyMod.MOD_ID, version = MyMod.MOD_VERSION, guiFactory = "io.github.iTitus.MyMod.client.gui.MyModGuiFactory")
 public class MyMod {
 
 	@Instance
 	public static MyMod instance;
 
 	public static final String MOD_ID = "mymod";
+	public static final String MOD_VERSION = "@VERSION@";
 
 	@SidedProxy(clientSide = "io.github.iTitus.MyMod.client.proxy.ClientProxy", serverSide = "io.github.iTitus.MyMod.common.proxy.CommonProxy")
 	public static CommonProxy proxy;
