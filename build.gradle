@@ -31,6 +31,8 @@ apply plugin: 'forge'
 version = config.minecraft_version + "-" + config.mod_version
 group= "io.github.iTitus" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "iTitusMyMod"
+targetCompatibility = '1.6'
+sourceCompatibility = '1.6'
 
 minecraft {
     version = config.minecraft_version + "-" + config.forge_version
