@@ -6,12 +6,12 @@ import net.minecraft.item.Item;
 
 public abstract class MyItem extends Item {
 
-	public MyItem(EnumItemType type) {
-		setUnlocalizedName(type.name);
-		if (type.hasTexture)
-			setTextureName(LibTextures.getTextureLoc(type));
-		if (type.putInTab)
-			setCreativeTab(MyCreativeTab.INSTANCE);
-	}
+    public MyItem(EnumItemType type) {
+        setUnlocalizedName(type.name);
+        if (type.hasTexture)
+            setTextureName(LibTextures.getTextureLoc(type));
+        if (type.putInTab)
+            setCreativeTab(MyCreativeTab.INSTANCE);
+    }
 
 }

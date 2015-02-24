@@ -14,140 +14,136 @@ import net.minecraft.util.MovingObjectPosition;
 
 public enum EnumModifierType {
 
-	diamond_sword {
+    diamond_sword {
+        @Override
+        public ItemStack getItemStack() {
+            return new ItemStack(Items.diamond_sword);
+        }
 
-		@Override
-		public ItemStack getItemStack() {
-			return new ItemStack(Items.diamond_sword);
-		}
+        @Override
+        public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
+                             int count) {
 
-		@Override
-		public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
-				int count) {
+            if (mop.entityHit != null
+                    && (mop.entityHit instanceof EntityLivingBase)
+                    || mop.entityHit instanceof EntityMinecart
+                    || mop.entityHit instanceof EntityBoat) {
 
-			if (mop.entityHit != null
-					&& (mop.entityHit instanceof EntityLivingBase)
-					|| mop.entityHit instanceof EntityMinecart
-					|| mop.entityHit instanceof EntityBoat) {
+                Entity e = mop.entityHit;
 
-				Entity e = mop.entityHit;
+                e.attackEntityFrom(
+                        DamageSource.causePlayerDamage(bullet.getShooter()),
+                        ((ItemSword) Items.diamond_sword).func_150931_i());
 
-				e.attackEntityFrom(
-						DamageSource.causePlayerDamage(bullet.getShooter()),
-						((ItemSword) Items.diamond_sword).func_150931_i());
+            }
 
-			}
+        }
 
-		}
+    },
+    fire {
+        @Override
+        public ItemStack getItemStack() {
+            return new ItemStack(Items.flint_and_steel);
+        }
 
-	},
-	fire {
+        @Override
+        public void onShoot(EntityBullet bullet, int count) {
+            bullet.setIsFirey(true);
+        }
+    },
+    gunpowder {
+        @Override
+        public ItemStack getItemStack() {
+            return new ItemStack(Items.gunpowder);
+        }
 
-		@Override
-		public ItemStack getItemStack() {
-			return new ItemStack(Items.flint_and_steel);
-		}
+        @Override
+        public int getMaxCount() {
+            return 3;
+        }
 
-		@Override
-		public void onShoot(EntityBullet bullet, int count) {
-			bullet.setIsFirey(true);
-		}
-	},
-	gunpowder {
+        @Override
+        public void onShoot(EntityBullet bullet, int count) {
+            double d = count * 1.1;
+            bullet.motionX *= d;
+            bullet.motionY *= d;
+            bullet.motionZ *= d;
+        }
 
-		@Override
-		public ItemStack getItemStack() {
-			return new ItemStack(Items.gunpowder);
-		}
+    },
+    tnt {
+        @Override
+        public ItemStack getItemStack() {
+            return new ItemStack(Blocks.tnt);
+        }
 
-		@Override
-		public int getMaxCount() {
-			return 3;
-		}
+        @Override
+        public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
+                             int count) {
 
-		@Override
-		public void onShoot(EntityBullet bullet, int count) {
-			double d = count * 1.1;
-			bullet.motionX *= d;
-			bullet.motionY *= d;
-			bullet.motionZ *= d;
-		}
+            if (!bullet.worldObj.isRemote) {
+                bullet.worldObj.createExplosion(bullet, mop.hitVec.xCoord,
+                        mop.hitVec.yCoord, mop.hitVec.zCoord, 2F, false);
+                bullet.setDead();
+            }
 
-	},
-	tnt {
+        }
 
-		@Override
-		public ItemStack getItemStack() {
-			return new ItemStack(Blocks.tnt);
-		}
+    };
 
-		@Override
-		public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
-				int count) {
+    public static EnumModifierType getForStack(ItemStack stack) {
 
-			if (!bullet.worldObj.isRemote) {
-				bullet.worldObj.createExplosion(bullet, mop.hitVec.xCoord,
-						mop.hitVec.yCoord, mop.hitVec.zCoord, 2F, false);
-				bullet.setDead();
-			}
+        if (stack != null) {
 
-		}
+            for (EnumModifierType modifier : values()) {
 
-	};
+                if (stack.getItem() != modifier.getItemStack().getItem())
+                    continue;
 
-	public static EnumModifierType getForStack(ItemStack stack) {
+                if (modifier.strictMeta()
+                        && modifier.getItemStack().getItemDamage() != stack
+                        .getItemDamage())
+                    continue;
 
-		if (stack != null) {
+                if (modifier.strictNBT()
+                        && !ItemStack.areItemStackTagsEqual(
+                        modifier.getItemStack(), stack))
+                    continue;
 
-			for (EnumModifierType modifier : values()) {
+                return modifier;
 
-				if (stack.getItem() != modifier.getItemStack().getItem())
-					continue;
+            }
+        }
 
-				if (modifier.strictMeta()
-						&& modifier.getItemStack().getItemDamage() != stack
-								.getItemDamage())
-					continue;
+        return null;
+    }
 
-				if (modifier.strictNBT()
-						&& !ItemStack.areItemStackTagsEqual(
-								modifier.getItemStack(), stack))
-					continue;
+    public static boolean isModifier(ItemStack stack) {
+        return getForStack(stack) != null;
+    }
 
-				return modifier;
+    public abstract ItemStack getItemStack();
 
-			}
-		}
+    public int getMaxCount() {
+        return 1;
+    }
 
-		return null;
-	}
+    public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
+                         int count) {
+    }
 
-	public static boolean isModifier(ItemStack stack) {
-		return getForStack(stack) != null;
-	}
+    public void onShoot(EntityBullet bullet, int count) {
+    }
 
-	public abstract ItemStack getItemStack();
+    public void onUpdate(EntityBullet bullet, int count) {
+    }
 
-	public int getMaxCount() {
-		return 1;
-	}
+    public boolean strictMeta() {
+        return false;
+    }
 
-	public void onImpact(EntityBullet bullet, MovingObjectPosition mop,
-			int count) {
-	}
-
-	public void onShoot(EntityBullet bullet, int count) {
-	}
-
-	public void onUpdate(EntityBullet bullet, int count) {
-	}
-
-	public boolean strictMeta() {
-		return false;
-	}
-
-	public boolean strictNBT() {
-		return false;
-	}
+    public boolean strictNBT() {
+        return false;
+    }
 
 }

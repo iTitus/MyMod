@@ -5,57 +5,57 @@ import net.minecraft.nbt.NBTTagCompound;
 
 public class TileEntityDisplay extends MyTileEntity {
 
-	// TODO:
-	private String[] text;
+    // TODO:
+    private String[] text;
 
-	public TileEntityDisplay() {
-		super();
-		// TODO:
-		text = new String[0];
-	}
+    public TileEntityDisplay() {
+        super();
+        // TODO:
+        text = new String[0];
+    }
 
-	public String[] getText() {
-		// TODO:
-		return new String[] { "Im a test string", "Another test string",
-				"Too many test strings", "AAAHHHHH" };
-	}
+    public String[] getText() {
+        // TODO:
+        return new String[]{"Im a test string", "Another test string",
+                "Too many test strings", "AAAHHHHH"};
+    }
 
-	public boolean isActive() {
-		return state == 1;
-	}
+    public void setText(String[] text) {
+        // TODO:
+    }
 
-	public boolean isAttached() {
-		return getBlockMetadata() == 0;
-	}
+    public boolean isActive() {
+        return state == 1;
+    }
 
-	public boolean isHanging() {
-		return getBlockMetadata() == 2;
-	}
+    public void setActive(boolean active) {
+        state = (byte) (active ? 1 : 0);
+    }
 
-	public boolean isStanding() {
-		return getBlockMetadata() == 1;
-	}
+    public boolean isAttached() {
+        return getBlockMetadata() == 0;
+    }
 
-	@Override
-	public void readFromNBT(NBTTagCompound nbt) {
-		super.readFromNBT(nbt);
-	}
+    public boolean isHanging() {
+        return getBlockMetadata() == 2;
+    }
 
-	public void setActive(boolean active) {
-		state = (byte) (active ? 1 : 0);
-	}
+    public boolean isStanding() {
+        return getBlockMetadata() == 1;
+    }
 
-	public void setAttachingMode(int mode) {
-		worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, mode, 3);
-	}
+    @Override
+    public void readFromNBT(NBTTagCompound nbt) {
+        super.readFromNBT(nbt);
+    }
 
-	public void setText(String[] text) {
-		// TODO:
-	}
+    public void setAttachingMode(int mode) {
+        worldObj.setBlockMetadataWithNotify(xCoord, yCoord, zCoord, mode, 3);
+    }
 
-	@Override
-	public void writeToNBT(NBTTagCompound nbt) {
-		super.writeToNBT(nbt);
-	}
+    @Override
+    public void writeToNBT(NBTTagCompound nbt) {
+        super.writeToNBT(nbt);
+    }
 
 }
