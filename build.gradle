@@ -29,7 +29,7 @@ configFile.withReader {
 apply plugin: 'forge'
 
 version = config.minecraft_version + "-" + config.mod_version
-group= "io.github.iTitus" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
+group= "io.github.iTitus.mymod" // http://maven.apache.org/guides/mini/guide-naming-conventions.html
 archivesBaseName = "iTitusMyMod"
 targetCompatibility = '1.6'
 sourceCompatibility = '1.6'
