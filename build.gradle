@@ -35,8 +35,8 @@ targetCompatibility = '1.6'
 sourceCompatibility = '1.6'
 
 minecraft {
-    version = config.minecraft_version + "-" + config.forge_version
-	
+    version = "${config.minecraft_version}-${config.forge_version}-${config.minecraft_version}"
+	runDir = "eclipse"
 	replace "@VERSION@", project.version
 }
 
