@@ -1,0 +1,10 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "mymod:fall_gen"
+  },
+  "variants": {
+    "inventory": [{}],
+    "normal": [{}]
+  }
+}

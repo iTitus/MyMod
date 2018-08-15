@@ -1,0 +1,16 @@
+[
+{
+  "modid": "mymod",
+  "name": "MyMod",
+  "description": "My mod.",
+  "version": "${version}",
+  "mcversion": "${mcversion}",
+  "url": "",
+  "updateUrl": "",
+  "authorList": ["iTitus"],
+  "credits": "The Forge and FML guys",
+  "logoFile": "",
+  "screenshots": [],
+  "dependencies": []
+}
+]

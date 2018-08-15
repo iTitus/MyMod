@@ -1,0 +1,68 @@
+itemGroup.mymod:main.name=MyMod
+itemGroup.mymod:dust.name=MyMod: Dusts
+
+tile.mymod:fall_gen.name=Piezo-Electric Generator
+tile.mymod:energy_cell.name=Energy Cell
+tile.mymod:creative_energy_cell.name=Creative Energy Cell
+tile.mymod:pulverizer.name=Pulverizer
+tile.mymod:tank.name=Fluid Tank
+tile.mymod:multi_chest.name=Multi Chest
+
+item.mymod:dust.name=%s Dust
+item.mymod:side_configurator.name=Side Configurator
+item.mymod:backpack.name=Backpack
+
+fluid.mymod:milk.name=Milk
+
+container.mymod:fall_gen.name=Piezo-Electric Generator
+container.mymod:energy_cell.name=Energy Cell
+container.mymod:pulverizer.name=Pulverizer
+container.mymod:tank.name=Fluid Tank
+container.mymod:multi_chest.name=Multi Chest
+
+recipe.mymod:pulverizer.title=Pulverizer
+
+text.mymod:energy=Energy
+text.mymod:energy.stored=%d / %d FE
+text.mymod:fluid.empty=Empty
+text.mymod:fluid.stored=%d / %d mB
+text.mymod:chance=Chance: %s
+text.mymod:time.ticks=Time: %d ticks
+text.mymod:slot.index=Slot: %d
+text.mymod:facing.all=All
+text.mymod:facing.all.short=A
+text.mymod:facing.down=Down
+text.mymod:facing.down.short=D
+text.mymod:facing.up=Up
+text.mymod:facing.up.short=U
+text.mymod:facing.north=North
+text.mymod:facing.north.short=N
+text.mymod:facing.south=South
+text.mymod:facing.south.short=S
+text.mymod:facing.west=West
+text.mymod:facing.west.short=W
+text.mymod:facing.east=East
+text.mymod:facing.east.short=E
+text.mymod:side.auto_import=Auto-Import
+text.mymod:side.auto_export=Auto-Export
+text.mymod:reset=Reset
+
+material.mymod:unknown.name=Unknown
+material.mymod:iron.name=Iron
+material.mymod:gold.name=Gold
+material.mymod:coal.name=Coal
+material.mymod:charcoal.name=Charcoal
+material.mymod:diamond.name=Diamond
+material.mymod:emerald.name=Emerald
+material.mymod:lapis.name=Lapis
+material.mymod:obsidian.name=Obsidian
+material.mymod:enderpear.name=Enderpearl
+material.mymod:quartz.name=Nether Quartz
+material.mymod:copper.name=Copper
+material.mymod:tin.name=Tin
+material.mymod:lead.name=Lead
+material.mymod:silver.name=Silver
+material.mymod:nickel.name=Nickel
+material.mymod:platinum.name=Platinum
+material.mymod:iridium.name=Iridium
+material.mymod:mithril.name=Mithril

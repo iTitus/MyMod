@@ -1,0 +1,8 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "side": "mymod:blocks/fall_gen_side",
+    "top": "mymod:blocks/fall_gen_top",
+    "bottom": "mymod:blocks/fall_gen_bottom"
+  }
+}

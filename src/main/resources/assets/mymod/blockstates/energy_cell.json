@@ -1,0 +1,69 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "mymod:energy_cell"
+  },
+  "variants": {
+    "creative": {
+      "true": {
+        "textures": {
+          "side": "mymod:blocks/energy_cell_side_creative"
+        }
+      },
+      "false": {}
+    },
+    "energy_level": {
+      "0": {},
+      "1": {
+        "textures": {
+          "side": "mymod:blocks/energy_cell_side_1"
+        }
+      },
+      "2": {
+        "textures": {
+          "side": "mymod:blocks/energy_cell_side_2"
+        }
+      },
+      "3": {
+        "textures": {
+          "side": "mymod:blocks/energy_cell_side_3"
+        }
+      },
+      "4": {
+        "textures": {
+          "side": "mymod:blocks/energy_cell_side_4"
+        }
+      },
+      "5": {
+        "textures": {
+          "side": "mymod:blocks/energy_cell_side_5"
+        }
+      },
+      "6": {
+        "textures": {
+          "side": "mymod:blocks/energy_cell_side_6"
+        }
+      },
+      "7": {
+        "textures": {
+          "side": "mymod:blocks/energy_cell_side_7"
+        }
+      },
+      "8": {
+        "textures": {
+          "side": "mymod:blocks/energy_cell_side_8"
+        }
+      },
+      "9": {
+        "textures": {
+          "side": "mymod:blocks/energy_cell_side_9"
+        }
+      },
+      "10": {
+        "textures": {
+          "side": "mymod:blocks/energy_cell_side_10"
+        }
+      }
+    }
+  }
+}

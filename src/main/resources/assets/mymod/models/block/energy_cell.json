@@ -1,0 +1,9 @@
+{
+  "parent": "block/cube_bottom_top",
+  "textures": {
+    "side": "mymod:blocks/energy_cell_side_0",
+    "top": "mymod:blocks/energy_cell_top",
+    "bottom": "mymod:blocks/energy_cell_bottom",
+    "particle": "mymod:blocks/energy_cell_top"
+  }
+}

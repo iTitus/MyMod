@@ -1,0 +1,6 @@
+{
+  "parent": "mymod:block/energy_cell",
+  "textures": {
+    "side": "mymod:blocks/energy_cell_side_8"
+  }
+}

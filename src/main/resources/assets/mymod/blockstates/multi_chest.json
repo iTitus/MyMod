@@ -1,0 +1,10 @@
+{
+  "forge_marker": 1,
+  "defaults": {
+    "model": "mymod:multi_chest"
+  },
+  "variants": {
+    "inventory": [{}],
+    "normal": [{}]
+  }
+}
