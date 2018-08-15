@@ -11,7 +11,7 @@ public class ItemBase extends Item {
         super();
         this.name = name;
         setRegistryName(name);
-        setUnlocalizedName(getRegistryName().toString());
+        setTranslationKey(getRegistryName().toString().replace(':', '.'));
         setCreativeTab(ModTabs.MAIN_TAB);
     }
 

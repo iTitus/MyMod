@@ -88,7 +88,7 @@ public class RecipeDumper {
     }
 
     public static void init() {
-        dumpFolder = new File(Minecraft.getMinecraft().mcDataDir, NAME);
+        dumpFolder = new File(Minecraft.getMinecraft().gameDir, NAME);
         dumpFolder.mkdirs();
 
         if (Loader.isModLoaded("extrautils2")) {

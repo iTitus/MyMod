@@ -203,7 +203,7 @@ public class SideConfiguration implements INBTSerializable<NBTTagCompound> {
         NBTTagList tagList = compound.getTagList("configurations", Constants.NBT.TAG_COMPOUND);
         for (int i = 0; i < tagList.tagCount(); i++) {
             NBTTagCompound tag = tagList.getCompoundTagAt(i);
-            get(EnumFacing.getFront(tag.getInteger("facing"))).deserializeNBT(tag.getCompoundTag("configuration"));
+            get(EnumFacing.byIndex(tag.getInteger("facing"))).deserializeNBT(tag.getCompoundTag("configuration"));
         }
     }
 

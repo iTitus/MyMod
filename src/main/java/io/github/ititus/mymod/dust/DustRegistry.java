@@ -19,7 +19,7 @@ public class DustRegistry implements IDustRegistry {
 
     @Override
     public void register(IDust dust) {
-        if (dust == null || Strings.isNullOrEmpty(dust.getOreName()) || Strings.isNullOrEmpty(dust.getUnlocalizedName()) || dust.getID() < 0 || dust.getID() >= Short.MAX_VALUE || get(dust.getID()) != null || get(dust.getOreName()) != null) {
+        if (dust == null || Strings.isNullOrEmpty(dust.getOreName()) || Strings.isNullOrEmpty(dust.getTranslationKey()) || dust.getID() < 0 || dust.getID() >= Short.MAX_VALUE || get(dust.getID()) != null || get(dust.getOreName()) != null) {
             throw new IllegalArgumentException();
         }
         dusts.add(dust);
@@ -33,7 +33,7 @@ public class DustRegistry implements IDustRegistry {
 
     @Override
     public IDust get(String name) {
-        return Strings.isNullOrEmpty(name) ? null : dusts.stream().filter(dust -> dust.getOreName().equals(name) || dust.getUnlocalizedName().equals(name)).findFirst().orElse(null);
+        return Strings.isNullOrEmpty(name) ? null : dusts.stream().filter(dust -> dust.getOreName().equals(name) || dust.getTranslationKey().equals(name)).findFirst().orElse(null);
     }
 
     @Override

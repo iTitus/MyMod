@@ -4,7 +4,11 @@
     "model": "mymod:multi_chest"
   },
   "variants": {
-    "inventory": [{}],
-    "normal": [{}]
+    "inventory": [
+      {}
+    ],
+    "normal": [
+      {}
+    ]
   }
 }

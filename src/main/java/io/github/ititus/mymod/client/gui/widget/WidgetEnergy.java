@@ -29,8 +29,8 @@ public class WidgetEnergy extends WidgetBase {
 
     @Override
     public void addInformation(List<String> tooltip, boolean advanced) {
-        tooltip.add(I18n.translateToLocal("text.mymod:energy"));
-        tooltip.add(TextFormatting.GRAY + I18n.translateToLocalFormatted("text.mymod:energy.stored", energy.getEnergyStored(), energy.getMaxEnergyStored()));
+        tooltip.add(I18n.translateToLocal("text.mymod.energy"));
+        tooltip.add(TextFormatting.GRAY + I18n.translateToLocalFormatted("text.mymod.energy.stored", energy.getEnergyStored(), energy.getMaxEnergyStored()));
     }
 
     private int getHFixed(int max) {

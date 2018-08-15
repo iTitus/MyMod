@@ -85,6 +85,11 @@ public class EnergyStorageBaseCombinedWrapper extends EnergyStorageBase {
     }
 
     @Override
+    public int getEnergyStored() {
+        return Arrays.stream(energyStorages).mapToInt(EnergyStorageBase::getEnergyStored).sum();
+    }
+
+    @Override
     public void setEnergyStored(int energy) {
         int set = 0;
         for (EnergyStorageBase energyStorage : energyStorages) {
@@ -92,11 +97,6 @@ public class EnergyStorageBaseCombinedWrapper extends EnergyStorageBase {
             energyStorage.setEnergyStored(toSet);
             set += toSet;
         }
-    }
-
-    @Override
-    public int getEnergyStored() {
-        return Arrays.stream(energyStorages).mapToInt(EnergyStorageBase::getEnergyStored).sum();
     }
 
     @Override

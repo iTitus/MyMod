@@ -119,7 +119,7 @@ public abstract class BlockContainerBase extends BlockBase implements ITileEntit
 
     @Override
     public IBlockState getStateFromMeta(int meta) {
-        return hasFacing() ? getDefaultState().withProperty(FACING, EnumFacing.getFront(meta)) : getDefaultState();
+        return hasFacing() ? getDefaultState().withProperty(FACING, EnumFacing.byIndex(meta)) : getDefaultState();
     }
 
     @Override

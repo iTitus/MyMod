@@ -7,24 +7,24 @@ import org.apache.commons.lang3.text.WordUtils;
 
 public class Dust implements IDust {
 
-    protected final String unlocalizedName, oreName;
+    protected final String translationKey, oreName;
     protected final int id;
     protected final int color;
 
-    public Dust(String unlocalizedName, int id, int color) {
-        this(unlocalizedName, WordUtils.capitalize(unlocalizedName), id, color);
+    public Dust(String translationKey, int id, int color) {
+        this(translationKey, WordUtils.capitalize(translationKey), id, color);
     }
 
-    public Dust(String unlocalizedName, String oreName, int id, int color) {
-        this.unlocalizedName = unlocalizedName;
+    public Dust(String translationKey, String oreName, int id, int color) {
+        this.translationKey = translationKey;
         this.oreName = oreName;
         this.id = id;
         this.color = color;
     }
 
     @Override
-    public String getUnlocalizedName() {
-        return unlocalizedName;
+    public String getTranslationKey() {
+        return translationKey;
     }
 
     public String getOreName() {

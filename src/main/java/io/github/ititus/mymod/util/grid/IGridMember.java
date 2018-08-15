@@ -4,9 +4,9 @@ import net.minecraft.util.ITickable;
 
 public interface IGridMember<G extends BaseGrid> extends ITickable {
 
-    void setGrid(G grid);
-
     G getGrid();
+
+    void setGrid(G grid);
 
     boolean valid();
 

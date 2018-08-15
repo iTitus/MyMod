@@ -19,7 +19,7 @@ import java.util.stream.Collectors;
 @JEIPlugin
 public class MyModJEIPlugin implements IModPlugin {
 
-    public static final String PULVERIZER_UID = MyMod.MOD_ID + ":" + "pulverizer";
+    public static final String PULVERIZER_UID = MyMod.MOD_ID + "." + "pulverizer";
     public static IJeiRuntime jeiRuntime;
 
     @Override

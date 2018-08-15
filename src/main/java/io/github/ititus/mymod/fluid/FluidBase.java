@@ -12,6 +12,6 @@ public class FluidBase extends Fluid {
 
     @Override
     public String getUnlocalizedName() {
-        return "fluid." + MyMod.MOD_ID + ":" + unlocalizedName + ".name";
+        return "fluid." + MyMod.MOD_ID + "." + unlocalizedName + ".name";
     }
 }

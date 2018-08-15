@@ -25,28 +25,28 @@ public class GuiSideConfigurator extends GuiBase<TileBase, ContainerSideConfigur
             getTile().getSideConfiguration().setAutoImport(enabled);
             sendTileToServer();
         }));
-        addWidget(new WidgetLabel(18, 140, "text.mymod:side.auto_import", false));
+        addWidget(new WidgetLabel(18, 140, "text.mymod.side.auto_import", false));
 
         addWidget(new WidgetCheckbox(7, 150, widget -> getTile().getSideConfiguration().isAutoExport(), (widget, enabled) -> {
             getTile().getSideConfiguration().setAutoExport(enabled);
             sendTileToServer();
         }));
-        addWidget(new WidgetLabel(18, 151, "text.mymod:side.auto_export", false));
+        addWidget(new WidgetLabel(18, 151, "text.mymod.side.auto_export", false));
 
         for (int i = -1; i < EnumFacing.VALUES.length; i++) {
-            EnumFacing facing = i < 0 ? null : EnumFacing.getFront(i);
-            addWidget(new WidgetButtonText(7 + (i < 0 ? 0 : i % 2) * 20, 32 + (i < 0 ? 0 : (i - (i % 2)) / 2 + 1) * 20, 20, 20, "text.mymod:facing." + (facing != null ? facing.getName() : "all") + ".short", true, widget -> selectedFacing != facing, widget -> {
+            EnumFacing facing = i < 0 ? null : EnumFacing.byIndex(i);
+            addWidget(new WidgetButtonText(7 + (i < 0 ? 0 : i % 2) * 20, 32 + (i < 0 ? 0 : (i - (i % 2)) / 2 + 1) * 20, 20, 20, "text.mymod.facing." + (facing != null ? facing.getName() : "all") + ".short", true, widget -> selectedFacing != facing, widget -> {
                 selectedFacing = facing;
                 initGui();
             }));
         }
 
-        addWidget(new WidgetButtonText(89, 139, 80, 20, "text.mymod:reset", true, widget -> {
+        addWidget(new WidgetButtonText(89, 139, 80, 20, "text.mymod.reset", true, widget -> {
             getTile().getSideConfiguration().reset();
             sendTileToServer();
         }));
 
-        String facingString = "text.mymod:facing." + (selectedFacing != null ? selectedFacing.getName() : "all");
+        String facingString = "text.mymod.facing." + (selectedFacing != null ? selectedFacing.getName() : "all");
         addWidget(new WidgetLabel(xSize / 2, 6 + fontRenderer.FONT_HEIGHT, facingString, true));
 
         SideConfiguration cfg = getTile().getSideConfiguration();

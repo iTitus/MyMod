@@ -4,7 +4,11 @@
     "model": "mymod:fall_gen"
   },
   "variants": {
-    "inventory": [{}],
-    "normal": [{}]
+    "inventory": [
+      {}
+    ],
+    "normal": [
+      {}
+    ]
   }
 }

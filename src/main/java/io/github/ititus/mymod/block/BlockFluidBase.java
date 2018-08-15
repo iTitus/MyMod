@@ -9,7 +9,7 @@ public class BlockFluidBase extends BlockFluidClassic {
     public BlockFluidBase(Fluid fluid, Material material) {
         super(fluid, material);
         setRegistryName(fluid.getName());
-        setUnlocalizedName(getRegistryName().toString());
+        setTranslationKey(getRegistryName().toString().replace(':', '.'));
     }
 
 }

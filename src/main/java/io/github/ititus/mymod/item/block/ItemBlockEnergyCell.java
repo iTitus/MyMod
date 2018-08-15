@@ -46,8 +46,8 @@ public class ItemBlockEnergyCell extends ItemBlockBase {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
-        return stack.getMetadata() == 0 ? super.getUnlocalizedName(stack) : "tile.mymod:creative_energy_cell";
+    public String getTranslationKey(ItemStack stack) {
+        return stack.getMetadata() == 0 ? super.getTranslationKey(stack) : "tile.mymod.creative_energy_cell";
     }
 
 
@@ -57,7 +57,7 @@ public class ItemBlockEnergyCell extends ItemBlockBase {
         if (stack.getMetadata() == 0 && stack.hasCapability(CapabilityEnergy.ENERGY, null)) {
             IEnergyStorage energy = stack.getCapability(CapabilityEnergy.ENERGY, null);
             if (energy != null) {
-                tooltip.add(TextFormatting.GRAY + I18n.translateToLocalFormatted("text.mymod:energy.stored", energy.getEnergyStored(), energy.getMaxEnergyStored()));
+                tooltip.add(TextFormatting.GRAY + I18n.translateToLocalFormatted("text.mymod.energy.stored", energy.getEnergyStored(), energy.getMaxEnergyStored()));
             }
         }
     }

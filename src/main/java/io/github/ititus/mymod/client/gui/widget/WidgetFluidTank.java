@@ -70,8 +70,8 @@ public class WidgetFluidTank extends WidgetBase {
     @Override
     public void addInformation(List<String> tooltip, boolean advanced) {
         FluidStack fluid = tank.getFluid();
-        tooltip.add(fluid != null ? fluid.getLocalizedName() : I18n.translateToLocal("text.mymod:fluid.empty"));
-        tooltip.add(TextFormatting.GRAY + I18n.translateToLocalFormatted("text.mymod:fluid.stored", fluid != null ? fluid.amount : 0, tank.getCapacity()));
+        tooltip.add(fluid != null ? fluid.getLocalizedName() : I18n.translateToLocal("text.mymod.fluid.empty"));
+        tooltip.add(TextFormatting.GRAY + I18n.translateToLocalFormatted("text.mymod.fluid.stored", fluid != null ? fluid.amount : 0, tank.getCapacity()));
     }
 
     private void drawFluid(FluidStack fluidStack, int scaledAmount) {

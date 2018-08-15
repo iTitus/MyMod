@@ -25,9 +25,8 @@ import java.util.UUID;
 public class BackpackManager extends WorldSavedData {
 
     public static final String NAME = String.format("%s_%s", MyMod.MOD_ID, MyMod.BACKPACK);
-
-    private WeakReference<World> world = new WeakReference<>(null);
     private final Map<UUID, Backpack> backpacks = new HashMap<>();
+    private WeakReference<World> world = new WeakReference<>(null);
 
     public BackpackManager() {
         this(NAME);
@@ -37,12 +36,38 @@ public class BackpackManager extends WorldSavedData {
         super(name);
     }
 
-    public void setWorld(World world) {
-        this.world = new WeakReference<>(world);
+    public static BackpackManager get(World world) {
+        MapStorage storage = world.getMapStorage();
+        BackpackManager instance = (BackpackManager) storage.getOrLoadData(BackpackManager.class, NAME);
+
+        if (instance == null) {
+            instance = new BackpackManager();
+            instance.setWorld(world);
+            storage.setData(NAME, instance);
+        }
+
+        instance.setWorld(world);
+        return instance;
+    }
+
+    @SubscribeEvent
+    public static void onWorldSave(WorldEvent.Save event) {
+        if (!event.getWorld().isRemote) {
+            //getServerInstance().save();
+        }
+    }
+
+    @SubscribeEvent
+    public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
+        //getServerInstance().sync(event.player);
     }
 
     public World getWorld() {
         return world.get();
+    }
+
+    public void setWorld(World world) {
+        this.world = new WeakReference<>(world);
     }
 
     public UUID getFree() {
@@ -107,32 +132,5 @@ public class BackpackManager extends WorldSavedData {
         });
         nbt.setTag("backpacks", list);
         return nbt;
-    }
-
-    public static BackpackManager get(World world) {
-        MapStorage storage = world.getMapStorage();
-        BackpackManager instance = (BackpackManager) storage.getOrLoadData(BackpackManager.class, NAME);
-
-        if (instance == null) {
-            instance = new BackpackManager();
-            instance.setWorld(world);
-            storage.setData(NAME, instance);
-        }
-
-        instance.setWorld(world);
-        return instance;
-    }
-
-
-    @SubscribeEvent
-    public static void onWorldSave(WorldEvent.Save event) {
-        if (!event.getWorld().isRemote) {
-            //getServerInstance().save();
-        }
-    }
-
-    @SubscribeEvent
-    public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        //getServerInstance().sync(event.player);
     }
 }

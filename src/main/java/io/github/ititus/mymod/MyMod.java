@@ -9,7 +9,6 @@ import io.github.ititus.mymod.handler.GuiHandler;
 import io.github.ititus.mymod.network.NetworkHandler;
 import io.github.ititus.mymod.proxy.CommonProxy;
 import io.github.ititus.mymod.recipe.pulverizer.PulverizerRecipeManager;
-import io.github.ititus.mymod.util.backpack.BackpackManager;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.common.Mod;
 import net.minecraftforge.fml.common.SidedProxy;

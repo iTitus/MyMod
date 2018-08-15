@@ -6,7 +6,7 @@ public interface IDust {
 
     String getOreName();
 
-    String getUnlocalizedName();
+    String getTranslationKey();
 
     int getID();
 

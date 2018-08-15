@@ -17,7 +17,7 @@ public class CommandMyMod extends CommandTreeBase implements IClientCommand {
     }
 
     public static String getUsage(String name) {
-        return "commands.mymod:" + name + ".usage";
+        return "commands.mymod." + name + ".usage";
     }
 
     @Override

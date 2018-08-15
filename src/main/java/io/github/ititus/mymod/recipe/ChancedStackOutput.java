@@ -36,7 +36,7 @@ public class ChancedStackOutput implements IRecipeOutput<ItemStack> {
             public void addTooltip(ItemStack ingredient, List<String> tooltip) {
                 int percentChance = (int) (100 * chance);
                 String percentString = (percentChance == 0 ? "< 1" : percentChance) + "%";
-                tooltip.add(I18n.translateToLocalFormatted("text.mymod:chance", percentString));
+                tooltip.add(I18n.translateToLocalFormatted("text.mymod.chance", percentString));
             }
         });
     }

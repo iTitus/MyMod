@@ -45,7 +45,7 @@ public class WidgetSlot extends WidgetBase {
                     if (tile != null && tile.hasSideConfiguration()) {
                         Slot slot = gui.getSlotUnderMouse();
                         if (slot != null && !(slot.inventory instanceof InventoryPlayer) && slot.getHasStack()) {
-                            event.getToolTip().add(I18n.translateToLocalFormatted("text.mymod:slot.index", slot.getSlotIndex()));
+                            event.getToolTip().add(I18n.translateToLocalFormatted("text.mymod.slot.index", slot.getSlotIndex()));
                         }
                     }
                 }
@@ -60,7 +60,7 @@ public class WidgetSlot extends WidgetBase {
             if (tile != null && tile.hasSideConfiguration()) {
                 Slot slot = gui.getSlotUnderMouse();
                 if (slot != null && !(slot.inventory instanceof InventoryPlayer) && !slot.getHasStack()) {
-                    tooltip.add(TextFormatting.GRAY + I18n.translateToLocalFormatted("text.mymod:slot.index", slot.getSlotIndex()));
+                    tooltip.add(TextFormatting.GRAY + I18n.translateToLocalFormatted("text.mymod.slot.index", slot.getSlotIndex()));
                 }
             }
         }

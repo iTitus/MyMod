@@ -12,16 +12,15 @@ public class ModCreativeTab extends CreativeTabs {
     private boolean hasSearchBar;
 
     public ModCreativeTab(String label, Supplier<ItemStack> iconStackSupplier) {
-        super(MyMod.MOD_ID + ":" + label + ".name");
+        super(MyMod.MOD_ID + "." + label + ".name");
         this.iconStackSupplier = iconStackSupplier;
         this.hasSearchBar = false;
     }
 
     @Override
-    public ItemStack getTabIconItem() {
+    public ItemStack createIcon() {
         return iconStackSupplier.get();
     }
-
 
     @Override
     public boolean hasSearchBar() {

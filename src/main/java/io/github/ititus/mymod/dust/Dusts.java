@@ -26,9 +26,9 @@ public class Dusts {
 
     private static void registerStandardMetalDust(EnumMetalDust metalDust, boolean registration) {
         if (registration) {
-            DustManager.dusts.register(new Dust(metalDust.unlocalizedName, metalDust.oreName, metalDust.id, metalDust.color));
+            DustManager.dusts.register(new Dust(metalDust.translationKey, metalDust.oreName, metalDust.id, metalDust.color));
         } else {
-            IDust dust = DustManager.dusts.get(metalDust.unlocalizedName);
+            IDust dust = DustManager.dusts.get(metalDust.translationKey);
             if (dust != null) {
                 PulverizerRecipe.PulverizerRecipeBuilder recipeBuilder = PulverizerRecipe.builder().in(dust.getOreOreName()).out1(dust.getStack(2));
                 IDust secondOutputDust = DustManager.dusts.get(metalDust.secondOutputDust);
@@ -50,9 +50,9 @@ public class Dusts {
 
     private static void registerDust(EnumDust enumDust, boolean registration) {
         if (registration) {
-            DustManager.dusts.register(new Dust(enumDust.unlocalizedName, enumDust.oreName, enumDust.id, enumDust.color));
+            DustManager.dusts.register(new Dust(enumDust.translationKey, enumDust.oreName, enumDust.id, enumDust.color));
         } else {
-            IDust dust = DustManager.dusts.get(enumDust.unlocalizedName);
+            IDust dust = DustManager.dusts.get(enumDust.translationKey);
             if (dust != null) {
                 PulverizerRecipe.PulverizerRecipeBuilder recipeBuilder = PulverizerRecipe.builder();
                 if (Strings.isNullOrEmpty(enumDust.oreInput)) {
@@ -78,17 +78,17 @@ public class Dusts {
         MITHRIL(17, "mithril", 0x85D7EF, "gold", 0.1F);
 
         int id, color;
-        String unlocalizedName, oreName, secondOutputDust;
+        String translationKey, oreName, secondOutputDust;
         float secondOutputChance;
         ItemStack secondOutputStack;
 
-        EnumMetalDust(int id, String unlocalizedName, int color, String secondOutputDust, float secondOutputChance) {
-            this(id, unlocalizedName, WordUtils.capitalize(unlocalizedName), color, secondOutputDust, ItemStack.EMPTY, secondOutputChance);
+        EnumMetalDust(int id, String translationKey, int color, String secondOutputDust, float secondOutputChance) {
+            this(id, translationKey, WordUtils.capitalize(translationKey), color, secondOutputDust, ItemStack.EMPTY, secondOutputChance);
         }
 
-        EnumMetalDust(int id, String unlocalizedName, String oreName, int color, String secondOutputDust, ItemStack secondOutputStack, float secondOutputChance) {
+        EnumMetalDust(int id, String translationKey, String oreName, int color, String secondOutputDust, ItemStack secondOutputStack, float secondOutputChance) {
             this.id = id;
-            this.unlocalizedName = unlocalizedName;
+            this.translationKey = translationKey;
             this.oreName = oreName;
             this.color = color;
             this.secondOutputDust = secondOutputDust;
@@ -108,33 +108,33 @@ public class Dusts {
         NETHER_QUARTZ(9, "quartz", 0xDBCCBF, "gemQuartz");
 
         int id, color, outputAmount;
-        String unlocalizedName, oreName;
+        String translationKey, oreName;
         String oreInput;
         ItemStack stackInput;
 
-        EnumDust(int id, String unlocalizedName, int color, String oreInput) {
-            this(id, unlocalizedName, color, oreInput, 1);
+        EnumDust(int id, String translationKey, int color, String oreInput) {
+            this(id, translationKey, color, oreInput, 1);
         }
 
-        EnumDust(int id, String unlocalizedName, int color, String oreInput, int outputAmount) {
-            this(id, unlocalizedName, color, oreInput, ItemStack.EMPTY, outputAmount);
+        EnumDust(int id, String translationKey, int color, String oreInput, int outputAmount) {
+            this(id, translationKey, color, oreInput, ItemStack.EMPTY, outputAmount);
         }
 
-        EnumDust(int id, String unlocalizedName, int color, ItemStack stackInput) {
-            this(id, unlocalizedName, color, stackInput, 1);
+        EnumDust(int id, String translationKey, int color, ItemStack stackInput) {
+            this(id, translationKey, color, stackInput, 1);
         }
 
-        EnumDust(int id, String unlocalizedName, int color, ItemStack stackInput, int outputAmount) {
-            this(id, unlocalizedName, color, null, stackInput, outputAmount);
+        EnumDust(int id, String translationKey, int color, ItemStack stackInput, int outputAmount) {
+            this(id, translationKey, color, null, stackInput, outputAmount);
         }
 
-        EnumDust(int id, String unlocalizedName, int color, String oreInput, ItemStack stackInput, int outputAmount) {
-            this(id, unlocalizedName, WordUtils.capitalize(unlocalizedName), color, oreInput, stackInput, outputAmount);
+        EnumDust(int id, String translationKey, int color, String oreInput, ItemStack stackInput, int outputAmount) {
+            this(id, translationKey, WordUtils.capitalize(translationKey), color, oreInput, stackInput, outputAmount);
         }
 
-        EnumDust(int id, String unlocalizedName, String oreName, int color, String oreInput, ItemStack stackInput, int outputAmount) {
+        EnumDust(int id, String translationKey, String oreName, int color, String oreInput, ItemStack stackInput, int outputAmount) {
             this.id = id;
-            this.unlocalizedName = unlocalizedName;
+            this.translationKey = translationKey;
             this.oreName = oreName;
             this.color = color;
             this.oreInput = oreInput;

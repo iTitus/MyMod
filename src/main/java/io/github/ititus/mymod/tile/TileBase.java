@@ -45,9 +45,9 @@ public class TileBase extends TileEntity implements IWorldNameable {
     private IBlockState state = null;
     private int meta = -1;
 
-    public TileBase(String name) {
+    public TileBase(String registryName) {
         super();
-        this.name = "container." + name + ".name";
+        this.name = "container." + registryName.replace(':', '.') + ".name";
         this.sideConfiguration = new SideConfiguration();
         this.inventories = new EnumMap<>(EnumFacing.class);
         this.energies = new EnumMap<>(EnumFacing.class);

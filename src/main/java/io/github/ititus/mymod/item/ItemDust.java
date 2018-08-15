@@ -20,25 +20,25 @@ public class ItemDust extends ItemBase {
     }
 
     @Override
-    public String getUnlocalizedName(ItemStack stack) {
+    public String getTranslationKey(ItemStack stack) {
         IDust dust = DustManager.dusts.get(stack);
-        return dust != null ? super.getUnlocalizedName(stack) + "." + dust.getUnlocalizedName() : super.getUnlocalizedName(stack);
+        return dust != null ? super.getTranslationKey(stack) + "." + dust.getTranslationKey() : super.getTranslationKey(stack);
     }
 
     @Override
     public String getItemStackDisplayName(ItemStack stack) {
         IDust dust = DustManager.dusts.get(stack);
         if (dust != null) {
-            String unlocalizedName = getUnlocalizedName(stack) + ".name";
-            String specificTranslation = I18n.translateToLocal(unlocalizedName);
-            if (!unlocalizedName.equals(specificTranslation)) {
+            String translationKey = getTranslationKey(stack) + ".name";
+            String specificTranslation = I18n.translateToLocal(translationKey);
+            if (!translationKey.equals(specificTranslation)) {
                 return specificTranslation;
             }
-            String unlocalizedMaterial = "material." + MyMod.MOD_ID + ":" + dust.getUnlocalizedName() + ".name";
+            String unlocalizedMaterial = "material." + MyMod.MOD_ID + "." + dust.getTranslationKey() + ".name";
             String materialTranslation = I18n.translateToLocal(unlocalizedMaterial);
-            return I18n.translateToLocalFormatted(getUnlocalizedName() + ".name", materialTranslation);
+            return I18n.translateToLocalFormatted(getTranslationKey() + ".name", materialTranslation);
         }
-        return I18n.translateToLocalFormatted(getUnlocalizedName() + ".name", I18n.translateToLocal("material." + MyMod.MOD_ID + ":unknown.name"));
+        return I18n.translateToLocalFormatted(getTranslationKey() + ".name", I18n.translateToLocal("material." + MyMod.MOD_ID + ".unknown.name"));
     }
 
     @Override

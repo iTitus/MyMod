@@ -23,7 +23,7 @@ public class BlockBase extends Block {
         super(material);
         this.name = name;
         setRegistryName(name);
-        setUnlocalizedName(getRegistryName().toString());
+        setTranslationKey(getRegistryName().toString().replace(':', '.'));
         setSoundType(soundType);
         setHardness(5);
         setResistance(7);
