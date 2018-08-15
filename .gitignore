@@ -2,6 +2,7 @@
 .gradle/
 .idea/
 .settings/
+.metadata/
 bin/
 build/
 eclipse/
