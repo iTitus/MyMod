@@ -48,18 +48,11 @@ public class MyMod {
 
     @Mod.EventHandler
     public void preInit(FMLPreInitializationEvent event) {
-        RecipeManager.pulverizer = new PulverizerRecipeManager();
-        DustManager.dusts = new DustRegistry();
-        NetworkRegistry.INSTANCE.registerGuiHandler(instance, new GuiHandler());
-
         proxy.preInit();
     }
 
     @Mod.EventHandler
     public void init(FMLInitializationEvent event) {
-        NetworkHandler.init();
-        Dusts.init();
-
         proxy.init();
     }
 
@@ -70,7 +63,7 @@ public class MyMod {
 
     @Mod.EventHandler
     public void serverAboutToStart(FMLServerAboutToStartEvent event) {
-        //BackpackManager.getServerInstance().load(event.getServer());
+        // BackpackManager.getServerInstance().load(event.getServer());
     }
 
     @Mod.EventHandler
@@ -88,7 +81,7 @@ public class MyMod {
 
     @Mod.EventHandler
     public void serverStopped(FMLServerStoppedEvent event) {
-        //BackpackManager.getServerInstance().clear();
+        // BackpackManager.getServerInstance().clear();
     }
 
     @Mod.EventHandler

@@ -1,29 +1,34 @@
 package io.github.ititus.mymod.tile;
 
-import com.google.common.collect.Sets;
 import io.github.ititus.mymod.init.ModBlocks;
 import io.github.ititus.mymod.util.MathUtil;
 import io.github.ititus.mymod.util.energy.EnergyProducer;
 import io.github.ititus.mymod.util.network.NetworkState;
-import io.github.ititus.mymod.util.weight.WeightHelper;
+import io.github.ititus.mymod.util.weight.MassHelper;
 import net.minecraft.entity.Entity;
 import net.minecraft.nbt.NBTTagCompound;
 import net.minecraft.tileentity.TileEntity;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.ITickable;
+import net.minecraft.util.math.MathHelper;
+import net.minecraftforge.common.util.FakePlayer;
 import net.minecraftforge.energy.CapabilityEnergy;
 import net.minecraftforge.energy.IEnergyStorage;
 
 import javax.annotation.Nonnull;
-import java.util.Set;
+import java.util.ArrayList;
+import java.util.List;
 
 public class TileFallGen extends TileBase implements ITickable {
 
-    public static final int CAPACITY = 10_000;
-    private static final double FE_PER_WEIGHT = 10;
+    public static final int CAPACITY = 64_000;
+    /**
+     * 1/2 * Gravity * FE/Energy
+     */
+    private static final double FE_FACTOR = 0.5 * 10 * 10;
 
     public final EnergyProducer energy = new EnergyProducer(CAPACITY);
-    private int energyLastTick;
+    private int energyLastTick, offset;
 
     public TileFallGen() {
         super(ModBlocks.fallGen.getRegistryName().toString());
@@ -44,7 +49,7 @@ public class TileFallGen extends TileBase implements ITickable {
 
     private void sendEnergy() {
         if (energy.getEnergyStored() > 0) {
-            Set<IEnergyStorage> receivers = Sets.newHashSet();
+            List<IEnergyStorage> receivers = new ArrayList<>(EnumFacing.VALUES.length);
             for (EnumFacing facing : EnumFacing.VALUES) {
                 TileEntity tile = world.getTileEntity(pos.offset(facing));
                 if (tile != null && tile.hasCapability(CapabilityEnergy.ENERGY, facing.getOpposite())) {
@@ -56,13 +61,21 @@ public class TileFallGen extends TileBase implements ITickable {
             }
 
             if (!receivers.isEmpty()) {
-                int maxTransfer = Math.max(1, Math.min(energy.getMaxExtract(), energy.getEnergyStored()) / receivers.size());
-                for (IEnergyStorage storage : receivers) {
-                    energy.extractEnergy(storage.receiveEnergy(energy.extractEnergy(maxTransfer, true), false), false);
+                int maxExtract = energy.getMaxExtract();
+                int toSend = receivers.size();
+
+                for (int i = 0; i < receivers.size(); i++) {
+                    IEnergyStorage storage = receivers.get((offset + i) % EnumFacing.VALUES.length);
+                    int maxTransfer = MathHelper.ceil(Math.min(maxExtract, energy.getEnergyStored()) / (double) toSend);
+                    maxExtract -= energy.extractEnergy(storage.receiveEnergy(energy.extractEnergy(maxTransfer, true), false), false);
+                    toSend--;
                     if (energy.getEnergyStored() <= 0) {
                         return;
                     }
                 }
+
+                offset++;
+                offset %= EnumFacing.VALUES.length;
             }
         }
     }
@@ -89,10 +102,13 @@ public class TileFallGen extends TileBase implements ITickable {
     }
 
     public void onFallenUpon(@Nonnull Entity entity, float fallDistance) {
-        double energyProduced = WeightHelper.getWeight(entity) * FE_PER_WEIGHT * fallDistance;
-        System.out.println("entity = [" + entity + "], fallDistance = [" + fallDistance + "], energyProduced = [" + energyProduced + "]");
-        System.out.println("energyProduced = " + energyProduced);
-        energy.receiveEnergyInternal((int) energyProduced, false);
+        if (!(entity instanceof FakePlayer)) {
+            double mass = MassHelper.getEntityMass(entity);
+            double energyProducedD = FE_FACTOR * mass * fallDistance;
+            int energyProduced = (int) energyProducedD;
+            System.out.println("entity = [" + entity + "], mass = [" + mass + "], fallDistance = [" + fallDistance + "], energyProduced = [" + energyProduced + "]");
+            energy.receiveEnergyInternal(energyProduced, false);
+        }
     }
 
     @Override

@@ -1,17 +1,23 @@
 package io.github.ititus.mymod.proxy;
 
 import io.github.ititus.mymod.MyMod;
+import io.github.ititus.mymod.api.dust.DustManager;
 import io.github.ititus.mymod.api.recipe.RecipeManager;
 import io.github.ititus.mymod.api.recipe.pulverizer.IPulverizerRecipe;
 import io.github.ititus.mymod.block.*;
+import io.github.ititus.mymod.dust.DustRegistry;
+import io.github.ititus.mymod.dust.Dusts;
 import io.github.ititus.mymod.fluid.FluidMilk;
+import io.github.ititus.mymod.handler.GuiHandler;
 import io.github.ititus.mymod.init.ModBlocks;
 import io.github.ititus.mymod.init.ModFluids;
 import io.github.ititus.mymod.item.ItemBackpack;
 import io.github.ititus.mymod.item.ItemDust;
 import io.github.ititus.mymod.item.ItemSideConfigurator;
 import io.github.ititus.mymod.item.block.ItemBlockBase;
+import io.github.ititus.mymod.network.NetworkHandler;
 import io.github.ititus.mymod.recipe.pulverizer.PulverizerRecipe;
+import io.github.ititus.mymod.recipe.pulverizer.PulverizerRecipeManager;
 import io.github.ititus.mymod.tile.*;
 import io.github.ititus.mymod.util.ItemUtil;
 import net.minecraft.block.Block;
@@ -26,7 +32,9 @@ import net.minecraftforge.event.RegistryEvent;
 import net.minecraftforge.fluids.FluidRegistry;
 import net.minecraftforge.fml.client.event.ConfigChangedEvent;
 import net.minecraftforge.fml.common.Mod;
+import net.minecraftforge.fml.common.event.FMLInterModComms;
 import net.minecraftforge.fml.common.eventhandler.SubscribeEvent;
+import net.minecraftforge.fml.common.network.NetworkRegistry;
 import net.minecraftforge.fml.common.registry.GameRegistry;
 
 @Mod.EventBusSubscriber(modid = MyMod.MOD_ID)
@@ -91,9 +99,17 @@ public class CommonProxy {
     }
 
     public void preInit() {
+        RecipeManager.pulverizer = new PulverizerRecipeManager();
+        DustManager.dusts = new DustRegistry();
+        NetworkRegistry.INSTANCE.registerGuiHandler(MyMod.instance, new GuiHandler());
+
+        FMLInterModComms.sendFunctionMessage("theoneprobe", "getTheOneProbe", "io.github.ititus.mymod.compat.top.MyModTOPCompat");
     }
 
     public void init() {
+        NetworkHandler.init();
+        Dusts.init();
+
         addPulverizerRecipe(new ItemStack(Items.BONE), ItemUtil.getDyeStack(EnumDyeColor.WHITE, 6));
         addPulverizerRecipe("sugarcane", new ItemStack(Items.SUGAR, 2));
         addPulverizerRecipe(ItemUtil.getWoolStack(null), new ItemStack(Items.STRING, 4));

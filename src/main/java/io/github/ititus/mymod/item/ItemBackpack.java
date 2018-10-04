@@ -4,6 +4,7 @@ import io.github.ititus.mymod.MyMod;
 import io.github.ititus.mymod.handler.GuiHandler;
 import io.github.ititus.mymod.util.backpack.Backpack;
 import io.github.ititus.mymod.util.backpack.BackpackManager;
+import net.minecraft.client.util.ITooltipFlag;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraft.nbt.NBTTagCompound;
@@ -12,16 +13,20 @@ import net.minecraft.util.ActionResult;
 import net.minecraft.util.EnumActionResult;
 import net.minecraft.util.EnumFacing;
 import net.minecraft.util.EnumHand;
+import net.minecraft.util.text.translation.I18n;
 import net.minecraft.world.World;
 import net.minecraftforge.common.capabilities.Capability;
 import net.minecraftforge.common.capabilities.ICapabilityProvider;
 import net.minecraftforge.common.util.Constants;
 import net.minecraftforge.fml.common.FMLCommonHandler;
+import net.minecraftforge.fml.relauncher.Side;
+import net.minecraftforge.fml.relauncher.SideOnly;
 import net.minecraftforge.items.CapabilityItemHandler;
 import net.minecraftforge.items.IItemHandler;
 
 import javax.annotation.Nonnull;
 import javax.annotation.Nullable;
+import java.util.List;
 import java.util.UUID;
 
 public class ItemBackpack extends ItemBase {
@@ -66,9 +71,9 @@ public class ItemBackpack extends ItemBase {
 
                             }
 
-                            //FMLServerHandler.instance().getServer().getEntityWorld();
-                            //FMLClientHandler.instance().getWorldClient();
-                            //FMLClientHandler.instance().getServer();
+                            // FMLServerHandler.instance().getServer().getEntityWorld();
+                            // FMLClientHandler.instance().getWorldClient();
+                            // FMLClientHandler.instance().getServer();
                             return CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.cast(handler);
                         }
                     }
@@ -104,19 +109,36 @@ public class ItemBackpack extends ItemBase {
                             nbt.setTag("backpack", compound);
                         }
                         compound.setTag("uuid", NBTUtil.createUUIDTag(uuid));
+
+                        Backpack backpack = backpackManager.getOrCreateBackpack(uuid);
+                        return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
                     }
 
-                    Backpack backpack = backpackManager.getBackpack(uuid);
-                    if (backpack == null) {
-                        backpack = new Backpack(backpackManager);
-                        backpackManager.putBackpack(uuid, backpack);
-                    }
-
+                    Backpack backpack = backpackManager.getOrCreateBackpack(uuid);
                     player.openGui(MyMod.instance, GuiHandler.BACKPACK, world, hand == EnumHand.MAIN_HAND ? 0 : 1, 0, 0);
                 }
                 return ActionResult.newResult(EnumActionResult.SUCCESS, stack);
             }
         }
         return super.onItemRightClick(world, player, hand);
+    }
+
+    @Override
+    @SideOnly(Side.CLIENT)
+    public void addInformation(ItemStack stack, @Nullable World world, List<String> tooltip, ITooltipFlag flag) {
+        super.addInformation(stack, world, tooltip, flag);
+
+        UUID uuid = null;
+        NBTTagCompound nbt = stack.getTagCompound();
+        if (nbt != null && nbt.hasKey("backpack", Constants.NBT.TAG_COMPOUND)) {
+            NBTTagCompound compound = nbt.getCompoundTag("backpack");
+            uuid = NBTUtil.getUUIDFromTag(compound.getCompoundTag("uuid"));
+        }
+
+        if (uuid != null && (uuid.getMostSignificantBits() != 0 || uuid.getLeastSignificantBits() != 0)) {
+            tooltip.add(I18n.translateToLocalFormatted("text.mymod.backpack.bound", uuid.toString()));
+        } else {
+            tooltip.add(I18n.translateToLocal("text.mymod.backpack.unbound"));
+        }
     }
 }

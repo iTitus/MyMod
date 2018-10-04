@@ -1,4 +1,4 @@
-package io.github.ititus.mymod.recipe.pulverizer;
+package io.github.ititus.mymod.recipe;
 
 import io.github.ititus.mymod.api.recipe.IRecipeInput;
 import net.minecraft.item.ItemStack;
@@ -13,8 +13,8 @@ public class StackInput implements IRecipeInput<ItemStack> {
     private final List<ItemStack> listView;
 
     public StackInput(ItemStack stack) {
-        this.stack = stack;
-        this.listView = Collections.singletonList(stack);
+        this.stack = stack.copy();
+        this.listView = Collections.singletonList(stack.copy());
     }
 
     @Override

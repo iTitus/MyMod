@@ -40,18 +40,30 @@ minecraft {
 
 repositories {
     maven {
-        name = "Progwml6 maven"
+        name = "ProgWML6 Maven"
         url "http://dvs1.progwml6.com/files/maven"
     }
     maven {
-        name = "ModMaven"
+        name = "K-4U ModMaven"
         url "modmaven.k-4u.nl"
+    }
+    repositories {
+        maven {
+            name "TehNut Maven"
+            url "http://tehnut.info/maven"
+        }
+    }
+    maven {
+        name "tterrag Maven"
+        url "http://maven.tterrag.com/"
     }
 }
 
 dependencies {
     deobfProvided "mezz.jei:jei_${config.minecraft_version}:${config.jei_version}:api"
     runtime "mezz.jei:jei_${config.minecraft_version}:${config.jei_version}"
+    deobfCompile "mcp.mobius.waila:Hwyla:${config.hwyla_version}_${config.minecraft_version}"
+    deobfCompile "mcjty.theoneprobe:TheOneProbe-${config.top_mc_version}:${config.top_mc_version}-${config.top_version}"
 
     compile fileTree(dir: 'libs', include: '*.jar')
 }

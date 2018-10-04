@@ -42,7 +42,7 @@ public class ChancedStackOutput implements IRecipeOutput<ItemStack> {
     }
 
     public ChancedStackOutput(ItemStack stack, IOutputSizeDistribution distribution) {
-        this.stack = stack;
+        this.stack = stack.copy();
         this.stack.setCount(distribution.getMax());
         this.distribution = distribution;
     }
@@ -59,7 +59,7 @@ public class ChancedStackOutput implements IRecipeOutput<ItemStack> {
 
     @Override
     public ItemStack getExample() {
-        return stack;
+        return stack.copy();
     }
 
     @Override

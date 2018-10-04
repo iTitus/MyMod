@@ -1,6 +1,7 @@
 package io.github.ititus.mymod.inventory.slot;
 
 import io.github.ititus.mymod.inventory.ItemStackHandlerBase;
+import io.github.ititus.mymod.tile.TileBase;
 import net.minecraft.entity.player.EntityPlayer;
 import net.minecraft.item.ItemStack;
 import net.minecraftforge.items.SlotItemHandler;
@@ -41,6 +42,15 @@ public class SlotItemHandlerBase extends SlotItemHandler {
     @Override
     public ItemStack decrStackSize(int amount) {
         return getItemHandler().canExtractFromSlot(getSlotIndex()) ? getItemHandler().extractItemInternal(getSlotIndex(), amount, false) : ItemStack.EMPTY;
+    }
+
+    @Override
+    public void onSlotChanged() {
+        super.onSlotChanged();
+        TileBase tile = getItemHandler().getTile();
+        if (tile != null) {
+            tile.markDirty();
+        }
     }
 
     @Override

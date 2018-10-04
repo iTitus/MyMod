@@ -41,21 +41,25 @@ public class TESRTank extends FastTESR<TileTank> {
 
     @Override
     public void renderTileEntityFast(TileTank tank, double x, double y, double z, float partialTicks, int destroyStage, float partial, BufferBuilder buffer) {
-        TextureAtlasSprite texture = getFluidTexture(tank.tank.getFluid());
+        FluidStack fluid = tank.tank.getFluid();
+        TextureAtlasSprite texture = getFluidTexture(fluid);
         if (texture == null) {
             return;
         }
 
-        double fillRaw = getFillRatio(tank.tank.getFluid(), tank.tank.getCapacity());
+        double fillRaw = getFillRatio(fluid, tank.tank.getCapacity());
         if (fillRaw <= 0) {
             return;
         }
         double eps = 1D / 1024;
+
+        // TODO: add alternative rendering for gasses/lighter-than-air fluids
+
         double fill = Math.max(eps, Math.min(1 - eps, fillRaw));
 
         int light = tank.getBlockState().getPackedLightmapCoords(tank.getWorld(), tank.getPos());
-        int skyLight = light >> 16 & 0xFFFF; //0x00F0;
-        int blockLight = light & 0xFFFF; //0x00F0;
+        int skyLight = (light >> 16) & 0xFFFF;
+        int blockLight = light & 0xFFFF;
         int color = getColor(tank.tank.getFluid());
 
         double uMin = texture.getMinU();

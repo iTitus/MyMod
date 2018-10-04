@@ -35,7 +35,7 @@ public class NetworkState {
         return state;
     }
 
-    public void toBytes0(ByteBuf buf) {
+    private void toBytes0(ByteBuf buf) {
         for (int i : ints) {
             buf.writeInt(i);
         }

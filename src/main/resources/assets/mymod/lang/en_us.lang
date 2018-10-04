@@ -1,5 +1,5 @@
 itemGroup.mymod.main.name=MyMod
-itemGroup.mymod.dust.name=MyMod - Dusts
+itemGroup.mymod.dust.name=MyMod: Dusts
 
 tile.mymod.fall_gen.name=Piezo-Electric Generator
 tile.mymod.energy_cell.name=Energy Cell
@@ -26,9 +26,9 @@ text.mymod.energy=Energy
 text.mymod.energy.stored=%d / %d FE
 text.mymod.fluid.empty=Empty
 text.mymod.fluid.stored=%d / %d mB
-text.mymod.chance=Chance. %s
-text.mymod.time.ticks=Time. %d ticks
-text.mymod.slot.index=Slot. %d
+text.mymod.chance=Chance: %s
+text.mymod.time.ticks=Time: %d ticks
+text.mymod.slot.index=Slot: %d
 text.mymod.facing.all=All
 text.mymod.facing.all.short=A
 text.mymod.facing.down=Down
@@ -46,6 +46,8 @@ text.mymod.facing.east.short=E
 text.mymod.side.auto_import=Auto-Import
 text.mymod.side.auto_export=Auto-Export
 text.mymod.reset=Reset
+text.mymod.backpack.unbound=Unbound
+text.mymod.backpack.bound=Bound to: %s
 
 material.mymod.unknown.name=Unknown
 material.mymod.iron.name=Iron

@@ -46,8 +46,9 @@ public class BlockTank extends BlockContainerBase {
         return new ItemBlockTank(this);
     }
 
+    @Override
     @SideOnly(Side.CLIENT)
-    public BlockRenderLayer getBlockLayer() {
+    public BlockRenderLayer getRenderLayer() {
         return BlockRenderLayer.CUTOUT;
     }
 

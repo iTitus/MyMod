@@ -19,7 +19,7 @@ public class WidgetArrow extends WidgetBase {
     @Override
     public void drawBackground(float partialTicks, int mouseX, int mouseY) {
         if (reverse) {
-            //TODO: FIXME
+            // TODO: FIXME
             throw new UnsupportedOperationException();
         } else {
             super.drawBackground(partialTicks, mouseX, mouseY);
@@ -27,6 +27,7 @@ public class WidgetArrow extends WidgetBase {
         int offset = Math.max(0, Math.min(WIDTH, offsetSupplier.applyAsInt(this)));
         if (offset > 0) {
             if (reverse) {
+                // TODO: Implement
             } else {
                 drawTexturedModalRect(gui.getGuiLeft() + bounds.getX(), gui.getGuiTop() + bounds.getY(), offset, bounds.getHeight(), u, v + texHeight, offset, texHeight, SHEET_WIDTH, SHEET_HEIGHT);
             }

@@ -53,13 +53,13 @@ public class BackpackManager extends WorldSavedData {
     @SubscribeEvent
     public static void onWorldSave(WorldEvent.Save event) {
         if (!event.getWorld().isRemote) {
-            //getServerInstance().save();
+            // getServerInstance().save();
         }
     }
 
     @SubscribeEvent
     public static void onPlayerLogin(PlayerEvent.PlayerLoggedInEvent event) {
-        //getServerInstance().sync(event.player);
+        // getServerInstance().sync(event.player);
     }
 
     public World getWorld() {

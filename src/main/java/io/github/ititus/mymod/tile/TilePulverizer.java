@@ -38,10 +38,11 @@ public class TilePulverizer extends TileBase implements ITickable {
             return true;
         }
     };
-    public IPulverizerRecipe recipe;
     public int progress, maxProgress;
-    private int energyLastTick, progressLastTick;
 
+    private ItemStack cachedInput = ItemStack.EMPTY;
+    private IPulverizerRecipe recipe;
+    private int energyLastTick, progressLastTick;
 
     public TilePulverizer() {
         super(ModBlocks.pulverizer.getRegistryName().toString());
@@ -73,22 +74,15 @@ public class TilePulverizer extends TileBase implements ITickable {
     }
 
     private void checkRecipe() {
-        IPulverizerRecipe recipe = RecipeManager.pulverizer.get(inventory.getStackInSlot(SLOT_INPUT));
-        if (recipe != null) {
-            if (this.recipe == null) {
-                this.recipe = recipe;
-                maxProgress = recipe.getTime();
-            } else {
-                if (this.recipe != recipe) {
-                    this.recipe = recipe;
-                    maxProgress = recipe.getTime();
-                    progress = 0;
-                }
+        ItemStack input = inventory.getStackInSlot(SLOT_INPUT);
+        if (!ItemStack.areItemStacksEqual(input, cachedInput)) {
+            cachedInput = input.isEmpty() ? ItemStack.EMPTY : input.copy();
+            IPulverizerRecipe newRecipe = RecipeManager.pulverizer.get(input);
+            if (newRecipe == null || recipe != newRecipe) {
+                recipe = newRecipe;
+                progress = 0;
+                maxProgress = recipe != null ? recipe.getTime() : 0;
             }
-        } else {
-            this.recipe = null;
-            maxProgress = 0;
-            progress = 0;
         }
     }
 
@@ -99,24 +93,24 @@ public class TilePulverizer extends TileBase implements ITickable {
         if (energy.extractEnergyInternal(FE_PER_TICK, true) < FE_PER_TICK) {
             return false;
         }
-        ItemStack stack = inventory.getStackInSlot(SLOT_INPUT);
-        if (stack.isEmpty() || stack.getCount() < recipe.getInput().getAmount()) {
+        ItemStack input = inventory.getStackInSlot(SLOT_INPUT);
+        if (!recipe.matches(input)) {
             return false;
         }
-        ItemStack stack1 = recipe.getPrimaryOutput().getExample();
-        ItemStack stack2 = recipe.getSecondaryOutput() != null ? recipe.getSecondaryOutput().getExample() : ItemStack.EMPTY;
-        if (stack2.isEmpty()) {
-            ItemStack remainder = inventory.insertItemInternal(SLOT_OUTPUT_1, stack1, true);
+        ItemStack output1 = recipe.getPrimaryOutput().getExample();
+        ItemStack output2 = recipe.getSecondaryOutput() != null ? recipe.getSecondaryOutput().getExample() : ItemStack.EMPTY;
+        if (output2.isEmpty()) {
+            ItemStack remainder = inventory.insertItemInternal(SLOT_OUTPUT_1, output1, true);
             if (!remainder.isEmpty()) {
                 if (!inventory.insertItemInternal(SLOT_OUTPUT_2, remainder, true).isEmpty()) {
                     return false;
                 }
             }
         } else {
-            if (!inventory.insertItemInternal(SLOT_OUTPUT_1, stack1, true).isEmpty()) {
+            if (!inventory.insertItemInternal(SLOT_OUTPUT_1, output1, true).isEmpty()) {
                 return false;
             }
-            if (!inventory.insertItemInternal(SLOT_OUTPUT_2, stack2, true).isEmpty()) {
+            if (!inventory.insertItemInternal(SLOT_OUTPUT_2, output2, true).isEmpty()) {
                 return false;
             }
         }
@@ -156,7 +150,7 @@ public class TilePulverizer extends TileBase implements ITickable {
             CapabilityItemHandler.ITEM_HANDLER_CAPABILITY.readNBT(inventory, null, compound.getTag("inventory"));
         }
         progress = compound.getInteger("progress");
-        checkRecipe();
+        // checkRecipe();
         energyLastTick = energy.getEnergyStored();
         progressLastTick = progress;
     }

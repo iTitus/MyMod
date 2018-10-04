@@ -45,6 +45,10 @@ public class ItemBlockTank extends ItemBlockBase {
                 FluidStack fluid = prop.getContents();
                 tooltip.add(fluid != null ? fluid.getLocalizedName() : I18n.translateToLocal("text.mymod.fluid.empty"));
                 tooltip.add(TextFormatting.GRAY + I18n.translateToLocalFormatted("text.mymod.fluid.stored", fluid != null ? fluid.amount : 0, prop.getCapacity()));
+                if (fluid != null && flag.isAdvanced()) {
+                    tooltip.add(TextFormatting.DARK_GRAY + fluid.getFluid().getName());
+                    tooltip.add(TextFormatting.DARK_GRAY + fluid.getUnlocalizedName());
+                }
             }
         }
     }

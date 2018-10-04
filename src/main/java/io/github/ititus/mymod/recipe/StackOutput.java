@@ -8,12 +8,12 @@ public class StackOutput implements IRecipeStackOutput {
     private final ItemStack stack;
 
     public StackOutput(ItemStack stack) {
-        this.stack = stack;
+        this.stack = stack.copy();
     }
 
     @Override
     public ItemStack getOutput() {
-        return stack;
+        return stack.copy();
     }
 
     @Override

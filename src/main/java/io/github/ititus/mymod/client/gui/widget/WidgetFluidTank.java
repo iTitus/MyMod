@@ -72,6 +72,10 @@ public class WidgetFluidTank extends WidgetBase {
         FluidStack fluid = tank.getFluid();
         tooltip.add(fluid != null ? fluid.getLocalizedName() : I18n.translateToLocal("text.mymod.fluid.empty"));
         tooltip.add(TextFormatting.GRAY + I18n.translateToLocalFormatted("text.mymod.fluid.stored", fluid != null ? fluid.amount : 0, tank.getCapacity()));
+        if (fluid != null && advanced) {
+            tooltip.add(TextFormatting.DARK_GRAY + fluid.getFluid().getName());
+            tooltip.add(TextFormatting.DARK_GRAY + fluid.getUnlocalizedName());
+        }
     }
 
     private void drawFluid(FluidStack fluidStack, int scaledAmount) {

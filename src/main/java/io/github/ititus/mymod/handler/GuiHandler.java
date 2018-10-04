@@ -141,7 +141,7 @@ public class GuiHandler implements IGuiHandler {
                         UUID uuid = NBTUtil.getUUIDFromTag(compound.getCompoundTag("uuid"));
                         if (uuid != null && (uuid.getMostSignificantBits() != 0 || uuid.getLeastSignificantBits() != 0)) {
                             //TODO: find out if saving on client is even required...
-                            Backpack backpack = new Backpack(BackpackManager.get(world)); //BackpackManager.get(world).getOrCreateBackpack(uuid);
+                            Backpack backpack = new Backpack(BackpackManager.get(world)); // BackpackManager.get(world).getOrCreateBackpack(uuid);
                             return new GuiBackpack(new ContainerBackpack(player, stack, backpack));
                         }
                     }

@@ -50,7 +50,7 @@ public class TileTank extends TileBase implements ITickable {
 
     @Override
     public boolean shouldRenderInPass(int pass) {
-        return super.shouldRenderInPass(pass);
+        return pass == 1;
     }
 
     @Override

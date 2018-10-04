@@ -37,7 +37,7 @@ public class BlockFallGen extends BlockContainerBase {
     @Override
     public void onFallenUpon(World world, BlockPos pos, Entity entity, float fallDistance) {
         super.onFallenUpon(world, pos, entity, fallDistance);
-        if (entity != null && !world.isRemote) {
+        if (!world.isRemote && !entity.isDead) {
             TileEntity tile = world.getTileEntity(pos);
             if (tile instanceof TileFallGen) {
                 ((TileFallGen) tile).onFallenUpon(entity, fallDistance);

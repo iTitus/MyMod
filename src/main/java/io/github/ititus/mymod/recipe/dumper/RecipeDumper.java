@@ -37,7 +37,7 @@ public class RecipeDumper {
         StringBuilder sb = new StringBuilder();
         String s;
 
-        sb.append("recipeCategory,modName,recipeCount,hasHandler" + System.lineSeparator());
+        sb.append("recipeCategory,modName,recipeCount,hasHandler").append(System.lineSeparator());
         for (IRecipeCategory<? extends IRecipeWrapper> recipeCategory : recipeCategories) {
             List<String> list = Lists.newArrayList(
                     recipeCategory.getUid(),
@@ -45,7 +45,7 @@ public class RecipeDumper {
                     "" + MyModJEIPlugin.jeiRuntime.getRecipeRegistry().getRecipeWrappers(recipeCategory).size(),
                     "" + !RecipeDumperRegistry.getHandler(recipeCategory).getPropertyList(recipeCategory).isEmpty()
             );
-            sb.append(list.stream().map(str -> str.contains(" ") ? '"' + str.replace("\"", "\"\"") + '"' : str).collect(Collectors.joining(SEPARATOR)) + System.lineSeparator());
+            sb.append(list.stream().map(str -> str.contains(" ") ? '"' + str.replace("\"", "\"\"") + '"' : str).collect(Collectors.joining(SEPARATOR))).append(System.lineSeparator());
         }
 
         s = sb.toString();

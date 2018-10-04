@@ -5,6 +5,7 @@ import io.github.ititus.mymod.api.recipe.IRecipeOutput;
 import io.github.ititus.mymod.api.recipe.pulverizer.IPulverizerRecipe;
 import io.github.ititus.mymod.recipe.ChancedStackOutput;
 import io.github.ititus.mymod.recipe.OreDictInput;
+import io.github.ititus.mymod.recipe.StackInput;
 import io.github.ititus.mymod.recipe.StackOutput;
 import net.minecraft.item.ItemStack;
 
